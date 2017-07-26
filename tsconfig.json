@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "outDir": "bin"
+  },
+
+  "include": [
+    "src/**/*"
+  ]
+}

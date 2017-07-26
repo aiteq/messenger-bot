@@ -1,0 +1,7 @@
+.tscache
+
+*.js
+*.d.ts
+
+node_modules
+bin

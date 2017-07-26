@@ -1,0 +1,42 @@
+[@aiteq/messenger-bot](../README.md) > [ButtonTemplateMessageBuilder](../classes/buttontemplatemessagebuilder.md) > [TemplateMessageBuilder](../modules/buttontemplatemessagebuilder.templatemessagebuilder.md) > [LoginButton](../classes/buttontemplatemessagebuilder.templatemessagebuilder.loginbutton.md)
+
+
+
+# Class: LoginButton
+
+## Index
+
+### Constructors
+
+* [constructor](buttontemplatemessagebuilder.templatemessagebuilder.loginbutton.md#constructor)
+
+
+
+---
+## Constructors
+<a id="constructor"></a>
+
+
+### ⊕ **new LoginButton**(url: *`string`*): [LoginButton](buttontemplatemessagebuilder.templatemessagebuilder.loginbutton.md)
+
+
+
+*Defined in fb-api-helpers/template-message-builder.ts:283*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| url | `string`   |  - |
+
+
+
+
+
+**Returns:** [LoginButton](buttontemplatemessagebuilder.templatemessagebuilder.loginbutton.md)
+
+---
+
+
