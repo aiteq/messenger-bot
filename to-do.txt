@@ -1,1 +1,0 @@
-- onMessage - první parametr: string | RegExp | string[] | RegExp[]

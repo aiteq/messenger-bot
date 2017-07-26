@@ -6,7 +6,8 @@
   "types": "./bin/index.d.ts",
   "scripts": {
     "compile": "tsc -p .",
-    "prepublishOnly": "npm run compile"
+    "prepublishOnly": "npm run compile",
+    "doc-md": "node_modules/.bin/typedoc --out doc --mode file --theme markdown ."
   },
   "repository": {
     "type": "git",
@@ -31,13 +32,11 @@
     "typescript": "2.3.x"
   },
   "dependencies": {
-    "@aiteq/trace": "^1.0.0",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "crypto": "0.0.3",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-    "http": "0.0.0",
     "log4js": "2.x.x",
     "request": "^2.81.0"
   },

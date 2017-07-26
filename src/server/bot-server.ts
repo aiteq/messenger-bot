@@ -3,7 +3,6 @@ import * as express from "express";
 import { Request, Response } from "express";
 import * as crypto from "crypto";
 import * as http from "http";
-import { Trace } from "@aiteq/trace";
 import { VerificationService } from "./verification-service";
 import { ResponderService } from "./responder-service";
 import { ExtensionService } from "./extension-service";
@@ -13,15 +12,17 @@ import { logger } from "../utils/logger";
 import { BotServerConfig } from "./bot-server-config";
 import { MessengerExtension } from "./messenger-extension";
 import { RegExpEscaped } from "../utils/reg-exp-escaped";
+import { Webhook } from "../fb-api/webhook";
 
 
 /**
  * Represents a bot server listening for webhook requests.
  */
-@Trace()
 export class BotServer {
 
     private app: express.Application;
+    private server: http.Server;
+
     private responder: ResponderService;
     private extensions: ExtensionService;
     private profileApi: MessengerProfile.Api;
@@ -40,23 +41,32 @@ export class BotServer {
 
         this.profileApi = new MessengerProfile.Api(this.config.accessToken);
 
-        //create express.js application
+        // create express.js application
         this.app = express();
 
+        // prepare ejs template engine for use by Message Extensions
         this.app.set("view engine", "ejs");
 
+        // use the 'public' folder for static assets
         this.app.use("/static", express.static("public"));
 
-        this.app.use(bodyParser.json({ verify: this.verifyRequestSignature.bind(this) }));
+        // parse incoming POST request bodies and make them available under the req.body property
+        // every incoming POST request will be verified according to https://developers.facebook.com/docs/messenger-platform/webhook-reference#security
+        this.app.use(bodyParser.json({ verify: this.verifySignature.bind(this) }));
+
+        // parse incoming GET request (used during webhook verification)
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
+        // install service for handling verification request
         this.app.use(this.config.webhookPath, new VerificationService(this.config.verifyToken).getRouter());
         logger.info("VerificationServices has been attached to", this.config.webhookPath);
 
+        // install service for handling webhook requests
         this.responder = new ResponderService(this.config.accessToken);
         this.app.use(this.config.webhookPath, this.responder.getRouter());
         logger.info("ResponderService has been attached to", this.config.webhookPath);
 
+        // install service for handling Message Extensions requests
         this.extensions = new ExtensionService();
         this.app.use(this.config.extensionsPath, this.extensions.getRouter());
         logger.info("ExtensionService has been attached to", this.config.extensionsPath);
@@ -64,18 +74,16 @@ export class BotServer {
 
     /**
      * Starts the bot server.
-     * 
-     * @returns {this} 
      */
-    public start(): this {
+    public start(): void {
 
         const port = BotServer.normalizePort(this.config.port || 8080);
 
         this.app.set("port", port);
 
-        const httpServer = http.createServer(this.app);
+        this.server = <http.Server>http.createServer(this.app)
 
-        httpServer.on("error", (error: NodeJS.ErrnoException) => {
+        .on("error", (error: NodeJS.ErrnoException) => {
 
             if (error.syscall !== "listen") throw error;
 
@@ -95,17 +103,22 @@ export class BotServer {
                 default:
                     throw error;
             }
-        });
+        })
 
-        httpServer.on("listening", () => {
-            let addr = httpServer.address();
+        .on("listening", () => {
+            let addr = this.server.address();
             let bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
             logger.info(`BotServer[${this.config.name}] is listening on ${bind}`);
-        });
+        })
 
-        httpServer.listen(port);
+        .listen(port);
+    }
 
-        return this;
+    /**
+     * Stops the bot server.
+     */
+    public stop(): void {
+        this.server.close();
     }
 
     /**
@@ -113,9 +126,9 @@ export class BotServer {
      * <i>text message</i>. The hooks can be specified as a keyword or using a <i>regular expression</i>.
      * When the server receives a text message, it test the content for specified hooks. If a match is
      * found the server executes the subscribed callback. Keywords are considered as case-insensitive.
-     * The callbacks installed using the {BotServer.hear} method are executed BEFORE callbacks installed using
-     * the {onMessage()} method.
-     * Note that the {hear()} method can be used only for text messages.
+     * The callbacks installed using the <code>BotServer.hear</code> method are executed BEFORE
+     * callbacks installed using the <code>on()</code> method.
+     * Note that the <code>hear()</code> method listens only for text messages.
      * 
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
      * @param {ResponderService.HearHandler} hearHandler - a callback to be executed if a message matches one of the hooks
@@ -127,13 +140,10 @@ export class BotServer {
 
         if (typeof hooks === "string") {
 
+            // create new case-insensitive regexp based on the given keyword
             reHooks = [new RegExp(`^${RegExpEscaped.escape(hooks)}$`, "i")];
 
         } else if (Array.isArray(hooks)) {
-
-            if (hooks.length == 0) {
-                throw new Error("BotServer[${this.config.name}].hear: at least one hook must be specified");
-            }
 
             reHooks = hooks.map((hook: RegExp | string) => {
                 return typeof hook === "string" ? new RegExp(`^${RegExpEscaped.escape(hook)}$`, "i") : hook;
@@ -150,87 +160,71 @@ export class BotServer {
     }
 
     /**
-     * Subscribes to an event when a text message is received.
-     * The callback will be executed for all received text messages, even if the content matches a hook
-     * specified using the {hear} method. The callbacks installed using the {onMessage()} method are
-     * executed AFTER callbacks installed using the {hear()} method.
+     * Subscribe to an <i>event</i> emitted when a webhook request is received. Available events:
      * 
-     * @param {ResponderService.EventHandler} eventHandler - a callback to be executed when a text message will be received
+     * @param {Webhook.Event} event - an event for which the callback will be executed
+     * @param {Function} callback - a callback function
      * @returns {this} - for chaining
      */
-    public onMessage(eventHandler: ResponderService.EventHandler): this {
+    public on(event: Webhook.Event, callback: Function): this;
 
-        this.responder.on(ResponderService.Event.TEXT_MESSAGE, eventHandler);
+    /**
+     * Subscribe to an <i>identified event</i>. The following events can be identifeid by ID:
+     * 
+     * @param {Webhook.Event} event - an event for which the callback will be executed
+     * @param {string} id - an ID identifing the event
+     * @param {Function} callback - a callback function
+     * @returns {this} 
+     */
+    public on(event: Webhook.Event, id: string, callback: Function): this;
 
+    public on(event: Webhook.Event, idOrCallback: string | Function, callback?: Function): this {
+
+        if (typeof idOrCallback === "string") {
+            event += ":" + idOrCallback;
+        } else {
+            callback = idOrCallback;
+        }
+
+        this.responder.on(event, callback);
         return this;
     }
 
-    public onPostback(eventHandler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.POSTBACK, eventHandler);
-
-        return this;
-    }
-
-    public onGetStarted(eventHandler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.GET_STARTED_BUTTON, eventHandler);
-
-        return this;
-    }
-
-    public onPostbackButton(id: string, eventHandler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.POSTBACK_BUTTON, id, eventHandler);
-
-        return this;
-    }
-
-    public onPersistentMenu(id: string, eventHandler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.PERSISTENT_MENU, id, eventHandler);
-
-        return this;
-    }
-
-    public onQuickReply(id: string, eventHandler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.TEXT_QUICK_REPLY, id, eventHandler);
-
-        return this;
-    }
-
-    public onConversation(handler: ResponderService.EventHandler): this {
-
-        this.responder.on(ResponderService.Event.CONVERSATION, handler);
-
-        return this;
-    }
-
+    /**
+     * 
+     * 
+     * @returns {MessengerProfile.Api} 
+     */
     public getMessengerProfile(): MessengerProfile.Api {
         return this.profileApi;
     }
 
+    /**
+     * 
+     * 
+     * @param {MessengerExtension} extension 
+     * @returns {this} 
+     */
     public addExtension(extension: MessengerExtension): this {
         this.extensions.addExtension(extension);
         return this;
     }
 
-    private verifyRequestSignature(req: Request, res: Response, data: string): void {
+    private verifySignature(req: Request, res: Response, data: string): void {
 
         let signature: string = req.headers["x-hub-signature"];
 
         if (!signature) {
-            throw new Error("couldn't validate the request signature, 'x-hub-signature' not found");
+            throw new Error("couldn't validate the request signature, the 'x-hub-signature' header not found");
         }
 
-        let elements: Array<string> = signature.split('=');
+        let elements: Array<string> = signature.split("=");
 
         if (elements[1] !== crypto.createHmac(elements[0], this.config.appSecret).update(data).digest("hex")) {
-            throw new Error("wrong request signature");
+            throw new Error("request's signature is not valid");
         }
 
-        logger.info("request signature verified");
+        logger.debug("request signature verified");
     }
 
     private static normalizePort(val: number | string): number | string | boolean {

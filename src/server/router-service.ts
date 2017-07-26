@@ -1,26 +1,26 @@
 import { Router, RequestHandler } from "express";
-import { Trace } from "@aiteq/trace";
+import { EventEmitter } from "events";
 
-@Trace()
-export abstract class RouterService {
-  
-  private router: Router;
+export abstract class RouterService extends EventEmitter {
 
-  constructor() {
-    this.router = Router();
-  }
+    private router: Router;
 
-  public getRouter(): Router {
-    return this.router;
-  }
+    constructor() {
+        super();
+        this.router = Router();
+    }
 
-  protected get(route: string, func: RequestHandler): Router {
-    this.router.get(route, func);
-    return this.router;
-  }
+    public getRouter(): Router {
+        return this.router;
+    }
 
-  protected post(route: string, func: RequestHandler): Router {
-    this.router.post(route, func);
-    return this.router;
-  }
+    protected get(route: string, func: RequestHandler): Router {
+        this.router.get(route, func);
+        return this.router;
+    }
+
+    protected post(route: string, func: RequestHandler): Router {
+        this.router.post(route, func);
+        return this.router;
+    }
 }
