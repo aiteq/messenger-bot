@@ -1,18 +1,16 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
-import { Request, Response } from "express";
 import * as crypto from "crypto";
 import * as http from "http";
 import { VerificationService } from "./verification-service";
+import { MessengerProfile } from "../fb-api/messenger-profile";
+import { Webhook } from "../fb-api/webhook";
+import { logger } from "../utils/logger";
+import { RegExpEscaped } from "../utils/reg-exp-escaped";
 import { ResponderService } from "./responder-service";
 import { ExtensionService } from "./extension-service";
-import { MessengerProfile } from "../fb-api/messenger-profile";
-import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
-import { logger } from "../utils/logger";
 import { BotServerConfig } from "./bot-server-config";
-import { MessengerExtension } from "./messenger-extension";
-import { RegExpEscaped } from "../utils/reg-exp-escaped";
-import { Webhook } from "../fb-api/webhook";
+import { ChatExtension } from "./messenger-extension";
 
 
 /**
@@ -52,7 +50,7 @@ export class BotServer {
 
         // parse incoming POST request bodies and make them available under the req.body property
         // every incoming POST request will be verified according to https://developers.facebook.com/docs/messenger-platform/webhook-reference#security
-        this.app.use(bodyParser.json({ verify: this.verifySignature.bind(this) }));
+        this.app.use(bodyParser.json({ verify: this.verifyRequest.bind(this) }));
 
         // parse incoming GET request (used during webhook verification)
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -106,6 +104,7 @@ export class BotServer {
         })
 
         .on("listening", () => {
+            // only for showing the "listening" message
             let addr = this.server.address();
             let bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
             logger.info(`BotServer[${this.config.name}] is listening on ${bind}`);
@@ -160,7 +159,7 @@ export class BotServer {
     }
 
     /**
-     * Subscribe to an <i>event</i> emitted when a webhook request is received. Available events:
+     * Subscribe to an <i>event</i> emitted when a webhook request is received.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {Function} callback - a callback function
@@ -169,15 +168,18 @@ export class BotServer {
     public on(event: Webhook.Event, callback: Function): this;
 
     /**
-     * Subscribe to an <i>identified event</i>. The following events can be identifeid by ID:
+     * Subscribe to an <i>identified event</i>. An identified event is specified, in addition to its
+     * type, with an ID. This feature is available for events capable of carrying data such as
+     * POSTBACK or PERSISTENT_MENU_ITEM.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
-     * @param {string} id - an ID identifing the event
+     * @param {string} id - an identification of the event
      * @param {Function} callback - a callback function
      * @returns {this} 
      */
     public on(event: Webhook.Event, id: string, callback: Function): this;
 
+    /* implementation of the overloaded method on() - see 2 overloads above */
     public on(event: Webhook.Event, idOrCallback: string | Function, callback?: Function): this {
 
         if (typeof idOrCallback === "string") {
@@ -191,7 +193,8 @@ export class BotServer {
     }
 
     /**
-     * 
+     * Expose the Messenger Profile API.
+     * (https://developers.facebook.com/docs/messenger-platform/messenger-profile)
      * 
      * @returns {MessengerProfile.Api} 
      */
@@ -200,35 +203,41 @@ export class BotServer {
     }
 
     /**
+     * Install a Chat Extension.
+     * (https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)
      * 
-     * 
-     * @param {MessengerExtension} extension 
+     * @param {ChatExtension} extension 
      * @returns {this} 
      */
-    public addExtension(extension: MessengerExtension): this {
+    public addChatExtension(extension: ChatExtension): this {
         this.extensions.addExtension(extension);
         return this;
     }
 
-    private verifySignature(req: Request, res: Response, data: string): void {
+    /**
+     * Verify incoming webhook request.
+     * (https://developers.facebook.com/docs/messenger-platform/webhook-reference#security)
+     */
+    private verifyRequest(req: Request, res: Response, data: string): void {
 
-        let signature: string = req.headers["x-hub-signature"];
+        let [algorithm, signature] = (req.headers["x-hub-signature"] || "").split("=");
 
         if (!signature) {
             throw new Error("couldn't validate the request signature, the 'x-hub-signature' header not found");
         }
 
-        let elements: Array<string> = signature.split("=");
-
-        if (elements[1] !== crypto.createHmac(elements[0], this.config.appSecret).update(data).digest("hex")) {
+        if (signature !== crypto.createHmac(algorithm, this.config.appSecret).update(data).digest("hex")) {
             throw new Error("request's signature is not valid");
         }
 
         logger.debug("request signature verified");
     }
 
-    private static normalizePort(val: number | string): number | string | boolean {
-        let port: number = (typeof val === "string") ? parseInt(val, 10) : val;
-        return isNaN(port) ? val : (port >= 0 ? port : false);
+    /**
+     * Normalize a port into a number, string, or false. In some environments the port can be named pipe.
+     */
+    private static normalizePort(value: number | string): number | string | boolean {
+        let port: number = (typeof value === "string") ? parseInt(value, 10) : value;
+        return isNaN(port) ? value : (port >= 0 ? port : false);
     }
 }
