@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { RouterService } from "./router-service";
 import { logger } from "../utils/logger";
-import { MessengerExtension } from "./messenger-extension";
+import { ChatExtension } from "./messenger-extension";
 
 
 export class ExtensionService extends RouterService {
 
-  public addExtension(extension: MessengerExtension): this {
+  public addExtension(extension: ChatExtension): this {
 
     let name: string = extension.getName();
 

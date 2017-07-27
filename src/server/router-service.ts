@@ -1,6 +1,10 @@
 import { Router, RequestHandler } from "express";
 import { EventEmitter } from "events";
 
+
+/**
+ * A parent class for services to be mounted as Express routes.
+ */
 export abstract class RouterService extends EventEmitter {
 
     private router: Router;

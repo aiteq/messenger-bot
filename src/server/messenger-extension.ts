@@ -1,4 +1,4 @@
-export interface MessengerExtension {
+export interface ChatExtension {
   getData(): any;
   getName(): string;
 }

@@ -75,7 +75,7 @@ export class BotServer {
      */
     public start(): void {
 
-        const port = BotServer.normalizePort(this.config.port || 8080);
+        const port = BotServer.normalizePort(this.config.port || process.env.PORT || 8080);
 
         this.app.set("port", port);
 
@@ -127,13 +127,15 @@ export class BotServer {
      * found the server executes the subscribed callback. Keywords are considered as case-insensitive.
      * The callbacks installed using the <code>BotServer.hear</code> method are executed BEFORE
      * callbacks installed using the <code>on()</code> method.
-     * Note that the <code>hear()</code> method listens only for text messages.
+     * <b>Note</b>: the <code>hear()</code> method listens only for text messages.
+     * <b>Note</b>: the callback is not executed when a received text message matches the hook but
+     * the message is part of an active conversation.
      * 
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
-     * @param {ResponderService.HearHandler} hearHandler - a callback to be executed if a message matches one of the hooks
+     * @param {Function} hearHandler - a callback to be executed if a message matches one of the hooks
      * @returns {this} - for chaining
      */
-    public hear(hooks: RegExp | string | Array<RegExp | string>, hearHandler: ResponderService.HearHandler): this {
+    public hear(hooks: RegExp | string | Array<RegExp | string>, hearHandler: Function): this {
 
         let reHooks: Array<RegExp>;
 

@@ -1,225 +1,318 @@
-import { Webhook } from "../fb-api/webhook";
 import { Request, Response, NextFunction } from "express";
-import { RouterService } from "./router-service";
 import { Send } from "../fb-api/send";
+import { Webhook } from "../fb-api/webhook";
 import { UserProfile } from "../fb-api/user-profile";
-import { Chat } from "./chat";
 import { logger } from "../utils/logger";
+import { RouterService } from "./router-service";
+import { Chat } from "./chat";
 
 
+/**
+ * Handles all webhook requests.
+ */
 export class ResponderService extends RouterService {
 
-  private hearHandlers: Array<{ hook: RegExp, func: ResponderService.HearHandler }>;
+    // handlers installed using BotServer.hear
+    private hearHandlers: Array<{ hook: RegExp, func: Function }>;
 
-  private chats: Map<string, Chat>;
-  
-  private sendApi: Send.Api;
-  private userProfileApi: UserProfile.Api;
+    // cached chats - necessary for holding conversation contexts
+    private chats: Map<string, Chat>;
+
+    private sendApi: Send.Api;
+    private userProfileApi: UserProfile.Api;
 
 
-  constructor(private accessToken: string) {
-    super();
+    /**
+     * Creates an instance of ResponderService.
+     * @param {string} accessToken 
+     */
+    constructor(private accessToken: string) {
 
-    this.hearHandlers = new Array<{ hook: RegExp, func: ResponderService.HearHandler }>();
+        super();
 
-    this.chats = new Map<string, Chat>();
+        this.hearHandlers = new Array<{ hook: RegExp, func: Function }>();
+        this.chats = new Map<string, Chat>();
 
-    this.sendApi = new Send.Api(accessToken);
-    this.userProfileApi = new UserProfile.Api(accessToken);
-    
-    this.post("/", (req: Request, res: Response, next: NextFunction) => {
+        this.sendApi = new Send.Api(accessToken);
+        this.userProfileApi = new UserProfile.Api(accessToken);
 
-      logger.debug("webhook post request received:", JSON.stringify(req.body));
-      logger.debug("returning 200 OK");
-      // returning 200 OK back prevents FB from retrying to send the message
-      res.status(200).end();
+        // install webhook request handler
+        this.post("/", (req: Request, res: Response, next: NextFunction) => {
 
-      if (!req.body.object || req.body.object !== "page" || !req.body.entry) {
-        throw new Error("unknown request");
-      }
+            logger.debug("webhook post request received:", JSON.stringify(req.body));
+            logger.debug("returning 200 OK");
 
-      (<Webhook.Request>req.body).entry.forEach((entry: Webhook.MessageEntry) => {
+            // returning 200 OK back prevents FB from retrying to send the message
+            res.status(200).end();
 
-        logger.info(`received meesage for page https://www.facebook.com/${entry.id}`);
-
-        entry.messaging.forEach((item: Webhook.MessagingItem) => {
-
-          let chat: Chat = this.chats.get(item.sender.id) || (() => {
-            let newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi);
-            this.chats.set(item.sender.id, newChat);
-            return newChat;
-          })();
-
-          if (item.message) {
-
-            if (item.message.quick_reply) {
-
-              this.processQuickReply(item.sender.id, item.message, chat);
-
-            } else if (item.message.text) {
-
-              this.processTextMessage(item.sender.id, item.message, chat);
-
-            } else if (item.message.attachments) {
-
-              this.processAttachment(item.sender.id, item.message, chat);
-
-            } else if (item.message.is_echo) {
-
-              this.processEcho(item.sender.id, item.message, chat);
-
-            } else {
-
-              logger.warn("received an unknown message item", item);
+            if (!req.body.object || req.body.object !== "page" || !req.body.entry) {
+                throw new Error("unknown request");
             }
 
-          } else if (item.delivery) {
+            // parse webhook request data according to common format
+            // see https://developers.facebook.com/docs/messenger-platform/webhook-reference#format
 
-            this.processDelivery(item.sender.id, item.delivery, chat);
+            (<Webhook.Request>req.body).entry.forEach((entry: Webhook.MessageEntry) => {
 
-          } else if (item.read) {
+                logger.info(`received meesage for page https://www.facebook.com/${entry.id}`);
 
-            this.processRead(item.sender.id, item.read, chat);
+                entry.messaging.forEach((item: Webhook.MessagingItem) => {
 
-          } else if (item.postback) {
+                    // get cached or create new Chat
+                    let chat: Chat = this.chats.get(item.sender.id) || (() => {
+                        let newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi);
+                        this.chats.set(item.sender.id, newChat);
+                        return newChat;
+                    })();
 
-            this.processPostback(item.sender.id, item.postback, chat);
+                    if (item.message) {
 
-          } else {
+                        if (item.message.quick_reply) {
 
-            logger.warn("received an unknown message item", item);
-          }
+                            // a QUICK REPLY message received
+                            // it must be checked before TEXT MESSAGE because it contains text property too
 
+                            this.processQuickReply(item.sender.id, item.message, chat);
+
+                        } else if (item.message.text) {
+
+                            // a TEXT message received
+
+                            this.processTextMessage(item.sender.id, item.message, chat);
+
+                        } else if (item.message.attachments) {
+
+                            // an ATTACHMENT received
+
+                            this.processAttachment(item.sender.id, item.message, chat);
+
+                        } else if (item.message.is_echo) {
+
+                            // an ECHO received
+
+                            this.processEcho(item.sender.id, item.message, chat);
+
+                        } else {
+
+                            logger.warn("received an unknown message item", item);
+                        }
+
+                    } else if (item.delivery) {
+
+                        // a message DELIVERY CONFIRMATION received
+
+                        this.processDelivery(item.sender.id, item.delivery, chat);
+
+                    } else if (item.read) {
+
+                        // a message READ CONFIRMATION received
+
+                        this.processRead(item.sender.id, item.read, chat);
+
+                    } else if (item.postback) {
+
+                        // a POSTBACK request received
+
+                        this.processPostback(item.sender.id, item.postback, chat);
+
+                    } else {
+
+                        logger.warn("received an unknown message item", item);
+                    }
+                });
+            });
         });
-      });
-    });
-  }
-
-  public hear(hooks: Array<RegExp>, handler: ResponderService.HearHandler): this {
-
-    hooks.forEach(hook => {
-      logger.info("registering hearing hook", hook);
-      this.hearHandlers.push({ hook: hook, func: handler });
-    });
-
-    return this;
-  }
-
-  private processTextMessage(senderId: string, message: Webhook.Message, chat: Chat): void {
-
-    logger.info("received TEXT message", message.mid);
-
-    if (chat.isConversationActive()) {
-
-      logger.info("..as a part of CONVERSATION");
-
-      chat.getConversation().resume(message.text);
-
-      return;
     }
 
-    this.hearHandlers.forEach((handler: { hook: RegExp, func: ResponderService.HearHandler }) => {
+    /**
+     * Install a hear listener for specified regular expressions testing against incoming text messages.
+     * It is called only by BotServer.hear().
+     * 
+     * @param {Array<RegExp>} hooks - an array of regular expressions
+     * @param {Function} handler - a callback function
+     * @returns {this} 
+     */
+    public hear(hooks: Array<RegExp>, handler: Function): this {
 
-      if (handler.hook.test(message.text)) {
+        hooks.forEach(hook => {
+            logger.info("registering hearing hook", hook);
+            this.hearHandlers.push({ hook: hook, func: handler });
+        });
 
-        logger.debug("calling hearing handler", handler.hook);
-
-        handler.func(chat, senderId, message.text);
-      }
-    });
-
-    this.emit(ResponderService.Event.TEXT_MESSAGE, senderId, message.text, chat);
-  }
-
-  private processAttachment(senderId: string, message: Webhook.Message, chat: Chat): void {
-
-    logger.info("received ATTACHMENT message", message.mid);
-    
-    message.attachments.forEach((attachment: Webhook.Attachment) => {
-
-      let data: any;
-
-      switch (attachment.type) {
-
-        case Webhook.AttachmentType.IMAGE:
-        case Webhook.AttachmentType.AUDIO:
-        case Webhook.AttachmentType.VIDEO:
-        case Webhook.AttachmentType.FILE:
-
-          logger.info("received MEDIA message", attachment.payload.url);
-          data = attachment.payload.url;
-          break;
-
-        case Webhook.AttachmentType.LOCATION:
-
-          logger.info("received LOCATION message", attachment.title, attachment.payload.coordinates);
-          data = attachment;
-          break;
-
-        default:
-
-          data = attachment;
-          break;
-      }
-
-      this.emit(`${ResponderService.Event.ATTACHMENT}:${attachment.type}`, senderId, data, chat);
-      this.emit(ResponderService.Event.ATTACHMENT, senderId, data, chat);
-    });
-  }
-
-  private processPostback(senderId: string, postback: Webhook.Postback, chat: Chat): void {
-
-    let payload: Webhook.PostbackPayload = JSON.parse(postback.payload);
-
-    logger.info("recieved POSTBACK from", payload.src, payload.id);
-
-    payload.id && this.emit(`${payload.src}:${payload.id}`, senderId, payload.data, chat);
-    this.emit(`${ResponderService.Event.POSTBACK}:${payload.src}`, senderId, payload.data, chat);
-    this.emit(ResponderService.Event.POSTBACK, senderId, payload.data, chat);
-  }
-
-  private processQuickReply(senderId: string, message: Webhook.Message, chat: Chat): void {
-
-    logger.info("received QUICK REPLY message", message.mid);
-    
-    let payload: Webhook.QuickReplyPayload = JSON.parse(message.quick_reply.payload);
-
-    if (chat.isConversationActive()) {
-
-      logger.info("..as a part of CONVERSATION");
-
-      chat.getConversation().resume(payload.data ? payload : payload.id);
-
-      return;
+        return this;
     }
 
-    this.emit(`${ResponderService.Event.TEXT_QUICK_REPLY}:${payload.id}`, senderId, payload.data, chat);
-    this.emit(ResponderService.Event.TEXT_QUICK_REPLY, senderId, payload.data, chat);
-  }
+    /**
+     * Process an incoming TEXT message.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.Message} message 
+     * @param {Chat} chat 
+     */
+    private processTextMessage(senderId: string, message: Webhook.Message, chat: Chat): void {
 
-  private processEcho(senderId: string, message: Webhook.Message, chat: Chat): void {
+        logger.debug("received TEXT message", message.mid);
 
-    logger.info("received ECHO for", message.mid);
+        if (chat.isConversationActive()) {
 
-    this.emit(ResponderService.Event.MESSAGE_ECHO, senderId, message, chat);
-  }
+            // if the message is part of an active conversation, don't call any hear handler
+            // just resume the conversation with the message text
 
-  private processDelivery(senderId: string, delivery: Webhook.DeliveryInfo, chat: Chat): void {
+            logger.debug("..as a part of CONVERSATION");
+            chat.getConversation().resume(message.text, this);
 
-    logger.info("received DELIVERY confirmations for", (delivery.mids || []).join(","));
-    
-    this.emit(ResponderService.Event.MESSAGE_DELIVERED, senderId, delivery, chat);
-  }
+        } else {
 
-  private processRead(senderId: string, read: Webhook.ReadInfo, chat: Chat): void {
+            // call all hear handlers according matching hooks
 
-    logger.info("received READ confirmation to time", read.watermark);
-    
-    this.emit(ResponderService.Event.MESSAGE_READ, senderId, read, chat);
-  }
-}
+            this.hearHandlers.forEach((handler: { hook: RegExp, func: Function }) => {
 
-export namespace ResponderService {
+                if (handler.hook.test(message.text)) {
 
-  export type HearHandler = (chat: Chat, senderId: string, text: string) => void;
+                    logger.debug("calling hearing handler", handler.hook);
+                    handler.func(chat, senderId, message.text);
+                }
+            });
+        }
+
+        // finally emit the TEXT_MESSAGE event to call installed handlers
+
+        this.emit(Webhook.Event.TEXT_MESSAGE, senderId, message.text, chat);
+    }
+
+    /**
+     * Process an incoming ATTACHMENT.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.Message} message 
+     * @param {Chat} chat 
+     */
+    private processAttachment(senderId: string, message: Webhook.Message, chat: Chat): void {
+
+        logger.debug("received ATTACHMENT message", message.mid);
+
+        message.attachments.forEach((attachment: Webhook.Attachment) => {
+
+            let data: any;
+
+            switch (attachment.type) {
+
+                case Webhook.AttachmentType.IMAGE:
+                case Webhook.AttachmentType.AUDIO:
+                case Webhook.AttachmentType.VIDEO:
+                case Webhook.AttachmentType.FILE:
+
+                    logger.debug("received MEDIA message", attachment.payload.url);
+                    data = attachment.payload.url;
+                    break;
+
+                case Webhook.AttachmentType.LOCATION:
+
+                    logger.debug("received LOCATION message", attachment.title, attachment.payload.coordinates);
+                    data = attachment;
+                    break;
+
+                default:
+
+                    data = attachment;
+                    break;
+            }
+
+            // emit TYPED ATTACHMENT event
+            this.emit(`${Webhook.Event.ATTACHMENT}:${attachment.type}`, senderId, data, chat);
+
+            // finally emit general ATTACHMENT event
+            this.emit(Webhook.Event.ATTACHMENT, senderId, data, chat);
+        });
+    }
+
+    /**
+     * Process an incoming POSTBACK.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.Postback} postback 
+     * @param {Chat} chat 
+     */
+    private processPostback(senderId: string, postback: Webhook.Postback, chat: Chat): void {
+
+        let payload: Webhook.PostbackPayload = JSON.parse(postback.payload);
+
+        logger.debug("recieved POSTBACK from", payload.src, payload.id);
+
+        // emit IDENTIFIED POSTBACK event
+        payload.id && this.emit(`${payload.src}:${payload.id}`, senderId, payload.data, chat);
+
+        // emit SOURCE TYPED POSTBACK event
+        this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, senderId, payload.data, chat);
+
+        // finally emit general POSTBACK event
+        this.emit(Webhook.Event.POSTBACK, senderId, payload.data, chat);
+    }
+
+    /**
+     * Process an incoming QUICK REPLY.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.Message} message 
+     * @param {Chat} chat 
+     */
+    private processQuickReply(senderId: string, message: Webhook.Message, chat: Chat): void {
+
+        logger.debug("received QUICK REPLY message", message.mid);
+
+        let payload: Webhook.QuickReplyPayload = JSON.parse(message.quick_reply.payload);
+
+        if (chat.isConversationActive()) {
+
+            // if the message is a part of conversation, resume it with data or id
+
+            logger.debug("..as a part of CONVERSATION");
+            chat.getConversation().resume(payload.data ? payload : payload.id, this);
+        }
+
+        // emit IDENTIFIED QUICK REPLY event
+        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, senderId, payload.data, chat);
+
+        // finally emit general QUICK REPLY event
+        this.emit(Webhook.Event.TEXT_QUICK_REPLY, senderId, payload.data, chat);
+    }
+
+    /**
+     * Process an incoming ECHO message.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.Message} message 
+     * @param {Chat} chat 
+     */
+    private processEcho(senderId: string, message: Webhook.Message, chat: Chat): void {
+
+        logger.debug("received ECHO for", message.mid);
+        this.emit(Webhook.Event.MESSAGE_ECHO, senderId, message, chat);
+    }
+
+    /**
+     * Process an incoming DELIVERY NOTIFICATION.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.DeliveryInfo} delivery 
+     * @param {Chat} chat 
+     */
+    private processDelivery(senderId: string, delivery: Webhook.DeliveryInfo, chat: Chat): void {
+
+        logger.debug("received DELIVERY confirmations for", (delivery.mids || []).join(","));
+        this.emit(Webhook.Event.MESSAGE_DELIVERED, senderId, delivery, chat);
+    }
+
+    /**
+     * Process an incoming READ CONFIRMATION.
+     * 
+     * @param {string} senderId 
+     * @param {Webhook.ReadInfo} read 
+     * @param {Chat} chat 
+     */
+    private processRead(senderId: string, read: Webhook.ReadInfo, chat: Chat): void {
+
+        logger.debug("received READ confirmation to time", read.watermark);
+        this.emit(Webhook.Event.MESSAGE_READ, senderId, read, chat);
+    }
 }
