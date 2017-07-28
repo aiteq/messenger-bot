@@ -26,7 +26,7 @@ export namespace MessengerProfile {
         }
 
         /**
-         * Sets the Get Started button for the page.
+         * Sets the Get Started button for the Page.
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
          * 
          * @param {*} [data] - a data to be received when the user clicks on the Get Started butoon
@@ -337,41 +337,49 @@ export namespace MessengerProfile {
             return this;
         }
 
-        private setField(field: Field, data: any): void {
+        private async setField(field: Field, data: any): Promise<void> {
 
             logger.debug(`setting the field '${field}' to`, data);
 
             let payload: any = { field: data };
 
-            (async () => {
+            try {
 
-                try {
+                await this.sendRequest(payload);
+                logger.debug(`..the field '${field}' has been succesfully set`);
 
-                    await this.sendRequest(payload);
+            } catch (error) {
 
-                    logger.debug(`..the field '${field}' succesfully set`);
-
-                } catch (error) {
-
-                    logger.debug(`..unable to set the field '${field}'`, error);
-                }
-            })();
+                logger.debug(`..unable to set the field '${field}'`, error);
+                throw Promise.reject(error);
+            }
         }
 
         private async getField(field: Field): Promise<any> {
 
-            logger.info("MessengerProfile.getField:", field);
+            logger.debug("reading the field", field);
 
             return (await this.sendRequest({
                 fields: field
             }, { method: GraphApi.Method.GET })).data;
         }
 
-        private deleteField(fields: Array<Field>): void {
+        private async deleteField(fields: Array<Field>): Promise<void> {
 
-            this.sendRequest({
-                fields: fields
-            }, {method: GraphApi.Method.DELETE })
+            logger.debug("deleting fields", fields);
+
+            try {
+
+                await this.sendRequest({
+                    fields: fields
+                }, {method: GraphApi.Method.DELETE });
+                logger.debug("..the fields have been succesfully deleted");
+
+            } catch (error) {
+
+                logger.debug("..the fields not deleted", error);
+                throw Promise.reject(error);
+            }
         }
     }
 

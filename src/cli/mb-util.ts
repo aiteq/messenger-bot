@@ -7,6 +7,7 @@ import { logger } from "../logger";
 import { Group } from "./group";
 import * as groups from "./groups/";
 
+
 /**
  * The entrypoint of the mbutil CLI.
  */
@@ -21,9 +22,11 @@ export class MBUtil {
         Object.keys(groups).forEach((key) => new groups[key]());
     }
 
-    public bootstrap(): void {
+    public async bootstrap(): Promise<void> {
 
         console.log("Messenger Bot Utility by Aiteq Reloaded, s.r.o (MIT licensed)");
+
+        logger.level = "OFF";
 
         let options: any = minimist(process.argv.slice(2));
 
@@ -38,12 +41,14 @@ export class MBUtil {
         options.accessToken && (config.accessToken = options.accessToken);
 
         if (!config.accessToken) {
-            throw new Error("accessToken must be specified");
+            return Promise.reject("accessToken must be specified");
         }
+
+        options.logLevel && (logger.level = options.logLevel);
 
         this.botUtils = new BotUtils(config);
 
-        MBUtil.groups.get(group).execute(command, this.botUtils, options);
+        await MBUtil.groups.get(group).execute(command, this.botUtils, options);
     }
 
     private static printUsage(): void {
@@ -55,14 +60,14 @@ export class MBUtil {
     public static getGlobalOptions(): string {
         return `
 Global options:
--config <filename> - config json file
--accessToken <token> - Page Access Token (overrides config file)
+--config <filename> - config json file
+--accessToken <token> - Page Access Token (overrides config file)
+--logLevel <level> - set log4js log level (default: OFF)
 `;
     }
 
     public static registerGroup(group: Group): void {
 
-        logger.debug("registering group", group.getName());
         MBUtil.groups.set(group.getName(), group);
     }
 }

@@ -28,7 +28,7 @@ export class BotServer {
     /**
      * Creates an instance of BotServer.
      * 
-     * @param {BotConfig} config - Bot server configuration object. {BotServerConfig} for config options.
+     * @param {BotConfig} config - bot configuration object
      */
     constructor(private config: BotConfig) {
 
