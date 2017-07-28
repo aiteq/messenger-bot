@@ -1,7 +1,7 @@
 /**
  * Represents configuration object for BotServer.
  */
-export interface BotServerConfig {
+export interface BotConfig {
 	/**
      * A Page Access Token for calling Messenger Platform API. Mandatory.
      * (https://developers.facebook.com/docs/messenger-platform/guides/setup#page_access_token)

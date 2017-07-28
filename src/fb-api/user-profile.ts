@@ -1,4 +1,4 @@
-import { logger } from "../utils/logger";
+import { logger } from "../logger";
 import { GraphApi } from "./graph-api";
 
 

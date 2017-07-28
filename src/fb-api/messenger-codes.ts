@@ -1,10 +1,17 @@
-import { logger } from "../utils/logger";
+import { logger } from "../logger";
 import { GraphApi } from "./graph-api";
 import { Webview } from "./webview";
 
 
+/**
+ * API and types for Messenger Codes.
+ * (https://developers.facebook.com/docs/messenger-platform/messenger-code)
+ */
 export namespace MessengerCodes {
 
+  /**
+   * Provides access to Messenger Code API.
+   */
   export class Api extends GraphApi<Request> {
 
     constructor(protected accessToken: string) {
@@ -12,18 +19,31 @@ export namespace MessengerCodes {
       super(accessToken, GraphApi.Endpoint.MESSENGER_CODES);
     }
 
-    public generateCode(size?: number, ref?: string): void {
+    /**
+     * Generates a new Messenger Code with given parameters.
+     * 
+     * @param {number} [size] - the size, in pixels, for the code (supported 100-2000, defaults to 1000)
+     * @param {string} [ref] - reference data to be send as POSTBACK when the user scans the code
+     * @returns {Promise<string>} - a URL of the generated code
+     */
+    public async generateCode(size?: number, ref?: string): Promise<string> {
 
       let req: Request = {
         type: Type.STANDARD,
         image_size: size || 1000        
       };
 
-      if (ref) {
-        req.data = { ref: ref }
-      }
+      ref && (req.data = { ref: ref });
 
-      this.sendRequest(req);
+      try {
+
+        let response: Response = await this.sendRequest(req);
+        return response.uri || Promise.reject("no uri");
+
+      } catch (error) {
+
+        return Promise.reject(error);
+      } 
     }
   }
 

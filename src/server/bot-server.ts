@@ -5,11 +5,10 @@ import * as http from "http";
 import { VerificationService } from "./verification-service";
 import { MessengerProfile } from "../fb-api/messenger-profile";
 import { Webhook } from "../fb-api/webhook";
-import { logger } from "../utils/logger";
-import { RegExpEscaped } from "../utils/reg-exp-escaped";
+import { logger } from "../logger";
 import { ResponderService } from "./responder-service";
 import { ExtensionService } from "./extension-service";
-import { BotServerConfig } from "./bot-server-config";
+import { BotConfig } from "../utils/bot-config";
 import { ChatExtension } from "./messenger-extension";
 
 
@@ -29,9 +28,9 @@ export class BotServer {
     /**
      * Creates an instance of BotServer.
      * 
-     * @param {BotServerConfig} config - Bot server configuration object. {BotServerConfig} for config options.
+     * @param {BotConfig} config - Bot server configuration object. {BotServerConfig} for config options.
      */
-    constructor(private config: BotServerConfig) {
+    constructor(private config: BotConfig) {
 
         config.webhookPath = config.webhookPath || "/webhook";
         config.extensionsPath = config.extensionsPath || "/ext";
@@ -142,12 +141,12 @@ export class BotServer {
         if (typeof hooks === "string") {
 
             // create new case-insensitive regexp based on the given keyword
-            reHooks = [new RegExp(`^${RegExpEscaped.escape(hooks)}$`, "i")];
+            reHooks = [new RegExp(`^${BotServer.regExpEscape(hooks)}$`, "i")];
 
         } else if (Array.isArray(hooks)) {
 
             reHooks = hooks.map((hook: RegExp | string) => {
-                return typeof hook === "string" ? new RegExp(`^${RegExpEscaped.escape(hook)}$`, "i") : hook;
+                return typeof hook === "string" ? new RegExp(`^${BotServer.regExpEscape(hook)}$`, "i") : hook;
             });
 
         } else {
@@ -241,5 +240,14 @@ export class BotServer {
     private static normalizePort(value: number | string): number | string | boolean {
         let port: number = (typeof value === "string") ? parseInt(value, 10) : value;
         return isNaN(port) ? value : (port >= 0 ? port : false);
+    }
+
+	private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
+
+    /**
+     * Escapes regexp special characters.
+     */
+    private static regExpEscape(text: string): string {
+        return text.replace(BotServer.RE_ESCAPE, "\\$&");
     }
 }

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Send } from "../fb-api/send";
 import { Webhook } from "../fb-api/webhook";
 import { UserProfile } from "../fb-api/user-profile";
-import { logger } from "../utils/logger";
+import { logger } from "../logger";
 import { RouterService } from "./router-service";
 import { Chat } from "./chat";
 

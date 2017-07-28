@@ -7,7 +7,9 @@
   "scripts": {
     "compile": "tsc -p .",
     "prepublishOnly": "npm run compile",
-    "doc-md": "node_modules/.bin/typedoc --out doc --mode file --theme markdown ."
+    "doc-md": "node_modules/.bin/typedoc --out doc --mode file --theme markdown .",
+    "test": "node ./bin/test.js",
+    "mbutil": "node ./bin/cli/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,8 @@
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
     "@types/ejs": "^2.3.33",
-    "@types/log4js": "0.0.32",
+    "@types/inquirer": "0.0.35",
+    "@types/minimist": "^1.2.0",
     "@types/node": "^7.0.38",
     "@types/request": "0.0.43",
     "typedoc": "^0.7.2",
@@ -32,12 +35,15 @@
     "typescript": "2.3.x"
   },
   "dependencies": {
+    "async-file": "^2.0.2",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "crypto": "0.0.3",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-    "log4js": "2.x.x",
+    "inquirer": "^3.2.1",
+    "log4js": "^2.3.1",
+    "minimist": "^1.2.0",
     "request": "^2.81.0"
   },
   "engines": {

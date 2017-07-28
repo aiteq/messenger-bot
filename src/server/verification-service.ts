@@ -1,18 +1,23 @@
 import { Request, Response, NextFunction } from "express";
+import { logger } from "../logger";
 import { RouterService } from "./router-service";
-import { logger } from "../utils/logger";
 
+
+/**
+ * Handles webhook verification request.
+ * (see https://developers.facebook.com/docs/messenger-platform/guides/setup#webhook_setup)
+ */
 export class VerificationService extends RouterService {
 
-  constructor(private verifyToken?: string) {
+  /**
+   * Creates an instance of VerificationService.
+   * @param {string} verifyToken - a string to be given during setting up the webhook
+   */
+  constructor(private verifyToken: string) {
+
     super();
 
-    verifyToken = verifyToken || process.env.GAE_VERSION;
-
-    if (!verifyToken) {
-      throw new Error("Verify token not set");
-    }
-
+    // install handler
     this.get("/", (req: Request, res: Response, next: NextFunction) => {
 
       logger.info("webhook verification request received:", req.query);
@@ -21,15 +26,13 @@ export class VerificationService extends RouterService {
 
         if (req.query["hub.verify_token"] === verifyToken) {
 
-          logger.info("verified with token:", verifyToken);
-          logger.debug("returning 200 OK and challenge:", req.query["hub.challenge"])
+          logger.info("webhook is verified with token:", verifyToken);
           res.status(200).send(req.query["hub.challenge"]);
           return;
 
         } else {
 
           logger.warn("not verified - wrong verification token");
-          logger.debug("returning 403 Forbidden");
           res.status(403).end();
           return;
         }

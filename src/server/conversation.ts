@@ -1,13 +1,13 @@
 import { Send } from "../fb-api/send";
 import { Webhook } from "../fb-api/webhook";
 import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
-import { logger } from "../utils/logger";
+import { logger } from "../logger";
 import { Chat } from "./chat";
 import { ResponderService } from "./responder-service";
 
 
 /**
- * Allows synchronous, contextual exchange of messages.
+ * Allows synchronous, contextual two-way interaction between the bot and user.
  * The instance is created calling the Chat.startConversation() method.
  * <b>Note:</b> In this time, only TEXT and QUICK REPLY messages can be used as parts of conversation.
  */

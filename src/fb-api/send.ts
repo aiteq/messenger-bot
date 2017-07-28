@@ -1,4 +1,4 @@
-import { logger } from "../utils/logger";
+import { logger } from "../logger";
 import { Webview } from "./webview";
 import { GraphApi } from "./graph-api";
 import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
