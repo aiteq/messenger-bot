@@ -5,6 +5,6 @@ import { MBUtil } from "./mb-util";
     try {
         await new MBUtil().bootstrap();
     } catch (error) {
-        cliout.error(error.message || error);
+        cliout.error((error.message || error) + "\n");
     }
 })();

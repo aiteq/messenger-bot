@@ -25,7 +25,7 @@ export class MBUtil {
 
     public async bootstrap(): Promise<void> {
 
-        console.log("Messenger Bot Utility by Aiteq Reloaded, s.r.o (MIT licensed)");
+        console.log("\nMessenger Bot Utility by Aiteq Reloaded, s.r.o (MIT licensed)\n");
 
         let options: any = minimist(process.argv.slice(2));
 
@@ -47,7 +47,7 @@ export class MBUtil {
 
         this.botUtils = new BotUtils(config);
 
-        cliout.info(await MBUtil.groups.get(group).execute(command, this.botUtils, options));
+        cliout.info(await MBUtil.groups.get(group).execute(command, this.botUtils, options) + "\n");
     }
 
     private static exitWithUsage(): void {

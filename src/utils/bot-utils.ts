@@ -29,6 +29,7 @@ export class BotUtils {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
      * 
      * @param {*} [data] - an optional data to be received when the user clicks on the Get Started butoon
+     * @returns {Promise<void>} 
      */
     public setGetStartedButton(data?: any): Promise<void> {
         return this.getMessengerProfileApi().setGetStartedButton(data);
@@ -47,6 +48,8 @@ export class BotUtils {
      * Removes the current Get Started button setting.
      * <b>Note:</b> Get Started button can't be removed when a Persistent Menu is set while
      * Persistent Menu can't be used without Get Started button.
+     * 
+     * @returns {Promise<void>} 
      */
     public deleteGetStartedButton(): Promise<void> {
         return this.getMessengerProfileApi().deleteGetStartedButton();
@@ -58,6 +61,7 @@ export class BotUtils {
      * 
      * @param {string} text - a text of the greeting
      * @param {string} [locale="default"] - greeting's locale
+     * @returns {Promise<void>} 
      */
     public setGreeting(text: string, locale: string = "default"): Promise<void> {
         return this.getMessengerProfileApi().setGreeting({ locale, text });
@@ -74,6 +78,8 @@ export class BotUtils {
 
     /**
      * Removes the current Greeting.
+     * 
+     * @returns {Promise<void>} 
      */
     public deleteGreeting(): Promise<void> {
         return this.getMessengerProfileApi().deleteGreeting();
@@ -83,25 +89,56 @@ export class BotUtils {
      * Sets Persistent Menu for the Page.
      * 
      * @param {(MessengerProfile.PersistentMenu | Array<MessengerProfile.PersistentMenu> | PersistentMenuBuilder)} menuDef 
+     * @returns {Promise<void>} 
      */
-    public async setPersistentMenu(menuDef: MessengerProfile.PersistentMenu | Array<MessengerProfile.PersistentMenu> | PersistentMenuBuilder): Promise<void> {
-        await this.getMessengerProfileApi().setPersistentMenu(menuDef);
+    public setPersistentMenu(menuDef: MessengerProfile.PersistentMenu | Array<MessengerProfile.PersistentMenu> | PersistentMenuBuilder): Promise<void> {
+        return this.getMessengerProfileApi().setPersistentMenu(menuDef);
     }
 
     /**
-     * Reads the current Persistent Menu.
+     * Returns the current Persistent Menu.
      * 
      * @returns {Promise<any>} - an object with Persistent Menu definition
      */
-    public async getPersistentMenu(): Promise<any> {
-        return await this.getMessengerProfileApi().getPersistentMenu();
+    public getPersistentMenu(): Promise<any> {
+        return this.getMessengerProfileApi().getPersistentMenu();
     }
 
     /**
      * Removes the current Persistent Menu.
+     * 
+     * @returns {Promise<void>} 
      */
-    public async deletePersistentMenu(): Promise<void> {
-        return await this.getMessengerProfileApi().deletePersistentMenu();
+    public deletePersistentMenu(): Promise<void> {
+        return this.getMessengerProfileApi().deletePersistentMenu();
+    }
+
+    /**
+     * Returns current list of whitelisted domains.
+     * 
+     * @returns {Promise<any>} - a list of whitelisted domains
+     */
+    public getDomainWhitelist(): Promise<any> {
+        return this.getMessengerProfileApi().getWhitelistedDomains();
+    }
+
+    /**
+     * Adds a domain to the whitelist.
+     * 
+     * @param {Array<string>} domains - an array of domains
+     * @returns {Promise<void>} 
+     */
+    public whitelistDomains(domains: Array<string>): Promise<void> {
+        return this.getMessengerProfileApi().whitelistDomains(domains);
+    }
+
+    /**
+     * Removes all domains from whitelist.
+     * 
+     * @returns {Promise<void>} 
+     */
+    public deleteDomainWhitelist(): Promise<void> {
+        return this.getMessengerProfileApi().deleteDomainWhitelist();
     }
 
     /**

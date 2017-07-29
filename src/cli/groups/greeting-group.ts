@@ -37,8 +37,7 @@ export class GreetingGroup extends Group {
     }
 
     protected getUsage(): string {
-        return `
-Manage Greeting text of the Page.
+        return `Manage Greeting text of the Page.
 See more about Greeting at https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text.
 
 Usage:

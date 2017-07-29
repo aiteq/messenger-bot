@@ -110,15 +110,12 @@ export namespace MessengerProfile {
          * <b>Note:</b> You must set up a Get Started button if you also wish to use Persistent Menu.
          * 
          * @param {(PersistentMenu | Array<PersistentMenu> | PersistentMenuBuilder)} menuDef - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public setPersistentMenu(menuDef: PersistentMenu | Array<PersistentMenu> | PersistentMenuBuilder): this {
+        public setPersistentMenu(menuDef: PersistentMenu | Array<PersistentMenu> | PersistentMenuBuilder): Promise<void> {
 
             menuDef instanceof PersistentMenuBuilder && (menuDef = menuDef.build());
-
-            this.setField(Field.PERSISTENT_MENU, Array.isArray(menuDef) ? menuDef : [menuDef]);
-
-            return this;
+            return this.setField(Field.PERSISTENT_MENU, Array.isArray(menuDef) ? menuDef : [menuDef]);
         }
 
         /**
@@ -142,12 +139,10 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting)
          * 
          * @param {(string | Array<string>)} domains - a domain or array of domains to by whitelisted
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public whitelistDomains(domains: string | Array<string>): this {
-
-            this.setField(Field.DOMAIN_WHITELIST, Array.isArray(domains) ? domains : [domains]);
-            return this;
+        public whitelistDomains(domains: string | Array<string>): Promise<void> {
+            return this.setField(Field.DOMAIN_WHITELIST, Array.isArray(domains) ? domains : [domains]);
         }
 
         /**
@@ -164,10 +159,8 @@ export namespace MessengerProfile {
          * 
          * @returns {this} - for chaining
          */
-        public deleteDomainWhitelist(): this {
-
-            this.deleteField([Field.DOMAIN_WHITELIST]);
-            return this;
+        public deleteDomainWhitelist(): Promise<void> {
+            return this.deleteField([Field.DOMAIN_WHITELIST]);
         }
 
         /**
@@ -402,7 +395,7 @@ export namespace MessengerProfile {
     export interface PersistentMenu extends Menu {
         locale: string;
         composer_input_disabled: boolean;
-        call_to_actions: Array<MenuItem>;
+        //call_to_actions: Array<MenuItem>;
     }
 
     export interface Greeting {

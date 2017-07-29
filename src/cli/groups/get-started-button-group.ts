@@ -22,7 +22,6 @@ export class GetStartedButtonGroup extends Group {
                     "Get Started button is not set";
 
             case "set":
-                //try { options.data = JSON.parse(options.data); } catch (error) {}
                 await botUtils.setGetStartedButton(options._[2]);
                 return "Get Started button has been successfully set";
 
@@ -36,8 +35,7 @@ export class GetStartedButtonGroup extends Group {
     }
 
     public getUsage(): string {
-        return `
-Manage Get Started button for the Page.
+        return `Manage Get Started button for the Page.
 See more about Get Started button at https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button.
 
 Usage:

@@ -99,7 +99,7 @@ export namespace PersistentMenuBuilder {
       this.addMenuItem({
         type: MessengerProfile.MenuItemType.NESTED,
         title: title,
-        call_to_actions: new Array<MessengerProfile.MenuItem>()
+        call_to_actions: submenu.actions
       });
 
       return this;

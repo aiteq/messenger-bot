@@ -1,1 +1,2 @@
 - conversation input validators
+- rename Conversation (due to https://developers.facebook.com/docs/messenger-platform/guides/ads)

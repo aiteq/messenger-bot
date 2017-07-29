@@ -13,5 +13,5 @@ export namespace Webview {
     export const SHOW = "show";
   }
 
-  export type ShareButton = typeof ShareButton.HIDE | undefined;
+  export type ShareButton = typeof ShareButton.HIDE | typeof ShareButton.SHOW;
 }

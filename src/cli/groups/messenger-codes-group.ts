@@ -18,8 +18,7 @@ export class MessengerCodeGroup extends Group {
     }
 
     public getUsage(): string {
-        return `
-Generates a new Messenger Code and saves it to disk as .PNG file.
+        return `Generates a new Messenger Code and saves it to disk as .PNG file.
 See more about Messenger Codes at https://developers.facebook.com/docs/messenger-platform/messenger-code.
 
 Usage:

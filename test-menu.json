@@ -1,0 +1,25 @@
+{
+    "default": {
+        "composerInputDisabled": false,
+        "items": [
+            {
+                "title": "Web",
+                "url": "http://www.rubicoin.cz"
+            },
+            {
+                "title": "Test postback",
+                "data": "test postback",
+                "id": "TEST-ITEM"
+            },
+            {
+                "title": "Submenu",
+                "items": [
+                    {
+                        "title": "Web",
+                        "url": "http://www.rubicoin.cz"
+                    }
+                ]
+            }
+        ]
+    }
+}
