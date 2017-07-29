@@ -142,6 +142,35 @@ export class BotUtils {
     }
 
     /**
+     * Returns current Account Linking URL.
+     * 
+     * @param {string} url 
+     * @returns {Promise<string>} 
+     */
+    public getAccountLinkingUrl(): Promise<string> {
+        return this.getMessengerProfileApi().getAccountLinkingUrl();
+    }
+
+    /**
+     * Sets a new Account Linking URL.
+     * 
+     * @param {string} url - a URL
+     * @returns {Promise<void>} 
+     */
+    public setAccountLinkingUrl(url: string): Promise<void> {
+        return this.getMessengerProfileApi().setAccountLinkingUrl(url);
+    }
+
+    /**
+     * Removes current setting of Account Linking URL.
+     * 
+     * @returns {Promise<void>} 
+     */
+    public deleteAccountLinkingUrl(): Promise<void> {
+        return this.getMessengerProfileApi().deleteAccountLinkingUrl();
+    }
+
+    /**
      * Generates and saves a new Messenger Code as PNG image.
      * 
      * @param {string} fileName - a name of the file to be saved (including relative or absolute path)

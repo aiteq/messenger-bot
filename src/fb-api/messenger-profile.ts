@@ -168,12 +168,10 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/account-linking-url)
          * 
          * @param {string} url 
-         * @returns {this} 
+         * @returns {Promise<void>} 
          */
-        public setAccountLinkingUrl(url: string): this {
-
-            this.setField(Field.ACCOUNT_LINKING_URL, url);
-            return this;
+        public setAccountLinkingUrl(url: string): Promise<void> {
+            return this.setField(Field.ACCOUNT_LINKING_URL, url);
         }
 
         /**
@@ -188,12 +186,10 @@ export namespace MessengerProfile {
         /**
          * Removes currently set account linking URL.
          * 
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public deleteAccountLinkingUrl(): this {
-
-            this.deleteField([Field.ACCOUNT_LINKING_URL]);
-            return this;
+        public deleteAccountLinkingUrl(): Promise<void> {
+            return this.deleteField([Field.ACCOUNT_LINKING_URL]);
         }
 
         /**
@@ -201,18 +197,16 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
          * @param {(string | Array<string>)} countries - a country or countries to be whitelisted for audience
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public whitelistAudienceCountries(countries: string | Array<string>): this {
+        public whitelistAudienceCountries(countries: string | Array<string>): Promise<void> {
 
-            this.setField(Field.TARGET_AUDIENCE, {
+            return this.setField(Field.TARGET_AUDIENCE, {
                 audience_type: AudienceType.CUSTOM,
                 countries: {
                     whitelist: Array.isArray(countries) ? countries : [countries]
                 }
             });
-
-            return this;
         }
 
         /**
@@ -220,48 +214,41 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
          * @param {(string | Array<string>)} countries - a country or countries to be blacklisted for audience
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public blacklistAudienceCountries(countries: string | Array<string>): this {
+        public blacklistAudienceCountries(countries: string | Array<string>): Promise<void> {
 
-            this.setField(Field.TARGET_AUDIENCE, {
+            return this.setField(Field.TARGET_AUDIENCE, {
                 audience_type: AudienceType.CUSTOM,
                 countries: {
                     blacklist: Array.isArray(countries) ? countries : [countries]
                 }
             });
-
-            return this;
         }
 
         /**
          * Opens audience for all.
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public openAudienceToAll(): this {
-
-            this.setField(Field.TARGET_AUDIENCE, {
+        public openAudienceToAll(): Promise<void> {
+            return this.setField(Field.TARGET_AUDIENCE, {
                 audience_type: AudienceType.ALL
             });
-
-            return this;
         }
 
         /**
          * Closes audience for all.
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public closeAudienceToAll(): this {
+        public closeAudienceToAll(): Promise<void> {
 
-            this.setField(Field.TARGET_AUDIENCE, {
+            return this.setField(Field.TARGET_AUDIENCE, {
                 audience_type: AudienceType.NONE
             });
-
-            return this;
         }
 
         /**
@@ -276,12 +263,10 @@ export namespace MessengerProfile {
         /**
          * Removes all audience settings.
          * 
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public deleteAudience(): this {
-
-            this.deleteField([Field.TARGET_AUDIENCE]);
-            return this;
+        public deleteAudience(): Promise<void> {
+            return this.deleteField([Field.TARGET_AUDIENCE]);
         }
 
         /**
@@ -291,18 +276,16 @@ export namespace MessengerProfile {
          * @param {string} url - Chat Extensions home URL
          * @param {boolean} [inTest=true] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
          * @param {Webview.ShareButton} [shareButton=Webview.ShareButton.HIDE] - Controls whether the share button in the webview is enabled.
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public setChatExtensionHomeUrl(url: string, inTest: boolean = true, shareButton: Webview.ShareButton = Webview.ShareButton.HIDE): this {
+        public setChatExtensionHomeUrl(url: string, inTest: boolean = true, shareButton: Webview.ShareButton = Webview.ShareButton.HIDE): Promise<void> {
 
-            this.setField(Field.CHAT_EXTENSION_WEB_URL, {
+            return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
                 url: url,
                 webview_height_ratio: Webview.HeightRatio.TALL,
                 webview_share_button: shareButton,
                 in_test: inTest
             });
-
-            return this;
         }
 
         /**
@@ -317,12 +300,10 @@ export namespace MessengerProfile {
         /**
          * Removes Chat Extension home URL.
          * 
-         * @returns {this} - for chaining
+         * @returns {Promise<void>} - for chaining
          */
-        public deleteChatExtensionHomeUrl(): this {
-
-            this.deleteField([Field.CHAT_EXTENSION_WEB_URL]);
-            return this;
+        public deleteChatExtensionHomeUrl(): Promise<void> {
+            return this.deleteField([Field.CHAT_EXTENSION_WEB_URL]);
         }
 
         private async setField(field: Field, data: any): Promise<void> {
