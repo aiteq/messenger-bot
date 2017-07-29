@@ -51,13 +51,13 @@ export abstract class GraphApi<T extends GraphApi.Request> {
             //config.url += "?" + Object.keys(data).map((key: string) => `${key}=${data[key]}`).join("&");
             config.params = data;
 
-        } else if (config.method === GraphApi.Method.POST) {
+        } else if (config.method === GraphApi.Method.POST || config.method === GraphApi.Method.DELETE) {
 
             config.data = data;
 
         } else {
 
-            Promise.reject("GraphApi.senRequest: method not implemented yet: " + config.method);
+            Promise.reject("GraphApi.senRequest: method not supporetd: " + config.method);
         }
 
         try {

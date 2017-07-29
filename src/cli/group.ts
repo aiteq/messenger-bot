@@ -26,10 +26,10 @@ export abstract class Group {
 
     public abstract execute(command: string, botUtils: BotUtils, options: any): void;
 
-    public abstract getUsage(): string;
+    protected abstract getUsage(): string;
 
-    public printUsage(): void {
-        console.log(`Usage: mbutil ${this.getName()} ${this.getUsage()}`);
+    protected exitWithUsage(): void {
+        console.log(this.getUsage());
         console.log(MBUtil.getGlobalOptions());
         process.exit(1);
     }

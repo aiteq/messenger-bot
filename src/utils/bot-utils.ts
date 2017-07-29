@@ -1,6 +1,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 import Axios from 'axios';
 import * as fs from "async-file";
+import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { MessengerCodes } from "../fb-api/messenger-codes";
 import { MessengerProfile } from "../fb-api/messenger-profile";
 import { logger } from "../logger";
@@ -28,24 +29,79 @@ export class BotUtils {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
      * 
      * @param {*} [data] - an optional data to be received when the user clicks on the Get Started butoon
-     * @returns {Promise<void>} 
      */
     public async setGetStartedButton(data?: any): Promise<void> {
-
-        try {
-
-            await this.getMessengerProfileApi().setGetStartedButton(data);
-            logger.info("Get Started button successfully set");
-
-        } catch (error) {
-
-            logger.error("Get Started button not set: ", error);
-            return Promise.reject(error);
-        }
+        await this.getMessengerProfileApi().setGetStartedButton(data);
     }
 
+    /**
+     * Reads the current Get Started button setting.
+     * 
+     * @returns {Promise<any>} - an object with Get Started button setting
+     */
     public async getGetStartedButton(): Promise<any> {
         return await this.getMessengerProfileApi().getGetStartedButton();
+    }
+
+    /**
+     * Removes the current Get Started button setting.
+     * <b>Note:</b> Get Started button can't be removed when a Persistent Menu is set while
+     * Persistent Menu can't be used without Get Started button.
+     */
+    public async deleteGetStartedButton(): Promise<void> {
+        return await this.getMessengerProfileApi().deleteGetStartedButton();
+    }
+
+    /**
+     * Sets the Greeting for the Page.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
+     * 
+     * @param {string} text - a text of the greeting
+     * @param {string} [locale="default"] - greeting's locale
+     */
+    public setGreeting(text: string, locale: string = "default"): Promise<void> {
+        return this.getMessengerProfileApi().setGreeting({ locale, text });
+    }
+
+    /**
+     * Reads the current Greeting.
+     * 
+     * @returns {Promise<any>} - an object with greeting
+     */
+    public getGreeting(): Promise<any> {
+        return this.getMessengerProfileApi().getGreeting();
+    }
+
+    /**
+     * Removes the current Greeting.
+     */
+    public deleteGreeting(): Promise<void> {
+        return this.getMessengerProfileApi().deleteGreeting();
+    }
+
+    /**
+     * Sets Persistent Menu for the Page.
+     * 
+     * @param {(MessengerProfile.PersistentMenu | Array<MessengerProfile.PersistentMenu> | PersistentMenuBuilder)} menuDef 
+     */
+    public async setPersistentMenu(menuDef: MessengerProfile.PersistentMenu | Array<MessengerProfile.PersistentMenu> | PersistentMenuBuilder): Promise<void> {
+        await this.getMessengerProfileApi().setPersistentMenu(menuDef);
+    }
+
+    /**
+     * Reads the current Persistent Menu.
+     * 
+     * @returns {Promise<any>} - an object with Persistent Menu definition
+     */
+    public async getPersistentMenu(): Promise<any> {
+        return await this.getMessengerProfileApi().getPersistentMenu();
+    }
+
+    /**
+     * Removes the current Persistent Menu.
+     */
+    public async deletePersistentMenu(): Promise<void> {
+        return await this.getMessengerProfileApi().deletePersistentMenu();
     }
 
     /**

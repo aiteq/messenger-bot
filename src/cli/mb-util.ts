@@ -4,6 +4,7 @@ import { Inquirer } from "inquirer";
 import * as fs from "fs";
 import { BotUtils } from "../utils/bot-utils";
 import { logger } from "../logger";
+import { cliout } from "./cli-logger";
 import { Group } from "./group";
 import * as groups from "./groups/";
 
@@ -26,13 +27,13 @@ export class MBUtil {
 
         console.log("Messenger Bot Utility by Aiteq Reloaded, s.r.o (MIT licensed)");
 
-        logger.level = "OFF";
-
         let options: any = minimist(process.argv.slice(2));
+
+        logger.level = options.logLevel || "OFF";
 
         let [group, command] = options._;
 
-        (MBUtil.groups.has(group) && command) || MBUtil.printUsage();
+        (MBUtil.groups.has(group) && command) || MBUtil.exitWithUsage();
 
         let config: any = {};
 
@@ -41,28 +42,25 @@ export class MBUtil {
         options.accessToken && (config.accessToken = options.accessToken);
 
         if (!config.accessToken) {
-            return Promise.reject("accessToken must be specified");
+            return Promise.reject("no accessToken");
         }
-
-        options.logLevel && (logger.level = options.logLevel);
 
         this.botUtils = new BotUtils(config);
 
-        await MBUtil.groups.get(group).execute(command, this.botUtils, options);
+        cliout.info(await MBUtil.groups.get(group).execute(command, this.botUtils, options));
     }
 
-    private static printUsage(): void {
+    private static exitWithUsage(): void {
         console.log("Usage: mbutil <group>");
         console.log("Groups: ", Array.from(MBUtil.groups.keys()).join(", "));
         process.exit(1);
     }
 
     public static getGlobalOptions(): string {
-        return `
-Global options:
---config <filename> - config json file
---accessToken <token> - Page Access Token (overrides config file)
---logLevel <level> - set log4js log level (default: OFF)
+        return `Global options:
+    --config <filename> - config json file
+    --accessToken <token> - Page Access Token (overrides config file)
+    --logLevel <level> - set log level for package @aiteq/messenger-bot (default: OFF)
 `;
     }
 

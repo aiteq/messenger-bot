@@ -58,13 +58,9 @@ export namespace MessengerProfile {
 
         /**
          * Removes Get Started button.
-         * 
-         * @returns {this} - for chaining
          */
-        public deleteGetStartedButton(): this {
-
-            this.deleteField([Field.GET_STARTED_BUTTON]);
-            return this;
+        public deleteGetStartedButton(): Promise<void> {
+            return this.deleteField([Field.GET_STARTED_BUTTON]);
         }
 
         /**
@@ -74,15 +70,20 @@ export namespace MessengerProfile {
          * @param {(string | Greeting | Array<Greeting>)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
          * @returns {this} - for chaining
          */
-        public setGreeting(greeting: string | Greeting | Array<Greeting>): this {
+        public async setGreeting(greeting: string | Greeting | Array<Greeting>): Promise<void> {
 
-            this.setField(Field.GREETING, typeof greeting === "string" ? [{
-                locale: "default",
-                text: greeting
-            }] : (Array.isArray(greeting) ? greeting : [greeting])
-            );
+            greeting = typeof greeting === "string" ?
+                [{
+                    locale: "default",
+                    text: greeting
+                }] :
+                (Array.isArray(greeting) ? greeting : [greeting]);
 
-            return this;
+            // first get current greetings
+            let current: Array<MessengerProfile.Greeting> = await this.getGreeting();
+
+            // add and set
+            return this.setField(Field.GREETING, current.concat(greeting));
         }
 
         /**
@@ -96,13 +97,9 @@ export namespace MessengerProfile {
 
         /**
          * Removes all greetings.
-         * 
-         * @returns {this} - for chaining
          */
-        public deleteGreeting(): this {
-
-            this.deleteField([Field.GREETING]);
-            return this;
+        public deleteGreeting(): Promise<void> {
+            return this.deleteField([Field.GREETING]);
         }
 
         /**
@@ -133,13 +130,9 @@ export namespace MessengerProfile {
 
         /**
          * Removes currently installed Persistent Menu.
-         * 
-         * @returns {this} - for chaining
          */
-        public deletePersistentMenu(): this {
-
-            this.deleteField([Field.PERSISTENT_MENU]);
-            return this;
+        public deletePersistentMenu(): Promise<void> {
+            return this.deleteField([Field.PERSISTENT_MENU]);
         }
 
         /**
@@ -339,19 +332,20 @@ export namespace MessengerProfile {
 
         private async setField(field: Field, data: any): Promise<void> {
 
-            logger.debug(`setting the field '${field}' to`, data);
+            logger.debug(`setting the field '${field}' to`, JSON.stringify(data, null, 2));
 
-            let payload: any = { field: data };
+            let payload: any = {};
+            payload[field] = data;
 
             try {
 
                 await this.sendRequest(payload);
-                logger.debug(`..the field '${field}' has been succesfully set`);
+                logger.debug(`the field '${field}' has been succesfully set`);
 
             } catch (error) {
 
-                logger.debug(`..unable to set the field '${field}'`, error);
-                throw Promise.reject(error);
+                logger.debug(`unable to set the field '${field}'`, error);
+                return Promise.reject(error);
             }
         }
 
@@ -359,27 +353,20 @@ export namespace MessengerProfile {
 
             logger.debug("reading the field", field);
 
-            return (await this.sendRequest({
+            let data: Array<any> = (await this.sendRequest({
                 fields: field
             }, { method: GraphApi.Method.GET })).data;
+
+            return data.length > 0 ? data[0][field] : data;
         }
 
         private async deleteField(fields: Array<Field>): Promise<void> {
 
             logger.debug("deleting fields", fields);
 
-            try {
-
-                await this.sendRequest({
-                    fields: fields
-                }, {method: GraphApi.Method.DELETE });
-                logger.debug("..the fields have been succesfully deleted");
-
-            } catch (error) {
-
-                logger.debug("..the fields not deleted", error);
-                throw Promise.reject(error);
-            }
+            return await this.sendRequest({
+                fields: fields
+            }, { method: GraphApi.Method.DELETE });
         }
     }
 
