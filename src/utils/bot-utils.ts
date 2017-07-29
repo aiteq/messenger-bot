@@ -30,8 +30,8 @@ export class BotUtils {
      * 
      * @param {*} [data] - an optional data to be received when the user clicks on the Get Started butoon
      */
-    public async setGetStartedButton(data?: any): Promise<void> {
-        await this.getMessengerProfileApi().setGetStartedButton(data);
+    public setGetStartedButton(data?: any): Promise<void> {
+        return this.getMessengerProfileApi().setGetStartedButton(data);
     }
 
     /**
@@ -39,8 +39,8 @@ export class BotUtils {
      * 
      * @returns {Promise<any>} - an object with Get Started button setting
      */
-    public async getGetStartedButton(): Promise<any> {
-        return await this.getMessengerProfileApi().getGetStartedButton();
+    public getGetStartedButton(): Promise<any> {
+        return this.getMessengerProfileApi().getGetStartedButton();
     }
 
     /**
@@ -48,8 +48,8 @@ export class BotUtils {
      * <b>Note:</b> Get Started button can't be removed when a Persistent Menu is set while
      * Persistent Menu can't be used without Get Started button.
      */
-    public async deleteGetStartedButton(): Promise<void> {
-        return await this.getMessengerProfileApi().deleteGetStartedButton();
+    public deleteGetStartedButton(): Promise<void> {
+        return this.getMessengerProfileApi().deleteGetStartedButton();
     }
 
     /**

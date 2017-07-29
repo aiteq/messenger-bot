@@ -30,9 +30,9 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
          * 
          * @param {*} [data] - a data to be received when the user clicks on the Get Started butoon
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
-        public setGetStartedButton(data?: any): this {
+        public setGetStartedButton(data?: any): Promise<void> {
 
             let payload: any = {
                 src: Webhook.PostbackSource.GET_STARTED_BUTTON
@@ -40,11 +40,9 @@ export namespace MessengerProfile {
 
             data && (payload.data = data);
 
-            this.setField(Field.GET_STARTED_BUTTON, {
+            return this.setField(Field.GET_STARTED_BUTTON, {
                 payload: JSON.stringify(payload)
             });
-
-            return this;
         }
 
         /**
@@ -58,6 +56,8 @@ export namespace MessengerProfile {
 
         /**
          * Removes Get Started button.
+         * 
+         * @returns {Promise<void>}
          */
         public deleteGetStartedButton(): Promise<void> {
             return this.deleteField([Field.GET_STARTED_BUTTON]);
@@ -68,7 +68,7 @@ export namespace MessengerProfile {
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
          * 
          * @param {(string | Greeting | Array<Greeting>)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
-         * @returns {this} - for chaining
+         * @returns {Promise<void>}
          */
         public async setGreeting(greeting: string | Greeting | Array<Greeting>): Promise<void> {
 
@@ -89,7 +89,7 @@ export namespace MessengerProfile {
         /**
          * Reads the current Greeting setting.
          * 
-         * @returns {Promise<Array<MessengerProfile.Greeting>>} - Greeting setting
+         * @returns {Promise<Array<MessengerProfile.Greeting>>} - current Greeting
          */
         public getGreeting(): Promise<Array<MessengerProfile.Greeting>> {
             return this.getField(Field.GREETING);
@@ -97,6 +97,8 @@ export namespace MessengerProfile {
 
         /**
          * Removes all greetings.
+         * 
+         * @returns {Promise<void>}
          */
         public deleteGreeting(): Promise<void> {
             return this.deleteField([Field.GREETING]);
@@ -357,7 +359,7 @@ export namespace MessengerProfile {
                 fields: field
             }, { method: GraphApi.Method.GET })).data;
 
-            return data.length > 0 ? data[0][field] : data;
+            return data.length > 0 ? data[0][field] : undefined;
         }
 
         private async deleteField(fields: Array<Field>): Promise<void> {
