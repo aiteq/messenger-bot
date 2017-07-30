@@ -126,6 +126,7 @@ export class BotServer {
      * found the server executes the subscribed callback. Keywords are considered as case-insensitive.
      * The callbacks installed using the <code>BotServer.hear</code> method are executed BEFORE
      * callbacks installed using the <code>on()</code> method.
+     * The callback is executed with the parameters: chat: Chat, senderId: string, text: string.
      * <b>Note</b>: the <code>hear()</code> method listens only for text messages.
      * <b>Note</b>: the callback is not executed when a received text message matches the hook but
      * the message is part of an active conversation.
@@ -161,6 +162,7 @@ export class BotServer {
 
     /**
      * Subscribe to an <i>event</i> emitted when a webhook request is received.
+     * The callback is executed with the parameters: chat: Chat, senderId: string, data: any.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {Function} callback - a callback function
@@ -172,6 +174,7 @@ export class BotServer {
      * Subscribe to an <i>identified event</i>. An identified event is specified, in addition to its
      * type, with an ID. This feature is available for events capable of carrying data such as
      * POSTBACK or PERSISTENT_MENU_ITEM.
+     * The callback is executed with the parameters: chat: Chat, senderId: string, data: any.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {string} id - an identification of the event

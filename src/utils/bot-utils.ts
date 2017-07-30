@@ -4,6 +4,7 @@ import * as fs from "async-file";
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { MessengerCodes } from "../fb-api/messenger-codes";
 import { MessengerProfile } from "../fb-api/messenger-profile";
+import { Send } from "../fb-api/send";
 import { logger } from "../logger";
 import { BotConfig } from "./bot-config";
 
@@ -15,6 +16,7 @@ export class BotUtils {
 
     private messengerCodesApi: MessengerCodes.Api;
     private messengerProfileApi: MessengerProfile.Api;
+    private sendApi: Send.Api;
 
 
     /**
@@ -23,6 +25,61 @@ export class BotUtils {
      * @param {BotConfig} config - bot configuration object
      */
     constructor(private config: BotConfig) {}
+
+    /**
+     * Sends a plain text message.
+     * 
+     * @param {string} recipientId - ID of the recipient 
+     * @param {string} text - a text to be send
+     * @returns {Promise<void>} 
+     */
+    public sendText(recipientId: string, text: string): Promise<void> {
+        return this.getSendApi().sendText(recipientId, text);
+    }
+
+    /**
+     * Sends a message with image attachment.
+     * 
+     * @param {string} recipientId - ID of the recipient
+     * @param {string} url - URL of the image
+     * @returns {Promise<string>} 
+     */
+    public sendImage(recipientId: string, url: string): Promise<string> {
+        return this.getSendApi().sendImage(recipientId, url, false);
+    }
+
+    /**
+     * Sends a message with audio attachment.
+     * 
+     * @param {string} recipientId - ID of the recipient
+     * @param {string} url - URL of the audio file
+     * @returns {Promise<string>} 
+     */
+    public sendAudio(recipientId: string, url: string): Promise<string> {
+        return this.getSendApi().sendAudio(recipientId, url, false);
+    }
+
+    /**
+     * Sends a message with video attachment.
+     * 
+     * @param {string} recipientId - ID of the recipient
+     * @param {string} url - URL of the video file
+     * @returns {Promise<string>} 
+     */
+    public sendVideo(recipientId: string, url: string): Promise<string> {
+        return this.getSendApi().sendVideo(recipientId, url, false);
+    }
+
+    /**
+     * Sends a message with file attachment.
+     * 
+     * @param {string} recipientId - ID of the recipient
+     * @param {string} url - URL of the file
+     * @returns {Promise<string>} 
+     */
+    public sendFile(recipientId: string, url: string): Promise<string> {
+        return this.getSendApi().sendFile(recipientId, url, false);
+    }
 
     /**
      * Sets the Get Started button for the Page.
@@ -316,5 +373,10 @@ export class BotUtils {
     private getMessengerProfileApi(): MessengerProfile.Api {
         return this.messengerProfileApi ||
             (this.messengerProfileApi = new MessengerProfile.Api(this.config.accessToken));
+    }
+
+    private getSendApi(): Send.Api {
+        return this.sendApi ||
+            (this.sendApi = new Send.Api(this.config.accessToken));
     }
 }

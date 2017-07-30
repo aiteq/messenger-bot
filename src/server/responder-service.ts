@@ -177,7 +177,7 @@ export class ResponderService extends RouterService {
 
         // finally emit the TEXT_MESSAGE event to call installed handlers
 
-        this.emit(Webhook.Event.TEXT_MESSAGE, senderId, message.text, chat);
+        this.emit(Webhook.Event.TEXT_MESSAGE, chat, senderId, message.text);
     }
 
     /**
@@ -219,10 +219,10 @@ export class ResponderService extends RouterService {
             }
 
             // emit TYPED ATTACHMENT event
-            this.emit(`${Webhook.Event.ATTACHMENT}:${attachment.type}`, senderId, data, chat);
+            this.emit(`${Webhook.Event.ATTACHMENT}:${attachment.type}`, chat, senderId, data);
 
             // finally emit general ATTACHMENT event
-            this.emit(Webhook.Event.ATTACHMENT, senderId, data, chat);
+            this.emit(Webhook.Event.ATTACHMENT, chat, senderId, data);
         });
     }
 
@@ -240,13 +240,13 @@ export class ResponderService extends RouterService {
         logger.debug("recieved POSTBACK from", payload.src, payload.id);
 
         // emit IDENTIFIED POSTBACK event
-        payload.id && this.emit(`${payload.src}:${payload.id}`, senderId, payload.data, chat);
+        payload.id && this.emit(`${payload.src}:${payload.id}`, chat, senderId, payload.data);
 
         // emit SOURCE TYPED POSTBACK event
-        this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, senderId, payload.data, chat);
+        this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, chat, senderId, payload.data);
 
         // finally emit general POSTBACK event
-        this.emit(Webhook.Event.POSTBACK, senderId, payload.data, chat);
+        this.emit(Webhook.Event.POSTBACK, chat, senderId, payload.data);
     }
 
     /**
@@ -271,10 +271,10 @@ export class ResponderService extends RouterService {
         }
 
         // emit IDENTIFIED QUICK REPLY event
-        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, senderId, payload.data, chat);
+        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, chat, senderId, payload.data);
 
         // finally emit general QUICK REPLY event
-        this.emit(Webhook.Event.TEXT_QUICK_REPLY, senderId, payload.data, chat);
+        this.emit(Webhook.Event.TEXT_QUICK_REPLY, chat, senderId, payload.data);
     }
 
     /**
@@ -287,7 +287,7 @@ export class ResponderService extends RouterService {
     private processEcho(senderId: string, message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received ECHO for", message.mid);
-        this.emit(Webhook.Event.MESSAGE_ECHO, senderId, message, chat);
+        this.emit(Webhook.Event.MESSAGE_ECHO, chat, senderId, message);
     }
 
     /**
@@ -300,7 +300,7 @@ export class ResponderService extends RouterService {
     private processDelivery(senderId: string, delivery: Webhook.DeliveryInfo, chat: Chat): void {
 
         logger.debug("received DELIVERY confirmations for", (delivery.mids || []).join(","));
-        this.emit(Webhook.Event.MESSAGE_DELIVERED, senderId, delivery, chat);
+        this.emit(Webhook.Event.MESSAGE_DELIVERED, chat, senderId, delivery);
     }
 
     /**
@@ -313,6 +313,6 @@ export class ResponderService extends RouterService {
     private processRead(senderId: string, read: Webhook.ReadInfo, chat: Chat): void {
 
         logger.debug("received READ confirmation to time", read.watermark);
-        this.emit(Webhook.Event.MESSAGE_READ, senderId, read, chat);
+        this.emit(Webhook.Event.MESSAGE_READ, chat, senderId, read);
     }
 }

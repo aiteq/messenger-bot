@@ -6,3 +6,4 @@ export * from "./domains-group";
 export * from "./target-audience-group";
 export * from "./account-linking-group";
 export * from "./chat-extension-group";
+export * from "./send-group";

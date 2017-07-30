@@ -10,3 +10,7 @@ export * from "./fb-api-helpers/list-template-message-builder";
 export * from "./fb-api-helpers/og-template-message-builder";
 export * from "./fb-api-helpers/receipt-template-message-builder";
 export * from "./server/messenger-extension";
+
+import { Webhook } from "./fb-api/webhook";
+export const WebhookEvent = Webhook.Event;
+export type WebhookEvent = Webhook.Event;
