@@ -72,18 +72,12 @@ export namespace MessengerProfile {
          */
         public async setGreeting(greeting: string | Greeting | Array<Greeting>): Promise<void> {
 
-            greeting = typeof greeting === "string" ?
+            return this.setField(Field.GREETING, typeof greeting === "string" ?
                 [{
                     locale: "default",
                     text: greeting
                 }] :
-                (Array.isArray(greeting) ? greeting : [greeting]);
-
-            // first get current greetings
-            let current: Array<MessengerProfile.Greeting> = await this.getGreeting();
-
-            // add and set
-            return this.setField(Field.GREETING, current.concat(greeting));
+                (Array.isArray(greeting) ? greeting : [greeting]));
         }
 
         /**
@@ -274,16 +268,16 @@ export namespace MessengerProfile {
          * <b>Note:</b> The domain of the URL should be whitelisted for it to work correctly.
          * 
          * @param {string} url - Chat Extensions home URL
-         * @param {boolean} [inTest=true] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
-         * @param {Webview.ShareButton} [shareButton=Webview.ShareButton.HIDE] - Controls whether the share button in the webview is enabled.
+         * @param {boolean} [inTest=false] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
+         * @param {boolean} [shareButton=false] - Controls whether the share button in the webview is enabled.
          * @returns {Promise<void>}
          */
-        public setChatExtensionHomeUrl(url: string, inTest: boolean = true, shareButton: Webview.ShareButton = Webview.ShareButton.HIDE): Promise<void> {
+        public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = false): Promise<void> {
 
             return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
                 url: url,
                 webview_height_ratio: Webview.HeightRatio.TALL,
-                webview_share_button: shareButton,
+                webview_share_button: shareButton ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE,
                 in_test: inTest
             });
         }
@@ -293,14 +287,14 @@ export namespace MessengerProfile {
          * 
          * @returns {string} - the current Chat Extension home URL
          */
-        public getChatExtensionHomeUrl(): Promise<TargetAudience> {
-            return this.getField(Field.TARGET_AUDIENCE);
+        public getChatExtensionHomeUrl(): Promise<string> {
+            return this.getField(Field.CHAT_EXTENSION_WEB_URL);
         }
 
         /**
          * Removes Chat Extension home URL.
          * 
-         * @returns {Promise<void>} - for chaining
+         * @returns {Promise<void>}
          */
         public deleteChatExtensionHomeUrl(): Promise<void> {
             return this.deleteField([Field.CHAT_EXTENSION_WEB_URL]);

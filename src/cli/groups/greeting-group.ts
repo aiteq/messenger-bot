@@ -21,11 +21,11 @@ export class GreetingGroup extends Group {
                     `Greeting is set to:\n${JSON.stringify(result, null, 2)}` :
                     "Greeting is not set";
 
-            case "set":
+            case "add":
                 let [text, locale] = options._.slice(2);
                 text || this.exitWithUsage();
-                await botUtils.setGreeting(text, locale);
-                return "Greeting has been successfully set";
+                await botUtils.addGreeting(text, locale);
+                return "Greeting has been successfully added";
 
             case "delete":
                 await botUtils.deleteGreeting();
@@ -45,8 +45,8 @@ Usage:
     mbutil ${this.getName()} get [options]
         - show current Greeting
 
-    mbutil ${this.getName()} set "<text>" [locale] [options]
-        - set a new Greeting text for the given locale
+    mbutil ${this.getName()} add "<text>" [locale] [options]
+        - add a new Greeting text for the given locale
         - if the locale is omitted, the text will be set as default
         - supported locales: https://developers.facebook.com/docs/messenger-platform/messenger-profile/supported-locales
 

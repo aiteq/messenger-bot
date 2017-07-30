@@ -5,3 +5,4 @@ export * from "./persistent-menu-group";
 export * from "./domains-group";
 export * from "./target-audience-group";
 export * from "./account-linking-group";
+export * from "./chat-extension-group";

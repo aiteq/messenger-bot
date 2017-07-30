@@ -56,15 +56,21 @@ export class BotUtils {
     }
 
     /**
-     * Sets the Greeting for the Page.
+     * Adds the Greeting for the Page.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
      * 
      * @param {string} text - a text of the greeting
      * @param {string} [locale="default"] - greeting's locale
      * @returns {Promise<void>} 
      */
-    public setGreeting(text: string, locale: string = "default"): Promise<void> {
-        return this.getMessengerProfileApi().setGreeting({ locale, text });
+    public async addGreeting(text: string, locale: string = "default"): Promise<void> {
+
+        let greeting: MessengerProfile.Greeting = { locale, text };
+
+        // first get current greetings
+        let current: Array<MessengerProfile.Greeting> = await this.getMessengerProfileApi().getGreeting();
+
+        return this.getMessengerProfileApi().setGreeting(current ? current.concat(greeting) : [greeting]);
     }
 
     /**
@@ -144,7 +150,6 @@ export class BotUtils {
     /**
      * Returns current Account Linking URL.
      * 
-     * @param {string} url 
      * @returns {Promise<string>} 
      */
     public getAccountLinkingUrl(): Promise<string> {
@@ -224,6 +229,52 @@ export class BotUtils {
      */
     public deleteTargetAudience(): Promise<void> {
         return this.getMessengerProfileApi().deleteAudience();
+    }
+
+    /**
+     * Returns Chat Extension home URL.
+     * 
+     * @returns {Promise<string>} 
+     */
+    public getChatExtensionHomeUrl(): Promise<string> {
+        return this.getMessengerProfileApi().getChatExtensionHomeUrl();
+    }
+
+    /**
+     * Sets a new Chat Extension home URL. If the URL is not whitelisted it will be done first.
+     * 
+     * @param {string} url - a home URL
+     * @param {boolean} inTest - controls whether the Chat Extension is in test mode
+     * @param {boolean} shareButton - controls whether the share button in the webview is enabled
+     * @param {*} [cliLogger] - logger for CLI
+     * @returns {Promise<void>} 
+     */
+    public async setChatExtensionHomeUrl(url: string, inTest: boolean, shareButton: boolean, cliLogger?: any): Promise<void> {
+
+        if (url.indexOf("https://") != 0) {
+            return Promise.reject("only 'https' protocol is supported for Chat Extension home URL");
+        }
+
+        url.charAt(url.length - 1) === "/" || (url = url.concat("/"));
+
+        let whitelist: Array<string> = await this.getMessengerProfileApi().getWhitelistedDomains();
+
+        if (!whitelist || whitelist.indexOf(url) < 0) {
+            // domain has to be whitelisted first
+            await this.getMessengerProfileApi().whitelistDomains([url]);
+            cliLogger && cliLogger.info(`Domain '${url}' has been successfully whitelisted`);
+        }
+
+        return this.getMessengerProfileApi().setChatExtensionHomeUrl(url, inTest, shareButton);
+    }
+
+    /**
+     * Removes current setting of Chat Extension home URL.
+     * 
+     * @returns {Promise<void>} 
+     */
+    public deleteChatExtensionHomeUrl(): Promise<void> {
+        return this.getMessengerProfileApi().deleteChatExtensionHomeUrl();
     }
 
     /**
