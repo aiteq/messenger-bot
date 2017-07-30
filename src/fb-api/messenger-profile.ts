@@ -196,7 +196,7 @@ export namespace MessengerProfile {
          * Whilists audience countries.
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
-         * @param {(string | Array<string>)} countries - a country or countries to be whitelisted for audience
+         * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted for audience
          * @returns {Promise<void>}
          */
         public whitelistAudienceCountries(countries: string | Array<string>): Promise<void> {
@@ -213,7 +213,7 @@ export namespace MessengerProfile {
          * Blacklist audience countries.
          * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
          * 
-         * @param {(string | Array<string>)} countries - a country or countries to be blacklisted for audience
+         * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted for audience
          * @returns {Promise<void>}
          */
         public blacklistAudienceCountries(countries: string | Array<string>): Promise<void> {
@@ -256,7 +256,7 @@ export namespace MessengerProfile {
          * 
          * @returns {string} - the current account linking URL
          */
-        public getAudience(): Promise<TargetAudience> {
+        public getTargetAudience(): Promise<TargetAudience> {
             return this.getField(Field.TARGET_AUDIENCE);
         }
 

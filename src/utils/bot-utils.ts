@@ -123,7 +123,7 @@ export class BotUtils {
     }
 
     /**
-     * Adds a domain to the whitelist.
+     * Adds domains to the whitelist.
      * 
      * @param {Array<string>} domains - an array of domains
      * @returns {Promise<void>} 
@@ -168,6 +168,62 @@ export class BotUtils {
      */
     public deleteAccountLinkingUrl(): Promise<void> {
         return this.getMessengerProfileApi().deleteAccountLinkingUrl();
+    }
+
+    /**
+     * Returns current Target Audience setting.
+     * 
+     * @returns {Promise<any>} 
+     */
+    public getTargetAudience(): Promise<any> {
+        return this.getMessengerProfileApi().getTargetAudience();
+    }
+
+    /**
+     * Open Target Audience to all.
+     * 
+     * @returns {Promise<any>} 
+     */
+    public openTargetAudience(): Promise<any> {
+        return this.getMessengerProfileApi().openAudienceToAll();
+    }
+
+    /**
+     * Close Target Audience to all.
+     * 
+     * @returns {Promise<any>} 
+     */
+    public closeTargetAudience(): Promise<any> {
+        return this.getMessengerProfileApi().closeAudienceToAll();
+    }
+
+    /**
+     * Adds countries to Target Audience whitelist.
+     * 
+     * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted
+     * @returns {Promise<void>} 
+     */
+    public whitelistAudienceCountries(countries: Array<string>): Promise<void> {
+        return this.getMessengerProfileApi().whitelistAudienceCountries(countries);
+    }
+
+    /**
+     * Adds countries to Target Audience blacklist.
+     * 
+     * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted
+     * @returns {Promise<void>} 
+     */
+    public blacklistAudienceCountries(countries: Array<string>): Promise<void> {
+        return this.getMessengerProfileApi().blacklistAudienceCountries(countries);
+    }
+
+    /**
+     * Removes all countris from both whitelist and blacklist.
+     * 
+     * @returns {Promise<void>} 
+     */
+    public deleteTargetAudience(): Promise<void> {
+        return this.getMessengerProfileApi().deleteAudience();
     }
 
     /**
