@@ -6,13 +6,14 @@ import { Webhook } from "./webhook";
 
 
 /**
- * API and types for Messenger Profile.
- * (https://developers.facebook.com/docs/messenger-platform/messenger-profile)
+ * API and types for Messenger Profile API.
+ * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile)
  */
 export namespace MessengerProfile {
 
     /**
      * Provides access to Messenger Profile API.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile)
      */
     export class Api extends GraphApi<Request> {
 
@@ -21,7 +22,6 @@ export namespace MessengerProfile {
          * @param {string} accessToken - a Page Access Token
          */
         constructor(protected accessToken: string) {
-
             super(accessToken, GraphApi.Endpoint.MESSENGER_PROFILE);
         }
 

@@ -6,12 +6,13 @@ import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-build
 
 /**
  * Functions and types for Send API.
- * (https://developers.facebook.com/docs/messenger-platform/send-api-reference)
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference)
  */
 export namespace Send {
 
     /**
      * Provides access to Send API.
+     * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference)
      */
     export class Api extends GraphApi<Request> {
 
@@ -32,30 +33,68 @@ export namespace Send {
          * 
          * @param {string} recipientId - recipient's ID
          * @param {string} text - a text to be send
-         * @returns {Promise<any>} 
+         * @returns {Promise<void>} 
          */
-        public sendText(recipientId: string, text: string): Promise<any> {
+        public sendText(recipientId: string, text: string): Promise<void> {
             return this.send(recipientId, { text: text });
         }
 
+        /**
+         * Sends a message with image attachment.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @param {string} url - URL of the image file
+         * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
+         * @returns {Promise<string>} - an attachment ID
+         */
         public sendImage(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
             return this.sendMediaAttachment(AttachmentType.IMAGE, recipientId, url, reusable);
         }
 
+        /**
+         * Sends a message with audio attachment.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @param {string} url - URL of the audio file
+         * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
+         * @returns {Promise<string>} - an attachment ID
+         */
         public sendAudio(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
             return this.sendMediaAttachment(AttachmentType.AUDIO, recipientId, url, reusable);
         }
 
+        /**
+         * Sends a message with video attachment.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @param {string} url - URL of the video file
+         * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
+         * @returns {Promise<string>} - an attachment ID
+         */
         public sendVideo(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
             return this.sendMediaAttachment(AttachmentType.VIDEO, recipientId, url, reusable);
         }
 
+        /**
+         * Sends a message with file attachment.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @param {string} url - URL of the file
+         * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
+         * @returns {Promise<string>} - an attachment ID
+         */
         public sendFile(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
             return this.sendMediaAttachment(AttachmentType.FILE, recipientId, url, reusable);
         }
 
-        public typingOn(recipientId: string): void {
-            this.sendRequest({
+        /**
+         * Turns typing indicator on, to let the user know you are processing his request.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @returns {Promise<void>} 
+         */
+        public typingOn(recipientId: string): Promise<void> {
+            return this.sendRequest({
                 recipient: JSON.stringify({
                     id: recipientId
                 }),
@@ -63,8 +102,14 @@ export namespace Send {
             });
         }
 
-        public typingOff(recipientId: string): void {
-            this.sendRequest({
+        /**
+         * Turns typing indicator off.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @returns {Promise<void>} 
+         */
+        public typingOff(recipientId: string): Promise<void> {
+            return this.sendRequest({
                 recipient: JSON.stringify({
                     id: recipientId
                 }),
@@ -72,12 +117,35 @@ export namespace Send {
             });
         }
 
-        public markSeen(recipientId: string): void {
-            this.sendRequest({
+        /**
+         * Mark the last sent message as read.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @returns {Promise<void>} 
+         */
+        public markSeen(recipientId: string): Promise<void> {
+            return this.sendRequest({
                 recipient: JSON.stringify({
                     id: recipientId
                 }),
                 sender_action: SenderAction.MARK_SEEN
+            });
+        }
+
+        /**
+         * Sends a message.
+         * 
+         * @param {string} recipientId - recipient's ID
+         * @param {(Message | AbstractMessageBuilder<Message>)} messageOrBuilder - a message or message builder
+         * @returns {Promise<any>} 
+         */
+        public send(recipientId: string, messageOrBuilder: Message | AbstractMessageBuilder<Message>): Promise<any> {
+
+            return this.sendRequest({
+                recipient: JSON.stringify({
+                    id: recipientId
+                }),
+                message: JSON.stringify(messageOrBuilder instanceof AbstractMessageBuilder ? messageOrBuilder.build() : messageOrBuilder)
             });
         }
 
@@ -121,16 +189,6 @@ export namespace Send {
             }
 
             return undefined;
-        }
-
-        public send(recipientId: string, messageOrBuilder: Message | AbstractMessageBuilder<Message>): Promise<any> {
-
-            return this.sendRequest({
-                recipient: JSON.stringify({
-                    id: recipientId
-                }),
-                message: JSON.stringify(messageOrBuilder instanceof AbstractMessageBuilder ? messageOrBuilder.build() : messageOrBuilder)
-            });
         }
     }
 

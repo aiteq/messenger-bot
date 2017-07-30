@@ -2,12 +2,25 @@ import { AbstractBuilder } from "./abstract-builder";
 import { Send } from "../fb-api/send";
 
 
+/**
+ * An abstract parent class for <i>message builders</i>. The message builders help to construct
+ * complex messages to be send (e.g. <i>template messages</i>).
+ */
 export abstract class AbstractMessageBuilder<T extends Send.Message> extends AbstractBuilder<T> {
 
 	protected message: T;
 
 
-	public addTextQuickReply(title: string, id: string, data?: string | any, imageUrl?: string): this {
+	/**
+     * Adds a Quick Reply text button to the message.
+     * 
+     * @param {string} title - a title of the Quick Reply
+     * @param {string} id - an ID of the button (required for proper generation of webhook events)
+     * @param {(string | any)} [data] - optional data payload
+     * @param {string} [imageUrl] - optional URL of an image for the Quick Reply
+     * @returns {this} - for chaining
+     */
+    public addTextQuickReply(title: string, id: string, data?: string | any, imageUrl?: string): this {
 
 		this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
 
@@ -26,7 +39,12 @@ export abstract class AbstractMessageBuilder<T extends Send.Message> extends Abs
 		return this;
 	}
 
-	public addLocationQuickReply(): this {
+	/**
+     * Adds a Quick Reply button to quickly send user's location.
+     * 
+     * @returns {this} - for chaining
+     */
+    public addLocationQuickReply(): this {
 
 		this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
 
@@ -35,8 +53,12 @@ export abstract class AbstractMessageBuilder<T extends Send.Message> extends Abs
 		return this;
 	}
 
-	public build(): T {
-
+	/**
+     * Creates and returns a message object.
+     * 
+     * @returns {T} - a message object
+     */
+    public build(): T {
 		return this.message;
 	}
 }

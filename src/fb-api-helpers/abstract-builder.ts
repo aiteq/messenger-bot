@@ -1,3 +1,12 @@
+/**
+ * An abstract parent class for builders.
+ */
 export abstract class AbstractBuilder<T> {
-	public abstract build(): T;
+
+	/**
+     * Creates an isntance of desired class.
+     * 
+     * @returns {T} 
+     */
+    public abstract build(): T;
 }

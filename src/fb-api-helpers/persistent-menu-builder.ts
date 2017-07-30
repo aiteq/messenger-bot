@@ -3,12 +3,13 @@ import { Webview } from "../fb-api/webview";
 import { Webhook } from "../fb-api/webhook";
 import { AbstractBuilder } from "./abstract-builder";
 
-
-
+/**
+ * Helps to create a Persistent Menu.
+ * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
+ */
 export class PersistentMenuBuilder extends AbstractBuilder<Array<MessengerProfile.PersistentMenu>> {
 
   private menus: Array<MessengerProfile.PersistentMenu> = new Array<MessengerProfile.PersistentMenu>();
-
 
   private static checkMenu(menu: MessengerProfile.PersistentMenu): MessengerProfile.PersistentMenu {
 
@@ -19,6 +20,14 @@ export class PersistentMenuBuilder extends AbstractBuilder<Array<MessengerProfil
     return menu;
   }
 
+  /**
+   * Adds a new Menu for the given locale.
+   * 
+   * @param {string} locale 
+   * @param {boolean} composerInputDisabled 
+   * @param {PersistentMenuBuilder.Menu} menu 
+   * @returns {this} - for chaining
+   */
   public addMenu(locale: string, composerInputDisabled: boolean, menu: PersistentMenuBuilder.Menu): this {
 
     this.menus.push(PersistentMenuBuilder.checkMenu({
@@ -30,10 +39,20 @@ export class PersistentMenuBuilder extends AbstractBuilder<Array<MessengerProfil
     return this;
   }
 
+  /**
+   * Returns built Persistent Menu object.
+   * 
+   * @returns {Array<MessengerProfile.PersistentMenu>} 
+   */
   public build(): Array<MessengerProfile.PersistentMenu> {
     return this.menus;
   }
 
+  /**
+   * Creates a new Menu.
+   * 
+   * @returns {PersistentMenuBuilder.Menu} 
+   */
   public static createMenu(): PersistentMenuBuilder.Menu {
     let menu: PersistentMenuBuilder.Menu = new PersistentMenuBuilder.Menu();
     return menu;

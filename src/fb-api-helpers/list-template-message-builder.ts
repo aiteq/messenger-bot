@@ -1,36 +1,68 @@
 import { AbstractBuilder } from "./abstract-builder";
 import { Send } from "../fb-api/send";
 import { TemplateMessageBuilder } from "./template-message-builder";
+import { ElementBuilder } from "./element-builder";
 
-
+/**
+ * Helps to create a List Template message.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template)
+ */
 export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.ListTemplate> {
 
-	public createMessage(): this {
+	constructor() {
+
+        super();
+
 		this.template = {
 			template_type: Send.TemplateType.LIST,
 			elements: new Array<Send.Element>()
 		};
-		return this;
 	}
 
-	public setTopElementStyle(topElementStyle: Send.ListTopElementStyle): this {
+	/**
+     * Sets a style for the first list item.
+     * 
+     * @param {Send.ListTopElementStyle} topElementStyle - Send.ListTopElementStyle.COMPACT or Send.ListTopElementStyle.LARGE
+     * @returns {this} - for chaining
+     */
+    public setTopElementStyle(topElementStyle: Send.ListTopElementStyle): this {
 		this.template.top_element_style = topElementStyle;
 		return this;
 	}
 
-	public setSherable(sherable: boolean): this {
+	/**
+     * Controls native share button.
+     * 
+     * @param {boolean} sherable - set to false to disable the native share button in Messenger
+     * @returns {this} - for chaining
+     */
+    public setSherable(sherable: boolean): this {
 		this.template.sherable = sherable;
 		return this;
 	}
 
-	public addElement(element: TemplateMessageBuilder.Element): this {
-		this.template.elements.push(element.getObject());
-		return this;
-	}
+    /**
+     * Adds an Element. Number of Elements must be 2-4.
+     * 
+     * @param {ElementBuilder} elementBuilder 
+     * @returns {this} - for chaining
+     */
+    public addElement(elementBuilder: ElementBuilder): this {
 
-	public addButton(button: TemplateMessageBuilder.Button<Send.Button>): this {
-		this.template.buttons = this.template.buttons || new Array<Send.Button>();
-		this.template.buttons.push(button.getOject());
-		return this;
-	}
+        if (this.template.elements.length === 4) {
+            throw new Error("couldn't add next Element to List Tepmplate message (only 2-4 elements is allowed)");
+        }
+
+        this.template.elements.push(elementBuilder.build());
+        return this;
+    }
+
+    /**
+     * Sets a Button for the List Template message.
+     * 
+     * @param {AbstractBuilder<T>} buttonBuilder 
+     */
+    public setButton<T extends Send.Button>(buttonBuilder: AbstractBuilder<T>): void {
+		this.template.buttons = [buttonBuilder.build()];
+    }
 }

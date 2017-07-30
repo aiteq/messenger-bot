@@ -1,3 +1,7 @@
+/**
+ * Types for Webhook interface.
+ * (see https://developers.facebook.com/docs/messenger-platform/webhook-reference)
+ */
 export namespace Webhook {
 
     export interface Request {

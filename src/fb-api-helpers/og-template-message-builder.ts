@@ -1,20 +1,33 @@
 import { AbstractBuilder } from "./abstract-builder";
 import { Send } from "../fb-api/send";
 import { TemplateMessageBuilder } from "./template-message-builder";
+import { OgElementBuilder } from "./og-element-builder";
 
-
+/**
+ * Helps to create a Open Graph Template message.
+ * (see https://developers.facebook.com/docs/messenger-platform/open-graph-template)
+ */
 export class OgTemplateMessageBuilder extends TemplateMessageBuilder<Send.OpenGraphTemplate> {
 
-	public createMessage(): this {
+	constructor() {
+
+        super();
+
 		this.template = {
 			template_type: Send.TemplateType.OPEN_GRAPH,
 			elements: new Array<Send.OpenGraphElement>()
 		};
-		return this;
-	}
+    }
+    
+    /**
+     * Sets an Open Graph Element.
+     * 
+     * @param {OgElementBuilder} elementBuilder 
+     * @returns {this} - for chaining
+     */
+    public setElement(elementBuilder: OgElementBuilder): this {
 
-	public addElement(element: TemplateMessageBuilder.OgElement): this {
-		this.template.elements.push(element.getObject());
-		return this;
-	}
+        this.template.elements = [elementBuilder.build()];
+        return this;
+    }
 }

@@ -1,2 +1,5 @@
 - conversation input validators
 - rename Conversation (due to https://developers.facebook.com/docs/messenger-platform/guides/ads)
+- adds "check" support for builders (e.g. number of buttons added, ...)
+    - check before adding components
+    - check before building the message
