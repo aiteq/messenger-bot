@@ -4,7 +4,7 @@ import { RouterService } from "./router-service";
 
 
 /**
- * Handles webhook verification request.
+ * A middleware handling webhook verification request.
  * (see https://developers.facebook.com/docs/messenger-platform/guides/setup#webhook_setup)
  */
 export class VerificationService extends RouterService {

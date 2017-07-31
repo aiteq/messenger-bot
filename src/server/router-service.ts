@@ -3,7 +3,7 @@ import { EventEmitter } from "events";
 
 
 /**
- * A parent class for services to be mounted as Express routes.
+ * A parent class for middleware services to be mounted as Express routes.
  */
 export abstract class RouterService extends EventEmitter {
 

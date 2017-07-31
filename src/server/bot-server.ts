@@ -121,12 +121,12 @@ export class BotServer {
 
     /**
      * A convenient method to subscribe to specific <i>hooks</i> that can be found within a received
-     * <i>text message</i>. The hooks can be specified as a keyword or using a <i>regular expression</i>.
+     * <i>text message</i>. The hooks can be specified as a command or using a <i>regular expression</i>.
      * When the server receives a text message, it test the content for specified hooks. If a match is
-     * found the server executes the subscribed callback. Keywords are considered as case-insensitive.
+     * found the server executes the subscribed callback. Commands are considered as case-insensitive.
      * The callbacks installed using the <code>BotServer.hear</code> method are executed BEFORE
      * callbacks installed using the <code>on()</code> method.
-     * The callback is executed with the parameters: chat: Chat, senderId: string, text: string, elements: string[].
+     * The callback is executed with the parameters: chat: Chat, text: string, matches: string[].
      * <b>Note</b>: the <code>hear()</code> method listens only for text messages.
      * <b>Note</b>: the callback is not executed when a received text message matches the hook but
      * the message is part of an active conversation.
@@ -137,25 +137,25 @@ export class BotServer {
      */
     public hear(hooks: RegExp | string | Array<RegExp | string>, hearHandler: Function): this {
 
-        let reHooks: Array<RegExp>;
+        let regexps: Array<RegExp>;
 
         if (typeof hooks === "string") {
 
             // create new case-insensitive regexp based on the given keyword
-            reHooks = [new RegExp(`^${BotServer.regExpEscape(hooks)}$`, "i")];
+            regexps = [new RegExp(`^${BotServer.regExpEscape(hooks)}$`, "i")];
 
         } else if (Array.isArray(hooks)) {
 
-            reHooks = hooks.map((hook: RegExp | string) => {
+            regexps = hooks.map((hook: RegExp | string) => {
                 return typeof hook === "string" ? new RegExp(`^${BotServer.regExpEscape(hook)}$`, "i") : hook;
             });
 
         } else {
 
-            reHooks = [hooks];
+            regexps = [hooks];
         }
 
-        this.responder.hear(reHooks, hearHandler);
+        this.responder.hear(regexps, hearHandler);
 
         return this;
     }

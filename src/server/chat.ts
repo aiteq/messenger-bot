@@ -170,4 +170,13 @@ export class Chat {
   public getConversation(): Conversation {
     return this.conversation;
   }
+
+  /**
+   * Returns an ID of the chat partner.
+   * 
+   * @returns {string} 
+   */
+  public getPartnerId(): string {
+      return this.partnerId;
+  }
 }

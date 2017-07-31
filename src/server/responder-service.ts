@@ -8,7 +8,7 @@ import { Chat } from "./chat";
 
 
 /**
- * Handles all webhook requests.
+ * A main middleware handling all webhook requests.
  */
 export class ResponderService extends RouterService {
 
@@ -72,25 +72,25 @@ export class ResponderService extends RouterService {
                             // a QUICK REPLY message received
                             // it must be checked before TEXT MESSAGE because it contains text property too
 
-                            this.processQuickReply(item.sender.id, item.message, chat);
+                            this.processQuickReply(item.message, chat);
 
                         } else if (item.message.text) {
 
                             // a TEXT message received
 
-                            this.processTextMessage(item.sender.id, item.message, chat);
+                            this.processTextMessage(item.message, chat);
 
                         } else if (item.message.attachments) {
 
                             // an ATTACHMENT received
 
-                            this.processAttachment(item.sender.id, item.message, chat);
+                            this.processAttachment(item.message, chat);
 
                         } else if (item.message.is_echo) {
 
                             // an ECHO received
 
-                            this.processEcho(item.sender.id, item.message, chat);
+                            this.processEcho(item.message, chat);
 
                         } else {
 
@@ -101,19 +101,19 @@ export class ResponderService extends RouterService {
 
                         // a message DELIVERY CONFIRMATION received
 
-                        this.processDelivery(item.sender.id, item.delivery, chat);
+                        this.processDelivery(item.delivery, chat);
 
                     } else if (item.read) {
 
                         // a message READ CONFIRMATION received
 
-                        this.processRead(item.sender.id, item.read, chat);
+                        this.processRead(item.read, chat);
 
                     } else if (item.postback) {
 
                         // a POSTBACK request received
 
-                        this.processPostback(item.sender.id, item.postback, chat);
+                        this.processPostback(item.postback, chat);
 
                     } else {
 
@@ -145,11 +145,10 @@ export class ResponderService extends RouterService {
     /**
      * Process an incoming TEXT message.
      * 
-     * @param {string} senderId 
      * @param {Webhook.Message} message 
      * @param {Chat} chat 
      */
-    private processTextMessage(senderId: string, message: Webhook.Message, chat: Chat): void {
+    private processTextMessage(message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received TEXT message", message.mid);
 
@@ -167,30 +166,28 @@ export class ResponderService extends RouterService {
 
             this.hearHandlers.forEach((handler: { hook: RegExp, func: Function }) => {
 
-                let elements: RegExpExecArray = handler.hook.exec(message.text);
+                let matches: RegExpExecArray = handler.hook.exec(message.text);
 
-                //if (handler.hook.test(message.text)) {
-                if (elements) {
+                if (matches) {
 
                     logger.debug("calling hearing handler", handler.hook);
-                    handler.func(chat, senderId, message.text, elements);
+                    handler.func(chat, message.text, matches.slice(1));
                 }
             });
         }
 
         // finally emit the TEXT_MESSAGE event to call installed handlers
 
-        this.emit(Webhook.Event.TEXT_MESSAGE, chat, senderId, message.text);
+        this.emit(Webhook.Event.TEXT_MESSAGE, chat, message.text);
     }
 
     /**
      * Process an incoming ATTACHMENT.
      * 
-     * @param {string} senderId 
      * @param {Webhook.Message} message 
      * @param {Chat} chat 
      */
-    private processAttachment(senderId: string, message: Webhook.Message, chat: Chat): void {
+    private processAttachment(message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received ATTACHMENT message", message.mid);
 
@@ -222,44 +219,42 @@ export class ResponderService extends RouterService {
             }
 
             // emit TYPED ATTACHMENT event
-            this.emit(`${Webhook.Event.ATTACHMENT}:${attachment.type}`, chat, senderId, data);
+            this.emit(`${Webhook.Event.ATTACHMENT}:${attachment.type}`, chat, data);
 
             // finally emit general ATTACHMENT event
-            this.emit(Webhook.Event.ATTACHMENT, chat, senderId, data);
+            this.emit(Webhook.Event.ATTACHMENT, chat, data);
         });
     }
 
     /**
      * Process an incoming POSTBACK.
      * 
-     * @param {string} senderId 
      * @param {Webhook.Postback} postback 
      * @param {Chat} chat 
      */
-    private processPostback(senderId: string, postback: Webhook.Postback, chat: Chat): void {
+    private processPostback(postback: Webhook.Postback, chat: Chat): void {
 
         let payload: Webhook.PostbackPayload = JSON.parse(postback.payload);
 
         logger.debug("recieved POSTBACK from", payload.src, payload.id);
 
         // emit IDENTIFIED POSTBACK event
-        payload.id && this.emit(`${payload.src}:${payload.id}`, chat, senderId, payload.data);
+        payload.id && this.emit(`${payload.src}:${payload.id}`, chat, payload.data);
 
         // emit SOURCE TYPED POSTBACK event
-        this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, chat, senderId, payload.data);
+        this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, chat, payload.data);
 
         // finally emit general POSTBACK event
-        this.emit(Webhook.Event.POSTBACK, chat, senderId, payload.data);
+        this.emit(Webhook.Event.POSTBACK, chat, payload.data);
     }
 
     /**
      * Process an incoming QUICK REPLY.
      * 
-     * @param {string} senderId 
      * @param {Webhook.Message} message 
      * @param {Chat} chat 
      */
-    private processQuickReply(senderId: string, message: Webhook.Message, chat: Chat): void {
+    private processQuickReply(message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received QUICK REPLY message", message.mid);
 
@@ -274,48 +269,45 @@ export class ResponderService extends RouterService {
         }
 
         // emit IDENTIFIED QUICK REPLY event
-        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, chat, senderId, payload.data);
+        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, chat, payload.data);
 
         // finally emit general QUICK REPLY event
-        this.emit(Webhook.Event.TEXT_QUICK_REPLY, chat, senderId, payload.data);
+        this.emit(Webhook.Event.TEXT_QUICK_REPLY, chat, payload.data);
     }
 
     /**
      * Process an incoming ECHO message.
      * 
-     * @param {string} senderId 
      * @param {Webhook.Message} message 
      * @param {Chat} chat 
      */
-    private processEcho(senderId: string, message: Webhook.Message, chat: Chat): void {
+    private processEcho(message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received ECHO for", message.mid);
-        this.emit(Webhook.Event.MESSAGE_ECHO, chat, senderId, message);
+        this.emit(Webhook.Event.MESSAGE_ECHO, chat, message);
     }
 
     /**
      * Process an incoming DELIVERY NOTIFICATION.
      * 
-     * @param {string} senderId 
      * @param {Webhook.DeliveryInfo} delivery 
      * @param {Chat} chat 
      */
-    private processDelivery(senderId: string, delivery: Webhook.DeliveryInfo, chat: Chat): void {
+    private processDelivery(delivery: Webhook.DeliveryInfo, chat: Chat): void {
 
         logger.debug("received DELIVERY confirmations for", (delivery.mids || []).join(","));
-        this.emit(Webhook.Event.MESSAGE_DELIVERED, chat, senderId, delivery);
+        this.emit(Webhook.Event.MESSAGE_DELIVERED, chat, delivery);
     }
 
     /**
      * Process an incoming READ CONFIRMATION.
      * 
-     * @param {string} senderId 
      * @param {Webhook.ReadInfo} read 
      * @param {Chat} chat 
      */
-    private processRead(senderId: string, read: Webhook.ReadInfo, chat: Chat): void {
+    private processRead(read: Webhook.ReadInfo, chat: Chat): void {
 
         logger.debug("received READ confirmation to time", read.watermark);
-        this.emit(Webhook.Event.MESSAGE_READ, chat, senderId, read);
+        this.emit(Webhook.Event.MESSAGE_READ, chat, read);
     }
 }
