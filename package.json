@@ -34,6 +34,7 @@
     "@types/body-parser": "^1.16.3",
     "@types/ejs": "^2.3.33",
     "@types/inquirer": "0.0.35",
+    "@types/lowdb": "^0.15.0",
     "@types/minimist": "^1.2.0",
     "@types/node": "^7.0.38",
     "@types/request": "0.0.43",
@@ -52,6 +53,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "log4js": "^2.3.1",
+    "lowdb": "^0.16.2",
     "minimist": "^1.2.0"
   },
   "engines": {

@@ -1,4 +1,6 @@
 import { logger } from "../logger";
+import { Reusable } from "../store/reusable";
+import { ReusableDao } from "../store/reusable-dao";
 import { Webview } from "./webview";
 import { GraphApi } from "./graph-api";
 import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
@@ -16,7 +18,7 @@ export namespace Send {
      */
     export class Api extends GraphApi<Request> {
 
-        private static reusableAttachments: Map<string, string> = new Map<string, string>();
+        private reusableDao: ReusableDao;
 
 
         /**
@@ -26,6 +28,7 @@ export namespace Send {
          */
         constructor(protected accessToken: string) {
             super(accessToken, GraphApi.Endpoint.MESSAGES);
+            this.reusableDao = new ReusableDao();
         }
 
         /**
@@ -149,27 +152,27 @@ export namespace Send {
             });
         }
 
-        private async sendMediaAttachment(type: MediaAttachmentType, recipientId: string, url: string, reusable: boolean): Promise<string> {
+        private async sendMediaAttachment(type: MediaAttachmentType, recipientId: string, url: string, reuse: boolean): Promise<string> {
 
-            // first check reusable attachments
-            if (Api.reusableAttachments.has(url)) {
+            if (reuse) {
 
-                // re-use the attachment
+                let reusable: Reusable = this.reusableDao.get(url);
 
-                let attachmentId: string = Api.reusableAttachments.get(url);
+                if (reusable) {
 
-                logger.info(`Send.Api: re-using attachment '{url}' (attachmentId=${attachmentId})`);
+                    logger.info(`re-using attachment '{url}' (attachmentId=${reusable.id})`);
 
-                this.send(recipientId, {
-                    attachment: <Attachment>{
-                        type: type,
-                        payload: {
-                            attachment_id: attachmentId
+                    this.send(recipientId, {
+                        attachment: <Attachment>{
+                            type: type,
+                            payload: {
+                                attachment_id: reusable.id
+                            }
                         }
-                    }
-                });
+                    });
 
-                return attachmentId;
+                    return reusable.id;
+                }
             }
 
             let response: Response = await this.send(recipientId, {
@@ -177,14 +180,14 @@ export namespace Send {
                     type: type,
                     payload: {
                         url: url,
-                        is_reusable: reusable
+                        is_reusable: reuse
                     }
                 }
             });
 
-            if (reusable && response) {
+            if (reuse && response) {
                 // save attachmentId to re-use later
-                Api.reusableAttachments.set(url, response.attachment_id);
+                this.reusableDao.save({ url: url, id: response.attachment_id });
                 return response.attachment_id;
             }
 

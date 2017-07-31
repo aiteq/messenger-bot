@@ -10,7 +10,8 @@ import { BotConfig } from "./bot-config";
 
 
 /**
- * Provides an interface to non-interactive services of Messenger Platform API.
+ * Provides an interface to non-interactive services of Messenger Platform API through a set of
+ * convenient methods.
  */
 export class BotUtils {
 

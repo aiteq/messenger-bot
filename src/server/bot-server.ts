@@ -49,7 +49,7 @@ export class BotServer {
 
         // parse incoming POST request bodies and make them available under the req.body property
         // every incoming POST request will be verified according to https://developers.facebook.com/docs/messenger-platform/webhook-reference#security
-        this.app.use(bodyParser.json({ verify: this.verifyRequest.bind(this) }));
+        this.app.use(bodyParser.json({ verify: this.verifyRequest }));
 
         // parse incoming GET request (used during webhook verification)
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -222,7 +222,7 @@ export class BotServer {
      * Verify incoming webhook request.
      * (https://developers.facebook.com/docs/messenger-platform/webhook-reference#security)
      */
-    private verifyRequest(req: Request, res: Response, data: string): void {
+    private verifyRequest(req: express.Request, res: express.Response, buf: Buffer, encoding: string): void {
 
         let [algorithm, signature] = (req.headers["x-hub-signature"] || "").split("=");
 
@@ -230,7 +230,7 @@ export class BotServer {
             throw new Error("couldn't validate the request signature, the 'x-hub-signature' header not found");
         }
 
-        if (signature !== crypto.createHmac(algorithm, this.config.appSecret).update(data).digest("hex")) {
+        if (signature !== crypto.createHmac(algorithm, this.config.appSecret).update(buf).digest("hex")) {
             throw new Error("request's signature is not valid");
         }
 

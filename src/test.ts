@@ -1,11 +1,14 @@
-import { BotUtils } from "./utils/bot-utils";
+import Lowdb = require("lowdb");
+//import fileAsync = require("lowdb/lib/storages/file-async");
 
-let utils: BotUtils = new BotUtils({
-    verifyToken: "rubi-1354-coin",
-    accessToken: "EAAVOaCaOkcsBAJtWPI61phtGAZCZAzFzdfzDerYnmMexdQ1udgi4tP7vhYesJ4OESbPMba74mEREj79cHbuI163jDs3DOXjWwYK1ZAZBuXNcbQ7UhHPB7OC1ImFr5ZBeMQI1lR9sBtbr2Etd6TUFbYFyAkW6hj57Dj7FxHkf4RRWsksXKV1Ez",
-    appSecret: "2d5f081197d81b8929eb5269c7245843"
+let ldb: Lowdb = new Lowdb("./work/test-db.json", {
+  storage: require("lowdb/lib/storages/file-async")
 });
 
 (async () => {
-    await utils.generateMessengerCode("code.png", 10000);
+console.log(await ldb.get("reusables")
+.push({ url: "xxx", id: "sdfcsdf"}).write()
+//.find({ url: "testxurl" })
+
+);
 })();
