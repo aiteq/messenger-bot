@@ -126,7 +126,7 @@ export class BotServer {
      * found the server executes the subscribed callback. Keywords are considered as case-insensitive.
      * The callbacks installed using the <code>BotServer.hear</code> method are executed BEFORE
      * callbacks installed using the <code>on()</code> method.
-     * The callback is executed with the parameters: chat: Chat, senderId: string, text: string.
+     * The callback is executed with the parameters: chat: Chat, senderId: string, text: string, elements: string[].
      * <b>Note</b>: the <code>hear()</code> method listens only for text messages.
      * <b>Note</b>: the callback is not executed when a received text message matches the hook but
      * the message is part of an active conversation.

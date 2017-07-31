@@ -167,10 +167,13 @@ export class ResponderService extends RouterService {
 
             this.hearHandlers.forEach((handler: { hook: RegExp, func: Function }) => {
 
-                if (handler.hook.test(message.text)) {
+                let elements: RegExpExecArray = handler.hook.exec(message.text);
+
+                //if (handler.hook.test(message.text)) {
+                if (elements) {
 
                     logger.debug("calling hearing handler", handler.hook);
-                    handler.func(chat, senderId, message.text);
+                    handler.func(chat, senderId, message.text, elements);
                 }
             });
         }
