@@ -28,9 +28,9 @@ export abstract class Group {
 
     protected abstract getUsage(): string;
 
-    protected exitWithUsage(): void {
+    public exitWithUsage(): void {
         console.log(this.getUsage());
         console.log(MBUtil.getGlobalOptions());
-        process.exit(1);
+        process.exit(0);
     }
 }

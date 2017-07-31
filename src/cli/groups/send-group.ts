@@ -45,7 +45,7 @@ export class SendGroup extends Group {
     }
 
     protected getUsage(): string {
-        return `Send messages.
+        return `Send messages directly to users.
 
 Usage:
 

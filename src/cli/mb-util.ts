@@ -25,15 +25,17 @@ export class MBUtil {
 
     public async bootstrap(): Promise<void> {
 
-        console.log("\nMessenger Bot Utility by Aiteq Reloaded, s.r.o (MIT licensed)\n");
-
         let options: any = minimist(process.argv.slice(2));
 
         logger.level = options.logLevel || "OFF";
 
         let [group, command] = options._;
 
-        (MBUtil.groups.has(group) && command) || MBUtil.exitWithUsage();
+        let groupHandler: Group = MBUtil.groups.get(group);
+
+        groupHandler || MBUtil.exitWithUsage();
+
+        options.help && groupHandler.exitWithUsage();
 
         let config: any = {};
 
@@ -47,13 +49,14 @@ export class MBUtil {
 
         this.botUtils = new BotUtils(config);
 
-        cliout.info(await MBUtil.groups.get(group).execute(command, this.botUtils, options) + "\n");
+        cliout.info(await groupHandler.execute(command, this.botUtils, options) + "\n");
     }
 
     private static exitWithUsage(): void {
-        console.log("Usage: mbutil <group>");
+        console.log("Usage: mbutil <group> [command] [options]");
         console.log("Groups: ", Array.from(MBUtil.groups.keys()).join(", "));
-        process.exit(1);
+        console.log("\nType 'mbutil <group> --help' to display usage for the group\n")
+        process.exit(0);
     }
 
     public static getGlobalOptions(): string {
@@ -61,6 +64,8 @@ export class MBUtil {
     --config <filename> - config json file
     --accessToken <token> - Page Access Token (overrides config file)
     --logLevel <level> - set log level for package @aiteq/messenger-bot (default: OFF)
+    --help - display usage for the group
+
 `;
     }
 
