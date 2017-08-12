@@ -1,10 +1,16 @@
 # @aiteq/messenger-bot
-#### A TypeScript coded Node.js package for accessing Facebook Messenger Platform API and effective building Messenger Bots.
+#### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
 *Please note that the package is still not fully tested Alpha version. Any ideas, tips and bug or typo reports are welcomed.*
 
-| [Major features][] | [Technologies used][] | [Getting started][] | [Use cases][] | [CLI][] | [API Documentation][] |
-|---|---|---|---|---|---|
+<table><tr>
+<td><b><a href="#major-features">Major features</a></b></td>
+<td><b><a href="#technologies-used">Technologies used</a></b></td>
+<td><b><a href="#getting-started">Getting started</a></b></td>
+<td><b><a href="#use-cases">Use cases</a></b></td>
+<td><b><a href="#cli">CLI</a></b></td>
+<td><b><a href="doc/README.md">API Documentation</a></b></td>
+</tr></table>
 
 ## Major features
 
@@ -56,7 +62,7 @@ Create ```index.ts``` and let's go to start coding:
 import { BotServer, Chat } from "@aiteq/messenger-bot";
 ```
 
-Create an instance of [BotServer](./doc/classes/botserver.md):
+Create an instance of [BotServer](doc/classes/botserver.md):
 ```typescript
 let bot: BotServer = new BotServer({
   name: "MyBot",
@@ -129,10 +135,10 @@ Now the bot is listening for messages sent to your page. Try to send message "he
 ## Use cases
 
 ### Hooking text
-You can subscribe to specific content of incoming text messages in two ways: exact *commands* and *regular expressions*.
+You can subscribe to specific content of incoming text messages in two ways: exact *commands* and *regular expressions*. The subscribing is done using the [BotServer.hear()](doc/classes/botserver.md#hear) method.
 
 #### Commands
-Hooking exact words or phrases can be useful when your bot is supposed to listen commands like a CLI. Commands are specified as strings or arrays of strings and are considered to be case-insensitive.
+Hooking exact words or phrases can be useful when your bot is supposed to listen for commands like a CLI. Commands are specified as strings or arrays of strings and are considered to be case-insensitive.
 ```typescript
 bot.hear("wait", (chat: Chat) => {
     chat.say("I'm waiting ...");
@@ -152,15 +158,15 @@ bot.hear(/^good (night|morning)$/i, (chat: Chat, text: string, captured: string[
 In addition, you can mix commands and regular expressions in one hook.
 
 ### Hooking events
-You can subscribe to a number of events emitted by the bot while it is receiving messages through [webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference).
+You can subscribe to a number of events emitted by the bot while it is receiving messages through [webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference). The subscribing is done using the [BotServer.on()](doc/classes/botserver.md#on) method.
 
-Check the [Webhook.Event](./doc/enums/webhook.event.md) enum for set of available events.
+Check the [Webhook.Event](doc/enums/webhook.event.md) enum for complete set of available events.
 
 #### Identified Postback events
 When subscribing to Postback based events
-- [Postback button](./doc/enums/webhook.event.md#postback_button)
-- [Persistent Menu item](./doc/enums/webhook.event.md#persistent_menu)
-- [Quick Reply button](./doc/enums/webhook.event.md#text_quick_reply)
+- [Postback button](doc/enums/webhook.event.md#postback_button)
+- [Persistent Menu item](doc/enums/webhook.event.md#persistent_menu)
+- [Quick Reply button](doc/enums/webhook.event.md#text_quick_reply)
 
 you have two options:
 1. subscribe to the **type** of the event and receive all events of the type (e.g. Persistent Menu item selected):
@@ -184,7 +190,7 @@ In the current version, a conversation can handle these types of messages:
 - Text message
 - Quick Reply message
 
-In the case of an active conversation any incoming text message won't trigger callbacks installed using the [hear](./doc/classes/botserver.md#hear) method. These must be handled by the conversation.
+In the case of an active conversation any incoming text message won't trigger callbacks installed using the [hear](doc/classes/botserver.md#hear) method. These must be handled by the conversation.
 
 ```typescript
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-song", async (chat: Chat) => {
@@ -224,9 +230,9 @@ The Facebook Messenger Platform API contains not only interractive functions for
 
 Sometimes, we also want to send a *push message* - a message sent to the user proactively, not just as a response to incoming message.
 
-The above cases are not quite bot-aware functions. Thus, in order to keep [BotServer](./doc/classes/botserver.md)'s interface clean, these services are made available through the [BotUtils](./doc/classes/botutils.md) class.
+The above cases are not quite bot-aware functions. Thus, in order to keep [BotServer](doc/classes/botserver.md)'s interface clean, these services are made available through the [BotUtils](doc/classes/botutils.md) class.
 
-An instance of the [BotUtils](./doc/classes/botutils.md) is also initialized passing the [config object](./doc/interfaces/botconfig.md), but only the [```accessToken```](./doc/interfaces/botconfig.md#accesstoken) property is required within.
+An instance of the [BotUtils](doc/classes/botutils.md) is also initialized passing the [config object](doc/interfaces/botconfig.md), but only the ```accessToken``` property is required within.
 ```typescript
 let utils: BotUtils = new BotUtils({
     accessToken: "open, sesame"
@@ -237,23 +243,23 @@ let utils: BotUtils = new BotUtils({
 ```typescript
 utils.sendText("123450987643", "RATE ALERT: Botcoin price has reached $ 1,000");
 ```
-See [BotUtils.sendText()](./doc/classes/botutils.md#sendtext)
+See [BotUtils.sendText()](doc/classes/botutils.md#sendtext)
 
 #### Example: activate Get Started button
 ```typescript
 utils.setGetStartedButton();
 ```
-See [BotUtils.setGetStartedButton()](./doc/classes/botutils.md#setgetstartedbutton)
+See [BotUtils.setGetStartedButton()](doc/classes/botutils.md#setgetstartedbutton)
 
 #### Example: generate Messenger Code
 ```typescript
 utils.generateMessengerCode("my-m-code.png");
 ```
-See [BotUtils.generateMessengerCode()](./doc/classes/botutils.md#generatemessengercode)
+See [BotUtils.generateMessengerCode()](doc/classes/botutils.md#generatemessengercode)
 
 ## CLI
 
-The [BotUtils](./doc/classes/botutils.md) class is useful if you need non-interactive functions of the Messenger API within your application. More often, however, you will need to use these features one-time, operatively, or as part of an automated workflow like shell script. There is a CLI ready for these cases.
+The [BotUtils](doc/classes/botutils.md) class is useful if you need non-interactive functions of the Messenger API within your application. More often, however, you will need to use these features one-time, operatively, or as part of an automated workflow like shell script. There is a CLI ready for these cases.
 
 #### General usage
 
@@ -486,11 +492,9 @@ Option|Value|Function
 ```--ref```|text|data to be received when user scans the code (optional)
 
 ## API documentation
-
-Package's [reference API documentation](./doc) is located in [doc](./doc) folder.
+Package's [reference API documentation](doc/README.md) is located in [doc](doc/README.md) folder.
 
 ## Credits
-
 Tomáš Klíma, [Aiteq](http://www.aiteq.com) & [Aiteq](http://www.aiteq.international)
 
 ## License
