@@ -22,7 +22,7 @@ export class GetStartedButtonGroup extends Group {
                     "Get Started button is not set";
 
             case "set":
-                await botUtils.setGetStartedButton(options._[2]);
+                await botUtils.setGetStartedButton(options.data);
                 return "Get Started button has been successfully set";
 
             case "delete":
@@ -43,12 +43,14 @@ Usage:
     mbutil ${this.getName()} get [options]
         - show current setting of the Get Started button
 
-    mbutil ${this.getName()} set ["<data>"] [options]
-        - set Get Started button for the page
-        - you can set an additional data (text ot json) to be send when the user clicks on the button
+    mbutil ${this.getName()} set [--data "<data>"] [options]
+        - set Get Started button for the page with optional data
 
     mbutil ${this.getName()} delete [options]
         - remove the Get Started button for the Page
+
+Options:
+    --data "<data>" - a text or JSON to be send when the user clicks on the button
 `
     }
 }

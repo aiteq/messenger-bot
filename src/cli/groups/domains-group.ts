@@ -45,8 +45,8 @@ Usage:
     mbutil ${this.getName()} get [options]
         - show current whitelisted domains
 
-    mbutil ${this.getName()} add <domain> [domain] [domain] ... [options]
-        - add one or more domains to the whitelist
+    mbutil ${this.getName()} add <domain> [domains] [options]
+        - add one or more domains (space separated list) to the whitelist
 
     mbutil ${this.getName()} delete [options]
         - remove all domains from the whitelist

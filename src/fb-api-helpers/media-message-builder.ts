@@ -1,11 +1,11 @@
-import { AbstractMessageBuilder } from "./abstract-message-builder";
+import { MessageBuilder } from "./message-builder";
 import { Send } from "../fb-api/send";
 
 /**
  * Helps to create a message with media attachment.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/contenttypes)
  */
-export class MediaMessageBuilder extends AbstractMessageBuilder<Send.AttachmentMessage> {
+export class MediaMessageBuilder extends MessageBuilder<Send.AttachmentMessage> {
 
 	/**
      * Creates an instance of MediaMessageBuilder.

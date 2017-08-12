@@ -1,11 +1,11 @@
 import { Send } from "../fb-api/send";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Call Button.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button)
  */
-export class CallButtonBuilder extends AbstractBuilder<Send.CallButton> {
+export class CallButtonBuilder extends Builder<Send.CallButton> {
 
     private button: Send.CallButton;
 

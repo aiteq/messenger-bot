@@ -132,10 +132,10 @@ export class BotServer {
      * the message is part of an active conversation.
      * 
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
-     * @param {Function} hearHandler - a callback to be executed if a message matches one of the hooks
+     * @param {Function} callback - a callback to be executed if a message matches one of the hooks
      * @returns {this} - for chaining
      */
-    public hear(hooks: RegExp | string | Array<RegExp | string>, hearHandler: Function): this {
+    public hear(hooks: RegExp | string | Array<RegExp | string>, callback: Function): this {
 
         let regexps: Array<RegExp>;
 
@@ -155,14 +155,14 @@ export class BotServer {
             regexps = [hooks];
         }
 
-        this.responder.hear(regexps, hearHandler);
+        this.responder.hear(regexps, callback);
 
         return this;
     }
 
     /**
      * Subscribe to an <i>event</i> emitted when a webhook request is received.
-     * The callback is executed with the parameters: chat: Chat, senderId: string, data: any.
+     * The callback is executed with the parameters: chat: Chat, data: any.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {Function} callback - a callback function
@@ -174,7 +174,7 @@ export class BotServer {
      * Subscribe to an <i>identified event</i>. An identified event is specified, in addition to its
      * type, with an ID. This feature is available for events capable of carrying data such as
      * POSTBACK or PERSISTENT_MENU_ITEM.
-     * The callback is executed with the parameters: chat: Chat, senderId: string, data: any.
+     * The callback is executed with the parameters: chat: Chat, data: any.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {string} id - an identification of the event
@@ -194,16 +194,6 @@ export class BotServer {
 
         this.responder.on(event, callback);
         return this;
-    }
-
-    /**
-     * Expose the Messenger Profile API.
-     * (https://developers.facebook.com/docs/messenger-platform/messenger-profile)
-     * 
-     * @returns {MessengerProfile.Api} 
-     */
-    public getMessengerProfile(): MessengerProfile.Api {
-        return this.profileApi;
     }
 
     /**

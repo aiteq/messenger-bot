@@ -1,93 +1,41 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [ReceiptElement](../interfaces/send.receiptelement.md)
 
-
-
 # Interface: ReceiptElement
 
-
 ## Properties
+
 <a id="currency"></a>
+### «optional» `currency`
 
-### «Optional» currency
-
-**●  currency**:  *`string`* 
-
-*Defined in [fb-api/send.ts:269](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L269)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="image_url"></a>
+### «optional» `image_url`
 
-### «Optional» image_url
-
-**●  image_url**:  *`string`* 
-
-*Defined in [fb-api/send.ts:270](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L270)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="price"></a>
+###  `price`
 
-###  price
-
-**●  price**:  *`number`* 
-
-*Defined in [fb-api/send.ts:268](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L268)*
-
-
-
-
-
+**type**: `number`
 ___
 
 <a id="quantity"></a>
+### «optional» `quantity`
 
-### «Optional» quantity
-
-**●  quantity**:  *`number`* 
-
-*Defined in [fb-api/send.ts:267](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L267)*
-
-
-
-
-
+**type**: `number`
 ___
 
 <a id="subtitle"></a>
+### «optional» `subtitle`
 
-### «Optional» subtitle
-
-**●  subtitle**:  *`string`* 
-
-*Defined in [fb-api/send.ts:266](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L266)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="title"></a>
+###  `title`
 
-###  title
-
-**●  title**:  *`string`* 
-
-*Defined in [fb-api/send.ts:265](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L265)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

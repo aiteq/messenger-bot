@@ -1,21 +1,8 @@
 [@aiteq/messenger-bot](../README.md) > [PersistentMenuBuilder](../classes/persistentmenubuilder.md)
 
-
-
 # Class: PersistentMenuBuilder
 
-## Hierarchy
-
-
- [AbstractBuilder](abstractbuilder.md)`Array`.<[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)>
-
-**↳ PersistentMenuBuilder**
-
-
-
-
-
-
+Helps to create a [Persistent Menu](https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu).
 
 ## Index
 
@@ -23,129 +10,35 @@
 
 * [Menu](persistentmenubuilder.menu.md)
 
-
 ### Methods
 
-* [addMenu](persistentmenubuilder.md#addmenu)
-* [build](persistentmenubuilder.md#build)
-* [checkMenu](persistentmenubuilder.md#checkmenu)
-* [createMenu](persistentmenubuilder.md#createmenu)
+* [addMenu(locale, composerInputDisabled, menu)](persistentmenubuilder.md#addmenu)
 
+### Static methods
 
+* [PersistentMenuBuilder.createMenu()](persistentmenubuilder.md#createmenu)
 
 ---
-
 ## Methods
 <a id="addmenu"></a>
+###  `addMenu(locale, composerInputDisabled, menu)`
 
-###  addMenu
-
-► **addMenu**(locale: *`string`*, composerInputDisabled: *`boolean`*, menu: *[Menu](persistentmenubuilder.menu.md)*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:22](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L22)*
-
-
+Adds a new Menu for the given locale.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| locale | `string`   |  - |
-| composerInputDisabled | `boolean`   |  - |
-| menu | [Menu](persistentmenubuilder.menu.md)   |  - |
+| locale | `string` | locale of the menu ([supported locales](https://developers.facebook.com/docs/messenger-platform/messenger-profile/supported-locales)); for default menu use '"default"` |
+| composerInputDisabled | `boolean` | Set to `true` to disable user input in the menu. This means users will only be able to interact with your bot via the menu, postbacks, buttons, and webviews. |
+| menu | [Menu](persistentmenubuilder.menu.md)   | menu to be added |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="build"></a>
-
-###  build
-
-► **build**(): `Array`.<[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)>
-
-
-
-
-*Overrides [AbstractBuilder](abstractbuilder.md).[build](abstractbuilder.md#build)*
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:33](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L33)*
-
-
-
-
-
-**Returns:** `Array`.<[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)>
-
-
-
-
-
-___
-
-<a id="checkmenu"></a>
-
-### «Static»«Private» checkMenu
-
-► **checkMenu**(menu: *[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)*): [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:13](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L13)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| menu | [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)   |  - |
-
-
-
-
-
-**Returns:** [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="createmenu"></a>
+### `PersistentMenuBuilder.createMenu()`
 
-### «Static» createMenu
-
-► **createMenu**(): [Menu](persistentmenubuilder.menu.md)
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:37](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L37)*
-
-
-
-
+Creates a new Menu.
 
 **Returns:** [Menu](persistentmenubuilder.menu.md)
-
-
-
-
-
 ___
-
-

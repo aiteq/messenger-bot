@@ -1,16 +1,14 @@
 [@aiteq/messenger-bot](../README.md) > [Webview](../modules/webview.md)
 
-
-
 # Module: Webview
+
+Types for [Messenger Webview](https://developers.facebook.com/docs/messenger-platform/webview) interface.
 
 ## Index
 
-### Modules
+### Enums
 
-* [HeightRatio](webview.heightratio.md)
-* [ShareButton](webview.sharebutton.md)
-
-
+* [HeightRatio](../enums/webview.heightratio.md)
+* [ShareButton](../enums/webview.sharebutton.md)
 
 ---

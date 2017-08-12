@@ -1,36 +1,23 @@
 [@aiteq/messenger-bot](../README.md) > [MessengerProfile](../modules/messengerprofile.md)
 
-
-
 # Module: MessengerProfile
+
+Types for [Messenger Profile API](https://developers.facebook.com/docs/messenger-platform/messenger-profile).
 
 ## Index
 
 ### Modules
 
-* [AudienceType](messengerprofile.audiencetype.md)
-* [Field](messengerprofile.field.md)
 * [Greeting](messengerprofile.greeting.md)
-* [MenuItemType](messengerprofile.menuitemtype.md)
 
+### Enums
 
-### Classes
-
-* [Api](../classes/messengerprofile.api.md)
-
+* [MenuItemType](../enums/messengerprofile.menuitemtype.md)
 
 ### Interfaces
 
-* [ChatExtensionHomeUrl](../interfaces/messengerprofile.chatextensionhomeurl.md)
-* [Country](../interfaces/messengerprofile.country.md)
-* [GetStartedButton](../interfaces/messengerprofile.getstartedbutton.md)
 * [Menu](../interfaces/messengerprofile.menu.md)
 * [MenuItem](../interfaces/messengerprofile.menuitem.md)
 * [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)
-* [Request](../interfaces/messengerprofile.request.md)
-* [Response](../interfaces/messengerprofile.response.md)
-* [TargetAudience](../interfaces/messengerprofile.targetaudience.md)
-
-
 
 ---

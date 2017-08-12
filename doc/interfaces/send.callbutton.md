@@ -1,51 +1,31 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [CallButton](../interfaces/send.callbutton.md)
 
-
-
 # Interface: CallButton
 
+Interface for [Call Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button).
 
 ## Properties
+
 <a id="payload"></a>
+###  `payload`
 
-###  payload
+Phone number. Format must have `"+"` prefix followed by the country code, area code and local number. For example, `"+16505551234"`.
 
-**●  payload**:  *`string`* 
-
-*Defined in [fb-api/send.ts:190](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L190)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="title"></a>
+###  `title`
 
-###  title
+Button title, 20 characters limit.
 
-**●  title**:  *`string`* 
-
-*Defined in [fb-api/send.ts:189](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L189)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="type"></a>
+###  `type`
 
-###  type
+Type of button. Must be `"phone_number"`.
 
-**●  type**:  *"phone_number"* 
-
-*Defined in [fb-api/send.ts:188](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L188)*
-
-
-
-
-
+**type**: `"phone_number"`
 ___
-
-

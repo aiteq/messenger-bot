@@ -1,4 +1,4 @@
-import { AbstractMessageBuilder } from "./abstract-message-builder";
+import { MessageBuilder } from "./message-builder";
 import { Send } from "../fb-api/send";
 
 
@@ -6,7 +6,7 @@ import { Send } from "../fb-api/send";
  * Helps to build a Text Message.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/text-message)
  */
-export class TextMessageBuilder extends AbstractMessageBuilder<Send.TextMessage> {
+export class TextMessageBuilder extends MessageBuilder<Send.TextMessage> {
 
 	/**
      * Creates an instance of TextMessageBuilder.

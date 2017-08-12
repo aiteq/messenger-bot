@@ -52,8 +52,8 @@ Usage:
         - remove the current Chat Extension home URL
 
 Options:
-    --inTest - controls whether public users can see the Chat Extension (true/false, default: false)
-    --shareButton - controls whether the share button in the webview is enabled (true/false, default: false)
+    --inTest <true|false> - controls whether public users can see the Chat Extension (true/false, default: false)
+    --shareButton <true|false> - controls whether the share button in the webview is enabled (true/false, default: false)
 `
     }
 }

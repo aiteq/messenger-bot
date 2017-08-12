@@ -1,499 +1,215 @@
 [@aiteq/messenger-bot](../README.md) > [TemplateMessageBuilder](../classes/templatemessagebuilder.md)
 
-
-
 # Class: TemplateMessageBuilder
 
+An abstract parent class for template message builders.
+
 ## Type parameters
+
 #### T 
+
 ## Hierarchy
 
-
-↳  [AbstractMessageBuilder](abstractmessagebuilder.md)[AttachmentMessage](../interfaces/send.attachmentmessage.md)
+[MessageBuilder](messagebuilder.md)
 
 **↳ TemplateMessageBuilder**
 
-↳  [ButtonTemplateMessageBuilder](buttontemplatemessagebuilder.md)
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ButtonTemplateMessageBuilder](buttontemplatemessagebuilder.md)
 
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [GenericTemplateMessageBuilder](generictemplatemessagebuilder.md)
 
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ListTemplateMessageBuilder](listtemplatemessagebuilder.md)
 
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [OgTemplateMessageBuilder](ogtemplatemessagebuilder.md)
 
-↳  [GenericTemplateMessageBuilder](generictemplatemessagebuilder.md)
-
-
-
-
-↳  [ListTemplateMessageBuilder](listtemplatemessagebuilder.md)
-
-
-
-
-↳  [OgTemplateMessageBuilder](ogtemplatemessagebuilder.md)
-
-
-
-
-↳  [ReceiptTemplateMessageBuilder](receipttemplatemessagebuilder.md)
-
-
-
-
-
-
-
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ReceiptTemplateMessageBuilder](receipttemplatemessagebuilder.md)
 
 ## Index
 
-### Classes
-
-* [Button](templatemessagebuilder.button.md)
-* [CallButton](templatemessagebuilder.callbutton.md)
-* [DefaultAction](templatemessagebuilder.defaultaction.md)
-* [Element](templatemessagebuilder.element.md)
-* [LoginButton](templatemessagebuilder.loginbutton.md)
-* [LogoutButton](templatemessagebuilder.logoutbutton.md)
-* [OgElement](templatemessagebuilder.ogelement.md)
-* [PostbackButton](templatemessagebuilder.postbackbutton.md)
-* [ReceiptElement](templatemessagebuilder.receiptelement.md)
-* [ShareButton](templatemessagebuilder.sharebutton.md)
-* [Template](templatemessagebuilder.template.md)
-* [UrlButton](templatemessagebuilder.urlbutton.md)
-
-
 ### Constructors
 
-* [constructor](templatemessagebuilder.md#constructor)
-
-
-### Properties
-
-* [message](templatemessagebuilder.md#message)
-* [template](templatemessagebuilder.md#template-1)
-
+* [constructor()](templatemessagebuilder.md#constructor)
 
 ### Methods
 
-* [addLocationQuickReply](templatemessagebuilder.md#addlocationquickreply)
-* [addTextQuickReply](templatemessagebuilder.md#addtextquickreply)
-* [build](templatemessagebuilder.md#build)
-* [createMessage](templatemessagebuilder.md#createmessage)
-* [createCallButton](templatemessagebuilder.md#createcallbutton)
-* [createDefaultAction](templatemessagebuilder.md#createdefaultaction)
-* [createElement](templatemessagebuilder.md#createelement)
-* [createLoginButton](templatemessagebuilder.md#createloginbutton)
-* [createLogoutButton](templatemessagebuilder.md#createlogoutbutton)
-* [createPostbackButton](templatemessagebuilder.md#createpostbackbutton)
-* [createShareButton](templatemessagebuilder.md#createsharebutton)
-* [createUrlButton](templatemessagebuilder.md#createurlbutton)
+* [addLocationQuickReply()](templatemessagebuilder.md#addlocationquickreply)
+* [addQuickReply(title, id, [data, [imageUrl]])](templatemessagebuilder.md#addquickreply)
 
+### Methods
 
+* [createCallButton(title, phoneNumber)](templatemessagebuilder.md#createcallbutton)
+* [createDefaultAction(url)](templatemessagebuilder.md#createdefaultaction)
+* [createElement(title)](templatemessagebuilder.md#createelement)
+* [createLoginButton(url)](templatemessagebuilder.md#createloginbutton)
+* [createLogoutButton()](templatemessagebuilder.md#createlogoutbutton)
+* [createOgElement(url)](templatemessagebuilder.md#createogelement)
+* [createPostbackButton(title, id, data)](templatemessagebuilder.md#createpostbackbutton)
+* [createReceiptElement(title, price)](templatemessagebuilder.md#createreceiptelement)
+* [createShareButton()](templatemessagebuilder.md#createsharebutton)
+* [createUrlButton(title, url)](templatemessagebuilder.md#createurlbutton)
 
 ---
+
 ## Constructors
+
 <a id="constructor"></a>
-
-
-### ⊕ **new TemplateMessageBuilder**(): [TemplateMessageBuilder](templatemessagebuilder.md)
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:11](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L11)*
-
-
-
-
+### `new TemplateMessageBuilder()`
 
 **Returns:** [TemplateMessageBuilder](templatemessagebuilder.md)
 
 ---
 
-
-## Properties
-<a id="message"></a>
-
-### «Protected» message
-
-**●  message**:  *[AttachmentMessage](../interfaces/send.attachmentmessage.md)* 
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[message](abstractmessagebuilder.md#message)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:7](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L7)*
-
-
-
-
-
-___
-
-<a id="template-1"></a>
-
-### «Protected» template
-
-**●  template**:  *`T`* 
-
-*Defined in [fb-api-helpers/template-message-builder.ts:9](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L9)*
-
-
-
-
-
-___
-
-
 ## Methods
+
 <a id="addlocationquickreply"></a>
+###  `addLocationQuickReply()`
 
-###  addLocationQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addLocationQuickReply**(): `this`
+Adds a Quick Reply button to quickly send user's location.
 
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addLocationQuickReply](abstractmessagebuilder.md#addlocationquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:29](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L29)*
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
-<a id="addtextquickreply"></a>
+<a id="addquickreply"></a>
+###  `addQuickReply(title, id, [data, [imageUrl]])`
 
-###  addTextQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addTextQuickReply**(title: *`string`*, id: *`string`*, data?: *`string`⎮`any`*, imageUrl?: *`string`*): `this`
-
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addTextQuickReply](abstractmessagebuilder.md#addtextquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:10](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L10)*
-
-
+Adds a Quick Reply button to the message.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| id | `string`   |  - |
-| data | `string`⎮`any`   |  - |
-| imageUrl | `string`   |  - |
+| title | `string` | title of the Quick Reply |
+| id | `string` | ID of the button (required for proper generation of webhook events) |
+| data | `any` | optional data to be send when the user click on the Quick Reply button |
+| imageUrl | `string` | URL of optional image |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="build"></a>
-
-###  build
-
-► **build**(): [AttachmentMessage](../interfaces/send.attachmentmessage.md)
-
-
-
-
-*Overrides [AbstractMessageBuilder](abstractmessagebuilder.md).[build](abstractmessagebuilder.md#build)*
-
-*Defined in [fb-api-helpers/template-message-builder.ts:55](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L55)*
-
-
-
-
-
-**Returns:** [AttachmentMessage](../interfaces/send.attachmentmessage.md)
-
-
-
-
-
-___
-
-<a id="createmessage"></a>
-
-###  createMessage
-
-► **createMessage**(...args: *`any`[]*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:11](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L11)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| args | `any`[]   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="createcallbutton"></a>
+### `TemplateMessageBuilder.createCallButton(title, phoneNumber)`
 
-### «Static» createCallButton
-
-► **createCallButton**(title: *`string`*, payload: *`string`*): [CallButton](templatemessagebuilder.callbutton.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:39](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L39)*
-
-
+Creates a new Call Button builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| payload | `string`   |  - |
+| title | `string`   | title of the button |
+| phoneNumber | `string`   | phone number (must be prefixed with `"+"`) |
 
-
-
-
-
-**Returns:** [CallButton](templatemessagebuilder.callbutton.md)
-
-
-
-
-
+**Returns:** [CallButtonBuilder](callbuttonbuilder.md)
 ___
 
 <a id="createdefaultaction"></a>
+### `TemplateMessageBuilder.createDefaultAction(url)`
 
-### «Static» createDefaultAction
-
-► **createDefaultAction**(url: *`string`*): [DefaultAction](templatemessagebuilder.defaultaction.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:27](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L27)*
-
-
+Creates a new Default Action builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| url | `string`   |  - |
+| url | `string`   | URL of the Default Action |
 
-
-
-
-
-**Returns:** [DefaultAction](templatemessagebuilder.defaultaction.md)
-
-
-
-
-
+**Returns:** [DefaultActionBuilder](defaultactionbuilder.md)
 ___
 
 <a id="createelement"></a>
+### `ButtonTemplateMessageBuilder.createElement(title)`
 
-### «Static» createElement
-
-► **createElement**(title: *`string`*): [Element](templatemessagebuilder.element.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:23](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L23)*
-
-
+Creates a new Element builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
+| title | `string` |  title of the Element |
 
-
-
-
-
-**Returns:** [Element](templatemessagebuilder.element.md)
-
-
-
-
-
+**Returns:** [ElementBuilder](elementbuilder.md)
 ___
 
 <a id="createloginbutton"></a>
+### `TemplateMessageBuilder.createLoginButton(url)`
 
-### «Static» createLoginButton
-
-► **createLoginButton**(url: *`string`*): [LoginButton](templatemessagebuilder.loginbutton.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:47](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L47)*
-
-
+Creates a new Login Button builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| url | `string`   |  - |
+| url | `string` | [Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |
 
-
-
-
-
-**Returns:** [LoginButton](templatemessagebuilder.loginbutton.md)
-
-
-
-
-
+**Returns:** [LoginButtonBuilder](loginbuttonbuilder.md)
 ___
 
 <a id="createlogoutbutton"></a>
+### `TemplateMessageBuilder.createLogoutButton()`
 
-### «Static» createLogoutButton
+Creates a new Logout Button builder.
 
-► **createLogoutButton**(): [LogoutButton](templatemessagebuilder.logoutbutton.md)
+**Returns:** [LogoutButtonBuilder](logoutbuttonbuilder.md)
+___
 
+<a id="createogelement"></a>
+### `TemplateMessageBuilder.createOgElement(url)`
 
+Creates a new Open Graph Element builder.
 
+**Parameters:**
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| url | `string` | Open Graph URL for the element |
 
-*Defined in [fb-api-helpers/template-message-builder.ts:51](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L51)*
-
-
-
-
-
-**Returns:** [LogoutButton](templatemessagebuilder.logoutbutton.md)
-
-
-
-
-
+**Returns:** [OgElementBuilder](ogelementbuilder.md)
 ___
 
 <a id="createpostbackbutton"></a>
+### `TemplateMessageBuilder.createPostbackButton(title, id, data)`
 
-### «Static» createPostbackButton
-
-► **createPostbackButton**(title: *`string`*, data: *`string`*, id: *`string`*): [PostbackButton](templatemessagebuilder.postbackbutton.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:35](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L35)*
-
-
+Creates a new Postback Button builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| data | `string`   |  - |
-| id | `string`   |  - |
+| title | `string`   | title of the button |
+| id | `string`   | id of the button |
+| data | `string`   | data to be send with postback request |
 
+**Returns:** [PostbackButtonBuilder](postbackbuttonbuilder.md)
+___
 
+<a id="createreceiptelement"></a>
+### `TemplateMessageBuilder.createReceiptElement(title, price)`
 
+Creates a new Receipt Element builder.
 
+**Parameters:**
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| title | `string`   |  title of the Receipt Element |
+| price | `number`   |  item price |
 
-**Returns:** [PostbackButton](templatemessagebuilder.postbackbutton.md)
-
-
-
-
-
+**Returns:** [ReceiptElementBuilder](receiptelementbuilder.md)
 ___
 
 <a id="createsharebutton"></a>
+### `TemplateMessageBuilder.createShareButton()`
 
-### «Static» createShareButton
+Creates a new Share Button builder.
 
-► **createShareButton**(): [ShareButton](templatemessagebuilder.sharebutton.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:43](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L43)*
-
-
-
-
-
-**Returns:** [ShareButton](templatemessagebuilder.sharebutton.md)
-
-
-
-
-
+**Returns:** [ShareButtonBuilder](sharebuttonbuilder.md)
 ___
 
 <a id="createurlbutton"></a>
+### `TemplateMessageBuilder.createUrlButton(title, url)`
 
-### «Static» createUrlButton
-
-► **createUrlButton**(title: *`string`*, url: *`string`*): [UrlButton](templatemessagebuilder.urlbutton.md)
-
-
-
-
-*Defined in [fb-api-helpers/template-message-builder.ts:31](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/template-message-builder.ts#L31)*
-
-
+Creates a new URL Button builder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| url | `string`   |  - |
+| title | `string`   | title of the button |
+| url | `string`   | target URL |
 
-
-
-
-
-**Returns:** [UrlButton](templatemessagebuilder.urlbutton.md)
-
-
-
-
-
+**Returns:** [UrlButtonBuilder](urlbuttonbuilder.md)
 ___
-
-

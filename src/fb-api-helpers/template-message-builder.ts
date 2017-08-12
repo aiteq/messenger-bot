@@ -1,6 +1,6 @@
 import { Webview } from "../fb-api/webview";
 import { Webhook } from "../fb-api/webhook";
-import { AbstractMessageBuilder } from "./abstract-message-builder";
+import { MessageBuilder } from "./message-builder";
 import { Send } from "../fb-api/send";
 import { logger } from "../logger";
 import { ElementBuilder } from "./element-builder";
@@ -17,7 +17,7 @@ import { LogoutButtonBuilder } from "./logout-button-builder";
 /**
  * An abstract parent class for template message builders.
  */
-export abstract class TemplateMessageBuilder<T> extends AbstractMessageBuilder<Send.AttachmentMessage> {
+export abstract class TemplateMessageBuilder<T> extends MessageBuilder<Send.AttachmentMessage> {
 
 	protected template: T;
 
@@ -112,11 +112,11 @@ export abstract class TemplateMessageBuilder<T> extends AbstractMessageBuilder<S
      * Creates a new Call Button builder.
      * 
      * @param {string} title 
-     * @param {string} payload 
+     * @param {string} phoneNumber 
      * @returns {CallButtonBuilder} 
      */
-    public static createCallButton(title: string, payload: string): CallButtonBuilder {
-        return new CallButtonBuilder(title, payload);
+    public static createCallButton(title: string, phoneNumber: string): CallButtonBuilder {
+        return new CallButtonBuilder(title, phoneNumber);
     }
 
     /**

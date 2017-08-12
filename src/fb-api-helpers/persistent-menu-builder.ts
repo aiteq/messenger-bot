@@ -1,13 +1,13 @@
 import { MessengerProfile } from "../fb-api/messenger-profile";
 import { Webview } from "../fb-api/webview";
 import { Webhook } from "../fb-api/webhook";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Persistent Menu.
  * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
  */
-export class PersistentMenuBuilder extends AbstractBuilder<Array<MessengerProfile.PersistentMenu>> {
+export class PersistentMenuBuilder extends Builder<Array<MessengerProfile.PersistentMenu>> {
 
   private menus: Array<MessengerProfile.PersistentMenu> = new Array<MessengerProfile.PersistentMenu>();
 
@@ -74,7 +74,7 @@ export namespace PersistentMenuBuilder {
       url: string,
       webviewHeightRatio?: Webview.HeightRatio,
       messengerExtensions?: boolean,
-      sharingDisabled?: boolean,
+      shareButton?: boolean,
       fallbackUrl?: string
     ): this {
 
@@ -82,7 +82,7 @@ export namespace PersistentMenuBuilder {
         type: MessengerProfile.MenuItemType.WEB_URL,
         title: title,
         url: url
-      }, webviewHeightRatio, messengerExtensions, sharingDisabled, fallbackUrl);
+      }, webviewHeightRatio, messengerExtensions, shareButton, fallbackUrl);
 
       return this;
     }
@@ -93,7 +93,7 @@ export namespace PersistentMenuBuilder {
       data: any,
       webviewHeightRatio?: Webview.HeightRatio,
       messengerExtensions?: boolean,
-      sharingDisabled?: boolean,
+      shareButton?: boolean,
       fallbackUrl?: string
     ): this {
 
@@ -105,7 +105,7 @@ export namespace PersistentMenuBuilder {
           id: id,
           data: data
         })
-      }, webviewHeightRatio, messengerExtensions, sharingDisabled, fallbackUrl);
+      }, webviewHeightRatio, messengerExtensions, shareButton, fallbackUrl);
 
       return this;
     }
@@ -128,14 +128,15 @@ export namespace PersistentMenuBuilder {
       item: MessengerProfile.MenuItem,
       webviewHeightRatio?: Webview.HeightRatio,
       messengerExtensions?: boolean,
-      sharingDisabled?: boolean,
+      shareButton?: boolean,
       fallbackUrl?: string
     ): void {
 
       webviewHeightRatio && (item.webview_height_ratio = webviewHeightRatio);
       messengerExtensions && (item.messenger_extensions = messengerExtensions);
       fallbackUrl && (item.fallback_url = fallbackUrl);
-      sharingDisabled && (item.webview_share_button = Webview.ShareButton.HIDE);
+      item.webview_share_button = shareButton === false ? Webview.ShareButton.HIDE : Webview.ShareButton.SHOW;
+
 
       this.actions.push(item);    
     }

@@ -1,51 +1,27 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [ButtonTemplate](../interfaces/send.buttontemplate.md)
 
-
-
 # Interface: ButtonTemplate
 
-
 ## Properties
+
 <a id="buttons"></a>
+###  `buttons`
 
-###  buttons
+Set of 1-3 buttons that appear as call-to-actions.
 
-**●  buttons**:  *`Array`.<[Button](../modules/send.md#button)>* 
-
-*Defined in [fb-api/send.ts:236](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L236)*
-
-
-
-
-
+**type**: Array`<[Button](../modules/send.md#button)>
 ___
 
 <a id="template_type"></a>
+###  `template_type`
 
-###  template_type
-
-**●  template_type**:  *"button"* 
-
-*Defined in [fb-api/send.ts:234](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L234)*
-
-
-
-
-
+**type**: `"button"`
 ___
 
 <a id="text"></a>
+###  `text`
 
-###  text
+UTF-8-encoded text of up to 640 characters that appears above the buttons.
 
-**●  text**:  *`string`* 
-
-*Defined in [fb-api/send.ts:235](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L235)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

@@ -3,7 +3,7 @@ import { Reusable } from "../store/reusable";
 import { ReusableDao } from "../store/reusable-dao";
 import { Webview } from "./webview";
 import { GraphApi } from "./graph-api";
-import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
+import { MessageBuilder } from "../fb-api-helpers/message-builder";
 
 
 /**
@@ -139,20 +139,22 @@ export namespace Send {
          * Sends a message.
          * 
          * @param {string} recipientId - recipient's ID
-         * @param {(Message | AbstractMessageBuilder<Message>)} messageOrBuilder - a message or message builder
+         * @param {(Message | MessageBuilder<Message>)} messageOrBuilder - a message or message builder
+         * @param {NotificationType} [notification=NotificationType.REGULAR] 
          * @returns {Promise<any>} 
          */
-        public send(recipientId: string, messageOrBuilder: Message | AbstractMessageBuilder<Message>): Promise<any> {
+        public send(recipientId: string, messageOrBuilder: Message | MessageBuilder<Message>, notification: NotificationType = NotificationType.REGULAR): Promise<any> {
 
             return this.sendRequest({
                 recipient: JSON.stringify({
                     id: recipientId
                 }),
-                message: JSON.stringify(messageOrBuilder instanceof AbstractMessageBuilder ? messageOrBuilder.build() : messageOrBuilder)
+                message: JSON.stringify(messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder),
+                notification_type: notification
             });
         }
 
-        private async sendMediaAttachment(type: MediaAttachmentType, recipientId: string, url: string, reuse: boolean): Promise<string> {
+        private async sendMediaAttachment(type: MediaAttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<string> {
 
             if (reuse) {
 
@@ -169,7 +171,7 @@ export namespace Send {
                                 attachment_id: reusable.id
                             }
                         }
-                    });
+                    }, notification);
 
                     return reusable.id;
                 }
@@ -183,7 +185,7 @@ export namespace Send {
                         is_reusable: reuse
                     }
                 }
-            });
+            }, notification);
 
             if (reuse && response) {
                 // save attachmentId to re-use later
@@ -325,7 +327,6 @@ export namespace Send {
 
     export interface ListTemplate {
         template_type: typeof TemplateType.LIST;
-        sherable?: boolean;
         top_element_style?: ListTopElementStyle;
         elements: Array<Element>;
         buttons?: Array<Button>;

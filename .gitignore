@@ -6,4 +6,5 @@
 node_modules
 bin
 work
+doc-pre
 bot-db.json

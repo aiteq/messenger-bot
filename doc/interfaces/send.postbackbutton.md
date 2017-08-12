@@ -1,51 +1,31 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [PostbackButton](../interfaces/send.postbackbutton.md)
 
-
-
 # Interface: PostbackButton
 
+Interface for [Postback Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button).
 
 ## Properties
+
 <a id="payload"></a>
+###  `payload`
 
-###  payload
+This data will be sent back to your webhook. 1000 characters limit.
 
-**●  payload**:  *`string`* 
-
-*Defined in [fb-api/send.ts:184](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L184)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="title"></a>
+###  `title`
 
-###  title
+Button title. 20 characters limit.
 
-**●  title**:  *`string`* 
-
-*Defined in [fb-api/send.ts:183](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L183)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="type"></a>
+###  `type`
 
-###  type
+Type of button. Must be `"postback"`.
 
-**●  type**:  *"postback"* 
-
-*Defined in [fb-api/send.ts:182](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L182)*
-
-
-
-
-
+**type**: `"postback"`
 ___
-
-

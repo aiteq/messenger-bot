@@ -1,11 +1,11 @@
 import { Send } from "../fb-api/send";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Share Button.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button)
  */
-export class ShareButtonBuilder extends AbstractBuilder<Send.ShareButton> {
+export class ShareButtonBuilder extends Builder<Send.ShareButton> {
 
     private button: Send.ShareButton;
 

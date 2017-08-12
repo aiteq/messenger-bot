@@ -1,4 +1,4 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { TemplateMessageBuilder } from "./template-message-builder";
 import { ElementBuilder } from "./element-builder";
@@ -30,17 +30,6 @@ export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.List
 		return this;
 	}
 
-	/**
-     * Controls native share button.
-     * 
-     * @param {boolean} sherable - set to false to disable the native share button in Messenger
-     * @returns {this} - for chaining
-     */
-    public setSherable(sherable: boolean): this {
-		this.template.sherable = sherable;
-		return this;
-	}
-
     /**
      * Adds an Element. Number of Elements must be 2-4.
      * 
@@ -60,9 +49,9 @@ export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.List
     /**
      * Sets a Button for the List Template message.
      * 
-     * @param {AbstractBuilder<T>} buttonBuilder 
+     * @param {Builder<T>} buttonBuilder 
      */
-    public setButton<T extends Send.Button>(buttonBuilder: AbstractBuilder<T>): void {
+    public setButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
 		this.template.buttons = [buttonBuilder.build()];
     }
 }

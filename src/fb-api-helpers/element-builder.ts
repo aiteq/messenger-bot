@@ -1,11 +1,11 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
  * Helps to create an Element.
  */
-export class ElementBuilder extends AbstractBuilder<Send.Element> {
+export class ElementBuilder extends Builder<Send.Element> {
 
     private element: Send.Element;
 
@@ -59,9 +59,9 @@ export class ElementBuilder extends AbstractBuilder<Send.Element> {
     /**
      * Adds a Button.
      * 
-     * @param {AbstractBuilder<T>} buttonBuilder 
+     * @param {Builder<T>} buttonBuilder 
      */
-    public addButton<T extends Send.Button>(buttonBuilder: AbstractBuilder<T>): void {
+    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
 
         this.element.buttons || (this.element.buttons = new Array<T>());
 

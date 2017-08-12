@@ -61,7 +61,7 @@ export class MBUtil {
 
     public static getGlobalOptions(): string {
         return `Global options:
-    --config <filename> - config json file
+    --config <path> - config json file
     --accessToken <token> - Page Access Token (overrides config file)
     --logLevel <level> - set log level for package @aiteq/messenger-bot (default: OFF)
     --help - display usage for the group

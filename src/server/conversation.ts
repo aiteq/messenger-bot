@@ -1,6 +1,6 @@
 import { Send } from "../fb-api/send";
 import { Webhook } from "../fb-api/webhook";
-import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
+import { MessageBuilder } from "../fb-api-helpers/message-builder";
 import { logger } from "../logger";
 import { Chat } from "./chat";
 import { ResponderService } from "./responder-service";
@@ -40,12 +40,12 @@ export class Conversation {
      * @param {string} text - a question
      * @returns {Promise<string>} 
      */
-    public async ask(text: string): Promise<string | Webhook.QuickReplyPayload> {
+    public async ask(text: string): Promise<string> {
 
         // await for the message to be send, so you can be sure the user is responding to your question
 		await this.say(text);
 
-		return new Promise((resolve: (data: string | Webhook.QuickReplyPayload) => void) => {
+		return new Promise((resolve: (data: string) => void) => {
 
             // This is maybe the most interested part of conversation's implementation.
             // Because the response will arrive in one of the subsequent requests, we must remember
@@ -59,10 +59,10 @@ export class Conversation {
      * Asks the user with a message prepared manually or using message builder. It's necessary when
      * we want to force the user to response using QUICK REPLY buttons.
      * 
-     * @param {(Send.Message | AbstractMessageBuilder<Send.Message>)} messageOrBuilder - a structured question message
+     * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - structured message or message builder
      * @returns {Promise<T>} 
      */
-    public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | AbstractMessageBuilder<Send.Message>): Promise<T> {
+    public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<T> {
 
         // await for the message to be send, so you can be sure the user is responding to your question
 		await this.chat.sendMessage(messageOrBuilder);
@@ -91,7 +91,14 @@ export class Conversation {
 
 		} else {
 
-			logger.warn("unable to resolve conversation, no resolve callback");
+            // received a message within an active conversation but without previously asking
+            // two possible causes:
+            // - the user sent unexpected message during conversation
+            // - the implementator didn't call Conversation.end()
+            // anyway, the message will be discarded, so let's log a warning
+
+            logger.warn("received message within conversation but without any question asked (check whether the Conversation.end() is called on the end of conversation)");
+            logger.warn("discarded message:", data);
 		}
 	}
 

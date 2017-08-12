@@ -1,191 +1,83 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [ReceiptTemplate](../interfaces/send.receipttemplate.md)
 
-
-
 # Interface: ReceiptTemplate
 
-
 ## Properties
+
 <a id="address"></a>
+### «optional» `address`
 
-### «Optional» address
-
-**●  address**:  *[Address](send.address.md)* 
-
-*Defined in [fb-api/send.ts:305](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L305)*
-
-
-
-
-
+**type**: [Address](send.address.md)
 ___
 
 <a id="adjustments"></a>
+### «optional» `adjustments`
 
-### «Optional» adjustments
-
-**●  adjustments**:  *[PaymentAdjustments](send.paymentadjustments.md)* 
-
-*Defined in [fb-api/send.ts:307](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L307)*
-
-
-
-
-
+**type**: [PaymentAdjustments](send.paymentadjustments.md)
 ___
 
 <a id="currency"></a>
+###  `currency`
 
-###  currency
-
-**●  currency**:  *`string`* 
-
-*Defined in [fb-api/send.ts:300](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L300)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="elements"></a>
+### «optional» `elements`
 
-### «Optional» elements
-
-**●  elements**:  *`Array`.<[ReceiptElement](send.receiptelement.md)>* 
-
-*Defined in [fb-api/send.ts:304](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L304)*
-
-
-
-
-
+**type**: `Array`<[ReceiptElement](send.receiptelement.md)>
 ___
 
 <a id="merchant_name"></a>
+### «optional» `merchant_name`
 
-### «Optional» merchant_name
-
-**●  merchant_name**:  *`string`* 
-
-*Defined in [fb-api/send.ts:298](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L298)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="order_number"></a>
+###  `order_number`
 
-###  order_number
-
-**●  order_number**:  *`string`* 
-
-*Defined in [fb-api/send.ts:299](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L299)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="order_url"></a>
+### «optional» `order_url`
 
-### «Optional» order_url
-
-**●  order_url**:  *`string`* 
-
-*Defined in [fb-api/send.ts:303](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L303)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="payment_method"></a>
+###  `payment_method`
 
-###  payment_method
-
-**●  payment_method**:  *`string`* 
-
-*Defined in [fb-api/send.ts:301](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L301)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="recipient_name"></a>
+###  `recipient_name`
 
-###  recipient_name
-
-**●  recipient_name**:  *`string`* 
-
-*Defined in [fb-api/send.ts:297](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L297)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="sherable"></a>
+### «optional» `sherable`
 
-### «Optional» sherable
-
-**●  sherable**:  *`boolean`* 
-
-*Defined in [fb-api/send.ts:296](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L296)*
-
-
-
-
-
+**type**: `boolean`
 ___
 
 <a id="summary"></a>
+###  `summary`
 
-###  summary
-
-**●  summary**:  *[PaymentSummary](send.paymentsummary.md)* 
-
-*Defined in [fb-api/send.ts:306](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L306)*
-
-
-
-
-
+**type**: [PaymentSummary](send.paymentsummary.md)
 ___
 
 <a id="template_type"></a>
+###  `template_type`
 
-###  template_type
-
-**●  template_type**:  *"receipt"* 
-
-*Defined in [fb-api/send.ts:295](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L295)*
-
-
-
-
-
+**type**: `"receipt"`
 ___
 
 <a id="timestamp"></a>
+### «optional» `timestamp`
 
-### «Optional» timestamp
-
-**●  timestamp**:  *`string`* 
-
-*Defined in [fb-api/send.ts:302](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L302)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

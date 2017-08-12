@@ -1,6 +1,6 @@
 import { Send } from "../fb-api/send";
 import { UserProfile } from "../fb-api/user-profile";
-import { AbstractMessageBuilder } from "../fb-api-helpers/abstract-message-builder";
+import { MessageBuilder } from "../fb-api-helpers/message-builder";
 import { logger } from "../logger";
 import { Conversation } from "./conversation";
 
@@ -116,10 +116,10 @@ export class Chat {
   /**
    * Sends a message prepared manually or using message builder.
    * 
-   * @param {(Send.Message | AbstractMessageBuilder<Send.Message>)} messageOrBuilder - a structured message or message builder
+   * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - a structured message or message builder
    * @returns {this} - for chaining
    */
-  public sendMessage(messageOrBuilder: Send.Message | AbstractMessageBuilder<Send.Message>): this {
+  public sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): this {
   	this.sendApi.send(this.partnerId, messageOrBuilder);
   	return this;
   }

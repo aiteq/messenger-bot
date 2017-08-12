@@ -1,37 +1,25 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [ShareButton](../interfaces/send.sharebutton.md)
 
-
-
 # Interface: ShareButton
 
+Interface for [Share Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button).
 
 ## Properties
+
 <a id="share_contents"></a>
+### «optional» `share_contents`
 
-### «Optional» share_contents
+The message that you wish the recipient of the share to see, if it is different from the one this button is attached to. The format follows that used in [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference), but must be a [generic template](https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template) with up to one [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button).
 
-**●  share_contents**:  *`any`* 
-
-*Defined in [fb-api/send.ts:195](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L195)*
-
-
-
-
-
+**type**: `any`
 ___
 
 <a id="type"></a>
+###  `type`
 
-###  type
+Type of button. Must be `"element_share"`.
 
-**●  type**:  *"element_share"* 
-
-*Defined in [fb-api/send.ts:194](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L194)*
-
-
-
-
-
+**type**: `"element_share"`
 ___
 
 

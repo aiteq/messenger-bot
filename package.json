@@ -7,7 +7,6 @@
   "scripts": {
     "compile": "tsc -p .",
     "prepublishOnly": "npm run compile",
-    "doc-md": "node_modules/.bin/typedoc --out doc --mode file --theme markdown .",
     "test": "node ./bin/test.js",
     "mbutil": "./bin/cli/index.js"
   },
@@ -41,6 +40,7 @@
     "grunt": "^1.0.1",
     "grunt-file-append": "0.0.7",
     "grunt-ts": "^6.0.0-beta.16",
+    "grunt-typedoc": "^0.2.4",
     "typedoc": "^0.7.2",
     "typedoc-plugin-markdown": "^1.0.6",
     "typescript": "2.3.x"

@@ -1,4 +1,4 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { TemplateMessageBuilder } from "./template-message-builder";
 import { OgElementBuilder } from "./og-element-builder";

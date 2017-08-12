@@ -1,28 +1,16 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md)
 
-
-
 # Module: Send
+
+Types for [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
 ## Index
 
-### Modules
+### Enums
 
-* [AttachmentType](send.attachmenttype.md)
-* [ButtonType](send.buttontype.md)
-* [ContentType](send.contenttype.md)
-* [ImageAspectRatio](send.imageaspectratio.md)
-* [ListTopElementStyle](send.listtopelementstyle.md)
-* [NotificationType](send.notificationtype.md)
-* [SenderAction](send.senderaction.md)
-* [Tag](send.tag.md)
-* [TemplateType](send.templatetype.md)
-
-
-### Classes
-
-* [Api](../classes/send.api.md)
-
+* [ImageAspectRatio](../enums/send.imageaspectratio.md)
+* [ListTopElementStyle](../enums/send.listtopelementstyle.md)
+* [NotificationType](../enums/send.notificationtype.md)
 
 ### Interfaces
 
@@ -34,7 +22,6 @@
 * [CallButton](../interfaces/send.callbutton.md)
 * [DefaultAction](../interfaces/send.defaultaction.md)
 * [Element](../interfaces/send.element.md)
-* [Error](../interfaces/send.error.md)
 * [FileAttachment](../interfaces/send.fileattachment.md)
 * [GenericTemplate](../interfaces/send.generictemplate.md)
 * [ImageAttachment](../interfaces/send.imageattachment.md)
@@ -43,7 +30,6 @@
 * [LoginButton](../interfaces/send.loginbutton.md)
 * [LogoutButton](../interfaces/send.logoutbutton.md)
 * [MediaPayload](../interfaces/send.mediapayload.md)
-* [Name](../interfaces/send.name.md)
 * [OpenGraphElement](../interfaces/send.opengraphelement.md)
 * [OpenGraphTemplate](../interfaces/send.opengraphtemplate.md)
 * [PaymentAdjustments](../interfaces/send.paymentadjustments.md)
@@ -51,16 +37,12 @@
 * [PostbackButton](../interfaces/send.postbackbutton.md)
 * [ReceiptElement](../interfaces/send.receiptelement.md)
 * [ReceiptTemplate](../interfaces/send.receipttemplate.md)
-* [Recipient](../interfaces/send.recipient.md)
-* [Request](../interfaces/send.request.md)
-* [Response](../interfaces/send.response.md)
 * [ShareButton](../interfaces/send.sharebutton.md)
 * [TemplateAttachment](../interfaces/send.templateattachment.md)
 * [TextMessage](../interfaces/send.textmessage.md)
 * [TextQuickReply](../interfaces/send.textquickreply.md)
 * [UrlButton](../interfaces/send.urlbutton.md)
 * [VideoAttachment](../interfaces/send.videoattachment.md)
-
 
 ### Type aliases
 
@@ -72,106 +54,48 @@
 * [QuickReply](send.md#quickreply)
 * [Template](send.md#template)
 
-
-
 ---
+
 ## Type aliases
+
 <a id="attachment"></a>
+###  `Attachment`
 
-###  Attachment
-
-**Τ Attachment**:  *[MediaAttachment](send.md#mediaattachment)⎮[TemplateAttachment](../interfaces/send.templateattachment.md)* 
-
-*Defined in [fb-api/send.ts:356](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L356)*
-
-
-
-
-
+**Τ Attachment**: *[MediaAttachment](send.md#mediaattachment)⎮[TemplateAttachment](../interfaces/send.templateattachment.md)* 
 ___
 
 <a id="button"></a>
+###  `Button`
 
-###  Button
-
-**Τ Button**:  *[UrlButton](../interfaces/send.urlbutton.md)⎮[PostbackButton](../interfaces/send.postbackbutton.md)⎮[CallButton](../interfaces/send.callbutton.md)⎮[ShareButton](../interfaces/send.sharebutton.md)⎮[LoginButton](../interfaces/send.loginbutton.md)⎮[LogoutButton](../interfaces/send.logoutbutton.md)* 
-
-*Defined in [fb-api/send.ts:207](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L207)*
-
-
-
-
-
+**Τ Button**: *[UrlButton](../interfaces/send.urlbutton.md)⎮[PostbackButton](../interfaces/send.postbackbutton.md)⎮[CallButton](../interfaces/send.callbutton.md)⎮[ShareButton](../interfaces/send.sharebutton.md)⎮[LoginButton](../interfaces/send.loginbutton.md)⎮[LogoutButton](../interfaces/send.logoutbutton.md)* 
 ___
 
 <a id="mediaattachment"></a>
+###  `MediaAttachment`
 
-###  MediaAttachment
-
-**Τ MediaAttachment**:  *[ImageAttachment](../interfaces/send.imageattachment.md)⎮[AudioAttachment](../interfaces/send.audioattachment.md)⎮[VideoAttachment](../interfaces/send.videoattachment.md)⎮[FileAttachment](../interfaces/send.fileattachment.md)* 
-
-*Defined in [fb-api/send.ts:354](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L354)*
-
-
-
-
-
+**Τ MediaAttachment**: *[ImageAttachment](../interfaces/send.imageattachment.md)⎮[AudioAttachment](../interfaces/send.audioattachment.md)⎮[VideoAttachment](../interfaces/send.videoattachment.md)⎮[FileAttachment](../interfaces/send.fileattachment.md)* 
 ___
 
 <a id="mediaattachmenttype"></a>
+###  `MediaAttachmentType`
 
-###  MediaAttachmentType
-
-**Τ MediaAttachmentType**:  *"image"⎮"audio"⎮"video"⎮"file"* 
-
-*Defined in [fb-api/send.ts:321](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L321)*
-
-
-
-
-
+**Τ MediaAttachmentType**: *"image"⎮"audio"⎮"video"⎮"file"*
 ___
 
 <a id="message"></a>
+###  `Message`
 
-###  Message
-
-**Τ Message**:  *[TextMessage](../interfaces/send.textmessage.md)⎮[AttachmentMessage](../interfaces/send.attachmentmessage.md)* 
-
-*Defined in [fb-api/send.ts:371](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L371)*
-
-
-
-
-
+**Τ Message**: *[TextMessage](../interfaces/send.textmessage.md)⎮[AttachmentMessage](../interfaces/send.attachmentmessage.md)*
 ___
 
 <a id="quickreply"></a>
+###  `QuickReply`
 
-###  QuickReply
-
-**Τ QuickReply**:  *[TextQuickReply](../interfaces/send.textquickreply.md)⎮[LocationQuickReply](../interfaces/send.locationquickreply.md)* 
-
-*Defined in [fb-api/send.ts:145](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L145)*
-
-
-
-
-
+**Τ QuickReply**: *[TextQuickReply](../interfaces/send.textquickreply.md)⎮[LocationQuickReply](../interfaces/send.locationquickreply.md)* 
 ___
 
 <a id="template"></a>
+###  `Template`
 
-###  Template
-
-**Τ Template**:  *[GenericTemplate](../interfaces/send.generictemplate.md)⎮[ButtonTemplate](../interfaces/send.buttontemplate.md)⎮[ListTemplate](../interfaces/send.listtemplate.md)⎮[ReceiptTemplate](../interfaces/send.receipttemplate.md)⎮[OpenGraphTemplate](../interfaces/send.opengraphtemplate.md)* 
-
-*Defined in [fb-api/send.ts:310](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L310)*
-
-
-
-
-
+**Τ Template**: *[GenericTemplate](../interfaces/send.generictemplate.md)⎮[ButtonTemplate](../interfaces/send.buttontemplate.md)⎮[ListTemplate](../interfaces/send.listtemplate.md)⎮[ReceiptTemplate](../interfaces/send.receipttemplate.md)⎮[OpenGraphTemplate](../interfaces/send.opengraphtemplate.md)* 
 ___
-
-

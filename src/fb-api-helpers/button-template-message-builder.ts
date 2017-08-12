@@ -1,4 +1,4 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { TemplateMessageBuilder } from "./template-message-builder";
 
@@ -17,7 +17,7 @@ export class ButtonTemplateMessageBuilder extends TemplateMessageBuilder<Send.Bu
 	/**
      * Creates a new ButtonTemplateMessageBuilder instance.
      * 
-     * @param {string} text - a text if the message
+     * @param {string} text - text of the message
      */
     constructor(text: string) {
 
@@ -33,10 +33,10 @@ export class ButtonTemplateMessageBuilder extends TemplateMessageBuilder<Send.Bu
     /**
      * Adds a Button. Number of Buttons must be 1-3.
      * 
-     * @param {AbstractBuilder<T>} buttonBuilder 
+     * @param {Builder<T>} buttonBuilder 
      * @returns {this} - for chaining
      */
-    public addButton<T extends Send.Button>(buttonBuilder: AbstractBuilder<T>): this {
+    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
 
         if (this.template.buttons.length === 3) {
             throw new Error("couldn't add next Button to Button Tepmlate message (only 1-3 buttons is allowed)");

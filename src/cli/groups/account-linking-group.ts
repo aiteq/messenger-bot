@@ -42,7 +42,7 @@ See more at https://developers.facebook.com/docs/messenger-platform/messenger-pr
 Usage:
 
     mbutil ${this.getName()} get [options]
-        - show current Account Greeting URL
+        - show current Account Linking URL
 
     mbutil ${this.getName()} set <url> [options]
         - set a new Account Linking URL

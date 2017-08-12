@@ -67,12 +67,12 @@ Usage:
     mbutil ${this.getName()} close [options]
         - close Target Audience for all countries
 
-    mbutil ${this.getName()} whitelist <country> [country] [country] ... [options]
-        - add one or more countries to the whitelist
+    mbutil ${this.getName()} whitelist <country> [countries] [options]
+        - add one or more countries (space separated list) to the whitelist
         - use ISO 3166 Alpha-2 codes to identify the countries
 
-    mbutil ${this.getName()} blacklist <country> [country] [country] ... [options]
-        - add one or more countries to the blacklist
+    mbutil ${this.getName()} blacklist <country> [countries] [options]
+        - add one or more countries (space separated list) to the blacklist
         - use ISO 3166 Alpha-2 codes to identify the countries
 
     mbutil ${this.getName()} delete [options]

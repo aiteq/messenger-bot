@@ -1,9 +1,6 @@
 [@aiteq/messenger-bot](../README.md) > [BotServer](../classes/botserver.md)
 
-
-
 # Class: BotServer
-
 
 Represents a bot server listening for webhook requests.
 
@@ -11,466 +8,133 @@ Represents a bot server listening for webhook requests.
 
 ### Constructors
 
-* [constructor](botserver.md#constructor)
-
+* [constructor(config)](botserver.md#constructor)
 
 ### Methods
 
-* [addExtension](botserver.md#addextension)
-* [getMessengerProfile](botserver.md#getmessengerprofile)
-* [hear](botserver.md#hear)
-* [onConversation](botserver.md#onconversation)
-* [onGetStarted](botserver.md#ongetstarted)
-* [onMessage](botserver.md#onmessage)
-* [onPersistentMenu](botserver.md#onpersistentmenu)
-* [onPostback](botserver.md#onpostback)
-* [onPostbackButton](botserver.md#onpostbackbutton)
-* [onQuickReply](botserver.md#onquickreply)
+* [addChatExtension(extension)](botserver.md#addchatextension)
+* [hear(hooks, callback)](botserver.md#hear)
+* [on(event, callback)](botserver.md#on1)
+* [on(event, id, callback)](botserver.md#on2)
 * [start](botserver.md#start)
-* [verifyRequestSignature](botserver.md#verifyrequestsignature)
-* [normalizePort](botserver.md#normalizeport)
-
-
+* [stop](botserver.md#stop)
 
 ---
 ## Constructors
 <a id="constructor"></a>
 
+### `new BotServer(config)`
 
-### ⊕ **new BotServer**(config: *[BotServerConfig](../interfaces/botserverconfig.md)*): [BotServer](botserver.md)
-
-
-
-*Defined in [server/bot-server.ts:27](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L27)*
-
-
-
-Creates an instance of BotServer.
-
+Creates an instance of the BotServer.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| config | [BotServerConfig](../interfaces/botserverconfig.md)   |  Bot server configuration object. {BotServerConfig} for config options. |
+| config | [BotConfig](../interfaces/botconfig.md) | bot configuration object |
 
-
-
-
-
-**Returns:** [BotServer](botserver.md)
+**Returns:** [BotServer](botserver.md) - an instance created
 
 ---
 
-
-
 ## Methods
-<a id="addextension"></a>
 
-###  addExtension
+<a id="addchatextension"></a>
+###  `addChatExtension(extension)`
 
-► **addExtension**(extension: *[MessengerExtension](../interfaces/messengerextension.md)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:214](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L214)*
-
-
+Install a [Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions).
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| extension | [MessengerExtension](../interfaces/messengerextension.md)   |  - |
-
-
-
+| extension | [ChatExtension](../interfaces/chatextension.md)   | a Chat Extension to be installed |
 
 
 **Returns:** `this`
-
-
-
-
-
-___
-
-<a id="getmessengerprofile"></a>
-
-###  getMessengerProfile
-
-► **getMessengerProfile**(): [Api](messengerprofile.api.md)
-
-
-
-
-*Defined in [server/bot-server.ts:210](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L210)*
-
-
-
-
-
-**Returns:** [Api](messengerprofile.api.md)
-
-
-
-
-
 ___
 
 <a id="hear"></a>
+###  `hear(hooks, hearHandler)`
 
-###  hear
+A convenient method to subscribe to specific *hooks* that can be found within a received _text message_. The hooks can be specified as a command or using a *regular expression*. When the server receives a text message, it test the content for specified hooks. If a match is found the server executes the subscribed callback. Commands are considered as case-insensitive.
 
-► **hear**(hooks: *`RegExp`⎮`string`⎮`Array`.<`RegExp`⎮`string`>*, hearHandler: *[HearHandler](responderservice.md#hearhandler)*): `this`
+The callback is executed with three parameters:
+| # | Type | Description |
+| ------ | ------ | ------ |
+| 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |
+| 2. | `string` | original message |
+| 3. | `string[]` | an array of captured matches if the regular expression contains *capturing groups*  |
 
+**Note**: The callbacks installed using [BotServer.hear()](botserver.md#hear) are executed BEFORE callbacks installed using [on()](botserver.md#on1).
 
+**Note**: the [BotServer.hear()](botserver.md#hear) method listens only for TEXT messages.
 
-
-*Defined in [server/bot-server.ts:124](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L124)*
-
-
-
-A convenient method to subscribe to specific _hooks_ that can be found within a received _text message_. The hooks can be specified as a keyword or using a _regular expression_. When the server receives a text message, it test the content for specified hooks. If a match is found the server executes the subscribed callback. Keywords are considered as case-insensitive. The callbacks installed using the {BotServer.hear} method are executed BEFORE callbacks installed using the {onMessage()} method. Note that the {hear()} method can be used only for text messages.
-
+**Note**: The callback is not executed when a received text message matches the hook but the message is part of an active conversation.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| hooks | `RegExp`⎮`string`⎮`Array`.<`RegExp`⎮`string`>   |  a string, a regexp or an array of both strings and regexps |
-| hearHandler | [HearHandler](responderservice.md#hearhandler)   |  a callback to be executed if a message matches one of the hooks |
+| hooks | `RegExp` ⎮ `string` ⎮ `Array`<`RegExp` ⎮ `string`> | a string, a regexp or a mixed array of both strings and regexps |
+| callback | `Function`   |  a callback to be executed if a message matches one of the hooks |
 
-
-
-
-
-**Returns:** `this`
-- for chaining
-
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
-<a id="onconversation"></a>
+<a id="on"></a>
+<a id="on1"></a>
+###  `on(event, callback)`
 
-###  onConversation
+Subscribe to an *event* emitted when a webhook request is received.
 
-► **onConversation**(handler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:203](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L203)*
-
+The callback is executed with two parameters:
+| # | Type | Description |
+| ------ | ------ | ------ |
+| 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |
+| 2. | `any` | event specific data (e.g. original text message) |
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| handler | [EventHandler](responderservice.md#eventhandler)   |  - |
+| event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
+| callback | `Function` | a callback function |
 
+**Returns:** `this` - for chaining
 
+<a id="on2"></a>
+###  `on(event, id, callback)`
 
+Subscribe to an *identified event*. An identified event is specified, in addition to its type, with an ID. This feature is available for events capable of carrying data such as POSTBACK or PERSISTENT_MENU_ITEM.
 
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="ongetstarted"></a>
-
-###  onGetStarted
-
-► **onGetStarted**(eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:175](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L175)*
-
-
+The callback is executed with two parameters:
+| # | Type | Description |
+| ------ | ------ | ------ |
+| 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |
+| 2. | `any` | event specific data (e.g. original text message) |
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="onmessage"></a>
-
-###  onMessage
-
-► **onMessage**(eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:161](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L161)*
-
-
-
-Subscribes to an event when a text message is received. The callback will be executed for all received text messages, even if the content matches a hook specified using the {hear} method. The callbacks installed using the {onMessage()} method are executed AFTER callbacks installed using the {hear()} method.
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  a callback to be executed when a text message will be received |
-
-
-
-
-
-**Returns:** `this`
-- for chaining
-
-
-
-
-
-
-___
-
-<a id="onpersistentmenu"></a>
-
-###  onPersistentMenu
-
-► **onPersistentMenu**(id: *`string`*, eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:189](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L189)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| id | `string`   |  - |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="onpostback"></a>
-
-###  onPostback
-
-► **onPostback**(eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:168](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L168)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="onpostbackbutton"></a>
-
-###  onPostbackButton
-
-► **onPostbackButton**(id: *`string`*, eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:182](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L182)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| id | `string`   |  - |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="onquickreply"></a>
-
-###  onQuickReply
-
-► **onQuickReply**(id: *`string`*, eventHandler: *[EventHandler](responderservice.md#eventhandler)*): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:196](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L196)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| id | `string`   |  - |
-| eventHandler | [EventHandler](responderservice.md#eventhandler)   |  - |
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+| event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
+| id | `string` | an identification of the event |
+| callback | `Function` | a callback function |
+
+**Returns:** `this` - for chaining
 ___
 
 <a id="start"></a>
-
-###  start
-
-► **start**(): `this`
-
-
-
-
-*Defined in [server/bot-server.ts:70](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L70)*
-
-
+###  `start()`
 
 Starts the bot server.
 
-
-
-
-**Returns:** `this`
-
-
-
-
-
-
-
+**Returns:** `void`
 ___
 
-<a id="verifyrequestsignature"></a>
+<a id="stop"></a>
+###  `stop()`
 
-### «Private» verifyRequestSignature
-
-► **verifyRequestSignature**(req: *`Request`*, res: *`Response`*, data: *`string`*): `void`
-
-
-
-
-*Defined in [server/bot-server.ts:219](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L219)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| req | `Request`   |  - |
-| res | `Response`   |  - |
-| data | `string`   |  - |
-
-
-
-
+Stops the bot server.
 
 **Returns:** `void`
-
-
-
-
-
 ___
-
-<a id="normalizeport"></a>
-
-### «Static»«Private» normalizePort
-
-► **normalizePort**(val: *`number`⎮`string`*): `number`⎮`string`⎮`boolean`
-
-
-
-
-*Defined in [server/bot-server.ts:236](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/bot-server.ts#L236)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| val | `number`⎮`string`   |  - |
-
-
-
-
-
-**Returns:** `number`⎮`string`⎮`boolean`
-
-
-
-
-
-___
-
-

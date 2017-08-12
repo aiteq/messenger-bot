@@ -1,14 +1,14 @@
-import Lowdb = require("lowdb");
-//import fileAsync = require("lowdb/lib/storages/file-async");
+import { BotServer, WebhookEvent, Chat, Conversation } from "./index";
 
-let ldb: Lowdb = new Lowdb("./work/test-db.json", {
-  storage: require("lowdb/lib/storages/file-async")
+let bot: BotServer = new BotServer({
+  name: "RUBICOIN",
+  port: process.env.PORT || 8088,
+  verifyToken: "rubi-1354-coin",
+  accessToken: "x",
+  appSecret: "x"
 });
 
-(async () => {
-console.log(await ldb.get("reusables")
-.push({ url: "xxx", id: "sdfcsdf"}).write()
-//.find({ url: "testxurl" })
-
-);
-})();
+bot.on(WebhookEvent.PERSISTENT_MENU, "menu-item-song", async (chat: Chat) => {
+    let conv: Conversation = chat.startConversation();
+    let favSong: string = await conv.ask("What's your favourite song?");
+});

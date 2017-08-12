@@ -1,206 +1,60 @@
 [@aiteq/messenger-bot](../README.md) > [Conversation](../classes/conversation.md)
 
-
-
 # Class: Conversation
+Allows synchronous, contextual interaction between the bot and user. The instance is created by calling the [Chat.startConversation()](./chat.md#startConversation). **Note:** In this time, only TEXT and QUICK REPLY messages can be used as parts of conversations.
 
 ## Index
 
-### Constructors
-
-* [constructor](conversation.md#constructor)
-
-
 ### Methods
-
 * [ask](conversation.md#ask)
 * [askWithMessage](conversation.md#askwithmessage)
 * [end](conversation.md#end)
-* [resume](conversation.md#resume)
 * [say](conversation.md#say)
-
-
-
 ---
-## Constructors
-<a id="constructor"></a>
-
-
-### ⊕ **new Conversation**(partnerId: *`string`*, chat: *[Chat](chat.md)*, sendApi: *[Api](send.api.md)*): [Conversation](conversation.md)
-
-
-
-*Defined in [server/conversation.ts:10](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L10)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| partnerId | `string`   |  - |
-| chat | [Chat](chat.md)   |  - |
-| sendApi | [Api](send.api.md)   |  - |
-
-
-
-
-
-**Returns:** [Conversation](conversation.md)
-
----
-
-
-
 ## Methods
 <a id="ask"></a>
-
-###  ask
-
-► **ask**(text: *`string`*): `Promise`.<`string`>
-
-
-
-
-*Defined in [server/conversation.ts:19](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L19)*
-
-
+###  `ask(text)`
+Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| text | `string`   |  - |
+| text | `string`   |  a question |
 
-
-
-
-
-**Returns:** `Promise`.<`string`>
-
-
-
-
-
+**Returns:** `Promise`<`string`>
 ___
 
 <a id="askwithmessage"></a>
-
-###  askWithMessage
-
-► **askWithMessage**T(messageOrBuilder: *[Message](../modules/send.md#message)⎮[AbstractMessageBuilder](abstractmessagebuilder.md)[Message](../modules/send.md#message)*): `Promise`.<`T`>
-
-
-
-
-*Defined in [server/conversation.ts:28](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L28)*
-
-
+###  `askWithMessage(messageOrBuilder)`
+Asks the user with a message prepared manually or using message builder. It's necessary when we want to force the user to response using QUICK REPLY buttons.
 
 **Type parameters:**
 
-#### T :  `string`⎮[QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
-**Parameters:**
+T:  `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
 
+**Parameters:**
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| messageOrBuilder | [Message](../modules/send.md#message)⎮[AbstractMessageBuilder](abstractmessagebuilder.md)[Message](../modules/send.md#message)   |  - |
+| messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) |structured message or message builder |
 
-
-
-
-
-**Returns:** `Promise`.<`T`>
-
-
-
-
-
+**Returns:** `Promise`<`T`>
 ___
 
 <a id="end"></a>
-
-###  end
-
-► **end**(): `void`
-
-
-
-
-*Defined in [server/conversation.ts:50](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L50)*
-
-
-
-
+###  `end()`
+Ends the conversation.
 
 **Returns:** `void`
-
-
-
-
-
-___
-
-<a id="resume"></a>
-
-###  resume
-
-► **resume**(data: *`string`⎮[QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)*): `void`
-
-
-
-
-*Defined in [server/conversation.ts:37](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L37)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| data | `string`⎮[QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)   |  - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
 ___
 
 <a id="say"></a>
-
-###  say
-
-► **say**(text: *`string`*): `Promise`.<`void`>
-
-
-
-
-*Defined in [server/conversation.ts:15](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/server/conversation.ts#L15)*
-
-
+###  `say(text)`
+Sends a plain TEXT message. Unlike the [Chat.say()](./chat.md#say) this method return a `Promise` so you can wait for the message to be send.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| text | `string`   |  - |
+| text | `string` | a text to be send |
 
-
-
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
+**Returns:** `Promise`<`void`>
 ___
-
-

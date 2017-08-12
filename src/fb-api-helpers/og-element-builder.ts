@@ -1,11 +1,11 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
  * Helps to create an Open Graph Element.
  */
-export class OgElementBuilder extends AbstractBuilder<Send.OpenGraphElement> {
+export class OgElementBuilder extends Builder<Send.OpenGraphElement> {
 
     private element: Send.OpenGraphElement;
 
@@ -24,10 +24,10 @@ export class OgElementBuilder extends AbstractBuilder<Send.OpenGraphElement> {
     /**
      * Adds a Button.
      * 
-     * @param {AbstractBuilder<T>} buttonBuilder 
+     * @param {Builder<T>} buttonBuilder 
      * @returns {this} - for chaining
      */
-    public addButton<T extends Send.Button>(buttonBuilder: AbstractBuilder<T>): this {
+    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
 
         this.element.buttons || (this.element.buttons = new Array<T>());
 

@@ -1,175 +1,70 @@
 [@aiteq/messenger-bot](../README.md) > [TextMessageBuilder](../classes/textmessagebuilder.md)
 
-
-
 # Class: TextMessageBuilder
+
+Helps to build a [Text Message](https://developers.facebook.com/docs/messenger-platform/send-api-reference/text-message).
 
 ## Hierarchy
 
-
-↳  [AbstractMessageBuilder](abstractmessagebuilder.md)[TextMessage](../interfaces/send.textmessage.md)
+[MessageBuilder](messagebuilder.md)
 
 **↳ TextMessageBuilder**
-
-
-
-
-
-
 
 ## Index
 
 ### Constructors
 
-* [constructor](textmessagebuilder.md#constructor)
-
-
-### Properties
-
-* [message](textmessagebuilder.md#message)
-
+* [constructor(text)](textmessagebuilder.md#constructor)
 
 ### Methods
 
-* [addLocationQuickReply](textmessagebuilder.md#addlocationquickreply)
-* [addTextQuickReply](textmessagebuilder.md#addtextquickreply)
-* [build](textmessagebuilder.md#build)
-
-
+* [addLocationQuickReply()](textmessagebuilder.md#addlocationquickreply)
+* [addQuickReply(title, id, [data, [imageUrl]])](textmessagebuilder.md#addquickreply)
 
 ---
+
 ## Constructors
+
 <a id="constructor"></a>
+### new TextMessageBuilder(text)`
 
-
-### ⊕ **new TextMessageBuilder**(text: *`string`*): [TextMessageBuilder](textmessagebuilder.md)
-
-
-
-*Defined in [fb-api-helpers/text-message-builder.ts:5](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/text-message-builder.ts#L5)*
-
-
+Creates an instance of TextMessageBuilder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| text | `string`   |  - |
-
-
-
-
+| text | `string`   | text of the message |
 
 **Returns:** [TextMessageBuilder](textmessagebuilder.md)
 
 ---
 
-
-## Properties
-<a id="message"></a>
-
-### «Protected» message
-
-**●  message**:  *[TextMessage](../interfaces/send.textmessage.md)* 
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[message](abstractmessagebuilder.md#message)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:7](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L7)*
-
-
-
-
-
-___
-
-
 ## Methods
+
 <a id="addlocationquickreply"></a>
+###  `addLocationQuickReply()`
 
-###  addLocationQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addLocationQuickReply**(): `this`
+Adds a Quick Reply button to quickly send user's location.
 
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addLocationQuickReply](abstractmessagebuilder.md#addlocationquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:29](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L29)*
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
-<a id="addtextquickreply"></a>
+<a id="addquickreply"></a>
+###  `addQuickReply(title, id, [data, [imageUrl]])`
 
-###  addTextQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addTextQuickReply**(title: *`string`*, id: *`string`*, data?: *`string`⎮`any`*, imageUrl?: *`string`*): `this`
-
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addTextQuickReply](abstractmessagebuilder.md#addtextquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:10](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L10)*
-
-
+Adds a Quick Reply button to the message.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| id | `string`   |  - |
-| data | `string`⎮`any`   |  - |
-| imageUrl | `string`   |  - |
+| title | `string` | title of the Quick Reply |
+| id | `string` | ID of the button (required for proper generation of webhook events) |
+| data | `any` | optional data to be send when the user click on the Quick Reply button |
+| imageUrl | `string` | URL of optional image |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
-
-<a id="build"></a>
-
-###  build
-
-► **build**(): [TextMessage](../interfaces/send.textmessage.md)
-
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[build](abstractmessagebuilder.md#build)*
-
-*Overrides [AbstractBuilder](abstractbuilder.md).[build](abstractbuilder.md#build)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:38](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L38)*
-
-
-
-
-
-**Returns:** [TextMessage](../interfaces/send.textmessage.md)
-
-
-
-
-
-___
-
-

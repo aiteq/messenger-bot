@@ -1,65 +1,35 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [GenericTemplate](../interfaces/send.generictemplate.md)
 
-
-
 # Interface: GenericTemplate
 
-
 ## Properties
+
 <a id="elements"></a>
+###  `elements`
 
-###  elements
+Data for each bubble in message.
 
-**●  elements**:  *`Array`.<[Element](send.element.md)>* 
-
-*Defined in [fb-api/send.ts:230](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L230)*
-
-
-
-
-
+**type**: `Array`<[Element](send.element.md)>
 ___
 
 <a id="image_aspect_ratio"></a>
+### «optional» `image_aspect_ratio`
 
-### «Optional» image_aspect_ratio
+Aspect ratio used to render images specified by `image_url` in `element` objects. Must be [ImageAspectRatio.HORIZONTAL](../enums/send.imageaspectratio.md#horizontal) or [ImageAspectRatio.SQUARE](../enums/send.imageaspectratio.md#square). Defaults to ImageAspectRatio.HORIZONTAL.
 
-**●  image_aspect_ratio**:  *[ImageAspectRatio](../modules/send.imageaspectratio.md)* 
-
-*Defined in [fb-api/send.ts:229](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L229)*
-
-
-
-
-
+**type**: [ImageAspectRatio](../modules/send.imageaspectratio.md)
 ___
 
 <a id="sherable"></a>
+### «optional» `sherable`
 
-### «Optional» sherable
+Set to `false` to disable the native share button in Messenger for the template message.
 
-**●  sherable**:  *`boolean`* 
-
-*Defined in [fb-api/send.ts:228](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L228)*
-
-
-
-
-
+**type**: `boolean`
 ___
 
 <a id="template_type"></a>
+###  `template_type`
 
-###  template_type
-
-**●  template_type**:  *"generic"* 
-
-*Defined in [fb-api/send.ts:227](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L227)*
-
-
-
-
-
+**type**: `"generic"`
 ___
-
-

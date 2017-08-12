@@ -1,70 +1,87 @@
+[@aiteq/messenger-bot](./README.md)
 
-# messenger-bot
+# Package: @aiteq/messenger-bot
 
+## Modules
 
+* [MessengerProfile](./modules/messengerprofile.md)
+* [MessengerProfile.Greeting](./modules/messengerprofile.greeting.md)
+* [Send](./modules/send.md)
+* [Webhook](./modules/webhook.md)
+* [Webview](./modules/webview.md)
 
-## Index
+## Classes
 
-### Modules
+* [BotServer](./classes/botserver.md)
+* [BotUtils](./classes/botutils.md)
+* [Builder](./classes/builder.md)
+* [ButtonTemplateMessageBuilder](./classes/buttontemplatemessagebuilder.md)
+* [CallButtonBuilder](./classes/callbuttonbuilder.md)
+* [Conversation](./classes/conversation.md)
+* [DefaultActionBuilder](./classes/defaultactionbuilder.md)
+* [ElementBuilder](./classes/elementbuilder.md)
+* [GenericTemplateMessageBuilder](./classes/generictemplatemessagebuilder.md)
+* [Chat](./classes/chat.md)
+* [ListTemplateMessageBuilder](./classes/listtemplatemessagebuilder.md)
+* [LoginButtonBuilder](./classes/loginbuttonbuilder.md)
+* [LogoutButtonBuilder](./classes/logoutbuttonbuilder.md)
+* [MediaMessageBuilder](./classes/mediamessagebuilder.md)
+* [MessageBuilder](./classes/messagebuilder.md)
+* [OgElementBuilder](./classes/ogelementbuilder.md)
+* [OgTemplateMessageBuilder](./classes/ogtemplatemessagebuilder.md)
+* [PersistentMenuBuilder](./classes/persistentmenubuilder.md)
+* [PersistentMenuBuilder.Menu](./classes/persistentmenubuilder.menu.md)
+* [PostbackButtonBuilder](./classes/postbackbuttonbuilder.md)
+* [ReceiptElementBuilder](./classes/receiptelementbuilder.md)
+* [ReceiptTemplateMessageBuilder](./classes/receipttemplatemessagebuilder.md)
+* [ShareButtonBuilder](./classes/sharebuttonbuilder.md)
+* [TemplateMessageBuilder](./classes/templatemessagebuilder.md)
+* [UrlButtonBuilder](./classes/urlbuttonbuilder.md)
 
-* [MessengerCodes](modules/messengercodes.md)
-* [MessengerProfile](modules/messengerprofile.md)
-* [Send](modules/send.md)
-* [UserProfile](modules/userprofile.md)
-* [Webhook](modules/webhook.md)
-* [Webview](modules/webview.md)
+## Interfaces
 
+* [BotConfig](./interfaces/botconfig.md)
+* [ChatExtension](./interfaces/chatextension.md)
+* [MessengerProfile.Menu](./interfaces/messengerprofile.menu.md)
+* [MessengerProfile.MenuItem](./interfaces/messengerprofile.menuitem.md)
+* [MessengerProfile.PersistentMenu](./interfaces/messengerprofile.persistentmenu.md)
+* [Send.AbstractMessage](./interfaces/send.abstractmessage.md)
+* [Send.Address](./interfaces/send.address.md)
+* [Send.AttachmentMessage](./interfaces/send.attachmentmessage.md)
+* [Send.AudioAttachment](./interfaces/send.audioattachment.md)
+* [Send.ButtonTemplate](./interfaces/send.buttontemplate.md)
+* [Send.CallButton](./interfaces/send.callbutton.md)
+* [Send.DefaultAction](./interfaces/send.defaultaction.md)
+* [Send.Element](./interfaces/send.element.md)
+* [Send.FileAttachment](./interfaces/send.fileattachment.md)
+* [Send.GenericTemplate](./interfaces/send.generictemplate.md)
+* [Send.ImageAttachment](./interfaces/send.imageattachment.md)
+* [Send.ListTemplate](./interfaces/send.listtemplate.md)
+* [Send.LocationQuickReply](./interfaces/send.locationquickreply.md)
+* [Send.LoginButton](./interfaces/send.loginbutton.md)
+* [Send.LogoutButton](./interfaces/send.logoutbutton.md)
+* [Send.OpenGraphElement](./interfaces/send.opengraphelement.md)
+* [Send.OpenGraphTemplate](./interfaces/send.opengraphtemplate.md)
+* [Send.PaymentAdjustments](./interfaces/send.paymentadjustments.md)
+* [Send.PostbackButton](./interfaces/send.postbackbutton.md)
+* [Send.ReceiptElement](./interfaces/send.receiptelement.md)
+* [Send.ReceiptTemplate](./interfaces/send.receipttemplate.md)
+* [Send.ShareButton](./interfaces/send.sharebutton.md)
+* [Send.TemplateAttachment](./interfaces/send.templateattachment.md)
+* [Send.TextMessage](./interfaces/send.textmessage.md)
+* [Send.TextQuickReply](./interfaces/send.textquickreply.md)
+* [Send.UrlButton](./interfaces/send.urlbutton.md)
+* [Send.VideoAttachment](./interfaces/send.videoattachment.md)
+* [Webhook.QuickReplyPayload](./interfaces/webhook.quickreplypayload.md)
 
-### Classes
+## Enums
 
-* [AbstractBuilder](classes/abstractbuilder.md)
-* [AbstractMessageBuilder](classes/abstractmessagebuilder.md)
-* [BotServer](classes/botserver.md)
-* [ButtonTemplateMessageBuilder](classes/buttontemplatemessagebuilder.md)
-* [Chat](classes/chat.md)
-* [Conversation](classes/conversation.md)
-* [ExtensionService](classes/extensionservice.md)
-* [GenericTemplateMessageBuilder](classes/generictemplatemessagebuilder.md)
-* [GraphApi](classes/graphapi.md)
-* [ListTemplateMessageBuilder](classes/listtemplatemessagebuilder.md)
-* [MediaMessageBuilder](classes/mediamessagebuilder.md)
-* [OgTemplateMessageBuilder](classes/ogtemplatemessagebuilder.md)
-* [PersistentMenuBuilder](classes/persistentmenubuilder.md)
-* [ReceiptTemplateMessageBuilder](classes/receipttemplatemessagebuilder.md)
-* [RegExpEscaped](classes/regexpescaped.md)
-* [ResponderService](classes/responderservice.md)
-* [RouterService](classes/routerservice.md)
-* [TemplateMessageBuilder](classes/templatemessagebuilder.md)
-* [TextMessageBuilder](classes/textmessagebuilder.md)
-* [VerificationService](classes/verificationservice.md)
-
-
-### Interfaces
-
-* [BotServerConfig](interfaces/botserverconfig.md)
-* [MessengerExtension](interfaces/messengerextension.md)
-
-
-### Variables
-
-* [logger](#logger)
-
-
-
----
-# Variables
-<a id="logger"></a>
-
-###  logger
-
-**●  logger**:  *`Logger`*  =  log4js.getLogger("@aiteq/messenger-bot")
-
-*Defined in [utils/logger.ts:5](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/utils/logger.ts#L5)*
-
-
-
-
-
-___
+* [MessengerProfile.MenuItemType](./enums/messengerprofile.menuitemtype.md)
+* [Send.ImageAspectRatio](./enums/send.imageaspectratio.md)
+* [Send.ListTopElementStyle](./enums/send.listtopelementstyle.md)
+* [Send.NotificationType](./enums/send.notificationtype.md)
+* [Webhook.Event](./enums/webhook.event.md)
+* [Webview.HeightRatio](./enums/webview.heightratio.md)
+* [Webview.ShareButton](./enums/webview.sharebutton.md)
 
 

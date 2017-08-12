@@ -1,65 +1,35 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [TextQuickReply](../interfaces/send.textquickreply.md)
 
-
-
 # Interface: TextQuickReply
 
-
 ## Properties
+
 <a id="content_type"></a>
+###  `content_type`
 
-###  content_type
-
-**●  content_type**:  *"text"* 
-
-*Defined in [fb-api/send.ts:135](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L135)*
-
-
-
-
-
+**type**: `"text"`
 ___
 
 <a id="image_url"></a>
+### «optional» `image_url`
 
-### «Optional» image_url
+URL of image.
 
-**●  image_url**:  *`string`* 
-
-*Defined in [fb-api/send.ts:138](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L138)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="payload"></a>
+###  `payload`
 
-###  payload
+Custom data that will be sent back to via webhook.
 
-**●  payload**:  *`string`* 
-
-*Defined in [fb-api/send.ts:137](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L137)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="title"></a>
+###  `title`
 
-###  title
+Caption of the button.
 
-**●  title**:  *`string`* 
-
-*Defined in [fb-api/send.ts:136](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L136)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

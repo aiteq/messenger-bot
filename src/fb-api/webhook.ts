@@ -76,8 +76,8 @@ export namespace Webhook {
     }
 
     export interface QuickReplyPayload {
-        data: any,
-        id?: string
+        id: string,
+        data?: any
     }
 
     export interface Postback {
@@ -155,7 +155,6 @@ export namespace Webhook {
         export const MESSAGE_DELIVERED = "delivery";
         export const MESSAGE_READ = "read";
         export const MESSAGE_ECHO = "echo";
-        export const CONVERSATION = "conversation";
         export const POSTBACK = "postback";
         export const ATTACHMENT = "attachment";
         export const ATTACHMENT_IMAGE = ATTACHMENT + ":" + AttachmentType.IMAGE;
@@ -176,7 +175,6 @@ export namespace Webhook {
         typeof Event.MESSAGE_DELIVERED |
         typeof Event.MESSAGE_READ |
         typeof Event.MESSAGE_ECHO |
-        typeof Event.CONVERSATION |
         typeof Event.POSTBACK |
         typeof Event.ATTACHMENT |
         typeof Event.ATTACHMENT_IMAGE |
@@ -186,6 +184,7 @@ export namespace Webhook {
         typeof Event.ATTACHMENT_FALLBACK |
         typeof Event.ATTACHMENT_LOCATION |
         typeof Event.GET_STARTED_BUTTON |
+        typeof Event.POSTBACK_BUTTON |
         typeof Event.PERSISTENT_MENU |
         typeof Event.TEXT_QUICK_REPLY |
         typeof Event.LOCATION_QUICK_REPLY;

@@ -5,7 +5,12 @@
     "declaration": true,
     "experimentalDecorators": true,
     "rootDir": "src",
-    "outDir": "bin"
+    "outDir": "bin",
+    "lib": [      
+        "es6",
+        "esnext.asynciterable",
+        "dom"
+    ]
   },
 
   "include": [

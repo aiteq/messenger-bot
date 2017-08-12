@@ -1,13 +1,13 @@
 import { Webview } from "../fb-api/webview";
 import { Send } from "../fb-api/send";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Default Action.
  * The Default Action behaves like a URL Button and contains the same fields except that the title field is not allowed.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button)
  */
-export class DefaultActionBuilder extends AbstractBuilder<Send.DefaultAction> {
+export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
 
     private action: Send.DefaultAction;
 
@@ -63,11 +63,11 @@ export class DefaultActionBuilder extends AbstractBuilder<Send.DefaultAction> {
     /**
      * Controls the share button in the Webview.
      * 
-     * @param {boolean} webviewShareButton 
+     * @param {boolean} visible 
      * @returns {this} - for chaining
      */
-    public setShowWebviewShareButton(webviewShareButton: boolean): this {
-        this.action.webview_share_button = webviewShareButton === true ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE;
+    public setShowWebviewShareButton(visible: boolean): this {
+        this.action.webview_share_button = visible === true ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE;
         return this;
     }
 

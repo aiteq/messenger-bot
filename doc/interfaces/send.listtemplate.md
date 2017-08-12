@@ -1,79 +1,35 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [ListTemplate](../interfaces/send.listtemplate.md)
 
-
-
 # Interface: ListTemplate
 
-
 ## Properties
+
 <a id="buttons"></a>
+### «optional» `buttons`
 
-### «Optional» buttons
+List of buttons associated on the list template message (maximum of 1 button).
 
-**●  buttons**:  *`Array`.<[Button](../modules/send.md#button)>* 
-
-*Defined in [fb-api/send.ts:251](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L251)*
-
-
-
-
-
+**type**: `Array`<[Button](../modules/send.md#button)>
 ___
 
 <a id="elements"></a>
+###  `elements`
 
-###  elements
+List view elements (maximum of 4 elements and minimum of 2 elements).
 
-**●  elements**:  *`Array`.<[Element](send.element.md)>* 
-
-*Defined in [fb-api/send.ts:250](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L250)*
-
-
-
-
-
-___
-
-<a id="sherable"></a>
-
-### «Optional» sherable
-
-**●  sherable**:  *`boolean`* 
-
-*Defined in [fb-api/send.ts:248](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L248)*
-
-
-
-
-
+**type**: `Array`<[Element](send.element.md)>
 ___
 
 <a id="template_type"></a>
+###  `template_type`
 
-###  template_type
-
-**●  template_type**:  *"list"* 
-
-*Defined in [fb-api/send.ts:247](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L247)*
-
-
-
-
-
+**type**: `"list"`
 ___
 
 <a id="top_element_style"></a>
+### «optional» `top_element_style`
 
-### «Optional» top_element_style
-
-**●  top_element_style**:  *[ListTopElementStyle](../modules/send.listtopelementstyle.md)* 
-
-*Defined in [fb-api/send.ts:249](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L249)*
-
-
-
-
-
+**type**: [ListTopElementStyle](../enums/send.listtopelementstyle.md)
 ___
 
 

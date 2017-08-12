@@ -1,37 +1,19 @@
 [@aiteq/messenger-bot](../README.md) > [Webhook](../modules/webhook.md) > [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
 
-
-
 # Interface: QuickReplyPayload
 
-
 ## Properties
+
 <a id="data"></a>
+###  «optional» `data`
 
-###  data
-
-**●  data**:  *`any`* 
-
-*Defined in [fb-api/webhook.ts:75](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/webhook.ts#L75)*
-
-
-
-
-
+**type**: `any`
 ___
 
 <a id="id"></a>
+### «optional» id
 
-### «Optional» id
-
-**●  id**:  *`string`* 
-
-*Defined in [fb-api/webhook.ts:76](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/webhook.ts#L76)*
-
-
-
-
-
+**type**: `string`
 ___
 
 

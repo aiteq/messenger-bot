@@ -1,11 +1,11 @@
 import { Send } from "../fb-api/send";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Login Button.
  * (see https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account)
  */
-export class LogoutButtonBuilder extends AbstractBuilder<Send.LogoutButton> {
+export class LogoutButtonBuilder extends Builder<Send.LogoutButton> {
 
     private button: Send.LogoutButton;
 

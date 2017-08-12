@@ -1,13 +1,13 @@
 import { Webview } from "../fb-api/webview";
 import { Send } from "../fb-api/send";
 import { Webhook } from "../fb-api/webhook";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a Postback Button.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button)
  */
-export class PostbackButtonBuilder extends AbstractBuilder<Send.PostbackButton> {
+export class PostbackButtonBuilder extends Builder<Send.PostbackButton> {
 
     private button: Send.PostbackButton;
 

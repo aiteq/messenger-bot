@@ -1,4 +1,4 @@
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
@@ -6,7 +6,7 @@ import { DefaultActionBuilder } from "./default-action-builder";
  * Helps to create a Receipt Element.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/receipt-template)
  */
-export class ReceiptElementBuilder extends AbstractBuilder<Send.ReceiptElement> {
+export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     private element: Send.ReceiptElement;
 

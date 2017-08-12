@@ -59,9 +59,9 @@ export class PersistentMenuGroup extends Group {
 
         items.forEach((item: any) => {
             if (item.url) {
-                menu.addWebUrlMenuItem(item.title, item.url, item.webviewHeightRatio, item.messengerExtensions, item.sharingDisabled, item.fallbackUrl);
+                menu.addWebUrlMenuItem(item.title, item.url, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
             } else if (item.id) {
-                menu.addPostbackMenuItem(item.title, item.id, item.data, item.webviewHeightRatio, item.messengerExtensions, item.sharingDisabled, item.fallbackUrl);
+                menu.addPostbackMenuItem(item.title, item.id, item.data, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
             } else if (item.items) {
                 menu.addSubmenu(item.title, this.createMenu(item.items));
             }
@@ -79,11 +79,14 @@ Usage:
     mbutil ${this.getName()} get [options]
         - show current Persistent Menu
 
-    mbutil ${this.getName()} set --file <menu-def-file> [options]
+    mbutil ${this.getName()} set --file <path> [options]
         - set Persistent Menu as defined in the given file
 
     mbutil ${this.getName()} delete [options]
         - remove Persistent Menu
+
+Options:
+    --file <path> - a path to the menu definition file
 `
     }
 }

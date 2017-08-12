@@ -269,10 +269,10 @@ export namespace MessengerProfile {
          * 
          * @param {string} url - Chat Extensions home URL
          * @param {boolean} [inTest=false] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
-         * @param {boolean} [shareButton=false] - Controls whether the share button in the webview is enabled.
+         * @param {boolean} [shareButton=true] - Controls whether the share button in the webview is enabled.
          * @returns {Promise<void>}
          */
-        public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = false): Promise<void> {
+        public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = true): Promise<void> {
 
             return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
                 url: url,
@@ -379,11 +379,9 @@ export namespace MessengerProfile {
     }
 
     export namespace Greeting {
-        export namespace Personalize {
-            export const FIRST_NAME = "user_first_name";
-            export const LAST_NAME = "user_last_name";
-            export const FULL_NAME = "user_full_name";
-        }
+        export const FIRST_NAME = "user_first_name";
+        export const LAST_NAME = "user_last_name";
+        export const FULL_NAME = "user_full_name";
     }
 
     export namespace AudienceType {

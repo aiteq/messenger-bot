@@ -1,37 +1,23 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [LoginButton](../interfaces/send.loginbutton.md)
 
-
-
 # Interface: LoginButton
 
+Interface for [Log In Button](https://developers.facebook.com/docs/messenger-platform/account-linking/link-account).
 
 ## Properties
+
 <a id="type"></a>
+###  `type`
 
-###  type
+Must be `"account_link"`.
 
-**●  type**:  *"account_link"* 
-
-*Defined in [fb-api/send.ts:199](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L199)*
-
-
-
-
-
+**type**: `"account_link"`
 ___
 
 <a id="url"></a>
+###  `url`
 
-###  url
+[Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL. Must use HTTPS protocol.
 
-**●  url**:  *`string`* 
-
-*Defined in [fb-api/send.ts:200](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L200)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

@@ -1,185 +1,61 @@
 [@aiteq/messenger-bot](../README.md) > [PersistentMenuBuilder](../classes/persistentmenubuilder.md) > [Menu](../classes/persistentmenubuilder.menu.md)
 
-
-
 # Class: Menu
 
 ## Index
 
 ### Methods
 
-* [addMenuItem](persistentmenubuilder.menu.md#addmenuitem)
-* [addPostbackMenuItem](persistentmenubuilder.menu.md#addpostbackmenuitem)
-* [addSubmenu](persistentmenubuilder.menu.md#addsubmenu)
-* [addWebUrlMenuItem](persistentmenubuilder.menu.md#addweburlmenuitem)
-* [getActions](persistentmenubuilder.menu.md#getactions)
-
-
+* [addPostbackMenuItem(title, id, data, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])](persistentmenubuilder.menu.md#addpostbackmenuitem)
+* [addSubmenu(title, submenu)](persistentmenubuilder.menu.md#addsubmenu)
+* [addWebUrlMenuItem(title, url, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])](persistentmenubuilder.menu.md#addweburlmenuitem)
 
 ---
 
 ## Methods
-<a id="addmenuitem"></a>
-
-### «Private» addMenuItem
-
-► **addMenuItem**(item: *[MenuItem](../interfaces/messengerprofile.menuitem.md)*, webviewHeightRatio?: *[HeightRatio](../modules/webview.heightratio.md)*, messengerExtensions?: *`boolean`*, sharingDisabled?: *`boolean`*, fallbackUrl?: *`string`*): `void`
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:108](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L108)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| item | [MenuItem](../interfaces/messengerprofile.menuitem.md)   |  - |
-| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md)   |  - |
-| messengerExtensions | `boolean`   |  - |
-| sharingDisabled | `boolean`   |  - |
-| fallbackUrl | `string`   |  - |
-
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
 
 <a id="addpostbackmenuitem"></a>
-
-###  addPostbackMenuItem
-
-► **addPostbackMenuItem**(title: *`string`*, id: *`string`*, data: *`any`*, webviewHeightRatio?: *[HeightRatio](../modules/webview.heightratio.md)*, messengerExtensions?: *`boolean`*, sharingDisabled?: *`boolean`*, fallbackUrl?: *`string`*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:71](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L71)*
-
-
+###  `addPostbackMenuItem(title, id, data, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])`
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| id | `string`   |  - |
-| data | `any`   |  - |
-| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md)   |  - |
-| messengerExtensions | `boolean`   |  - |
-| sharingDisabled | `boolean`   |  - |
-| fallbackUrl | `string`   |  - |
+| title | `string`   | title of the item |
+| id | `string`   | ID of the item |
+| data | `any`   | payload data to be send when the item is selected |
+| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md)   | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| messengerExtensions | `boolean` | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| shareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
+| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="addsubmenu"></a>
-
-###  addSubmenu
-
-► **addSubmenu**(title: *`string`*, submenu: *[Menu](persistentmenubuilder.menu.md)*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:94](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L94)*
-
-
+###  `addSubmenu(title, submenu)`
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| submenu | [Menu](persistentmenubuilder.menu.md)   |  - |
+| title | `string`   | title of the submenu |
+| submenu | [Menu](persistentmenubuilder.menu.md)   |  |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="addweburlmenuitem"></a>
-
-###  addWebUrlMenuItem
-
-► **addWebUrlMenuItem**(title: *`string`*, url: *`string`*, webviewHeightRatio?: *[HeightRatio](../modules/webview.heightratio.md)*, messengerExtensions?: *`boolean`*, sharingDisabled?: *`boolean`*, fallbackUrl?: *`string`*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:53](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L53)*
-
-
+###  `addWebUrlMenuItem(title, url, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])`
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| url | `string`   |  - |
-| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md)   |  - |
-| messengerExtensions | `boolean`   |  - |
-| sharingDisabled | `boolean`   |  - |
-| fallbackUrl | `string`   |  - |
+| title | `string`   | title of the item |
+| url | `string`   | ID of the item |
+| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| messengerExtensions | `boolean`   | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| shareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
+| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
-
-<a id="getactions"></a>
-
-###  getActions
-
-► **getActions**(): `Array`.<[MenuItem](../interfaces/messengerprofile.menuitem.md)>
-
-
-
-
-*Defined in [fb-api-helpers/persistent-menu-builder.ts:49](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/persistent-menu-builder.ts#L49)*
-
-
-
-
-
-**Returns:** `Array`.<[MenuItem](../interfaces/messengerprofile.menuitem.md)>
-
-
-
-
-
-___
-
-

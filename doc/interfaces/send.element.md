@@ -1,79 +1,45 @@
 [@aiteq/messenger-bot](../README.md) > [Send](../modules/send.md) > [Element](../interfaces/send.element.md)
 
-
-
 # Interface: Element
 
-
 ## Properties
+
 <a id="buttons"></a>
+### «optional» `buttons`
 
-### «Optional» buttons
+List of buttons on the element.
 
-**●  buttons**:  *`Array`.<[Button](../modules/send.md#button)>* 
-
-*Defined in [fb-api/send.ts:223](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L223)*
-
-
-
-
-
+**type**: `Array`<[Button](../modules/send.md#button)>
 ___
 
 <a id="default_action"></a>
+### «optional» `default_action`
 
-### «Optional» default_action
+Default action to be triggered when user taps on the element row.
 
-**●  default_action**:  *[DefaultAction](send.defaultaction.md)* 
-
-*Defined in [fb-api/send.ts:222](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L222)*
-
-
-
-
-
+**type**: [DefaultAction](send.defaultaction.md)
 ___
 
 <a id="image_url"></a>
+### «optional» `image_url`
 
-### «Optional» image_url
+URL to image in list view item. It is required for the first element if `top_element_style` is `large`.
 
-**●  image_url**:  *`string`* 
-
-*Defined in [fb-api/send.ts:221](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L221)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="subtitle"></a>
+### «optional» `subtitle`
 
-### «Optional» subtitle
+Subtitle of the element.
 
-**●  subtitle**:  *`string`* 
-
-*Defined in [fb-api/send.ts:220](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L220)*
-
-
-
-
-
+**type**: `string`
 ___
 
 <a id="title"></a>
+###  `title`
 
-###  title
+Title of the element.
 
-**●  title**:  *`string`* 
-
-*Defined in [fb-api/send.ts:219](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api/send.ts#L219)*
-
-
-
-
-
+**type**: `string`
 ___
-
-

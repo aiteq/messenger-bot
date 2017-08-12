@@ -245,18 +245,18 @@ export class BotUtils {
     /**
      * Open Target Audience to all.
      * 
-     * @returns {Promise<any>} 
+     * @returns {Promise<void>} 
      */
-    public openTargetAudience(): Promise<any> {
+    public openTargetAudience(): Promise<void> {
         return this.getMessengerProfileApi().openAudienceToAll();
     }
 
     /**
      * Close Target Audience to all.
      * 
-     * @returns {Promise<any>} 
+     * @returns {Promise<void>} 
      */
-    public closeTargetAudience(): Promise<any> {
+    public closeTargetAudience(): Promise<void> {
         return this.getMessengerProfileApi().closeAudienceToAll();
     }
 
@@ -302,12 +302,12 @@ export class BotUtils {
      * Sets a new Chat Extension home URL. If the URL is not whitelisted it will be done first.
      * 
      * @param {string} url - a home URL
-     * @param {boolean} inTest - controls whether the Chat Extension is in test mode
-     * @param {boolean} shareButton - controls whether the share button in the webview is enabled
+     * @param {boolean} [inTest=false] - controls whether the Chat Extension is in test mode
+     * @param {boolean} [shareButton=true] - controls whether the share button in the webview is enabled
      * @param {*} [cliLogger] - logger for CLI
      * @returns {Promise<void>} 
      */
-    public async setChatExtensionHomeUrl(url: string, inTest: boolean, shareButton: boolean, cliLogger?: any): Promise<void> {
+    public async setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = true, cliLogger?: any): Promise<void> {
 
         if (url.indexOf("https://") != 0) {
             return Promise.reject("only 'https' protocol is supported for Chat Extension home URL");

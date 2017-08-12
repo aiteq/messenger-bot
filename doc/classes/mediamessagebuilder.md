@@ -1,239 +1,98 @@
 [@aiteq/messenger-bot](../README.md) > [MediaMessageBuilder](../classes/mediamessagebuilder.md)
 
-
-
 # Class: MediaMessageBuilder
+
+Helps to create a message with media attachment. ([see more about content types](https://developers.facebook.com/docs/messenger-platform/send-api-reference/contenttypes))
 
 ## Hierarchy
 
-
-↳  [AbstractMessageBuilder](abstractmessagebuilder.md)[AttachmentMessage](../interfaces/send.attachmentmessage.md)
+[MessageBuilder](messagebuilder.md)
 
 **↳ MediaMessageBuilder**
-
-
-
-
-
-
 
 ## Index
 
 ### Constructors
 
-* [constructor](mediamessagebuilder.md#constructor)
-
-
-### Properties
-
-* [message](mediamessagebuilder.md#message)
-
+* [constructor(type)](mediamessagebuilder.md#constructor)
 
 ### Methods
 
-* [addLocationQuickReply](mediamessagebuilder.md#addlocationquickreply)
-* [addTextQuickReply](mediamessagebuilder.md#addtextquickreply)
-* [build](mediamessagebuilder.md#build)
-* [setReusable](mediamessagebuilder.md#setreusable)
-* [setUrl](mediamessagebuilder.md#seturl)
-
-
+* [addLocationQuickReply()](mediamessagebuilder.md#addlocationquickreply)
+* [addQuickReply(title, id, [data, [imageUrl]])](mediamessagebuilder.md#addquickreply)
+* [setReusable(reusable)](mediamessagebuilder.md#setreusable)
+* [setUrl(url)](mediamessagebuilder.md#seturl)
 
 ---
+
 ## Constructors
+
 <a id="constructor"></a>
+### `new MediaMessageBuilder(type)`
 
-
-### ⊕ **new MediaMessageBuilder**(type: *[MediaAttachmentType](../modules/send.md#mediaattachmenttype)*): [MediaMessageBuilder](mediamessagebuilder.md)
-
-
-
-*Defined in [fb-api-helpers/media-message-builder.ts:5](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/media-message-builder.ts#L5)*
-
-
+Creates an instance of MediaMessageBuilder.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| type | [MediaAttachmentType](../modules/send.md#mediaattachmenttype)   |  - |
-
-
-
-
+| type | [MediaAttachmentType](../modules/send.md#mediaattachmenttype) | type of the attachment |
 
 **Returns:** [MediaMessageBuilder](mediamessagebuilder.md)
 
 ---
 
-
-## Properties
-<a id="message"></a>
-
-### «Protected» message
-
-**●  message**:  *[AttachmentMessage](../interfaces/send.attachmentmessage.md)* 
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[message](abstractmessagebuilder.md#message)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:7](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L7)*
-
-
-
-
-
-___
-
-
 ## Methods
+
 <a id="addlocationquickreply"></a>
+###  `addLocationQuickReply()`
 
-###  addLocationQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addLocationQuickReply**(): `this`
+Adds a Quick Reply button to quickly send user's location.
 
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addLocationQuickReply](abstractmessagebuilder.md#addlocationquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:29](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L29)*
-
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
-<a id="addtextquickreply"></a>
+<a id="addquickreply"></a>
+###  `addQuickReply(title, id, [data, [imageUrl]])`
 
-###  addTextQuickReply
+*Inherited from [MessageBuilder](messagebuilder.md)*
 
-► **addTextQuickReply**(title: *`string`*, id: *`string`*, data?: *`string`⎮`any`*, imageUrl?: *`string`*): `this`
-
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[addTextQuickReply](abstractmessagebuilder.md#addtextquickreply)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:10](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L10)*
-
-
+Adds a Quick Reply button to the message.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   |  - |
-| id | `string`   |  - |
-| data | `string`⎮`any`   |  - |
-| imageUrl | `string`   |  - |
+| title | `string` | title of the Quick Reply |
+| id | `string` | ID of the button (required for proper generation of webhook events) |
+| data | `any` | optional data to be send when the user click on the Quick Reply button |
+| imageUrl | `string` | URL of optional image |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
-___
-
-<a id="build"></a>
-
-###  build
-
-► **build**(): [AttachmentMessage](../interfaces/send.attachmentmessage.md)
-
-
-
-
-*Inherited from [AbstractMessageBuilder](abstractmessagebuilder.md).[build](abstractmessagebuilder.md#build)*
-
-*Overrides [AbstractBuilder](abstractbuilder.md).[build](abstractbuilder.md#build)*
-
-*Defined in [fb-api-helpers/abstract-message-builder.ts:38](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/abstract-message-builder.ts#L38)*
-
-
-
-
-
-**Returns:** [AttachmentMessage](../interfaces/send.attachmentmessage.md)
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="setreusable"></a>
+###  `setReusable(reusable)`
 
-###  setReusable
-
-► **setReusable**(reusable: *`boolean`*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/media-message-builder.ts:22](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/media-message-builder.ts#L22)*
-
-
+Controls attachment's reusability.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| reusable | `boolean`   |  - |
+| reusable | `boolean`   | if `true` the attachment will be reused |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
 
 <a id="seturl"></a>
+###  `setUrl(url)`
 
-###  setUrl
-
-► **setUrl**(url: *`string`*): `this`
-
-
-
-
-*Defined in [fb-api-helpers/media-message-builder.ts:17](https://github.com/aiteq/messenger-bot/blob/a540dbb/src/fb-api-helpers/media-message-builder.ts#L17)*
-
-
+Sets a URL of the media file.
 
 **Parameters:**
-
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| url | `string`   |  - |
+| url | `string`   | URL of the attachment |
 
-
-
-
-
-**Returns:** `this`
-
-
-
-
-
+**Returns:** `this` - for chaining
 ___
-
-

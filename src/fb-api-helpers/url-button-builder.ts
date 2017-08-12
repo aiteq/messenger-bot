@@ -1,12 +1,12 @@
 import { Webview } from "../fb-api/webview";
 import { Send } from "../fb-api/send";
-import { AbstractBuilder } from "./abstract-builder";
+import { Builder } from "./builder";
 
 /**
  * Helps to create a URL Button.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button)
  */
-export class UrlButtonBuilder extends AbstractBuilder<Send.UrlButton> {
+export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
     private button: Send.UrlButton;
 
