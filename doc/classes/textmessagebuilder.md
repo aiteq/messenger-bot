@@ -31,6 +31,7 @@ Helps to build a [Text Message](https://developers.facebook.com/docs/messenger-p
 Creates an instance of TextMessageBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | text | `string`   | text of the message |
@@ -59,6 +60,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |

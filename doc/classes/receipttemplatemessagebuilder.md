@@ -45,6 +45,7 @@ Helps to create a [Open Graph Template](https://developers.facebook.com/docs/mes
 Creates an instance of ReceiptTemplateMessageBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientName | `string`   |  |
@@ -65,6 +66,7 @@ Creates an instance of ReceiptTemplateMessageBuilder.
 Adds a Receipt Element representing items of the order. Max number of elements is limited to 100.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | elementBuilder | [ReceiptElementBuilder](receiptelementbuilder.md)   | |
@@ -90,6 +92,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |
@@ -106,6 +109,7 @@ ___
 Sets an address.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | address | [Address](../interfaces/send.address.md)   |  |
@@ -119,6 +123,7 @@ ___
 Sets a name of the the merchant.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | merchantName | `string`   |  |
@@ -132,6 +137,7 @@ ___
 Sets a URL of the order.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | orderUrl | `string`   | URL |
@@ -145,6 +151,7 @@ ___
 Sets payment adjustements.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | adjustments | [PaymentAdjustments](../interfaces/send.paymentadjustments.md)   |  |
@@ -158,6 +165,7 @@ ___
 Controls native share button.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | sherable | `boolean`   |  set to `false` to disable the native share button in Messenger |
@@ -171,6 +179,7 @@ ___
 Sets order's shipping cost.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | shippingCost | `number`   |  |
@@ -184,6 +193,7 @@ ___
 Sets receipt's subtotal.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | subtotal | `number`   |  |
@@ -197,6 +207,7 @@ ___
 Sets the timestamp.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | timestamp | `string`   |  |
@@ -210,6 +221,7 @@ ___
 Sets receipt's total tax.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | totalTax | `number`   |  |
@@ -225,6 +237,7 @@ ___
 Creates a new Receipt Element builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   |  title of the Receipt Element |

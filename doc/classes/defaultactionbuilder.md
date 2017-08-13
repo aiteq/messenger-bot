@@ -32,6 +32,7 @@ Helps to create a [Default Action](https://developers.facebook.com/docs/messenge
 Creates an instance of DefaultActionBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | the URL that is opened in a mobile browser when the button is tapped |
@@ -48,6 +49,7 @@ Creates an instance of DefaultActionBuilder.
 Sets the URL to use on clients that don't support Messenger Extensions.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | fallbackUrl | `string` | fallback URL |
@@ -61,6 +63,7 @@ ___
 Controls usage of Messenger Extensions.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | messengerExtensions | `boolean`   | must be `true` if using Messenger Extensions |
@@ -74,6 +77,7 @@ ___
 Controls the share button in the Webview.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | visible | `boolean` | controls whether the share button will be visible in the Webview |
@@ -87,6 +91,7 @@ ___
 Sets a height of the Webview.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) |  |

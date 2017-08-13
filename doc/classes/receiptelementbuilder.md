@@ -33,6 +33,7 @@ Helps to create a [Receipt Element](https://developers.facebook.com/docs/messeng
 Creates an instance of ReceiptBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the element |
@@ -50,6 +51,7 @@ Creates an instance of ReceiptBuilder.
 Sets receipt's currency.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | currency | `string`   | currency code |
@@ -63,6 +65,7 @@ ___
 Sets Recipient Element's image.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | imageUrl | `string`   | URL of the image |
@@ -76,6 +79,7 @@ ___
 Sets a number of quantity.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | quantity | `number`   |  |
@@ -89,6 +93,7 @@ ___
 Sets a text for Receipt Element's subtitle.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | subtitle | `string`   | optional subtitle of the element |

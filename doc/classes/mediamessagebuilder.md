@@ -33,6 +33,7 @@ Helps to create a message with media attachment. ([see more about content types]
 Creates an instance of MediaMessageBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | type | [MediaAttachmentType](../modules/send.md#mediaattachmenttype) | type of the attachment |
@@ -61,6 +62,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |
@@ -77,6 +79,7 @@ ___
 Controls attachment's reusability.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | reusable | `boolean`   | if `true` the attachment will be reused |
@@ -90,6 +93,7 @@ ___
 Sets a URL of the media file.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | URL of the attachment |

@@ -45,6 +45,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |

@@ -67,6 +67,7 @@ Creates an instance of [BotUtils](botutils.md).
 Adds the [Greeting](https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text) for the Page.
 
 **Parameters:**
+
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | text | `string`  | |   a greeting text |
@@ -161,6 +162,7 @@ ___
 Generates and saves a new Messenger Code as PNG image.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | fileName | `string` |  a path and name of the file to be saved |
@@ -240,6 +242,7 @@ ___
 Sends a message with audio attachment.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
@@ -256,6 +259,7 @@ ___
 Sends a message with file attachment.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
@@ -272,6 +276,7 @@ ___
 Sends a message with image attachment.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
@@ -288,6 +293,7 @@ ___
 Sends a plain text message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
@@ -302,6 +308,7 @@ ___
 Sends a message with video attachment.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
@@ -318,6 +325,7 @@ ___
 Sets a new Account Linking URL.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   |  new Account Linking URL |
@@ -347,6 +355,7 @@ ___
 Sets [Get Started button](https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button) for the Page.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | data | `any`   | optional data to be sent when the user clicks on the button |
@@ -360,6 +369,7 @@ ___
 Sets Persistent Menu for the Page.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | menuDef | [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md) ⎮ `Array`<[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)> ⎮ [PersistentMenuBuilder](persistentmenubuilder.md)   | definition of Persistent Menu |
@@ -373,6 +383,7 @@ ___
 Adds countries to Target Audience whitelist.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | countries | `Array`<`string`> | list of [ISO 3166 Alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of countries to be whitelisted |
@@ -386,6 +397,7 @@ ___
 Adds domains to the whitelist.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | domains | `Array`<`string`> | array of domains to be whitelisted |

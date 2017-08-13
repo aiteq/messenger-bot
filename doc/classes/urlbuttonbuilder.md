@@ -51,6 +51,7 @@ Creates an instance of UrlButtonBuilder.
 Sets the URL to use on clients that don't support Messenger Extensions. If this is not defined, the `url` will be used as the fallback.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | fallbackUrl | `string`   |  fallback URL |
@@ -64,6 +65,7 @@ ___
 Controls usage of Messenger Extensions.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | messengerExtensions | `boolean` |  must be `true` if using Messenger Extensions |
@@ -77,6 +79,7 @@ ___
 Controls the share button in the Webview.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | webviewShareButton | `boolean`   | if `false` the native share button will be hidden |
@@ -90,6 +93,7 @@ ___
 Sets a height of the Webview.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | |

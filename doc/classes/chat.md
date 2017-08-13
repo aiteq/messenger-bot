@@ -66,6 +66,7 @@ ___
 Sends an audio file.
 
 **Parameters:**
+
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | url | `string`  |  | a URL of the audio file |
@@ -81,6 +82,7 @@ ___
 Sends a file.
 
 **Parameters:**
+
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | url | `string`  |  |   a URL of the file |
@@ -95,6 +97,7 @@ ___
 Sends an image.
 
 **Parameters:**
+
 | Param | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | url | `string`  | - |   a URL of the image file |
@@ -109,6 +112,7 @@ ___
 Sends a message prepared manually or using message builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) | a structured message or message builder |

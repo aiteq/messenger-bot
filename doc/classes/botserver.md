@@ -4,6 +4,20 @@
 
 Represents a bot server listening for webhook requests.
 
+#### Example:
+```typescript
+new BotServer({
+    name: "MyBot",
+    verifyToken: "hasta-la-vista-baby",
+    accessToken: "<your access token>",
+    appSecret: "<your app secret>"
+})
+.hear("hello", (chat: Chat) => {
+    chat.say("Hello! I'm Emil, the Bot. How are you?");
+})
+.start();
+```
+
 ## Index
 
 ### Constructors
@@ -28,6 +42,7 @@ Represents a bot server listening for webhook requests.
 Creates an instance of the BotServer.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | config | [BotConfig](../interfaces/botconfig.md) | bot configuration object |
@@ -44,6 +59,7 @@ Creates an instance of the BotServer.
 Install a [Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions).
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | extension | [ChatExtension](../interfaces/chatextension.md)   | a Chat Extension to be installed |
@@ -58,19 +74,21 @@ ___
 A convenient method to subscribe to specific *hooks* that can be found within a received _text message_. The hooks can be specified as a command or using a *regular expression*. When the server receives a text message, it test the content for specified hooks. If a match is found the server executes the subscribed callback. Commands are considered as case-insensitive.
 
 The callback is executed with three parameters:
+
 | # | Type | Description |
 | ------ | ------ | ------ |
 | 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |
 | 2. | `string` | original message |
 | 3. | `string[]` | an array of captured matches if the regular expression contains *capturing groups*  |
 
-**Note**: The callbacks installed using [BotServer.hear()](botserver.md#hear) are executed BEFORE callbacks installed using [on()](botserver.md#on1).
+**Note**: The callbacks installed using [hear()](botserver.md#hear) are executed BEFORE callbacks installed using [on()](botserver.md#on1).
 
-**Note**: the [BotServer.hear()](botserver.md#hear) method listens only for TEXT messages.
+**Note**: the [hear()](botserver.md#hear) method listens only for TEXT messages.
 
 **Note**: The callback is not executed when a received text message matches the hook but the message is part of an active conversation.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | hooks | `RegExp` ⎮ `string` ⎮ `Array`<`RegExp` ⎮ `string`> | a string, a regexp or a mixed array of both strings and regexps |
@@ -86,6 +104,7 @@ ___
 Subscribe to an *event* emitted when a webhook request is received.
 
 The callback is executed with two parameters:
+
 | # | Type | Description |
 | ------ | ------ | ------ |
 | 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |
@@ -107,6 +126,7 @@ The callback is executed with two parameters:
 Subscribe to an *identified event*. An identified event is specified, in addition to its type, with an ID. This feature is available for events capable of carrying data such as POSTBACK or PERSISTENT_MENU_ITEM.
 
 The callback is executed with two parameters:
+
 | # | Type | Description |
 | ------ | ------ | ------ |
 | 1. | [Chat](chat.md) | an instance of [Chat](chat.md) to be used for replaying |

@@ -32,6 +32,7 @@ Helps to create an Element.
 Creates an instance of ElementBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the Element |
@@ -48,9 +49,11 @@ Creates an instance of ElementBuilder.
 Adds a Button.
 
 **Type parameters:**
-#### T:  [Button](../modules/send.md#button)
+
+#### T: [Button](../modules/send.md#button)
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | buttonBuilder | [Builder](builder.md) | button builder |
@@ -64,6 +67,7 @@ ___
 Set a Default Action for the Element.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | defaultActionBuilder | [DefaultActionBuilder](defaultactionbuilder.md) |  |
@@ -77,6 +81,7 @@ ___
 Sets Element's image.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | imageUrl | `string`   | URL of the image of the Element |
@@ -90,6 +95,7 @@ ___
 Sets a text for Element's subtitle.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | subtitle | `string`   | subtitle of the Element |

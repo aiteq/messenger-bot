@@ -41,6 +41,7 @@ Creates an instance of ShareButtonBuilder.
 Sets share contents.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | shareContents | `any`   |  |

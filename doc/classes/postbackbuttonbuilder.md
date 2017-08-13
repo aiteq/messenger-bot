@@ -26,6 +26,7 @@ Helps to create a [Postback button](https://developers.facebook.com/docs/messeng
 Creates an instance of PostbackButtonBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | titile of the button |

@@ -18,6 +18,7 @@
 ###  `addPostbackMenuItem(title, id, data, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])`
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the item |
@@ -35,6 +36,7 @@ ___
 ###  `addSubmenu(title, submenu)`
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the submenu |

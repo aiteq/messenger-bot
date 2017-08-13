@@ -30,6 +30,7 @@ Helps to create an Open Graph Element.
 Creates an instance of ElementBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | Open Uraph URL for the element |
@@ -47,9 +48,10 @@ Adds a Button.
 
 **Type parameters:**
 
-#### T:  [Button](../modules/send.md#button)
+#### T: [Button](../modules/send.md#button)
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | buttonBuilder | [Builder](builder.md) | button builder |
@@ -63,6 +65,7 @@ ___
 Set a Default Action for the Element.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | defaultActionBuilder | [DefaultActionBuilder](defaultactionbuilder.md) |  |

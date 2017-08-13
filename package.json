@@ -6,9 +6,7 @@
   "types": "./bin/index.d.ts",
   "scripts": {
     "compile": "tsc -p .",
-    "prepublishOnly": "npm run compile",
-    "test": "node ./bin/test.js",
-    "mbutil": "./bin/cli/index.js"
+    "prepublishOnly": "npm run compile"
   },
   "bin": {
     "mbutil": "./bin/cli/index.js"
@@ -27,16 +25,15 @@
     "chatbot",
     "bot"
   ],
+  "homepage": "https://github.com/aiteq/messenger-bot#readme",
   "author": "Aiteq Reloaded, s.r.o.",
   "license": "MIT",
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
     "@types/ejs": "^2.3.33",
-    "@types/inquirer": "0.0.35",
     "@types/lowdb": "^0.15.0",
     "@types/minimist": "^1.2.0",
     "@types/node": "^7.0.38",
-    "@types/request": "0.0.43",
     "grunt": "^1.0.1",
     "grunt-file-append": "0.0.7",
     "grunt-ts": "^6.0.0-beta.16",
@@ -55,8 +52,5 @@
     "log4js": "^2.3.1",
     "lowdb": "^0.16.2",
     "minimist": "^1.2.0"
-  },
-  "engines": {
-    "node": "8.1.3"
   }
 }

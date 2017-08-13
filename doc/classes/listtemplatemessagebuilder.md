@@ -55,6 +55,7 @@ Helps to create a [List Template](https://developers.facebook.com/docs/messenger
 Adds an Element. Number of Elements must be 2-4.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | elementBuilder | [ElementBuilder](elementbuilder.md)   | |
@@ -80,6 +81,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |
@@ -114,6 +116,7 @@ ___
 Controls native share button.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | sherable | `boolean`   |  set to `false` to disable the native share button in Messenger |
@@ -127,6 +130,7 @@ ___
 Sets a style for the first list item.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | topElementStyle | [ListTopElementStyle](../modules/send.listtopelementstyle.md) | |
@@ -142,6 +146,7 @@ Creates a new Call Button builder.
 *Inherited from [TemplateMessageBuilder](templatemessagebuilder.md).*
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |
@@ -158,6 +163,7 @@ ___
 Creates a new Default Action builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | URL of the Default Action |
@@ -173,6 +179,7 @@ ___
 Creates a new Element builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` |  title of the Element |
@@ -188,6 +195,7 @@ ___
 Creates a new Login Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` | [Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |
@@ -213,6 +221,7 @@ ___
 Creates a new Postback Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |
@@ -240,6 +249,7 @@ ___
 Creates a new URL Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |

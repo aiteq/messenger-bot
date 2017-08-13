@@ -79,6 +79,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |
@@ -95,6 +96,7 @@ ___
 Creates a new Call Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |
@@ -109,6 +111,7 @@ ___
 Creates a new Default Action builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | URL of the Default Action |
@@ -122,6 +125,7 @@ ___
 Creates a new Element builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` |  title of the Element |
@@ -135,6 +139,7 @@ ___
 Creates a new Login Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` | [Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |
@@ -156,6 +161,7 @@ ___
 Creates a new Open Graph Element builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` | Open Graph URL for the element |
@@ -184,6 +190,7 @@ ___
 Creates a new Receipt Element builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   |  title of the Receipt Element |
@@ -206,6 +213,7 @@ ___
 Creates a new URL Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |

@@ -53,6 +53,7 @@ new ButtonTemplateMessageBuilder("What do you want to do next?")
 Creates a new ButtonTemplateMessageBuilder instance.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | text | `string`   |  text of the message |
@@ -97,6 +98,7 @@ ___
 Adds a Quick Reply button to the message.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string` | title of the Quick Reply |
@@ -115,6 +117,7 @@ Creates a new Call Button builder.
 *Inherited from [TemplateMessageBuilder](templatemessagebuilder.md).*
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |
@@ -131,6 +134,7 @@ ___
 Creates a new Login Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string` | [Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |
@@ -156,6 +160,7 @@ ___
 Creates a new Postback Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |
@@ -183,6 +188,7 @@ ___
 Creates a new URL Button builder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button |

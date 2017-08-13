@@ -25,6 +25,7 @@ Helps to create a [Login Button](https://developers.facebook.com/docs/messenger-
 Creates an instance of LoginButtonBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | url | `string`   | [authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |

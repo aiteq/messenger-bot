@@ -36,6 +36,7 @@
 * [ReceiptTemplateMessageBuilder](./classes/receipttemplatemessagebuilder.md)
 * [ShareButtonBuilder](./classes/sharebuttonbuilder.md)
 * [TemplateMessageBuilder](./classes/templatemessagebuilder.md)
+* [TextMessageBuilder](./classes/textmessagebuilder.md)
 * [UrlButtonBuilder](./classes/urlbuttonbuilder.md)
 
 ## Interfaces

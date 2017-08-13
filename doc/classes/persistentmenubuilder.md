@@ -26,6 +26,7 @@ Helps to create a [Persistent Menu](https://developers.facebook.com/docs/messeng
 Adds a new Menu for the given locale.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | locale | `string` | locale of the menu ([supported locales](https://developers.facebook.com/docs/messenger-platform/messenger-profile/supported-locales)); for default menu use '"default"` |

@@ -1,7 +1,9 @@
 [@aiteq/messenger-bot](../README.md) > [Conversation](../classes/conversation.md)
 
 # Class: Conversation
-Allows synchronous, contextual interaction between the bot and user. The instance is created by calling the [Chat.startConversation()](./chat.md#startConversation). **Note:** In this time, only TEXT and QUICK REPLY messages can be used as parts of conversations.
+Allows synchronous, contextual interaction between the bot and user. The instance is created by calling the [Chat.startConversation()](./chat.md#startConversation).
+
+**Note:** In this time, only TEXT and QUICK REPLY messages can be used as parts of conversations.
 
 ## Index
 
@@ -17,6 +19,7 @@ Allows synchronous, contextual interaction between the bot and user. The instanc
 Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | text | `string`   |  a question |
@@ -33,6 +36,7 @@ Asks the user with a message prepared manually or using message builder. It's ne
 T:  `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) |structured message or message builder |
@@ -52,6 +56,7 @@ ___
 Sends a plain TEXT message. Unlike the [Chat.say()](./chat.md#say) this method return a `Promise` so you can wait for the message to be send.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | text | `string` | a text to be send |

@@ -18,6 +18,7 @@ Helps to create a [Call Button](https://developers.facebook.com/docs/messenger-p
 Creates an instance of CallButtonBuilder.
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the button, max length is 20 characters |
