@@ -1,6 +1,4 @@
-import * as inquirer from "inquirer";
 import * as minimist from "minimist";
-import { Inquirer } from "inquirer";
 import * as fs from "fs";
 import { BotUtils } from "../utils/bot-utils";
 import { logger } from "../logger";

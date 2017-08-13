@@ -1,7 +1,7 @@
 # @aiteq/messenger-bot
 #### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
-*Please note that the package is still not fully tested Alpha version. Any ideas, tips and bug/typo reports are welcomed.*
+*Please note that the package is still not fully tested BETA. Ideas, tips and bug/typo reports are welcomed.*
 
 <table><tr>
 <td><b><a href="#major-features">Major features</a></b></td>
