@@ -4,13 +4,13 @@
 *Please note that the package is still not fully tested BETA. Ideas, tips and bug/typo reports are welcomed.*
 
 <table><tr>
-<td><b><a href="#major-features">Major features</a></b></td>
-<td><b><a href="#technologies-used">Technologies used</a></b></td>
+<td><b><a href="#major-features">Features</a></b></td>
+<td><b><a href="#technologies-used">Technologies</a></b></td>
 <td><b><a href="#getting-started">Getting started</a></b></td>
-<td><b><a href="#use-cases">Use cases</a></b></td>
+<td><b><a href="#use-cases">Usage</a></b></td>
 <td><b><a href="#chat-extensions">Chat extensions</a></b></td>
 <td><b><a href="#cli">CLI</a></b></td>
-<td><b><a href="doc/README.md">API Documentation</a></b></td>
+<td><b><a href="doc/README.md">API Doc</a></b></td>
 </tr></table>
 
 ## Major features
