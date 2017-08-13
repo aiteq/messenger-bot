@@ -211,8 +211,10 @@ export class BotServer {
     /**
      * Verify incoming webhook request.
      * (https://developers.facebook.com/docs/messenger-platform/webhook-reference#security)
+     * 
+     * Must be an arrow function because it is called as calback and needs to acceess this.config
      */
-    private verifyRequest(req: express.Request, res: express.Response, buf: Buffer, encoding: string): void {
+    private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => void = (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => {
 
         let [algorithm, signature] = (req.headers["x-hub-signature"] || "").split("=");
 
