@@ -25,7 +25,9 @@ export class MBUtil {
 
         let options: any = minimist(process.argv.slice(2));
 
-        logger.level = options.logLevel || "OFF";
+        console.log("debug", options.debug);
+
+        logger.level = options.debug ? "ALL" : "OFF";
 
         let [group, command] = options._;
 
@@ -61,7 +63,6 @@ export class MBUtil {
         return `Global options:
     --config <path> - config json file
     --accessToken <token> - Page Access Token (overrides config file)
-    --logLevel <level> - set log level for package @aiteq/messenger-bot (default: OFF)
     --help - display usage for the group
 
 `;

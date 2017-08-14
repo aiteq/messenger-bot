@@ -47,8 +47,6 @@ export abstract class GraphApi<T extends GraphApi.Request> {
 
         if (config.method === GraphApi.Method.GET) {
 
-            //config.url = config.url || "";      
-            //config.url += "?" + Object.keys(data).map((key: string) => `${key}=${data[key]}`).join("&");
             config.params = data;
 
         } else if (config.method === GraphApi.Method.POST || config.method === GraphApi.Method.DELETE) {
@@ -61,6 +59,9 @@ export abstract class GraphApi<T extends GraphApi.Request> {
         }
 
         try {
+
+            logger.debug("GraphApi: sending:", config.method, this.client.defaults.baseURL);
+            logger.debug("GraphApi:", JSON.stringify(data));
 
             // perform the call
             let response: AxiosResponse = await this.client.request(config);

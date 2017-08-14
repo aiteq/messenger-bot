@@ -308,7 +308,6 @@ Option|Function
 ```--config <path>```|path to the config JSON file; must contain the ```accessToken``` property
 ```--accessToken <token>```|*access token* (one of ```--config``` or ```--accessToken``` must be specified)
 ```--help```|display help for the group
-```--logLevel <level>```|set *log level* for the package (use Log4js level names)
 
 
 #### Group: ```send```
@@ -380,7 +379,7 @@ Display current setting:
 mbutil menu get [options]
 ```
 
-Set Persistent Menu according to definition in a file:
+Set Persistent Menu according to definition in a JSON file:
 ```bash
 mbutil menu set --file <path> [--locale <locale>] [options]
 ```
@@ -393,9 +392,47 @@ mbutil menu delete [options]
 Options:
 Option|Function
 ---|---
-```--file <path>```|path to menu's definition file
+```--file <path>```|path to menu definition JSON file
 
-***TO DO**: menu def file structure*
+Required structure of the JSON menu definition file is clear from the following example (object contains two variants of the menu for `"default"` and `"cs_CZ"` locales):
+```json
+{
+    "default": {
+        "composerInputDisabled": false,
+        "items": [
+            {
+                "title": "Show exchange rate",
+                "id": "menu-rate"
+            },
+            {
+                "title": "Buy Botcoins",
+                "id": "menu-buy"
+            },
+            {
+                "title": "Aiteq International, Ltd.",
+                "url": "http://www.aiteq.international"
+            }
+        ]
+    },
+    "cs_CZ": {
+        "composerInputDisabled": false,
+        "items": [
+            {
+                "title": "Aktuální kurz",
+                "id": "menu-rate"
+            },
+            {
+                "title": "Koupit Botcoiny",
+                "id": "menu-buy"
+            },
+            {
+                "title": "Aiteq Reloaded, s.r.o.",
+                "url": "http://www.aiteq.com"
+            }
+        ]
+    }
+}
+```
 
 #### Group: ```domains```
 Manage [Domain Whitelist](https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting).
