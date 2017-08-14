@@ -192,6 +192,8 @@ export class BotServer {
             callback = idOrCallback;
         }
 
+        logger.info("subscribing to event", event);
+
         this.responder.on(event, callback);
         return this;
     }

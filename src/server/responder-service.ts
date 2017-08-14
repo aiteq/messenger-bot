@@ -135,7 +135,7 @@ export class ResponderService extends RouterService {
     public hear(hooks: Array<RegExp>, handler: Function): this {
 
         hooks.forEach(hook => {
-            logger.info("registering hearing hook", hook);
+            logger.info("subscribing to text", hook);
             this.hearHandlers.push({ hook: hook, func: handler });
         });
 
@@ -239,7 +239,7 @@ export class ResponderService extends RouterService {
         logger.debug("recieved POSTBACK from", payload.src, payload.id);
 
         // emit IDENTIFIED POSTBACK event
-        payload.id && this.emit(`${payload.src}:${payload.id}`, chat, payload.data);
+        payload.id && this.emit(`${Webhook.Event.POSTBACK}:${payload.src}:${payload.id}`, chat, payload.data);
 
         // emit SOURCE TYPED POSTBACK event
         this.emit(`${Webhook.Event.POSTBACK}:${payload.src}`, chat, payload.data);
