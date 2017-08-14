@@ -25,8 +25,6 @@ export class MBUtil {
 
         let options: any = minimist(process.argv.slice(2));
 
-        console.log("debug", options.debug);
-
         logger.level = options.debug ? "ALL" : "OFF";
 
         let [group, command] = options._;

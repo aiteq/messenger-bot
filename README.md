@@ -15,12 +15,12 @@
 
 ## Major features
 
-* Express.js based and **event-driven bot server** that can handle both **[Webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference)** and **[Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)** requests.
-* **Subscribing** to incoming text messages using regular expresions or to specific events emitted by the webhook middleware.
+* Express.js based, **event-driven bot server** handling both **[Webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference)** and **[Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)** requests.
+* **Subscribing** to incoming text messages using regular expresions or to events emitted by the webhook middleware.
 * Start and manage **conversations** for contextual, synchronous message exchange with users.
-* **Utilities** for calling Messenger Platform API function from code **outside** chatbot flow.
-* Standalone **CLI** for instant access to functions of the Messenger Platform API (e.g. proactive message sending, creating Persistent Menu or enabling Get Started button).
-* Complete **type definitions** so the package is ready to be used in both **JavaScript** and **TypeScript** coded projects.
+* **Utilities** for calling [Messenger Platform API](https://developers.facebook.com/docs/messenger-platform) functions from code **outside** chatbot flow.
+* Standalone **CLI** for instant access to backing functions of the Messenger API.
+* Complete **type definitions** so the package is ready to be used in both **JavaScript** and **TypeScript** projects.
 
 ## Technologies used
 

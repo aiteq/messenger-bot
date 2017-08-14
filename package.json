@@ -1,56 +1,59 @@
 {
-  "name": "@aiteq/messenger-bot",
-  "version": "1.1.0-beta.1",
-  "description": "A Node bot server for the Facebook Messenger Platform",
-  "main": "./bin/index.js",
-  "types": "./bin/index.d.ts",
-  "scripts": {
-    "compile": "tsc -p .",
-    "prepublishOnly": "npm run compile"
-  },
-  "bin": {
-    "mbutil": "./bin/cli/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aiteq/messenger-bot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/aiteq/messenger-bot/issues"
-  },
-  "keywords": [
-    "facebook-messenger-platform",
-    "facebook-messenger-bot",
-    "messenger-bot",
-    "chatbot",
-    "bot"
-  ],
-  "homepage": "https://github.com/aiteq/messenger-bot#readme",
-  "author": "Aiteq Reloaded, s.r.o.",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/body-parser": "^1.16.3",
-    "@types/ejs": "^2.3.33",
-    "@types/lowdb": "^0.15.0",
-    "@types/minimist": "^1.2.0",
-    "@types/node": "^7.0.38",
-    "grunt": "^1.0.1",
-    "grunt-file-append": "0.0.7",
-    "grunt-ts": "^6.0.0-beta.16",
-    "grunt-typedoc": "^0.2.4",
-    "typedoc": "^0.7.2",
-    "typedoc-plugin-markdown": "^1.0.6",
-    "typescript": "2.3.x"
-  },
-  "dependencies": {
-    "async-file": "^2.0.2",
-    "axios": "^0.16.2",
-    "body-parser": "^1.17.2",
-    "crypto": "0.0.3",
-    "ejs": "^2.5.6",
-    "express": "^4.15.3",
-    "log4js": "^2.3.1",
-    "lowdb": "^0.16.2",
-    "minimist": "^1.2.0"
-  }
+    "name": "@aiteq/messenger-bot",
+    "version": "1.1.0-beta.2",
+    "description": "A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.",
+    "main": "./bin/index.js",
+    "types": "./bin/index.d.ts",
+    "scripts": {
+        "compile": "grunt",
+        "prepublishOnly": "npm run compile"
+    },
+    "bin": {
+        "mbutil": "./bin/cli/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/aiteq/messenger-bot.git"
+    },
+    "bugs": {
+        "url": "https://github.com/aiteq/messenger-bot/issues"
+    },
+    "keywords": [
+        "facebook-messenger-platform",
+        "facebook-messenger-bot",
+        "messenger-bot",
+        "chatbot",
+        "bot"
+    ],
+    "homepage": "https://github.com/aiteq/messenger-bot#readme",
+    "author": "Aiteq Reloaded, s.r.o.",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/body-parser": "^1.16.3",
+        "@types/ejs": "^2.3.33",
+        "@types/lowdb": "^0.15.0",
+        "@types/minimist": "^1.2.0",
+        "@types/node": "^7.0.38",
+        "grunt": "^1.0.1",
+        "grunt-file-append": "0.0.7",
+        "grunt-ts": "^6.0.0-beta.16",
+        "grunt-typedoc": "^0.2.4",
+        "typedoc": "^0.7.2",
+        "typedoc-plugin-markdown": "^1.0.6",
+        "typescript": "2.3.x"
+    },
+    "dependencies": {
+        "async-file": "^2.0.2",
+        "axios": "^0.16.2",
+        "body-parser": "^1.17.2",
+        "crypto": "0.0.3",
+        "ejs": "^2.5.6",
+        "express": "^4.15.3",
+        "log4js": "^2.3.1",
+        "lowdb": "^0.16.2",
+        "minimist": "^1.2.0"
+    },
+    "engines": {
+        "node": ">=7.10.0"
+    }
 }

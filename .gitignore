@@ -3,7 +3,6 @@
 *.js
 *.d.ts
 
-.npmignore
 node_modules
 bin
 work
