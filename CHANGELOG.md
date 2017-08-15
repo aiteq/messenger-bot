@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## 1.1.0-beta.4 - planned
+### Fixed
+- using built-in 'crypto' module instead of deprecated external package
+
 ### Will be fixed
 - error "Cannot find type definition file for 'express'" (workaround: manualy install @types/express)
 
