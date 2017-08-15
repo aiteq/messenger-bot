@@ -95,25 +95,18 @@ export abstract class GraphApi<T extends GraphApi.Request> {
 
 export namespace GraphApi {
 
-    export namespace Method {
-        export const GET = "get";
-        export const POST = "post";
-        export const DELETE = "delete";
+    export enum Method {
+        GET = "get",
+        POST = "post",
+        DELETE = "delete"
     }
 
-    export type Method = typeof Method.GET | typeof Method.POST | typeof Method.DELETE;
-
-    export namespace Endpoint {
-        export const MESSAGES = "me/messages";
-        export const MESSENGER_PROFILE = "me/messenger_profile";
-        export const MESSENGER_CODES = "me/messenger_codes";
-        export const USER_PROFILE = "USER-PROFILE";
+    export enum Endpoint {
+        MESSAGES = "me/messages",
+        MESSENGER_PROFILE = "me/messenger_profile",
+        MESSENGER_CODES = "me/messenger_codes",
+        USER_PROFILE = "USER-PROFILE"
     }
-
-    export type Endpoint =
-        typeof Endpoint.MESSAGES |
-        typeof Endpoint.MESSENGER_PROFILE |
-        typeof Endpoint.MESSENGER_CODES;
 
     export interface Request {
         access_token?: string;

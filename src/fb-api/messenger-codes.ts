@@ -48,11 +48,9 @@ export namespace MessengerCodes {
         }
     }
 
-    export namespace Type {
-        export const STANDARD = "standard";
+    export enum Type {
+        STANDARD = "standard"
     }
-
-    export type Type = typeof Type.STANDARD;
 
     export interface Request extends GraphApi.Request {
         type: Type;

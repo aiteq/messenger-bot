@@ -50,18 +50,16 @@ export namespace UserProfile {
         fields: string
     }
 
-    export namespace Field {
-        export const FIRST_NAME = "first_name";
-        export const LAST_NAME = "last_name";
-        export const PROFILE_PIC = "profile_pic";
-        export const LOCALE = "locale";
-        export const TIMEZONE = "timezone";
-        export const GENDER = "gender";
-        export const IS_PAYMENT_ENABLED = "is_payment_enabled";
-        export const LAST_AD_REFERRAL = "last_ad_referral";
+    export enum Field {
+        FIRST_NAME = "first_name",
+        LAST_NAME = "last_name",
+        PROFILE_PIC = "profile_pic",
+        LOCALE = "locale",
+        TIMEZONE = "timezone",
+        GENDER = "gender",
+        IS_PAYMENT_ENABLED = "is_payment_enabled",
+        LAST_AD_REFERRAL = "last_ad_referral"
     }
-
-    export type Field = typeof Field.FIRST_NAME | typeof Field.LAST_NAME | typeof Field.PROFILE_PIC | typeof Field.LOCALE | typeof Field.TIMEZONE | typeof Field.GENDER | typeof Field.IS_PAYMENT_ENABLED | typeof Field.LAST_AD_REFERRAL;
 
     export interface LastAdReferral {
         source: string;

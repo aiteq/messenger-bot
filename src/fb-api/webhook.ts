@@ -113,79 +113,48 @@ export namespace Webhook {
         ref: string;
     }
 
-    /* ready for TypeScript 2.4
-        export enum PostbackSource {
-            GET_STARTED_BUTTON = "get-started-button",
-            POSTBACK_BUTTON = "postback-button",
-            PERSISTENT_MENU = "persistent-menu"
-        }
-    */
-
-    export namespace PostbackSource {
-        export const GET_STARTED_BUTTON = "get-started-button";
-        export const POSTBACK_BUTTON = "postback-button";
-        export const PERSISTENT_MENU = "persistent-menu";
+    export enum PostbackSource {
+        GET_STARTED_BUTTON = "get-started-button",
+        POSTBACK_BUTTON = "postback-button",
+        PERSISTENT_MENU = "persistent-menu"
     }
 
-    export type PostbackSource = typeof PostbackSource.GET_STARTED_BUTTON | typeof PostbackSource.POSTBACK_BUTTON | typeof PostbackSource.PERSISTENT_MENU;
 
-    export namespace AttachmentType {
-        export const IMAGE = "image";
-        export const AUDIO = "audio";
-        export const VIDEO = "video";
-        export const FILE = "file";
-        export const LOCATION = "location";
-        export const FALLBACK = "fallback";
+    export enum AttachmentType {
+        IMAGE = "image",
+        AUDIO = "audio",
+        VIDEO = "video",
+        FILE = "file",
+        LOCATION = "location",
+        FALLBACK = "fallback"
     }
 
     export type MediaAttachmentType = typeof AttachmentType.IMAGE | typeof AttachmentType.AUDIO | typeof AttachmentType.VIDEO | typeof AttachmentType.FILE;
-    export type AttachmentType = MediaAttachmentType | typeof AttachmentType.LOCATION | typeof AttachmentType.FALLBACK;
 
-    export namespace ReferralSource {
-        export const SHORTLINK = "SHORTLINK";
-        export const ADS = "ADS";
-        export const MESSENGER_CODE = "MESSENGER_CODE";
-        export const DISCOVER_TAB = "DISCOVER_TAB";
+    export enum ReferralSource {
+        SHORTLINK = "SHORTLINK",
+        ADS = "ADS",
+        MESSENGER_CODE = "MESSENGER_CODE",
+        DISCOVER_TAB = "DISCOVER_TAB"
     }
 
-    export type ReferralSource = typeof ReferralSource.SHORTLINK | typeof ReferralSource.ADS | typeof ReferralSource.MESSENGER_CODE | typeof ReferralSource.DISCOVER_TAB;
-
-    export namespace Event {
-        export const TEXT_MESSAGE = "message";
-        export const MESSAGE_DELIVERED = "delivery";
-        export const MESSAGE_READ = "read";
-        export const MESSAGE_ECHO = "echo";
-        export const POSTBACK = "postback";
-        export const ATTACHMENT = "attachment";
-        export const ATTACHMENT_IMAGE = ATTACHMENT + ":" + AttachmentType.IMAGE;
-        export const ATTACHMENT_AUDIO = ATTACHMENT + ":" + AttachmentType.AUDIO;
-        export const ATTACHMENT_VIDEO = ATTACHMENT + ":" + AttachmentType.VIDEO;
-        export const ATTACHMENT_FILE = ATTACHMENT + ":" + AttachmentType.FILE;
-        export const ATTACHMENT_FALLBACK = ATTACHMENT + ":" + AttachmentType.FALLBACK;
-        export const ATTACHMENT_LOCATION = ATTACHMENT + ":" + AttachmentType.LOCATION;
-        export const GET_STARTED_BUTTON = POSTBACK + ":" + PostbackSource.GET_STARTED_BUTTON;
-        export const POSTBACK_BUTTON = POSTBACK + ":" + PostbackSource.POSTBACK_BUTTON;
-        export const PERSISTENT_MENU = POSTBACK + ":" + PostbackSource.PERSISTENT_MENU;
-        export const TEXT_QUICK_REPLY = "qr:text";
-        export const LOCATION_QUICK_REPLY = "qr:location";
+    export enum Event {
+        TEXT_MESSAGE = "message",
+        MESSAGE_DELIVERED = "delivery",
+        MESSAGE_READ = "read",
+        MESSAGE_ECHO = "echo",
+        POSTBACK = "postback",
+        ATTACHMENT = "attachment",
+        ATTACHMENT_IMAGE = "attachment:image",
+        ATTACHMENT_AUDIO = "attachment:audio",
+        ATTACHMENT_VIDEO = "attachment:video",
+        ATTACHMENT_FILE = "attachment:file",
+        ATTACHMENT_FALLBACK = "attachment:fallback",
+        ATTACHMENT_LOCATION = "attachment:location",
+        GET_STARTED_BUTTON = "postback:get",
+        POSTBACK_BUTTON = "postback:get-started-button",
+        PERSISTENT_MENU = "postback:persistent-menu",
+        TEXT_QUICK_REPLY = "qr:text",
+        LOCATION_QUICK_REPLY = "qr:location"
     }
-
-    export type Event =
-        typeof Event.TEXT_MESSAGE |
-        typeof Event.MESSAGE_DELIVERED |
-        typeof Event.MESSAGE_READ |
-        typeof Event.MESSAGE_ECHO |
-        typeof Event.POSTBACK |
-        typeof Event.ATTACHMENT |
-        typeof Event.ATTACHMENT_IMAGE |
-        typeof Event.ATTACHMENT_AUDIO |
-        typeof Event.ATTACHMENT_VIDEO |
-        typeof Event.ATTACHMENT_FILE |
-        typeof Event.ATTACHMENT_FALLBACK |
-        typeof Event.ATTACHMENT_LOCATION |
-        typeof Event.GET_STARTED_BUTTON |
-        typeof Event.POSTBACK_BUTTON |
-        typeof Event.PERSISTENT_MENU |
-        typeof Event.TEXT_QUICK_REPLY |
-        typeof Event.LOCATION_QUICK_REPLY;
 }

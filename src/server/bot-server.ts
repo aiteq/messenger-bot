@@ -186,15 +186,17 @@ export class BotServer {
     /* implementation of the overloaded method on() - see 2 overloads above */
     public on(event: Webhook.Event, idOrCallback: string | Function, callback?: Function): this {
 
+        let extEvent: string = event;
+
         if (typeof idOrCallback === "string") {
-            event += ":" + idOrCallback;
+            extEvent += ":" + idOrCallback;
         } else {
             callback = idOrCallback;
         }
 
-        logger.info("subscribing to event", event);
+        logger.info("subscribing to event", extEvent);
 
-        this.responder.on(event, callback);
+        this.responder.on(extEvent, callback);
         return this;
     }
 

@@ -208,9 +208,9 @@ export namespace Send {
         name: Name;
     }
 
-    export namespace ContentType {
-        export const TEXT = "text";
-        export const LOCATION = "location";
+    export enum ContentType {
+        TEXT = "text",
+        LOCATION = "location"
     }
 
     export interface TextQuickReply {
@@ -226,28 +226,26 @@ export namespace Send {
 
     export type QuickReply = TextQuickReply | LocationQuickReply;
 
-    export namespace TemplateType {
-        export const GENERIC = "generic";
-        export const BUTTON = "button";
-        export const LIST = "list";
-        export const OPEN_GRAPH = "open_graph";
-        export const RECEIPT = "receipt";
+    export enum TemplateType {
+        GENERIC = "generic",
+        BUTTON = "button",
+        LIST = "list",
+        OPEN_GRAPH = "open_graph",
+        RECEIPT = "receipt"
     }
 
-    export namespace ImageAspectRatio {
-        export const HORIZONTAL = "horizontal";
-        export const SQUARE = "square";
+    export enum ImageAspectRatio {
+        HORIZONTAL = "horizontal",
+        SQUARE = "square"
     }
 
-    export type ImageAspectRatio = typeof ImageAspectRatio.HORIZONTAL | typeof ImageAspectRatio.SQUARE;
-
-    export namespace ButtonType {
-        export const WEB_URL = "web_url";
-        export const POSTBACK = "postback";
-        export const CALL = "phone_number";
-        export const SHARE = "element_share";
-        export const LOGIN = "account_link";
-        export const LOGOUT = "account_unlink";
+    export enum ButtonType {
+        WEB_URL = "web_url",
+        POSTBACK = "postback",
+        CALL = "phone_number",
+        SHARE = "element_share",
+        LOGIN = "account_link",
+        LOGOUT = "account_unlink"
     }
 
     export interface UrlButton {
@@ -318,12 +316,10 @@ export namespace Send {
         buttons: Array<Button>;
     }
 
-    export namespace ListTopElementStyle {
-        export const LARGE = "large";
-        export const COMPACT = "compact";
+    export enum ListTopElementStyle {
+        LARGE = "large",
+        COMPACT = "compact"
     }
-
-    export type ListTopElementStyle = typeof ListTopElementStyle.LARGE | typeof ListTopElementStyle.COMPACT;
 
     export interface ListTemplate {
         template_type: typeof TemplateType.LIST;
@@ -390,15 +386,14 @@ export namespace Send {
 
     export type Template = GenericTemplate | ButtonTemplate | ListTemplate | ReceiptTemplate | OpenGraphTemplate;
 
-    export namespace AttachmentType {
-        export const IMAGE = "image";
-        export const AUDIO = "audio";
-        export const VIDEO = "video";
-        export const FILE = "file";
-        export const TEMPLATE = "template";
+    export enum AttachmentType {
+        IMAGE = "image",
+        AUDIO = "audio",
+        VIDEO = "video",
+        FILE = "file",
+        TEMPLATE = "template"
     }
 
-    export type AttachmentType = typeof AttachmentType.IMAGE | typeof AttachmentType.AUDIO | typeof AttachmentType.VIDEO | typeof AttachmentType.FILE | typeof AttachmentType.TEMPLATE;
     export type MediaAttachmentType = typeof AttachmentType.IMAGE | typeof AttachmentType.AUDIO | typeof AttachmentType.VIDEO | typeof AttachmentType.FILE;
 
     export interface MediaPayload {
@@ -451,29 +446,23 @@ export namespace Send {
 
     export type Message = TextMessage | AttachmentMessage;
 
-    export namespace SenderAction {
-        export const TYPING_ON = "typing_on";
-        export const TYPING_OFF = "typing_off";
-        export const MARK_SEEN = "mark_seen";
+    export enum SenderAction {
+        TYPING_ON = "typing_on",
+        TYPING_OFF = "typing_off",
+        MARK_SEEN = "mark_seen"
     }
 
-    export type SenderAction = typeof SenderAction.TYPING_ON | typeof SenderAction.TYPING_OFF | typeof SenderAction.MARK_SEEN;
-
-    export namespace NotificationType {
-        export const REGULAR = "REGULAR";
-        export const SILENT_PUSH = "SILENT_PUSH";
-        export const NO_PUSH = "NO_PUSH";
+    export enum NotificationType {
+        REGULAR = "REGULAR",
+        SILENT_PUSH = "SILENT_PUSH",
+        NO_PUSH = "NO_PUSH"
     }
 
-    export type NotificationType = typeof NotificationType.REGULAR | typeof NotificationType.SILENT_PUSH | typeof NotificationType.NO_PUSH;
-
-    export namespace Tag {
-        export const SHIPPING_UPDATE = "SHIPPING_UPDATE";
-        export const RESERVATION_UPDATE = "RESERVATION_UPDATE";
-        export const ISSUE_RESOLUTION = "ISSUE_RESOLUTION";
+    export enum Tag {
+        SHIPPING_UPDATE = "SHIPPING_UPDATE",
+        RESERVATION_UPDATE = "RESERVATION_UPDATE",
+        ISSUE_RESOLUTION = "ISSUE_RESOLUTION"
     }
-
-    export type Tag = typeof Tag.SHIPPING_UPDATE | typeof Tag.RESERVATION_UPDATE | typeof Tag.ISSUE_RESOLUTION;
 
     export interface Request extends GraphApi.Request {
         recipient: string;

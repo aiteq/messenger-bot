@@ -344,13 +344,11 @@ export namespace MessengerProfile {
         payload: string;
     }
 
-    export namespace MenuItemType {
-        export const WEB_URL = "web_url";
-        export const POSTBACK = "postback";
-        export const NESTED = "nested";
+    export enum MenuItemType {
+        WEB_URL = "web_url",
+        POSTBACK = "postback",
+        NESTED = "nested"
     }
-
-    export type MenuItemType = typeof MenuItemType.WEB_URL | typeof MenuItemType.POSTBACK | typeof MenuItemType.NESTED;
 
     export interface Menu {
         call_to_actions?: Array<MenuItem>;
@@ -384,13 +382,11 @@ export namespace MessengerProfile {
         export const FULL_NAME = "user_full_name";
     }
 
-    export namespace AudienceType {
-        export const ALL = "all";
-        export const CUSTOM = "custom";
-        export const NONE = "none";
+    export enum AudienceType {
+        ALL = "all",
+        CUSTOM = "custom",
+        NONE = "none"
     }
-
-    export type AudienceType = typeof AudienceType.ALL | typeof AudienceType.CUSTOM | typeof AudienceType.NONE;
 
     export interface Country {
         blacklist?: Array<string>;    // ISO 3166 Alpha-2 codes
@@ -423,24 +419,15 @@ export namespace MessengerProfile {
         fields?: Field | Array<Field>;
     }
 
-    export namespace Field {
-        export const PERSISTENT_MENU = "persistent_menu";
-        export const GET_STARTED_BUTTON = "get_started";
-        export const GREETING = "greeting";
-        export const DOMAIN_WHITELIST = "whitelisted_domains";
-        export const ACCOUNT_LINKING_URL = "account_linking_url";
-        export const TARGET_AUDIENCE = "target_audience";
-        export const CHAT_EXTENSION_WEB_URL = "home_url";
+    export enum Field {
+        PERSISTENT_MENU = "persistent_menu",
+        GET_STARTED_BUTTON = "get_started",
+        GREETING = "greeting",
+        DOMAIN_WHITELIST = "whitelisted_domains",
+        ACCOUNT_LINKING_URL = "account_linking_url",
+        TARGET_AUDIENCE = "target_audience",
+        CHAT_EXTENSION_WEB_URL = "home_url"
     }
-
-    export type Field =
-        typeof Field.PERSISTENT_MENU |
-        typeof Field.GET_STARTED_BUTTON |
-        typeof Field.GREETING |
-        typeof Field.DOMAIN_WHITELIST |
-        typeof Field.ACCOUNT_LINKING_URL |
-        typeof Field.TARGET_AUDIENCE |
-        typeof Field.CHAT_EXTENSION_WEB_URL;
 
     export interface Response {
         result: string;

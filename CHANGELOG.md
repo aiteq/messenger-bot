@@ -5,13 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-## 1.1.0-beta.4 - planned
 ### Fixed
-- using built-in 'crypto' module instead of deprecated external package
+- using built-in 'crypto' module instead of deprecated external package (no more warnings)
+- added @types/express to devDeps (solving "Cannot find type definition file for 'express'" error)
 
-### Will be fixed
-- error "Cannot find type definition file for 'express'" (workaround: manualy install @types/express)
+### Changed
+- TypeScript upgraded to 2.4 -> string enums used instead namespace+type workaround
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
