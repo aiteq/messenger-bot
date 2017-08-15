@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 1.1.0-beta.4 - planned
 ### Will be fixed
-- "Cannot find type definition file for 'express'" (workaround: manualy install @types/express)
+- error "Cannot find type definition file for 'express'" (workaround: manualy install @types/express)
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
