@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.2...HEAD
+## 1.1.0-beta.3 - 2017-08-15
+### Fixed
+- emitting postback identified events
+
+[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.3...HEAD
 [1.1.0-beta.3]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.2...v1.1.0-beta.3
 
