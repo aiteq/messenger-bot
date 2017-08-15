@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## 1.1.0-beta.3 - 2017-08-15
+## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
 - emitting postback identified events
 
