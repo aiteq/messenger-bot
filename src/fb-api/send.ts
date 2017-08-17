@@ -272,7 +272,9 @@ export namespace Send {
 
     export interface ShareButton {
         type: typeof ButtonType.SHARE;
-        share_contents?: any;
+        share_contents?: {
+            attachment: GenericTemplateAttachment
+        }
     }
 
     export interface LoginButton {
@@ -403,28 +405,34 @@ export namespace Send {
     }
 
     export interface ImageAttachment {
-        type: typeof AttachmentType.IMAGE;
+        type: AttachmentType.IMAGE;
         payload: MediaPayload;
     }
 
     export interface AudioAttachment {
-        type: typeof AttachmentType.AUDIO;
+        type: AttachmentType.AUDIO;
         payload: MediaPayload;
     }
 
     export interface VideoAttachment {
-        type: typeof AttachmentType.VIDEO;
+        type: AttachmentType.VIDEO;
         payload: MediaPayload;
     }
 
     export interface FileAttachment {
-        type: typeof AttachmentType.FILE;
+        type: AttachmentType.FILE;
         payload: MediaPayload;
     }
 
     export interface TemplateAttachment {
-        type: typeof AttachmentType.TEMPLATE;
+        type: AttachmentType.TEMPLATE;
         payload: Template;
+    }
+
+    // for ShareButton espec.
+    export interface GenericTemplateAttachment {
+        type: AttachmentType.TEMPLATE;
+        payload: GenericTemplate;
     }
 
     export type MediaAttachment = ImageAttachment | AudioAttachment | VideoAttachment | FileAttachment;

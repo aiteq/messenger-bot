@@ -1,5 +1,6 @@
 import { Send } from "../fb-api/send";
 import { Builder } from "./builder";
+import { GenericTemplateMessageBuilder } from "./generic-template-message-builder";
 
 /**
  * Helps to create a Share Button.
@@ -22,13 +23,14 @@ export class ShareButtonBuilder extends Builder<Send.ShareButton> {
     }
 
     /**
-     * Sets share contents.
+     * Sets optional share contents, actually a complete Generic Template Message.
+     * (See https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button#implementation)
      * 
-     * @param {*} shareContents 
+     * @param {GenericTemplateMessageBuilder} builder 
      * @returns {this} - for chaining
      */
-    public setShareContents(shareContents: any): this {
-        this.button.share_contents = shareContents;
+    public setGenericTemplate(builder: GenericTemplateMessageBuilder): this {
+        this.button.share_contents = <{ attachment: Send.GenericTemplateAttachment }>builder.build();
         return this;
     }
 
