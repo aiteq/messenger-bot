@@ -208,7 +208,7 @@ export class ResponderService extends RouterService {
 
                 case Webhook.AttachmentType.LOCATION:
 
-                    logger.debug("received LOCATION message", attachment.title, attachment.payload.coordinates);
+                    logger.debug("received LOCATION message", (<Webhook.LocationAttachment>attachment).title, (<Webhook.LocationAttachment>attachment).payload.coordinates);
                     data = attachment;
                     break;
 

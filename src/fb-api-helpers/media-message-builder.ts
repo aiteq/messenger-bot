@@ -12,7 +12,7 @@ export class MediaMessageBuilder extends MessageBuilder<Send.AttachmentMessage> 
      * 
      * @param {Send.MediaAttachmentType} type 
      */
-    constructor(type: Send.MediaAttachmentType) {
+    constructor(type: Send.AttachmentType) {
 
         super();
         

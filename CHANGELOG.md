@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - TypeScript upgraded to 2.4 -> string enums used instead namespace+type workaround
+- changed type of Send-ShareButton.share_contents to proper type
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed

@@ -47,12 +47,12 @@ export namespace Webhook {
     export type Attachment = MediaAttachment | LocationAttachment;
 
     export interface MediaAttachment {
-        type: MediaAttachmentType;
+        type: AttachmentType;
         payload: MediaAttachmentPayload;
     }
 
     export interface LocationAttachment {
-        type: typeof AttachmentType.LOCATION;
+        type: AttachmentType.LOCATION;
         payload: LocationAttachmentPayload;
         title: string;
         url: string;
@@ -128,8 +128,6 @@ export namespace Webhook {
         LOCATION = "location",
         FALLBACK = "fallback"
     }
-
-    export type MediaAttachmentType = typeof AttachmentType.IMAGE | typeof AttachmentType.AUDIO | typeof AttachmentType.VIDEO | typeof AttachmentType.FILE;
 
     export enum ReferralSource {
         SHORTLINK = "SHORTLINK",

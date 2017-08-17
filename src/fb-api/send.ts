@@ -154,7 +154,7 @@ export namespace Send {
             });
         }
 
-        private async sendMediaAttachment(type: MediaAttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<string> {
+        private async sendMediaAttachment(type: AttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<string> {
 
             if (reuse) {
 
@@ -214,14 +214,14 @@ export namespace Send {
     }
 
     export interface TextQuickReply {
-        content_type: typeof ContentType.TEXT;
+        content_type: ContentType.TEXT;
         title: string;
         payload: string;
         image_url?: string;
     }
 
     export interface LocationQuickReply {
-        content_type: typeof ContentType.LOCATION;
+        content_type: ContentType.LOCATION;
     }
 
     export type QuickReply = TextQuickReply | LocationQuickReply;
@@ -249,7 +249,7 @@ export namespace Send {
     }
 
     export interface UrlButton {
-        type: typeof ButtonType.WEB_URL;
+        type: ButtonType.WEB_URL;
         title: string;
         url: string;
         webview_height_ratio?: Webview.HeightRatio;
@@ -259,37 +259,37 @@ export namespace Send {
     }
 
     export interface PostbackButton {
-        type: typeof ButtonType.POSTBACK;
+        type: ButtonType.POSTBACK;
         title: string;
         payload: string;
     }
 
     export interface CallButton {
-        type: typeof ButtonType.CALL;
+        type: ButtonType.CALL;
         title: string;
         payload: string;
     }
 
     export interface ShareButton {
-        type: typeof ButtonType.SHARE;
+        type: ButtonType.SHARE;
         share_contents?: {
             attachment: GenericTemplateAttachment
         }
     }
 
     export interface LoginButton {
-        type: typeof ButtonType.LOGIN;
+        type: ButtonType.LOGIN;
         url: string;
     }
 
     export interface LogoutButton {
-        type: typeof ButtonType.LOGOUT;
+        type: ButtonType.LOGOUT;
     }
 
     export type Button = UrlButton | PostbackButton | CallButton | ShareButton | LoginButton | LogoutButton;
 
     export interface DefaultAction {
-        type: typeof ButtonType.WEB_URL;
+        type: ButtonType.WEB_URL;
         url: string;
         webview_height_ratio?: Webview.HeightRatio;
         messenger_extensions?: boolean;
@@ -306,14 +306,14 @@ export namespace Send {
     }
 
     export interface GenericTemplate {
-        template_type: typeof TemplateType.GENERIC;
+        template_type: TemplateType.GENERIC;
         sherable?: boolean;
         image_aspect_ratio?: ImageAspectRatio;
         elements: Array<Element>;
     }
 
     export interface ButtonTemplate {
-        template_type: typeof TemplateType.BUTTON;
+        template_type: TemplateType.BUTTON;
         text: string;
         buttons: Array<Button>;
     }
@@ -324,7 +324,7 @@ export namespace Send {
     }
 
     export interface ListTemplate {
-        template_type: typeof TemplateType.LIST;
+        template_type: TemplateType.LIST;
         top_element_style?: ListTopElementStyle;
         elements: Array<Element>;
         buttons?: Array<Button>;
@@ -336,7 +336,7 @@ export namespace Send {
     }
 
     export interface OpenGraphTemplate {
-        template_type: typeof TemplateType.OPEN_GRAPH;
+        template_type: TemplateType.OPEN_GRAPH;
         elements: Array<OpenGraphElement>;
     }
 
@@ -371,7 +371,7 @@ export namespace Send {
     }
 
     export interface ReceiptTemplate {
-        template_type: typeof TemplateType.RECEIPT;
+        template_type: TemplateType.RECEIPT;
         sherable?: boolean;
         recipient_name: string;
         merchant_name?: string;
@@ -395,8 +395,6 @@ export namespace Send {
         FILE = "file",
         TEMPLATE = "template"
     }
-
-    export type MediaAttachmentType = typeof AttachmentType.IMAGE | typeof AttachmentType.AUDIO | typeof AttachmentType.VIDEO | typeof AttachmentType.FILE;
 
     export interface MediaPayload {
         url?: string;
