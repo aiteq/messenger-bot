@@ -10,8 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - added @types/express to devDeps (solving "Cannot find type definition file for 'express'" error)
 
 ### Changed
-- TypeScript upgraded to 2.4 -> string enums used instead namespace+type workaround
-- changed type of Send-ShareButton.share_contents to proper type
+- TypeScript upgraded to 2.4 -> string enums used instead *namespace+type* workaround
+- changed type of Send.ShareButton.share_contents to proper type
+
+### Added
+- validation support for Conversation.ask
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
