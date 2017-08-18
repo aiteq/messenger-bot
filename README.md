@@ -235,6 +235,21 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-sum3", async (chat: Chat) => {
 });
 ```
 
+#### Input validation
+As with classic forms, even in the case of a conversation, we need to validate user inputs. Therefore, the interface offers the ability to call a validation function wich you can pass when calling the [ask()](./doc/classes/conversation.md#ask) method. As a validator you can conveniently use functions from [validator.js](https://github.com/chriso/validator.js) package:
+```typescript
+import * as validator from "validator";
+
+bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
+    let conv: Conversation = chat.startConversation();
+    //...
+    let email: string = await conv.ask("Give me your email address, please", validator.isEmail)
+    //...
+});
+```
+The bot will automatically repeat the question until the user enters a valid email address.
+
+
 ### BotUtils
 
 The [Facebook Messenger Platform API](https://developers.facebook.com/docs/messenger-platform) contains not only interactive functions for message exchange between the bot and users. There are a lot of services in the API backing the communication like activating [Get Started button](https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button), installing [Persistent Menu](https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu) or generating [Messenger Code](https://developers.facebook.com/docs/messenger-platform/messenger-code).

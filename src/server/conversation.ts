@@ -13,7 +13,11 @@ import { ResponderService } from "./responder-service";
  */
 export class Conversation {
 
-	private resolve: (data: string | Webhook.QuickReplyPayload) => void;
+	private callbacks: {
+        resolve: (data: string | Webhook.QuickReplyPayload) => void,
+        validator?: (text: string) => void,
+        challenge?: string
+    };
 
 	/**
      * Creates an instance of Conversation.
@@ -36,14 +40,16 @@ export class Conversation {
 
 	/**
      * Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
+     * If a validator is specified, the bot will automatically repeat the challenge until valid response.
      * 
-     * @param {string} text - a question
+     * @param {string} challenge - a question
+     * @param {(text: string) => boolean} [validator] - optional validator function - returns `true` if the input is valid
      * @returns {Promise<string>} 
      */
-    public async ask(text: string): Promise<string> {
+    public async ask(challenge: string, validator?: (text: string) => boolean): Promise<string> {
 
         // await for the message to be send, so you can be sure the user is responding to your question
-		await this.say(text);
+		await this.say(challenge);
 
 		return new Promise((resolve: (data: string) => void) => {
 
@@ -51,7 +57,7 @@ export class Conversation {
             // Because the response will arrive in one of the subsequent requests, we must remember
             // this Promise's resolve callback. Its later execution will be made by the resume() method.
 
-            this.resolve = resolve;
+            this.callbacks = { resolve, validator, challenge };
 		});
 	}
 
@@ -68,12 +74,14 @@ export class Conversation {
 		await this.chat.sendMessage(messageOrBuilder);
 
 		return new Promise((resolve: (data: T) => void) => {
-			this.resolve = resolve;
+            this.callbacks = { resolve };
 		});
 	}
 
     /**
-     * Resumes the conversation executing the saved resolve callback.
+     * For internal use only.
+     * Resumes the conversation executing the saved resolve callback or repeating the original
+     * challenge if the response is not valid
      * 
      * @param {(string | Webhook.QuickReplyPayload)} data - user's response
      * @param {ResponderService} responder - the method can be called only from ResponderService
@@ -84,10 +92,25 @@ export class Conversation {
             throw new Error("unauthorized calling of the Conversation.resume");
         }
 
-		if (this.resolve) {
+		if (this.callbacks) {
 
-			this.resolve(data);
-			this.resolve = undefined;
+            if (typeof data === "string" && this.callbacks.validator && !this.callbacks.validator(data)) {
+
+                // validation of the input failed, repeat the challenge
+
+                logger.debug("input validation failed, repeating the challenge");
+
+                this.say(this.callbacks.challenge);                
+
+            } else {
+
+                // the challenge answered, clearing the callbacks
+
+                logger.debug("the challenge has been answered")
+
+                this.callbacks.resolve(data);
+                this.callbacks = undefined;
+            }
 
 		} else {
 
@@ -106,7 +129,7 @@ export class Conversation {
      * Ends the conversation.
      */
     public end(): void {
-		this.resolve = undefined;
+		this.callbacks = undefined;
 		this.chat.endConversation();
 	}
 }

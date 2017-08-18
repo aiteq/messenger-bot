@@ -17,12 +17,27 @@ Allows synchronous, contextual interaction between the bot and user. The instanc
 <a id="ask"></a>
 ###  `ask(text)`
 Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
+If a validator is specified, the bot will automatically repeat the challenge until valid response.
+
+As a validator you can use functions from [validator.js](https://github.com/chriso/validator.js) package:
+```typescript
+import * as validator from "validator";
+
+bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
+    let conv: Conversation = chat.startConversation();
+    //...
+    let email: string = await conv.ask("Give me your email address, please", validator.isEmail)
+    //...
+});
+```
+The bot will automatically repeat the question until the user enters a valid email address.
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | text | `string`   |  a question |
+| validator | `(text: string) => boolean` | optional validator function - returns `true` if the input is valid |
 
 **Returns:** `Promise`<`string`>
 ___
@@ -33,7 +48,7 @@ Asks the user with a message prepared manually or using message builder. It's ne
 
 **Type parameters:**
 
-T:  `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
+T: `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
 
 **Parameters:**
 
