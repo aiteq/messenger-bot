@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - TypeScript upgraded to 2.4 -> string enums used instead *namespace+type* workaround
 - changed type of Send.ShareButton.share_contents to proper type
+- CLI: `--inTest` and `--shareButton` switches doesn't need following `true`/`false`
 
 ### Added
 - validation support for Conversation.ask

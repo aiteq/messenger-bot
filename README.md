@@ -540,8 +540,8 @@ mbutil chatext delete [options]
 Options:
 Option|Value|Function
 ---|---|---
-```--inTest```|```true``` or ```false```|controls whether public users can see the Chat Extension (default: ```false```)
-```--shareButton```|```true``` or ```false```|controls whether the share button in the webview is enabled (default: ```false```)
+```--inTest```| |controls whether public users can see the Chat Extension
+```--shareButton```| |controls whether the share button in the webview is enabled
 
 #### Group: ```code```
 Generate [Messenger Code](https://developers.facebook.com/docs/messenger-platform/messenger-code).

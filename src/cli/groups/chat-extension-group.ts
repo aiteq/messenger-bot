@@ -24,7 +24,7 @@ export class ChatExtensionGroup extends Group {
 
             case "set":
                 options._[2] || this.exitWithUsage();
-                await botUtils.setChatExtensionHomeUrl(options._[2], options.inTest === "true", options.shareButton === "true", cliout);
+                await botUtils.setChatExtensionHomeUrl(options._[2], !!options.inTest, !!options.shareButton, cliout);
                 return "Chat Extension home URL has been successfully set";
 
             case "delete":
@@ -52,8 +52,8 @@ Usage:
         - remove the current Chat Extension home URL
 
 Options:
-    --inTest <true|false> - controls whether public users can see the Chat Extension (true/false, default: false)
-    --shareButton <true|false> - controls whether the share button in the webview is enabled (true/false, default: false)
+    --inTest - controls whether public users can see the Chat Extension
+    --shareButton - controls whether the share button in the webview is enabled
 `
     }
 }
