@@ -40,6 +40,8 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
 ```
 The bot will automatically repeat the question until the user enters a valid email address.
 
+**Note:** No events are emitted and no hear handlers called when the bot receives an answer to the question asked.
+
 **Parameters:**
 
 | Param | Type | Description |
@@ -53,6 +55,8 @@ ___
 <a id="askwithmessage"></a>
 ###  `askWithMessage(messageOrBuilder)`
 Asks the user with a message prepared manually or using message builder. It's necessary when we want to force the user to response using QUICK REPLY buttons.
+
+**Note:** No events are emitted and no hear handlers called when the bot receives an answer to the question asked.
 
 **Type parameters:**
 

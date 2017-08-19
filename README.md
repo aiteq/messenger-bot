@@ -191,7 +191,13 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-about", (chat: Chat) => {
 ### Conversation
 Conversation is synchronous message exchange between users and the bot by setting a flow of questions and answers. It's a useful way to get conventional UI tasks, like form filling, closer to interpersonal communication.
 
-In order to ensure execution of steps of the conversation synchronously, all methods of the [Chat](doc/classes/chat.md) class return Promises. So you can call next step after resolving the current. And when you add a little bit of syntactic sugar using the ```async```/```await``` concept, the conversation flow will look much more readable, almost like a real dialog:
+In order to ensure execution of steps of the conversation synchronously, all methods of the [Chat](doc/classes/chat.md) class return Promises. So you can call next step after resolving the current. And when you add a little bit of syntactic sugar using the ```async```/```await``` concept, the conversation flow will look much more readable, almost like a real dialog.
+
+There are two methods for interaction with the user:
+* [ask()](doc/classes/chat.md#ask) - asking with plain text question
+* [askWithMessage()](doc/classes/chat.md#askwithmessage) - asking with structured message
+
+**Note:** No events are emitted and no hear handlers called when the bot receives an answer to the question asked.
 
 ```typescript
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-song", async (chat: Chat) => {

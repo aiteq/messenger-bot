@@ -153,7 +153,7 @@ export class ResponderService extends RouterService {
         logger.debug("received TEXT message", message.mid);
 
         // check if the incoming message is an answer to previously asked question
-        // in that case no hear handlers will be called
+        // in that case no hear handlers will be called and no events will be fired
 
         if (!chat.answer(message.text, this)) {
 
@@ -169,11 +169,10 @@ export class ResponderService extends RouterService {
                     handler.func(chat, message.text, matches.slice(1));
                 }
             });
+
+            // emit the TEXT_MESSAGE event to call installed handlers
+            this.emit(Webhook.Event.TEXT_MESSAGE, chat, message.text);
         }
-
-        // finally emit the TEXT_MESSAGE event to call installed handlers
-
-        this.emit(Webhook.Event.TEXT_MESSAGE, chat, message.text);
     }
 
     /**
@@ -255,19 +254,16 @@ export class ResponderService extends RouterService {
 
         let payload: Webhook.QuickReplyPayload = JSON.parse(message.quick_reply.payload);
 
-        if (chat.isConversationActive()) {
+        // check if the incoming message is an answer to previously asked question
+        // in that case no events will be fired
 
-            // if the message is a part of conversation, resume it with data or id
+        if (!chat.answer(payload.data ? payload : payload.id, this)) {
+            // emit IDENTIFIED QUICK REPLY event
+            this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, chat, payload.data);
 
-            logger.debug("..as a part of CONVERSATION");
-            chat.getConversation().resume(payload.data ? payload : payload.id, this);
+            // finally emit general QUICK REPLY event
+            this.emit(Webhook.Event.TEXT_QUICK_REPLY, chat, payload.data);
         }
-
-        // emit IDENTIFIED QUICK REPLY event
-        this.emit(`${Webhook.Event.TEXT_QUICK_REPLY}:${payload.id}`, chat, payload.data);
-
-        // finally emit general QUICK REPLY event
-        this.emit(Webhook.Event.TEXT_QUICK_REPLY, chat, payload.data);
     }
 
     /**

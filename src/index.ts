@@ -1,6 +1,5 @@
 export * from "./server/bot-server";
 export * from "./server/chat";
-export * from "./server/conversation";
 export * from "./server/messenger-extension";
 export * from "./utils/bot-utils";
 export * from "./fb-api-helpers/persistent-menu-builder";
