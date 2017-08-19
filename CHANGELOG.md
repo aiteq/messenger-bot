@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - validation support for Conversation.ask
+- CLI: added alias `code generate` to `code create`
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
