@@ -152,15 +152,10 @@ export class ResponderService extends RouterService {
 
         logger.debug("received TEXT message", message.mid);
 
-        if (chat.isConversationActive()) {
+        // check if the incoming message is an answer to previously asked question
+        // in that case no hear handlers will be called
 
-            // if the message is part of an active conversation, don't call any hear handler
-            // just resume the conversation with the message text
-
-            logger.debug("..as a part of CONVERSATION");
-            chat.getConversation().resume(message.text, this);
-
-        } else {
+        if (!chat.answer(message.text, this)) {
 
             // call all hear handlers according matching hooks
 

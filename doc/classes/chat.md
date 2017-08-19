@@ -1,11 +1,13 @@
 [@aiteq/messenger-bot](../README.md) > [Chat](../classes/chat.md)
 
 # Class: Chat
-Provides methods for one-way bot-to-user communication. An instance of [Chat](chat.md) is always passed to hear and event handlers to be used for interaction with the user. **Note:** all methods are non-blocking and call underlaying API asynchronously.
+Provides methods for two-way bot-to-user communication. An instance of [Chat](chat.md) is always passed to hear and event handlers to be used for interaction with the user. **Note:** all methods are non-blocking and call underlaying API asynchronously.
 
 ## Index
 
 ### Methods
+* [ask](conversation.md#ask)
+* [askWithMessage](conversation.md#askwithmessage)
 * [getPartnerId](chat.md#getpartnerid)
 * [getUserProfile](chat.md#getuserprofile)
 * [markSeen](chat.md#markseen)
@@ -15,13 +17,56 @@ Provides methods for one-way bot-to-user communication. An instance of [Chat](ch
 * [sendImage](chat.md#sendimage)
 * [sendMessage](chat.md#sendmessage)
 * [sendVideo](chat.md#sendvideo)
-* [startConversation](chat.md#startconversation)
 * [typingOff](chat.md#typingoff)
 * [typingOn](chat.md#typingon)
 
 ---
 
 ## Methods
+<a id="ask"></a>
+###  `ask(text)`
+Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
+If a validator is specified, the bot will automatically repeat the challenge until valid response.
+
+As a validator you can use functions from [validator.js](https://github.com/chriso/validator.js) package:
+```typescript
+import * as validator from "validator";
+
+bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
+    //...
+    let email: string = await chat.ask("Give me your email address, please", validator.isEmail)
+    //...
+});
+```
+The bot will automatically repeat the question until the user enters a valid email address.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| text | `string`   |  a question |
+| validator | `(text: string) => boolean` | optional validator function - returns `true` if the input is valid |
+
+**Returns:** `Promise`<`string`>
+___
+
+<a id="askwithmessage"></a>
+###  `askWithMessage(messageOrBuilder)`
+Asks the user with a message prepared manually or using message builder. It's necessary when we want to force the user to response using QUICK REPLY buttons.
+
+**Type parameters:**
+
+T: `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) |structured message or message builder |
+
+**Returns:** `Promise`<`T`>
+___
+
 <a id="getpartnerid"></a>
 ###  `getPartnerId()`
 
@@ -43,7 +88,7 @@ ___
 
 Marks the last sent message as read.
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`void`>
 ___
 
 <a id="say"></a>
@@ -57,7 +102,7 @@ The primary way to send a plain TEXT message to the user.
 | ------ | ------ | ------ |
 | text | `string`   |  a text to be send |
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`void`>
 ___
 
 <a id="sendaudio"></a>
@@ -72,8 +117,7 @@ Sends an audio file.
 | url | `string`  |  | a URL of the audio file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`string`>
 ___
 
 <a id="sendfile"></a>
@@ -88,7 +132,7 @@ Sends a file.
 | url | `string`  |  |   a URL of the file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`string`>
 ___
 
 <a id="sendimage"></a>
@@ -103,7 +147,7 @@ Sends an image.
 | url | `string`  | - |   a URL of the image file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`string`>
 ___
 
 <a id="sendmessage"></a>
@@ -132,15 +176,7 @@ Sends a video file.
 | url | `string`  | |   a URL of the video file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `this` - for chaining
-___
-
-<a id="startconversation"></a>
-###  startConversation
-
-Starts a new conversation.
-
-**Returns:** [Conversation](conversation.md)
+**Returns:** `Promise`<`string`>
 ___
 
 <a id="typingoff"></a>
@@ -148,7 +184,7 @@ ___
 
 Turns typing indicator OFF.
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`void`>
 ___
 
 <a id="typingon"></a>
@@ -156,5 +192,5 @@ ___
 
 Turns typing indicator ON for 20 seconds or next message.
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<`void`>
 ___

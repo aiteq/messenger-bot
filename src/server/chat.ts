@@ -1,18 +1,23 @@
 import { Send } from "../fb-api/send";
+import { Webhook } from "../fb-api/webhook";
 import { UserProfile } from "../fb-api/user-profile";
 import { MessageBuilder } from "../fb-api-helpers/message-builder";
 import { logger } from "../logger";
-import { Conversation } from "./conversation";
+import { ResponderService } from "./responder-service";
 
 
 /**
- * Provides methods for one-way bot-to-user communication. An instance of [[Chat]] is always passed to
+ * Provides methods for two-way bot-to-user communication. An instance of [[Chat]] is always passed to
  * hear and event handlers to be used for interaction with the user.
  * <b>Note:</b> all methods are non-blocking and call underlaying API asynchronously.
  */
 export class Chat {
 
-    private conversation: Conversation;
+    private callbacks: {
+        resolve: (data: string | Webhook.QuickReplyPayload) => void,
+        validator?: (text: string) => void,
+        challenge?: string
+    };
 
     /**
      * Creates an instance of [[Chat]]. Instances are managed by the [[ResponderService]] so
@@ -28,41 +33,37 @@ export class Chat {
      * The primary way to send a plain TEXT message to the user.
      * 
      * @param {string} text - a text to be send
-     * @returns {this} - for chaining
+     * @returns {Promise<void>}
      */
-    public say(text: string): this {
-        this.sendApi.sendText(this.partnerId, text);
-        return this;
+    public async say(text: string): Promise<void> {
+        return await this.sendApi.sendText(this.partnerId, text);
     }
 
     /**
      * Turns typing indicator ON for 20 seconds or next message.
      * 
-     * @returns {this} - for chaining
+     * @returns {Promise<void>}
      */
-    public typingOn(): this {
-        this.sendApi.typingOn(this.partnerId);
-        return this;
+    public async typingOn(): Promise<void> {
+        return await this.sendApi.typingOn(this.partnerId);
     }
 
     /**
      * Turns typing indicator OFF.
      * 
-     * @returns {this} - for chaining
+     * @returns {Promise<void>}
      */
-    public typingOff(): this {
-        this.sendApi.typingOff(this.partnerId);
-        return this;
+    public async typingOff(): Promise<void> {
+        return await this.sendApi.typingOff(this.partnerId);
     }
 
     /**
      * Marks the last sent message as read.
      * 
-     * @returns {this} - for chaining
+     * @returns {Promise<void>}
      */
-    public markSeen(): this {
-        this.sendApi.markSeen(this.partnerId);
-        return this;
+    public async markSeen(): Promise<void> {
+        return await this.sendApi.markSeen(this.partnerId);
     }
 
     /**
@@ -70,11 +71,10 @@ export class Chat {
      * 
      * @param {string} url - a URL of the image file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {this} - for chaining
+     * @returns {Promise<string>} - an attachment ID
      */
-    public sendImage(url: string, reusable: boolean = false): this {
-        this.sendApi.sendImage(this.partnerId, url, reusable);
-        return this;
+    public async sendImage(url: string, reusable: boolean = false): Promise<string> {
+        return await this.sendApi.sendImage(this.partnerId, url, reusable);
     }
 
     /**
@@ -82,11 +82,10 @@ export class Chat {
      * 
      * @param {string} url - a URL of the audio file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {this} - for chaining
+     * @returns {Promise<string>} - an attachment ID
      */
-    public sendAudio(url: string, reusable: boolean = false): this {
-        this.sendApi.sendAudio(this.partnerId, url, reusable);
-        return this;
+    public async sendAudio(url: string, reusable: boolean = false): Promise<string> {
+        return await this.sendApi.sendAudio(this.partnerId, url, reusable);
     }
 
     /**
@@ -94,11 +93,10 @@ export class Chat {
      * 
      * @param {string} url - a URL of the video file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {this} - for chaining
+     * @returns {Promise<string>} - an attachment ID
      */
-    public sendVideo(url: string, reusable: boolean = false): this {
-        this.sendApi.sendVideo(this.partnerId, url, reusable);
-        return this;
+    public async sendVideo(url: string, reusable: boolean = false): Promise<string> {
+        return await this.sendApi.sendVideo(this.partnerId, url, reusable);
     }
 
     /**
@@ -106,69 +104,110 @@ export class Chat {
      * 
      * @param {string} url - a URL of the file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {this} - for chaining
+     * @returns {Promise<string>} - an attachment ID
      */
-    public sendFile(url: string, reusable: boolean = false): this {
-        this.sendApi.sendFile(this.partnerId, url, reusable);
-        return this;
+    public async sendFile(url: string, reusable: boolean = false): Promise<string> {
+        return await this.sendApi.sendFile(this.partnerId, url, reusable);
     }
 
     /**
      * Sends a message prepared manually or using message builder.
      * 
      * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - a structured message or message builder
-     * @returns {this} - for chaining
+     * @returns {Promise<string>} - an attachment ID
      */
-    public sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): this {
-        this.sendApi.send(this.partnerId, messageOrBuilder);
-        return this;
+    public async sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<void> {
+        return await this.sendApi.send(this.partnerId, messageOrBuilder);
+    }
+
+	/**
+     * Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
+     * If a validator is specified, the bot will automatically repeat the challenge until valid response.
+     * 
+     * @param {string} challenge - a question
+     * @param {(text: string) => boolean} [validator] - optional validator function - returns `true` if the input is valid
+     * @returns {Promise<string>} 
+     */
+    public async ask(challenge: string, validator?: (text: string) => boolean): Promise<string> {
+
+        // await for the message to be send, so you can be sure the user is responding to your question
+        await this.say(challenge);
+
+        return new Promise((resolve: (data: string) => void) => {
+
+            // This is maybe the most interested part of conversation's implementation.
+            // Because the response will arrive in one of the subsequent requests, we must remember
+            // this Promise's resolve callback. Its later execution will be made by the resume() method.
+
+            this.callbacks = { resolve, validator, challenge };
+        });
     }
 
     /**
-     * Returns user's profile containing public information.
+     * Asks the user with a message prepared manually or using message builder. It's necessary when
+     * we want to force the user to response using QUICK REPLY buttons.
      * 
-     * @returns {Promise<UserProfile.Response>} - user's public profile information
+     * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - structured message or message builder
+     * @returns {Promise<T>}
      */
+    public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<T> {
+
+        // await for the message to be send, so you can be sure the user is responding to your question
+        await this.sendMessage(messageOrBuilder);
+
+        return new Promise((resolve: (data: T) => void) => {
+            this.callbacks = { resolve };
+        });
+    }
+
+    /**
+     * For internal use only.
+     * Resumes the conversation executing the saved resolve callback or repeating the original
+     * challenge if the response is not valid
+     * 
+     * @param {(string | Webhook.QuickReplyPayload)} data - user's response
+     * @param {ResponderService} responder - the method can be called only from ResponderService
+     * @returns {boolean} - true if the incoming message is an answer to previously asked question
+     */
+    public answer(data: string | Webhook.QuickReplyPayload, responder: ResponderService): boolean {
+
+        if (!responder) {
+            throw new Error("unauthorized calling of the Chat.answer");
+        }
+
+        if (this.callbacks) {
+
+            if (typeof data === "string" && this.callbacks.validator && !this.callbacks.validator(data)) {
+
+                // validation of the input failed, repeat the challenge
+
+                logger.debug("input validation failed, repeating the challenge");
+
+                this.say(this.callbacks.challenge);
+
+            } else {
+
+                // the question answered, clear the callbacks
+
+                logger.debug("the question asked has been answered")
+
+                this.callbacks.resolve(data);
+                this.callbacks = undefined;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+    * Returns user's profile containing public information.
+    * 
+    * @returns {Promise<UserProfile.Response>} - user's public profile information
+    */
     public getUserProfile(): Promise<UserProfile.Response> {
         return this.userProfileApi.getUserProfile(this.partnerId);
-    }
-
-    /**
-     * Starts a new conversation.
-     * 
-     * @returns {Conversation} 
-     */
-    public startConversation(): Conversation {
-        this.conversation = new Conversation(this.partnerId, this, this.sendApi);
-        return this.conversation;
-    }
-
-    /**
-     * Ends the active conversation.
-     * 
-     * @returns {this} - for chaining
-     */
-    public endConversation(): this {
-        this.conversation = undefined;
-        return this;
-    }
-
-    /**
-     * Indicates whether a conversation is active.
-     * 
-     * @returns {boolean} - <code>true</code> if a conversation is active
-     */
-    public isConversationActive(): boolean {
-        return !!this.conversation;
-    }
-
-    /**
-     * Returns the active conversation.
-     * 
-     * @returns {Conversation} 
-     */
-    public getConversation(): Conversation {
-        return this.conversation;
     }
 
     /**

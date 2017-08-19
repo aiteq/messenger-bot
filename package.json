@@ -1,6 +1,6 @@
 {
     "name": "@aiteq/messenger-bot",
-    "version": "1.1.0-beta.3",
+    "version": "1.1.0-beta.4",
     "description": "A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.",
     "main": "./bin/index.js",
     "types": "./bin/index.d.ts",

@@ -24,7 +24,6 @@ As a validator you can use functions from [validator.js](https://github.com/chri
 import * as validator from "validator";
 
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
-    let conv: Conversation = chat.startConversation();
     //...
     let email: string = await conv.ask("Give me your email address, please", validator.isEmail)
     //...

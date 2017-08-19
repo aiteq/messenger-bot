@@ -17,7 +17,7 @@
 
 * Express.js based, **event-driven bot server** handling both **[Webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference)** and **[Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)** requests.
 * **Subscribing** to incoming text messages using regular expresions or to events emitted by the webhook middleware.
-* Start and manage **conversations** for contextual, synchronous message exchange with users.
+* Support for synchronous **conversations** between the bot and users.
 * **Utilities** for calling [Messenger Platform API](https://developers.facebook.com/docs/messenger-platform) functions from code **outside** chatbot flow.
 * Standalone **CLI** for instant access to backing functions of the Messenger API.
 * Complete **type definitions** so the package is ready to be used in both **JavaScript** and **TypeScript** projects.
@@ -187,23 +187,15 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-about", (chat: Chat) => {
     chat.say("What can I say about myself... I'm a bot.");
 });
 ```
-
+<a id="conversation"></a>
 ### Conversation
-Conversation is contextual, synchronous message exchange between users and the bot by setting a flow of questions and answers. It's a useful way to get conventional UI tasks, like form filling, closer to interpersonal communication.
+Conversation is synchronous message exchange between users and the bot by setting a flow of questions and answers. It's a useful way to get conventional UI tasks, like form filling, closer to interpersonal communication.
 
-In the current version, a conversation can handle these types of messages:
-- Text message
-- Quick Reply message
-
-In the case of an active conversation any incoming text message won't trigger callbacks installed using the [hear](doc/classes/botserver.md#hear) method. The flow will remain inside the conversation.
-
-In order to ensure execution of steps of the conversation synchronously, all methods of the [Conversation](doc/classes/conversation.md) class return a Promise. So you can call next step after resolving the current. And when you add a little bit of syntactic sugar using the ```async```/```await``` concept, the conversation flow will look much more readable, almost like a real dialog:
+In order to ensure execution of steps of the conversation synchronously, all methods of the [Chat](doc/classes/chat.md) class return Promises. So you can call next step after resolving the current. And when you add a little bit of syntactic sugar using the ```async```/```await``` concept, the conversation flow will look much more readable, almost like a real dialog:
 
 ```typescript
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-song", async (chat: Chat) => {
-    let conv: Conversation = chat.startConversation();
-    profile.favSong = await conv.ask("What's your favourite song?");
-    conv.end();
+    profile.favSong = await chat.ask("What's your favourite song?");
 });
 ```
 
@@ -211,13 +203,11 @@ Or more complex flow:
 
 ```typescript
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-order", async (chat: Chat) => {
-    let conv: Conversation = chat.startConversation();
-    await conv.say("Well, let's order some Botcoins. I'll just ask you a few details.");
-    order.amount = await conv.ask("How many Botcoins you want to buy?");
-    order.wallet = await conv.ask("What's the address of your Botcoin wallet?");
-    order.email = await conv.ask("And finally, tell me your email where I should send instructions for payment.");
-    conv.say("Thank you for your order!");
-    conv.end();
+    await chat.say("Well, let's order some Botcoins. I'll just ask you a few details.");
+    order.amount = await chat.ask("How many Botcoins you want to buy?");
+    order.wallet = await chat.ask("What's the address of your Botcoin wallet?");
+    order.email = await chat.ask("And finally, tell me your email where I should send instructions for payment.");
+    chat.say("Thank you for your order!");
 });
 ```
 
@@ -225,25 +215,22 @@ Also, if the order of questions in the flow does not matter, you can wait for re
 
 ```typescript
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-sum3", async (chat: Chat) => {
-    let conv: Conversation = chat.startConversation();
-    await conv.say("Tell me 3 numbers and I'll sum them.");
-    let a = conv.ask("Number?");
-    let b = conv.ask("Number?");
-    let c = conv.ask("Number?");
-    conv.say(`Total: ${await a + await b + await c}`);
-    conv.end();
+    await chat.say("Tell me 3 numbers and I'll sum them.");
+    let a = chat.ask("Number?");
+    let b = chat.ask("Number?");
+    let c = chat.ask("Number?");
+    chat.say(`Total: ${await a + await b + await c}`);
 });
 ```
 
 #### Input validation
-As with classic forms, even in the case of a conversation, we need to validate user inputs. Therefore, the interface offers the ability to call a validation function wich you can pass when calling the [ask()](./doc/classes/conversation.md#ask) method. As a validator you can conveniently use functions from [validator.js](https://github.com/chriso/validator.js) package:
+As with classic forms, even in the case of a conversation, we need to validate user inputs. Therefore, the interface offers the ability to call a validation function wich you can pass when calling the [ask()](./doc/classes/chat.md#ask) method. As a validator you can conveniently use functions from [validator.js](https://github.com/chriso/validator.js) package:
 ```typescript
 import * as validator from "validator";
 
 bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
-    let conv: Conversation = chat.startConversation();
     //...
-    let email: string = await conv.ask("Give me your email address, please", validator.isEmail)
+    let email: string = await chat.ask("Give me your email address, please", validator.isEmail)
     //...
 });
 ```
