@@ -19,6 +19,8 @@ export class Chat {
         challenge?: string
     };
 
+    private timeout: Promise<any>;
+
     /**
      * Creates an instance of [[Chat]]. Instances are managed by the [[ResponderService]] so
      * don't create one directly.
@@ -36,6 +38,10 @@ export class Chat {
      * @returns {Promise<void>}
      */
     public async say(text: string): Promise<void> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+
         return await this.sendApi.sendText(this.partnerId, text);
     }
 
@@ -45,6 +51,10 @@ export class Chat {
      * @returns {Promise<void>}
      */
     public async typingOn(): Promise<void> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+
         return await this.sendApi.typingOn(this.partnerId);
     }
 
@@ -54,6 +64,10 @@ export class Chat {
      * @returns {Promise<void>}
      */
     public async typingOff(): Promise<void> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.typingOff(this.partnerId);
     }
 
@@ -63,6 +77,10 @@ export class Chat {
      * @returns {Promise<void>}
      */
     public async markSeen(): Promise<void> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.markSeen(this.partnerId);
     }
 
@@ -74,6 +92,10 @@ export class Chat {
      * @returns {Promise<string>} - an attachment ID
      */
     public async sendImage(url: string, reusable: boolean = false): Promise<string> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.sendImage(this.partnerId, url, reusable);
     }
 
@@ -85,6 +107,10 @@ export class Chat {
      * @returns {Promise<string>} - an attachment ID
      */
     public async sendAudio(url: string, reusable: boolean = false): Promise<string> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.sendAudio(this.partnerId, url, reusable);
     }
 
@@ -96,6 +122,10 @@ export class Chat {
      * @returns {Promise<string>} - an attachment ID
      */
     public async sendVideo(url: string, reusable: boolean = false): Promise<string> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.sendVideo(this.partnerId, url, reusable);
     }
 
@@ -107,6 +137,10 @@ export class Chat {
      * @returns {Promise<string>} - an attachment ID
      */
     public async sendFile(url: string, reusable: boolean = false): Promise<string> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.sendFile(this.partnerId, url, reusable);
     }
 
@@ -117,6 +151,10 @@ export class Chat {
      * @returns {Promise<string>} - an attachment ID
      */
     public async sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<void> {
+
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         return await this.sendApi.send(this.partnerId, messageOrBuilder);
     }
 
@@ -130,6 +168,9 @@ export class Chat {
      */
     public async ask(challenge: string, validator?: (text: string) => boolean): Promise<string> {
 
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.say(challenge);
 
@@ -152,6 +193,9 @@ export class Chat {
      */
     public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<T> {
 
+        // wait if requested
+        this.timeout && await this.timeout;
+        
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.sendMessage(messageOrBuilder);
 
@@ -213,9 +257,25 @@ export class Chat {
     /**
      * Returns an ID of the chat partner.
      * 
-     * @returns {string} 
+     * @returns {string}
      */
     public getPartnerId(): string {
         return this.partnerId;
+    }
+
+    /**
+     * Wait before next action.
+     * 
+     * @param {number} seconds - lenght of timeout
+     * @returns {this} - for chaining
+     */
+    public wait(seconds: number): this {
+        this.timeout = new Promise(resolve => {
+            setTimeout(() => {
+                this.timeout = undefined;
+                resolve();
+            }, seconds * 1000);
+        });
+        return this;
     }
 }

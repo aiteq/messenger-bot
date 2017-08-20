@@ -19,6 +19,7 @@ Provides methods for two-way bot-to-user communication. An instance of [Chat](ch
 * [sendVideo](chat.md#sendvideo)
 * [typingOff](chat.md#typingoff)
 * [typingOn](chat.md#typingon)
+* [wait](chat.md#wait)
 
 ---
 
@@ -197,4 +198,25 @@ ___
 Turns typing indicator ON for 20 seconds or next message.
 
 **Returns:** `Promise`<`void`>
+___
+
+<a id="wait"></a>
+###  `wait()`
+
+Wait for the given seconds before next chat action.
+```typescript
+bot.hear("order", async (chat: Chat) => {
+    //...
+    chat.wait(30).say("Sorry to disturb you yet again, but I want to ask you ...");
+    //...
+});
+```
+
+**Parameters:**
+
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| seconds | `number`  | | number of seconds to wait |
+
+**Returns:** `this` - for chaining
 ___
