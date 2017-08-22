@@ -165,10 +165,10 @@ export class BotServer {
      * The callback is executed with the parameters: chat: Chat, data: any.
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
-     * @param {Function} callback - a callback function
+     * @param {(...args: any[]) => void} callback - a callback function
      * @returns {this} - for chaining
      */
-    public on(event: Webhook.Event, callback: Function): this;
+    public on(event: Webhook.Event, callback: (...args: any[]) => void): this;
 
     /**
      * Subscribe to an <i>identified event</i>. An identified event is specified, in addition to its
@@ -178,13 +178,13 @@ export class BotServer {
      * 
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {string} id - an identification of the event
-     * @param {Function} callback - a callback function
+     * @param {(...args: any[]) => void} callback - a callback function
      * @returns {this} 
      */
-    public on(event: Webhook.Event, id: string, callback: Function): this;
+    public on(event: Webhook.Event, id: string, callback: (...args: any[]) => void): this;
 
     /* implementation of the overloaded method on() - see 2 overloads above */
-    public on(event: Webhook.Event, idOrCallback: string | Function, callback?: Function): this {
+    public on(event: Webhook.Event, idOrCallback: string | ((...args: any[]) => void), callback?: (...args: any[]) => void): this {
 
         let extEvent: string = event;
 
@@ -220,7 +220,7 @@ export class BotServer {
      */
     private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => void = (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => {
 
-        let [algorithm, signature] = (req.headers["x-hub-signature"] || "").split("=");
+        let [algorithm, signature] = ((req.headers["x-hub-signature"] as string) || "").split("=");
 
         if (!signature) {
             throw new Error("couldn't validate the request signature, the 'x-hub-signature' header not found");

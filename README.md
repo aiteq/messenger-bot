@@ -39,6 +39,9 @@ A syntactical superset of JavaScript adding static typing, implementing object-o
 #### Embedded JavaScript Templates
 [EJS](http://ejs.co/) is a very simple templating language that helps to create HTML for the pages to be shown in a programmatic way with injecting values. The package uses the EJS for **rendering Chat Extensions**.
 
+#### Jest
+[Jest](https://facebook.github.io/jest/) is yet another unit testing framework by Facebook. It covers all needed unit testing areas: tests definition, assertion and code coverage measuring and reporting. In addition the Jest supports TypeScript and Promises. It's interface is just right balanced between descriptiveness and verbosity, so its using is very intuitive..
+
 #### Grunt
 As a task runner the [Grunt](https://gruntjs.com/) helps to organize building, releasing and maintaining the package.
 

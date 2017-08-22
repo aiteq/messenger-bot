@@ -116,7 +116,7 @@ The callback is executed with two parameters:
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
-| callback | `Function` | a callback function |
+| callback | `(...args: any[]) => void` | a callback function |
 
 **Returns:** `this` - for chaining
 
@@ -138,7 +138,7 @@ The callback is executed with two parameters:
 | ------ | ------ | ------ |
 | event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
 | id | `string` | an identification of the event |
-| callback | `Function` | a callback function |
+| callback | `(...args: any[]) => void` | a callback function |
 
 **Returns:** `this` - for chaining
 ___
