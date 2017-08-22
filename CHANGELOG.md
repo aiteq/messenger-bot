@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- storing reusable media ids (store module refactored)
+
+### Changed
+- TypeScript 2.5, Node 8.4
+
 ### Added
 - [Chat.wait](doc/classes/chat.md#wait)
 
