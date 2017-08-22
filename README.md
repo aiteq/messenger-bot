@@ -158,7 +158,7 @@ bot.hear(/^good (night|morning)$/i, (chat: Chat, text: string, captured: string[
     chat.say(`Hi, good ${captured[0]}!`);
 });
 ```
-In addition, you can mix commands and regular expressions in one hook.
+In addition, you can mix commands and regular expressions in the same array.
 
 **Note**: The regular expressions are used exactly as given, so if you want to test the text in case-insensitive manner you must explictily indicate it (the `i` flag).
 

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - TypeScript 2.5, Node 8.4
 
 ### Added
+- test coverage: store
 - [Chat.wait](doc/classes/chat.md#wait)
 
 ## [1.1.0-beta.4] - 2017-08-19

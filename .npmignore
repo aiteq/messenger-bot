@@ -1,4 +1,5 @@
 .tscache
-doc-pre
-src
-work
+/doc-pre
+/src
+/test
+/work

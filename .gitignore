@@ -3,8 +3,9 @@
 *.js
 *.d.ts
 
-node_modules
-bin
-work
-doc-pre
+/node_modules
+/bin
+/test
+/work
+/doc-pre
 bot-db.json
