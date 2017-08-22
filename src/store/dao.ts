@@ -25,7 +25,7 @@ export class Dao<T> {
         return this.table.find({ [this.idProperty]: id }).value<T>();
     }
 
-    public async save(entity: T): Promise<void> {
+    public async save(entity: T): Promise<T> {
 
         if (!entity || !entity[this.idProperty]) {
             return Promise.reject(`couldn't save undefined or entity without ${this.idProperty} property`);
@@ -36,12 +36,12 @@ export class Dao<T> {
         if (existing.value()) {
 
             // update existing
-            return existing.assign(entity).write();
+            return existing.assign(entity).write() as any;
 
         } else {
 
             // save new
-            return this.table.push(entity).write();
+            return (await this.table.push(entity).write())[0];
         }
     }
 }
