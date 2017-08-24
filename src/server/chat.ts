@@ -24,16 +24,16 @@ export class Chat {
     /**
      * Creates an instance of [[Chat]]. Instances are managed by the [[ResponderService]] so
      * don't create one directly.
-     * 
-     * @param {string} partnerId 
-     * @param {Send.Api} sendApi 
-     * @param {UserProfile.Api} userProfileApi 
+     *
+     * @param {string} partnerId
+     * @param {Send.Api} sendApi
+     * @param {UserProfile.Api} userProfileApi
      */
     constructor(protected partnerId: string, protected sendApi: Send.Api, protected userProfileApi: UserProfile.Api) { }
 
     /**
      * The primary way to send a plain TEXT message to the user.
-     * 
+     *
      * @param {string} text - a text to be send
      * @returns {Promise<void>}
      */
@@ -47,7 +47,7 @@ export class Chat {
 
     /**
      * Turns typing indicator ON for 20 seconds or next message.
-     * 
+     *
      * @returns {Promise<void>}
      */
     public async typingOn(): Promise<void> {
@@ -60,33 +60,33 @@ export class Chat {
 
     /**
      * Turns typing indicator OFF.
-     * 
+     *
      * @returns {Promise<void>}
      */
     public async typingOff(): Promise<void> {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.typingOff(this.partnerId);
     }
 
     /**
      * Marks the last sent message as read.
-     * 
+     *
      * @returns {Promise<void>}
      */
     public async markSeen(): Promise<void> {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.markSeen(this.partnerId);
     }
 
     /**
      * Sends an image.
-     * 
+     *
      * @param {string} url - a URL of the image file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
      * @returns {Promise<string>} - an attachment ID
@@ -95,13 +95,13 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.sendImage(this.partnerId, url, reusable);
     }
 
     /**
      * Sends an audio.
-     * 
+     *
      * @param {string} url - a URL of the audio file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
      * @returns {Promise<string>} - an attachment ID
@@ -110,13 +110,13 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.sendAudio(this.partnerId, url, reusable);
     }
 
     /**
      * Sends a video.
-     * 
+     *
      * @param {string} url - a URL of the video file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
      * @returns {Promise<string>} - an attachment ID
@@ -125,13 +125,13 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.sendVideo(this.partnerId, url, reusable);
     }
 
     /**
      * Sends a file.
-     * 
+     *
      * @param {string} url - a URL of the file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
      * @returns {Promise<string>} - an attachment ID
@@ -140,13 +140,13 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.sendFile(this.partnerId, url, reusable);
     }
 
     /**
      * Sends a message prepared manually or using message builder.
-     * 
+     *
      * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - a structured message or message builder
      * @returns {Promise<string>} - an attachment ID
      */
@@ -154,23 +154,23 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         return await this.sendApi.send(this.partnerId, messageOrBuilder);
     }
 
 	/**
      * Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
      * If a validator is specified, the bot will automatically repeat the challenge until valid response.
-     * 
+     *
      * @param {string} challenge - a question
      * @param {(text: string) => boolean} [validator] - optional validator function - returns `true` if the input is valid
-     * @returns {Promise<string>} 
+     * @returns {Promise<string>}
      */
     public async ask(challenge: string, validator?: (text: string) => boolean): Promise<string> {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.say(challenge);
 
@@ -187,7 +187,7 @@ export class Chat {
     /**
      * Asks the user with a message prepared manually or using message builder. It's necessary when
      * we want to force the user to response using QUICK REPLY buttons.
-     * 
+     *
      * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - structured message or message builder
      * @returns {Promise<T>}
      */
@@ -195,7 +195,7 @@ export class Chat {
 
         // wait if requested
         this.timeout && await this.timeout;
-        
+
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.sendMessage(messageOrBuilder);
 
@@ -208,7 +208,7 @@ export class Chat {
      * For internal use only.
      * Resumes the conversation executing the saved resolve callback or repeating the original
      * challenge if the response is not valid
-     * 
+     *
      * @param {(string | Webhook.QuickReplyPayload)} data - user's response
      * @param {ResponderService} responder - the method can be called only from ResponderService
      * @returns {boolean} - true if the incoming message is an answer to previously asked question
@@ -247,7 +247,7 @@ export class Chat {
 
     /**
     * Returns user's profile containing public information.
-    * 
+    *
     * @returns {Promise<UserProfile.Response>} - user's public profile information
     */
     public getUserProfile(): Promise<UserProfile.Response> {
@@ -256,7 +256,7 @@ export class Chat {
 
     /**
      * Returns an ID of the chat partner.
-     * 
+     *
      * @returns {string}
      */
     public getPartnerId(): string {
@@ -265,7 +265,7 @@ export class Chat {
 
     /**
      * Wait before next action.
-     * 
+     *
      * @param {number} seconds - lenght of timeout
      * @returns {this} - for chaining
      */

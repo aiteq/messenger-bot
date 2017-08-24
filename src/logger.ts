@@ -19,8 +19,8 @@ log4js.configure({
     },
     categories: {
         "@aiteq/messenger-bot": { "appenders": ["console"], "level": "ALL" },
-        "cli": { "appenders": ["cli"], "level": "INFO" },
-        "default": { "appenders": ["console"], "level": "ALL" }
+        cli: { "appenders": ["cli"], "level": "INFO" },
+        default: { "appenders": ["console"], "level": "ALL" }
     }
 });
 

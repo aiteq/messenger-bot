@@ -1,7 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { logger } from "../logger";
 import { RouterService } from "./router-service";
-
 
 /**
  * A middleware handling webhook verification request.

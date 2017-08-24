@@ -1,6 +1,5 @@
-import { Router, RequestHandler } from "express";
 import { EventEmitter } from "events";
-
+import { RequestHandler, Router } from "express";
 
 /**
  * A parent class for middleware services to be mounted as Express routes.

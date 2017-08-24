@@ -1,5 +1,5 @@
-import { Reusable } from "./reusable";
 import { Dao } from "./dao";
+import { Reusable } from "./reusable";
 
 export class ReusableDao extends Dao<Reusable> {
 

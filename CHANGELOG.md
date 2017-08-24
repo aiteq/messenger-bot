@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - TypeScript 2.5, Node 8.4
+- using `npm shrinkwrap` due to vulnerabilities found by snyk (check npm-shrinkwrap.json.0)
 
 ### Added
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)

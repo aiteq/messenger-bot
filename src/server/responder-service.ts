@@ -1,11 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Send } from "../fb-api/send";
-import { Webhook } from "../fb-api/webhook";
 import { UserProfile } from "../fb-api/user-profile";
+import { Webhook } from "../fb-api/webhook";
 import { logger } from "../logger";
-import { RouterService } from "./router-service";
 import { Chat } from "./chat";
-
+import { RouterService } from "./router-service";
 
 /**
  * A main middleware handling all webhook requests.
@@ -21,10 +20,9 @@ export class ResponderService extends RouterService {
     private sendApi: Send.Api;
     private userProfileApi: UserProfile.Api;
 
-
     /**
      * Creates an instance of ResponderService.
-     * @param {string} accessToken 
+     * @param {string} accessToken
      */
     constructor(private accessToken: string) {
 
@@ -52,15 +50,15 @@ export class ResponderService extends RouterService {
             // parse webhook request data according to common format
             // see https://developers.facebook.com/docs/messenger-platform/webhook-reference#format
 
-            (<Webhook.Request>req.body).entry.forEach((entry: Webhook.MessageEntry) => {
+            (req.body as Webhook.Request).entry.forEach((entry: Webhook.MessageEntry) => {
 
                 logger.info(`received meesage for page https://www.facebook.com/${entry.id}`);
 
                 entry.messaging.forEach((item: Webhook.MessagingItem) => {
 
                     // get cached or create new Chat
-                    let chat: Chat = this.chats.get(item.sender.id) || (() => {
-                        let newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi);
+                    const chat: Chat = this.chats.get(item.sender.id) || (() => {
+                        const newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi);
                         this.chats.set(item.sender.id, newChat);
                         return newChat;
                     })();
@@ -127,16 +125,16 @@ export class ResponderService extends RouterService {
     /**
      * Install a hear listener for specified regular expressions testing against incoming text messages.
      * It is called only by BotServer.hear().
-     * 
+     *
      * @param {Array<RegExp>} hooks - an array of regular expressions
      * @param {Function} handler - a callback function
-     * @returns {this} 
+     * @returns {this}
      */
     public hear(hooks: Array<RegExp>, handler: Function): this {
 
         hooks.forEach(hook => {
             logger.info("subscribing to text", hook);
-            this.hearHandlers.push({ hook: hook, func: handler });
+            this.hearHandlers.push({ hook, func: handler });
         });
 
         return this;
@@ -144,9 +142,9 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming TEXT message.
-     * 
-     * @param {Webhook.Message} message 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.Message} message
+     * @param {Chat} chat
      */
     private processTextMessage(message: Webhook.Message, chat: Chat): void {
 
@@ -159,9 +157,9 @@ export class ResponderService extends RouterService {
 
             // call all hear handlers according matching hooks
 
-            this.hearHandlers.forEach((handler: { hook: RegExp, func: Function }) => {
+            this.hearHandlers.forEach((handler: { hook: RegExp, func: (chat: Chat, text: string, captured: string[]) => void }) => {
 
-                let matches: RegExpExecArray = handler.hook.exec(message.text);
+                const matches: RegExpExecArray = handler.hook.exec(message.text);
 
                 if (matches) {
 
@@ -177,9 +175,9 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming ATTACHMENT.
-     * 
-     * @param {Webhook.Message} message 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.Message} message
+     * @param {Chat} chat
      */
     private processAttachment(message: Webhook.Message, chat: Chat): void {
 
@@ -202,7 +200,7 @@ export class ResponderService extends RouterService {
 
                 case Webhook.AttachmentType.LOCATION:
 
-                    logger.debug("received LOCATION message", (<Webhook.LocationAttachment>attachment).title, (<Webhook.LocationAttachment>attachment).payload.coordinates);
+                    logger.debug("received LOCATION message", (attachment as Webhook.LocationAttachment).title, (attachment as Webhook.LocationAttachment).payload.coordinates);
                     data = attachment;
                     break;
 
@@ -222,13 +220,13 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming POSTBACK.
-     * 
-     * @param {Webhook.Postback} postback 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.Postback} postback
+     * @param {Chat} chat
      */
     private processPostback(postback: Webhook.Postback, chat: Chat): void {
 
-        let payload: Webhook.PostbackPayload = JSON.parse(postback.payload);
+        const payload: Webhook.PostbackPayload = JSON.parse(postback.payload);
 
         logger.debug("recieved POSTBACK from", payload.src, payload.id);
 
@@ -244,15 +242,15 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming QUICK REPLY.
-     * 
-     * @param {Webhook.Message} message 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.Message} message
+     * @param {Chat} chat
      */
     private processQuickReply(message: Webhook.Message, chat: Chat): void {
 
         logger.debug("received QUICK REPLY message", message.mid);
 
-        let payload: Webhook.QuickReplyPayload = JSON.parse(message.quick_reply.payload);
+        const payload: Webhook.QuickReplyPayload = JSON.parse(message.quick_reply.payload);
 
         // check if the incoming message is an answer to previously asked question
         // in that case no events will be fired
@@ -268,9 +266,9 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming ECHO message.
-     * 
-     * @param {Webhook.Message} message 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.Message} message
+     * @param {Chat} chat
      */
     private processEcho(message: Webhook.Message, chat: Chat): void {
 
@@ -280,9 +278,9 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming DELIVERY NOTIFICATION.
-     * 
-     * @param {Webhook.DeliveryInfo} delivery 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.DeliveryInfo} delivery
+     * @param {Chat} chat
      */
     private processDelivery(delivery: Webhook.DeliveryInfo, chat: Chat): void {
 
@@ -292,9 +290,9 @@ export class ResponderService extends RouterService {
 
     /**
      * Process an incoming READ CONFIRMATION.
-     * 
-     * @param {Webhook.ReadInfo} read 
-     * @param {Chat} chat 
+     *
+     * @param {Webhook.ReadInfo} read
+     * @param {Chat} chat
      */
     private processRead(read: Webhook.ReadInfo, chat: Chat): void {
 

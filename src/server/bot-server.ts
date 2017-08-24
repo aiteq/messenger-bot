@@ -27,7 +27,7 @@ export class BotServer {
 
     /**
      * Creates an instance of BotServer.
-     * 
+     *
      * @param {BotConfig} config - bot configuration object
      */
     constructor(private config: BotConfig) {
@@ -130,7 +130,7 @@ export class BotServer {
      * <b>Note</b>: the <code>hear()</code> method listens only for text messages.
      * <b>Note</b>: the callback is not executed when a received text message matches the hook but
      * the message is part of an active conversation.
-     * 
+     *
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
      * @param {Function} callback - a callback to be executed if a message matches one of the hooks
      * @returns {this} - for chaining
@@ -163,7 +163,7 @@ export class BotServer {
     /**
      * Subscribe to an <i>event</i> emitted when a webhook request is received.
      * The callback is executed with the parameters: chat: Chat, data: any.
-     * 
+     *
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {(...args: any[]) => void} callback - a callback function
      * @returns {this} - for chaining
@@ -175,11 +175,11 @@ export class BotServer {
      * type, with an ID. This feature is available for events capable of carrying data such as
      * POSTBACK or PERSISTENT_MENU_ITEM.
      * The callback is executed with the parameters: chat: Chat, data: any.
-     * 
+     *
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {string} id - an identification of the event
      * @param {(...args: any[]) => void} callback - a callback function
-     * @returns {this} 
+     * @returns {this}
      */
     public on(event: Webhook.Event, id: string, callback: (...args: any[]) => void): this;
 
@@ -203,9 +203,9 @@ export class BotServer {
     /**
      * Install a Chat Extension.
      * (https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)
-     * 
-     * @param {ChatExtension} extension 
-     * @returns {this} 
+     *
+     * @param {ChatExtension} extension
+     * @returns {this}
      */
     public addChatExtension(extension: ChatExtension): this {
         this.extensions.addExtension(extension);
@@ -215,7 +215,7 @@ export class BotServer {
     /**
      * Verify incoming webhook request.
      * (https://developers.facebook.com/docs/messenger-platform/webhook-reference#security)
-     * 
+     *
      * Must be an arrow function because it is called as calback and needs to acceess this.config
      */
     private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => void = (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => {

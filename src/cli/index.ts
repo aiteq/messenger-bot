@@ -1,5 +1,5 @@
-import { cliout } from "./cli-logger";
 import { logger } from "../logger";
+import { cliout } from "./cli-logger";
 import { MBUtil } from "./mb-util";
 
 (async () => {

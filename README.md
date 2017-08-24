@@ -1,4 +1,5 @@
-# @aiteq/messenger-bot
+# <div style="float:left">@aiteq/messenger-bot</div><div style="float:right">[![npm version](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot.svg)](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot) [![Build Status](https://travis-ci.org/aiteq/messenger-bot.svg?branch=master)](https://travis-ci.org/aiteq/messenger-bot) [![Coverage Status](https://coveralls.io/repos/github/aiteq/messenger-bot/badge.svg?branch=master)](https://coveralls.io/github/aiteq/messenger-bot?branch=master)</div><div style="clear:both"></div>
+
 #### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
 *Please note that the package is still not fully tested BETA. Ideas, tips and bug/typo reports are welcomed.*

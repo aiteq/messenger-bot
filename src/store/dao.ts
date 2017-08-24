@@ -10,7 +10,7 @@ export class Dao<T> {
         if (!path) {
             throw new Error("path not specified");
         }
-        
+
         this.db = new Lowdb("./bot-db.json", {
             storage: require("lowdb/lib/storages/file-async")
         })
@@ -31,7 +31,7 @@ export class Dao<T> {
             return Promise.reject(`couldn't save undefined or entity without ${this.idProperty} property`);
         }
 
-        let existing: Lowdb = this.table.find({ [this.idProperty]: entity[this.idProperty] });
+        const existing: Lowdb = this.table.find({ [this.idProperty]: entity[this.idProperty] });
 
         if (existing.value()) {
 

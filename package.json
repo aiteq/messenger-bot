@@ -14,7 +14,8 @@
     "scripts": {
         "compile": "grunt",
         "prepublishOnly": "npm run compile",
-        "test": "jest"
+        "test": "jest",
+        "lint": "tslint --project ."
     },
     "bin": {
         "mbutil": "./bin/cli/index.js"
@@ -30,21 +31,23 @@
     "author": "Aiteq Reloaded, s.r.o.",
     "license": "MIT",
     "devDependencies": {
-        "@types/body-parser": "^1.16.4",
+        "@types/body-parser": "^1.16.5",
         "@types/ejs": "^2.3.33",
-        "@types/express": "^4.0.36",
-        "@types/jest": "^20.0.7",
+        "@types/express": "^4.0.37",
+        "@types/jest": "^20.0.8",
         "@types/lowdb": "^0.15.0",
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.24",
+        "@types/node": "^8.0.25",
         "grunt": "^1.0.1",
         "grunt-coveralls": "^1.0.1",
         "grunt-exec": "^3.0.0",
         "grunt-file-append": "0.0.7",
-        "grunt-ts": "^6.0.0-beta.16",
+        "grunt-ts": "^5.5.1",
+        "grunt-tslint": "^5.0.1",
         "jest": "^20.0.4",
         "ts-jest": "^20.0.10",
-        "typescript": "^2.5.1"
+        "tslint": "^5.6.0",
+        "typescript": "^2.4.2"
     },
     "dependencies": {
         "async-file": "^2.0.2",
@@ -53,7 +56,7 @@
         "ejs": "^2.5.7",
         "express": "^4.15.4",
         "log4js": "^2.3.3",
-        "lowdb": "^0.16.2",
+        "lowdb": "^0.17.2",
         "minimist": "^1.2.0"
     },
     "engines": {
