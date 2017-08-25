@@ -1,6 +1,7 @@
 import * as fs from "async-file";
-import { MessengerProfile } from "../../fb-api/messenger-profile";
 import { PersistentMenuBuilder } from "../../fb-api-helpers/persistent-menu-builder";
+import { Menu } from "../../fb-api-helpers/persistent-menu-builder-menu";
+import * as MessengerProfile from "../../fb-api/messenger-profile";
 import { BotUtils } from "../../utils/bot-utils";
 import { Group } from "../group";
 
@@ -15,11 +16,11 @@ export class PersistentMenuGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getPersistentMenu();
+                const result: any = await botUtils.getPersistentMenu();
                 return result ?
                     `Persistent menu is set: ${JSON.stringify(result, null, 2)}` :
                     "Persistent Menu is not set";
@@ -36,38 +37,6 @@ export class PersistentMenuGroup extends Group {
             default:
                 this.exitWithUsage();
         }
-    }
-
-    private async readFromFile(fileName: string): Promise<PersistentMenuBuilder> {
-
-        let menuDef: any = JSON.parse(await fs.readTextFile(fileName, "utf8"));
-
-        let builder: PersistentMenuBuilder = new PersistentMenuBuilder();
-
-        Object.keys(menuDef).forEach((locale: string) => {
-
-            let lmenu: any = menuDef[locale];
-            builder.addMenu(locale, !!lmenu.composerInputDisabled, this.createMenu(lmenu.items));
-        });
-
-        return builder;
-    }
-
-    private createMenu(items: Array<any>): PersistentMenuBuilder.Menu {
-
-        let menu: PersistentMenuBuilder.Menu = PersistentMenuBuilder.createMenu();
-
-        items.forEach((item: any) => {
-            if (item.url) {
-                menu.addWebUrlMenuItem(item.title, item.url, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
-            } else if (item.id) {
-                menu.addPostbackMenuItem(item.title, item.id, item.data, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
-            } else if (item.items) {
-                menu.addSubmenu(item.title, this.createMenu(item.items));
-            }
-        });
-
-        return menu;
     }
 
     public getUsage(): string {
@@ -87,6 +56,38 @@ Usage:
 
 Options:
     --file <path> - a path to the menu definition file
-`
+`;
+    }
+
+    private async readFromFile(fileName: string): Promise<PersistentMenuBuilder> {
+
+        const menuDef: any = JSON.parse(await fs.readTextFile(fileName, "utf8"));
+
+        const builder: PersistentMenuBuilder = new PersistentMenuBuilder();
+
+        Object.keys(menuDef).forEach((locale: string) => {
+
+            const lmenu: any = menuDef[locale];
+            builder.addMenu(locale, !!lmenu.composerInputDisabled, this.createMenu(lmenu.items));
+        });
+
+        return builder;
+    }
+
+    private createMenu(items: any[]): Menu {
+
+        const menu: Menu = PersistentMenuBuilder.createMenu();
+
+        items.forEach((item: any) => {
+            if (item.url) {
+                menu.addWebUrlMenuItem(item.title, item.url, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
+            } else if (item.id) {
+                menu.addPostbackMenuItem(item.title, item.id, item.data, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
+            } else if (item.items) {
+                menu.addSubmenu(item.title, this.createMenu(item.items));
+            }
+        });
+
+        return menu;
     }
 }

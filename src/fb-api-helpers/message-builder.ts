@@ -1,6 +1,5 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
-
 
 /**
  * An abstract parent class for <i>message builders</i>. The message builders help to construct
@@ -8,12 +7,11 @@ import { Send } from "../fb-api/send";
  */
 export abstract class MessageBuilder<T extends Send.Message> extends Builder<T> {
 
-	protected message: T;
+    protected message: T;
 
-
-	/**
+    /**
      * Adds a Quick Reply button to the message.
-     * 
+     *
      * @param {string} title - a title of the Quick Reply
      * @param {string} id - an ID of the button (required for proper generation of webhook events)
      * @param {(string | any)} [data] - optional data payload
@@ -22,43 +20,43 @@ export abstract class MessageBuilder<T extends Send.Message> extends Builder<T> 
      */
     public addQuickReply(title: string, id: string, data?: string | any, imageUrl?: string): this {
 
-		this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
+        this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
 
-		let payload: any = { id: id };
-		data && (payload.data = typeof data === "string" ? data : JSON.stringify(data));
+        const payload: any = { id };
+        data && (payload.data = typeof data === "string" ? data : JSON.stringify(data));
 
-		let qr: Send.TextQuickReply = {
-			content_type: Send.ContentType.TEXT,
-			title: title,
-			payload: JSON.stringify(payload)
-		};
-		imageUrl && (qr.image_url = imageUrl);
+        const qr: Send.TextQuickReply = {
+            content_type: Send.ContentType.TEXT,
+            title,
+            payload: JSON.stringify(payload)
+        };
+        imageUrl && (qr.image_url = imageUrl);
 
-		this.message.quick_replies.push(qr);
+        this.message.quick_replies.push(qr);
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
+    /**
      * Adds a Quick Reply button to quickly send user's location.
-     * 
+     *
      * @returns {this} - for chaining
      */
     public addLocationQuickReply(): this {
 
-		this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
+        this.message.quick_replies = this.message.quick_replies || new Array<Send.QuickReply>();
 
-		this.message.quick_replies.push({ content_type: Send.ContentType.LOCATION });
+        this.message.quick_replies.push({ content_type: Send.ContentType.LOCATION });
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
+    /**
      * Creates and returns a message object.
-     * 
+     *
      * @returns {T} - a message object
      */
     public build(): T {
-		return this.message;
-	}
+        return this.message;
+    }
 }

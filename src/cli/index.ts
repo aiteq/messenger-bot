@@ -2,6 +2,8 @@ import { logger } from "../logger";
 import { cliout } from "./cli-logger";
 import { MBUtil } from "./mb-util";
 
+/* tslint:disable no-console */
+
 (async () => {
     try {
         console.log("\nMessenger Bot Utility by Aiteq\n");

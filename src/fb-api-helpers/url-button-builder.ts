@@ -1,5 +1,5 @@
-import { Webview } from "../fb-api/webview";
-import { Send } from "../fb-api/send";
+import * as Send from "../fb-api/send";
+import * as Webview from "../fb-api/webview";
 import { Builder } from "./builder";
 
 /**
@@ -12,9 +12,9 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
     /**
      * Creates an instance of UrlButtonBuilder.
-     * 
-     * @param {string} title 
-     * @param {string} url 
+     *
+     * @param {string} title
+     * @param {string} url
      */
     constructor(title: string, url: string) {
 
@@ -22,14 +22,14 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
         this.button = {
             type: Send.ButtonType.WEB_URL,
-            title: title,
-            url: url
+            title,
+            url
         };
     }
 
     /**
      * Sets a height of the Webview.
-     * 
+     *
      * @param {Webview.HeightRatio} webviewHeightRatio - Webview.HeightRatio.COMPACT or Webview.HeightRatio.FULL or Webview.HeightRatio.TALL
      * @returns {this} - for chaining
      */
@@ -40,7 +40,7 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
     /**
      * Controls usage of Messenger Extensions.
-     * 
+     *
      * @param {boolean} messengerExtensions - must be true if using Messenger Extensions
      * @returns {this} - for chaining
      */
@@ -53,7 +53,7 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
      * Sets the URL to use on clients that don't support Messenger Extensions.
      * If this is not defined, the <code>url</code> will be used as the fallback.
      * It may only be specified if messenger_extensions is true.
-     * 
+     *
      * @param {string} fallbackUrl - a fallback URL
      * @returns {this} - for chaining
      */
@@ -64,8 +64,8 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
     /**
      * Controls the share button in the Webview.
-     * 
-     * @param {boolean} webviewShareButton 
+     *
+     * @param {boolean} webviewShareButton
      * @returns {this} - for chaining
      */
     public setShowWebviewShareButton(webviewShareButton: boolean): this {
@@ -75,8 +75,8 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
 
     /**
      * Returns built URL Button object.
-     * 
-     * @returns {Send.UrlButton} 
+     *
+     * @returns {Send.UrlButton}
      */
     public build(): Send.UrlButton {
         return this.button;

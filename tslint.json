@@ -10,7 +10,9 @@
         "max-line-length": false,
         "jsdoc-format": false,
         "interface-name": [true, "never-prefix"],
-        "trailing-comma": false
+        "trailing-comma": false,
+        "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-separator", "check-type", "check-preblock"],
+        "object-literal-sort-keys": false
     },
     "rulesDirectory": []
 }

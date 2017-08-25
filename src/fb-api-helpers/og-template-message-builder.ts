@@ -1,7 +1,7 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
-import { TemplateMessageBuilder } from "./template-message-builder";
 import { OgElementBuilder } from "./og-element-builder";
+import { TemplateMessageBuilder } from "./template-message-builder";
 
 /**
  * Helps to create a Open Graph Template message.
@@ -9,20 +9,20 @@ import { OgElementBuilder } from "./og-element-builder";
  */
 export class OgTemplateMessageBuilder extends TemplateMessageBuilder<Send.OpenGraphTemplate> {
 
-	constructor() {
+    constructor() {
 
         super();
 
-		this.template = {
-			template_type: Send.TemplateType.OPEN_GRAPH,
-			elements: new Array<Send.OpenGraphElement>()
-		};
+        this.template = {
+            template_type: Send.TemplateType.OPEN_GRAPH,
+            elements: new Array<Send.OpenGraphElement>()
+        };
     }
-    
+
     /**
      * Sets an Open Graph Element.
-     * 
-     * @param {OgElementBuilder} elementBuilder 
+     *
+     * @param {OgElementBuilder} elementBuilder
      * @returns {this} - for chaining
      */
     public setElement(elementBuilder: OgElementBuilder): this {

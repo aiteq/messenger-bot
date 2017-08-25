@@ -12,17 +12,17 @@ export class GreetingGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getGreeting();
+                const result: any = await botUtils.getGreeting();
                 return result && result.length > 0 ?
                     `Greeting is set to:\n${JSON.stringify(result, null, 2)}` :
                     "Greeting is not set";
 
             case "add":
-                let text: string = options._[2];
+                const text: string = options._[2];
                 text || this.exitWithUsage();
                 await botUtils.addGreeting(text, options.locale);
                 return "Greeting has been successfully added";
@@ -54,6 +54,6 @@ Usage:
 
 Options:
     --locale <locale> - supported locales: https://developers.facebook.com/docs/messenger-platform/messenger-profile/supported-locales
-`
+`;
     }
 }

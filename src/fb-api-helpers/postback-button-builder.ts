@@ -1,6 +1,6 @@
-import { Webview } from "../fb-api/webview";
-import { Send } from "../fb-api/send";
-import { Webhook } from "../fb-api/webhook";
+import * as Send from "../fb-api/send";
+import * as Webhook from "../fb-api/webhook";
+import * as Webview from "../fb-api/webview";
 import { Builder } from "./builder";
 
 /**
@@ -13,10 +13,10 @@ export class PostbackButtonBuilder extends Builder<Send.PostbackButton> {
 
     /**
      * Creates an instance of PostbackButtonBuilder.
-     * 
-     * @param {string} title 
-     * @param {string} id 
-     * @param {string} data 
+     *
+     * @param {string} title
+     * @param {string} id
+     * @param {string} data
      */
     constructor(title: string, id: string, data: string) {
 
@@ -24,19 +24,19 @@ export class PostbackButtonBuilder extends Builder<Send.PostbackButton> {
 
         this.button = {
             type: Send.ButtonType.POSTBACK,
-            title: title,
+            title,
             payload: JSON.stringify({
                 src: Webhook.PostbackSource.POSTBACK_BUTTON,
-                id: id,
-                data: data
+                id,
+                data
             })
         };
     }
 
     /**
      * Returns built Postback Button object.
-     * 
-     * @returns {Send.PostbackButton} 
+     *
+     * @returns {Send.PostbackButton}
      */
     public build(): Send.PostbackButton {
         return this.button;

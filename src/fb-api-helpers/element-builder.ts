@@ -1,5 +1,5 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
@@ -11,22 +11,20 @@ export class ElementBuilder extends Builder<Send.Element> {
 
     /**
      * Creates an instance of ElementBuilder.
-     * 
-     * @param {string} title 
+     *
+     * @param {string} title
      */
     constructor(title: string) {
 
         super();
 
-        this.element = {
-            title: title
-        }
+        this.element = { title };
     }
 
     /**
      * Sets a text for Element's subtitle.
-     * 
-     * @param {string} subtitle 
+     *
+     * @param {string} subtitle
      * @returns {this} - for chaining
      */
     public setSubtitle(subtitle: string): this {
@@ -36,8 +34,8 @@ export class ElementBuilder extends Builder<Send.Element> {
 
     /**
      * Sets Element's image.
-     * 
-     * @param {string} imageUrl 
+     *
+     * @param {string} imageUrl
      * @returns {this} - for chaining
      */
     public setImageUrl(imageUrl: string): this {
@@ -47,8 +45,8 @@ export class ElementBuilder extends Builder<Send.Element> {
 
     /**
      * Set a Default Action for the Element.
-     * 
-     * @param {DefaultActionBuilder} defaultActionBuilder 
+     *
+     * @param {DefaultActionBuilder} defaultActionBuilder
      * @returns {this} - for chaining
      */
     public setDefaultAction(defaultActionBuilder: DefaultActionBuilder): this {
@@ -58,20 +56,20 @@ export class ElementBuilder extends Builder<Send.Element> {
 
     /**
      * Adds a Button.
-     * 
-     * @param {Builder<T>} buttonBuilder 
+     *
+     * @param {Builder<T>} buttonBuilder
      */
     public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
 
         this.element.buttons || (this.element.buttons = new Array<T>());
 
-		this.element.buttons.push(buttonBuilder.build());
+        this.element.buttons.push(buttonBuilder.build());
     }
 
     /**
      * Returns built Element object.
-     * 
-     * @returns {Send.Element} 
+     *
+     * @returns {Send.Element}
      */
     public build(): Send.Element {
         return this.element;

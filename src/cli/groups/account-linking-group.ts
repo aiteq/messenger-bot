@@ -12,11 +12,11 @@ export class AccountLinkingGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getAccountLinkingUrl();
+                const result: any = await botUtils.getAccountLinkingUrl();
                 return result ?
                     `Account Linking URL is set to: ${result}` :
                     "Account Linking URL is not set";
@@ -49,6 +49,6 @@ Usage:
 
     mbutil ${this.getName()} delete [options]
         - remove the current Account Linking URL
-`
+`;
     }
 }

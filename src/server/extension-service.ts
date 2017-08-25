@@ -1,8 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { logger } from "../logger";
+import { ChatExtension } from "./chat-extension";
 import { RouterService } from "./router-service";
-import { ChatExtension } from "./messenger-extension";
-
 
 /**
  * Handles all request routed to Chat Extensions path (default "/ext").
@@ -15,13 +14,13 @@ export class ExtensionService extends RouterService {
    * the name of the given extension is "orders", the extension's path will be "/ext/orders".
    * The name actually represents the name of a <i>view</i> to be rendered by Express using specified
    * view engine.
-   * 
-   * @param {ChatExtension} extension 
-   * @returns {this} 
+   *
+   * @param {ChatExtension} extension
+   * @returns {this}
    */
   public addExtension(extension: ChatExtension): this {
 
-    let view: string = extension.getView();
+    const view: string = extension.getView();
 
     logger.info("adding extension", view);
 

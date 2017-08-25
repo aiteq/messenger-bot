@@ -1,7 +1,7 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
-import { TemplateMessageBuilder } from "./template-message-builder";
 import { ElementBuilder } from "./element-builder";
+import { TemplateMessageBuilder } from "./template-message-builder";
 
 /**
  * Helps to create a Generic Template message.
@@ -9,45 +9,45 @@ import { ElementBuilder } from "./element-builder";
  */
 export class GenericTemplateMessageBuilder extends TemplateMessageBuilder<Send.GenericTemplate> {
 
-	/**
+    /**
      * Creates an instance of GenericTemplateMessageBuilder.
      */
     constructor() {
 
         super();
 
-		this.template = {
-			template_type: Send.TemplateType.GENERIC,
-			elements: new Array<Send.Element>()
-		};
-	}
+        this.template = {
+            template_type: Send.TemplateType.GENERIC,
+            elements: new Array<Send.Element>()
+        };
+    }
 
-	/**
+    /**
      * Sets image aspect ratio. The aspect ratio is used to render images specified by image_url in element objects.
-     * 
+     *
      * @param {Send.ImageAspectRatio} imageAspectRatio - Send.ImageAspectRatio.HORIZONTAL or Send.ImageAspectRatio.SQUARE
      * @returns {this} - for chaining
      */
     public setImageAspectRatio(imageAspectRatio: Send.ImageAspectRatio): this {
-		this.template.image_aspect_ratio = imageAspectRatio;
-		return this;
-	}
+        this.template.image_aspect_ratio = imageAspectRatio;
+        return this;
+    }
 
-	/**
+    /**
      * Controls native share button.
-     * 
+     *
      * @param {boolean} sherable - set to false to disable the native share button in Messenger
      * @returns {this} - for chaining
      */
     public setSherable(sherable: boolean): this {
-		this.template.sherable = sherable;
-		return this;
+        this.template.sherable = sherable;
+        return this;
     }
-    
+
     /**
      * Adds an Element. Number of Elements is limited to 10.
-     * 
-     * @param {ElementBuilder} elementBuilder 
+     *
+     * @param {ElementBuilder} elementBuilder
      * @returns {this} - for chaining
      */
     public addElement(elementBuilder: ElementBuilder): this {

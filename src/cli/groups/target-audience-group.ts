@@ -12,13 +12,13 @@ export class TargetAudienceGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
-        let countries: Array<string>;
+
+        let countries: string[];
 
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getTargetAudience();
+                const result: any = await botUtils.getTargetAudience();
                 return result ?
                     `Target Audience is set to:\n${JSON.stringify(result, null, 2)}` :
                     "Target Audience is not set";
@@ -77,6 +77,6 @@ Usage:
 
     mbutil ${this.getName()} delete [options]
         - remove all Target Audience settings
-`
+`;
     }
 }

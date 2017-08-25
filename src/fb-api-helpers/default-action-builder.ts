@@ -1,5 +1,5 @@
-import { Webview } from "../fb-api/webview";
-import { Send } from "../fb-api/send";
+import * as Send from "../fb-api/send";
+import * as Webview from "../fb-api/webview";
 import { Builder } from "./builder";
 
 /**
@@ -13,21 +13,21 @@ export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
 
     /**
      * Creates an instance of DefaultActionBuilder.
-     * 
-     * @param {string} url 
+     *
+     * @param {string} url
      */
     constructor(url: string) {
 
         super();
         this.action = {
             type: Send.ButtonType.WEB_URL,
-            url: url
+            url
         };
     }
 
     /**
      * Sets a height of the Webview.
-     * 
+     *
      * @param {Webview.HeightRatio} webviewHeightRatio - Webview.HeightRatio.COMPACT or Webview.HeightRatio.FULL or Webview.HeightRatio.TALL
      * @returns {this} - for chaining
      */
@@ -38,7 +38,7 @@ export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
 
     /**
      * Controls usage of Messenger Extensions.
-     * 
+     *
      * @param {boolean} messengerExtensions - must be true if using Messenger Extensions
      * @returns {this} - for chaining
      */
@@ -51,7 +51,7 @@ export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
      * Sets the URL to use on clients that don't support Messenger Extensions.
      * If this is not defined, the <code>url</code> will be used as the fallback.
      * It may only be specified if messenger_extensions is true.
-     * 
+     *
      * @param {string} fallbackUrl - a fallback URL
      * @returns {this} - for chaining
      */
@@ -62,8 +62,8 @@ export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
 
     /**
      * Controls the share button in the Webview.
-     * 
-     * @param {boolean} visible 
+     *
+     * @param {boolean} visible
      * @returns {this} - for chaining
      */
     public setShowWebviewShareButton(visible: boolean): this {
@@ -73,8 +73,8 @@ export class DefaultActionBuilder extends Builder<Send.DefaultAction> {
 
     /**
      * Returns built Default Action object.
-     * 
-     * @returns {Send.DefaultAction} 
+     *
+     * @returns {Send.DefaultAction}
      */
     public build(): Send.DefaultAction {
         return this.action;

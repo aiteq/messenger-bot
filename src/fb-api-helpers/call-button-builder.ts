@@ -1,4 +1,4 @@
-import { Send } from "../fb-api/send";
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
 
 /**
@@ -11,7 +11,7 @@ export class CallButtonBuilder extends Builder<Send.CallButton> {
 
     /**
      * Creates an instance of CallButtonBuilder.
-     * 
+     *
      * @param {string} title - a title of the Button, max length is 20 characters
      * @param {string} payload - a phone number, format must have "+" prefix followed by the country code, area code and local number (e.g. +16505551234)
      */
@@ -20,15 +20,15 @@ export class CallButtonBuilder extends Builder<Send.CallButton> {
         super();
         this.button = {
             type: Send.ButtonType.CALL,
-            title: title,
-            payload: payload
+            title,
+            payload
         };
     }
 
     /**
      * Returns built Call Button object.
-     * 
-     * @returns {Send.CallButton} 
+     *
+     * @returns {Send.CallButton}
      */
     public build(): Send.CallButton {
         return this.button;

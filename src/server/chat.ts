@@ -1,10 +1,9 @@
-import { Send } from "../fb-api/send";
-import { Webhook } from "../fb-api/webhook";
-import { UserProfile } from "../fb-api/user-profile";
 import { MessageBuilder } from "../fb-api-helpers/message-builder";
+import * as Send from "../fb-api/send";
+import * as UserProfile from "../fb-api/user-profile";
+import * as Webhook from "../fb-api/webhook";
 import { logger } from "../logger";
 import { ResponderService } from "./responder-service";
-
 
 /**
  * Provides methods for two-way bot-to-user communication. An instance of [[Chat]] is always passed to
@@ -158,7 +157,7 @@ export class Chat {
         return await this.sendApi.send(this.partnerId, messageOrBuilder);
     }
 
-	/**
+    /**
      * Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
      * If a validator is specified, the bot will automatically repeat the challenge until valid response.
      *
@@ -233,7 +232,7 @@ export class Chat {
 
                 // the question answered, clear the callbacks
 
-                logger.debug("the question asked has been answered")
+                logger.debug("the question asked has been answered");
 
                 this.callbacks.resolve(data);
                 this.callbacks = undefined;
@@ -270,7 +269,7 @@ export class Chat {
      * @returns {this} - for chaining
      */
     public wait(seconds: number): this {
-        this.timeout = new Promise(resolve => {
+        this.timeout = new Promise((resolve) => {
             setTimeout(() => {
                 this.timeout = undefined;
                 resolve();

@@ -12,11 +12,11 @@ export class GetStartedButtonGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getGetStartedButton();
+                const result: any = await botUtils.getGetStartedButton();
                 return result ?
                     `Get Started button is set (data: ${JSON.parse(result.payload).data || "not set"})` :
                     "Get Started button is not set";
@@ -51,6 +51,6 @@ Usage:
 
 Options:
     --data "<data>" - a text or JSON to be send when the user clicks on the button
-`
+`;
     }
 }

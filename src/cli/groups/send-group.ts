@@ -11,7 +11,7 @@ export class SendGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
+
         switch (command) {
 
             case "image":
@@ -35,7 +35,7 @@ export class SendGroup extends Group {
                 break;
 
             default:
-                let text: string = options._[1];
+                const text: string = options._[1];
                 (text && options.recipient) || this.exitWithUsage();
                 await botUtils.sendText(options.recipient, text);
                 break;
@@ -67,6 +67,6 @@ Usage:
 Options:
     --recipient <id> - ID of the recepient
     --url <url> - URL of the attachment
-`
+`;
     }
 }

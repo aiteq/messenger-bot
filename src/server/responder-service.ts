@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { Send } from "../fb-api/send";
-import { UserProfile } from "../fb-api/user-profile";
-import { Webhook } from "../fb-api/webhook";
+import * as Send from "../fb-api/send";
+import * as UserProfile from "../fb-api/user-profile";
+import * as Webhook from "../fb-api/webhook";
 import { logger } from "../logger";
 import { Chat } from "./chat";
 import { RouterService } from "./router-service";
@@ -12,7 +12,7 @@ import { RouterService } from "./router-service";
 export class ResponderService extends RouterService {
 
     // handlers installed using BotServer.hear
-    private hearHandlers: Array<{ hook: RegExp, func: Function }>;
+    private hearHandlers: Array<{ hook: RegExp, func: (chat: Chat, text: string, matches: string[]) => void }>;
 
     // cached chats - necessary for holding conversation contexts
     private chats: Map<string, Chat>;
@@ -28,7 +28,7 @@ export class ResponderService extends RouterService {
 
         super();
 
-        this.hearHandlers = new Array<{ hook: RegExp, func: Function }>();
+        this.hearHandlers = new Array<{ hook: RegExp, func: () => void }>();
         this.chats = new Map<string, Chat>();
 
         this.sendApi = new Send.Api(accessToken);
@@ -126,13 +126,13 @@ export class ResponderService extends RouterService {
      * Install a hear listener for specified regular expressions testing against incoming text messages.
      * It is called only by BotServer.hear().
      *
-     * @param {Array<RegExp>} hooks - an array of regular expressions
-     * @param {Function} handler - a callback function
+     * @param {RegExp[]} hooks - an array of regular expressions
+     * @param {(chat: Chat, text: string, matches: string[]) => void} handler - a callback function
      * @returns {this}
      */
-    public hear(hooks: Array<RegExp>, handler: Function): this {
+    public hear(hooks: RegExp[], handler: (chat: Chat, text: string, matches: string[]) => void): this {
 
-        hooks.forEach(hook => {
+        hooks.forEach((hook) => {
             logger.info("subscribing to text", hook);
             this.hearHandlers.push({ hook, func: handler });
         });

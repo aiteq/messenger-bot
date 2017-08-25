@@ -1,21 +1,38 @@
 import * as bodyParser from "body-parser";
-import * as express from "express";
 import * as crypto from "crypto";
+import * as express from "express";
 import * as http from "http";
-import { VerificationService } from "./verification-service";
-import { MessengerProfile } from "../fb-api/messenger-profile";
-import { Webhook } from "../fb-api/webhook";
+import * as MessengerProfile from "../fb-api/messenger-profile";
+import * as Webhook from "../fb-api/webhook";
 import { logger } from "../logger";
-import { ResponderService } from "./responder-service";
-import { ExtensionService } from "./extension-service";
 import { BotConfig } from "../utils/bot-config";
-import { ChatExtension } from "./messenger-extension";
-
+import { Chat } from "./chat";
+import { ChatExtension } from "./chat-extension";
+import { ExtensionService } from "./extension-service";
+import { ResponderService } from "./responder-service";
+import { VerificationService } from "./verification-service";
 
 /**
  * Represents a bot server listening for webhook requests.
  */
 export class BotServer {
+
+    private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
+
+    /**
+     * Normalize a port into a number, string, or false. In some environments the port can be named pipe.
+     */
+    private static normalizePort(value: number | string): number | string | boolean {
+        const port: number = (typeof value === "string") ? parseInt(value, 10) : value;
+        return isNaN(port) ? value : (port >= 0 ? port : false);
+    }
+
+    /**
+     * Escapes regexp special characters.
+     */
+    private static regExpEscape(text: string): string {
+        return text.replace(BotServer.RE_ESCAPE, "\\$&");
+    }
 
     private app: express.Application;
     private server: http.Server;
@@ -23,7 +40,6 @@ export class BotServer {
     private responder: ResponderService;
     private extensions: ExtensionService;
     private profileApi: MessengerProfile.Api;
-
 
     /**
      * Creates an instance of BotServer.
@@ -78,13 +94,15 @@ export class BotServer {
 
         this.app.set("port", port);
 
-        this.server = <http.Server>http.createServer(this.app)
+        this.server = http.createServer(this.app)
 
         .on("error", (error: NodeJS.ErrnoException) => {
 
-            if (error.syscall !== "listen") throw error;
+            if (error.syscall !== "listen") {
+                throw error;
+            }
 
-            let bind = (typeof port === "string") ? "Pipe " + port : "Port " + port;
+            const bind = (typeof port === "string") ? "Pipe " + port : "Port " + port;
 
             switch (error.code) {
                 case "EACCES":
@@ -104,12 +122,12 @@ export class BotServer {
 
         .on("listening", () => {
             // only for showing the "listening" message
-            let addr = this.server.address();
-            let bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
+            const addr = this.server.address();
+            const bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
             logger.info(`BotServer[${this.config.name}] is listening on ${bind}`);
         })
 
-        .listen(port);
+        .listen(port) as http.Server;
     }
 
     /**
@@ -132,12 +150,12 @@ export class BotServer {
      * the message is part of an active conversation.
      *
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
-     * @param {Function} callback - a callback to be executed if a message matches one of the hooks
+     * @param {(chat: Chat, text: string, matches: string[]) => void} callback - a callback to be executed if a message matches one of the hooks
      * @returns {this} - for chaining
      */
-    public hear(hooks: RegExp | string | Array<RegExp | string>, callback: Function): this {
+    public hear(hooks: RegExp | string | Array<RegExp | string>, callback: (chat: Chat, text: string, matches: string[]) => void): this {
 
-        let regexps: Array<RegExp>;
+        let regexps: RegExp[];
 
         if (typeof hooks === "string") {
 
@@ -220,7 +238,7 @@ export class BotServer {
      */
     private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => void = (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => {
 
-        let [algorithm, signature] = ((req.headers["x-hub-signature"] as string) || "").split("=");
+        const [algorithm, signature] = ((req.headers["x-hub-signature"] as string) || "").split("=");
 
         if (!signature) {
             throw new Error("couldn't validate the request signature, the 'x-hub-signature' header not found");
@@ -231,22 +249,5 @@ export class BotServer {
         }
 
         logger.debug("request signature verified");
-    }
-
-    /**
-     * Normalize a port into a number, string, or false. In some environments the port can be named pipe.
-     */
-    private static normalizePort(value: number | string): number | string | boolean {
-        let port: number = (typeof value === "string") ? parseInt(value, 10) : value;
-        return isNaN(port) ? value : (port >= 0 ? port : false);
-    }
-
-	private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
-
-    /**
-     * Escapes regexp special characters.
-     */
-    private static regExpEscape(text: string): string {
-        return text.replace(BotServer.RE_ESCAPE, "\\$&");
     }
 }

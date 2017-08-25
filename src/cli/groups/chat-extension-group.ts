@@ -1,5 +1,5 @@
-import { cliout } from "../cli-logger";
 import { BotUtils } from "../../utils/bot-utils";
+import { cliout } from "../cli-logger";
 import { Group } from "../group";
 
 /**
@@ -13,11 +13,11 @@ export class ChatExtensionGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getChatExtensionHomeUrl();
+                const result: any = await botUtils.getChatExtensionHomeUrl();
                 return result ?
                     `Chat Extension home URL is set to:\n${JSON.stringify(result, null, 2)}` :
                     "Chat Extension home URL is not set";
@@ -54,6 +54,6 @@ Usage:
 Options:
     --inTest - controls whether public users can see the Chat Extension
     --shareButton - controls whether the share button in the webview is enabled
-`
+`;
     }
 }

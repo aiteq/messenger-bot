@@ -1,5 +1,5 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
@@ -12,8 +12,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Creates an instance of ReceiptBuilder.
-     * 
-     * @param {string} title 
+     *
+     * @param {string} title
      */
     constructor(title: string, price: number) {
 
@@ -24,8 +24,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Sets a text for Receipt Element's subtitle.
-     * 
-     * @param {string} subtitle 
+     *
+     * @param {string} subtitle
      * @returns {this} - for chaining
      */
     public setSubtitle(subtitle: string): this {
@@ -35,8 +35,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Sets a number of quantity.
-     * 
-     * @param {number} quantity 
+     *
+     * @param {number} quantity
      * @returns {this} - for chaining
      */
     public setQuantity(quantity: number): this {
@@ -46,8 +46,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Sets receipt's currency.
-     * 
-     * @param {string} currency 
+     *
+     * @param {string} currency
      * @returns {this} - for chaining
      */
     public setCurrency(currency: string): this {
@@ -57,8 +57,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Sets Recipient Element's image.
-     * 
-     * @param {string} imageUrl 
+     *
+     * @param {string} imageUrl
      * @returns {this} - for chaining
      */
     public setImageUrl(imageUrl: string): this {
@@ -68,8 +68,8 @@ export class ReceiptElementBuilder extends Builder<Send.ReceiptElement> {
 
     /**
      * Returns built Receipt Element object.
-     * 
-     * @returns {Send.ReceiptElement} 
+     *
+     * @returns {Send.ReceiptElement}
      */
     public build(): Send.ReceiptElement {
         return this.element;

@@ -1,64 +1,55 @@
 import { logger } from "../logger";
-import { GraphApi } from "./graph-api";
-import { Webview } from "./webview";
-
+import * as ga from "./graph-api";
+import * as Webview from "./webview";
 
 /**
  * API and types for Messenger Codes API.
  * (see https://developers.facebook.com/docs/messenger-platform/messenger-code)
  */
-export namespace MessengerCodes {
+export class Api extends ga.GraphApi<Request> {
+
+    constructor(protected accessToken: string) {
+
+        super(accessToken, ga.Endpoint.MESSENGER_CODES);
+    }
 
     /**
-     * Provides access to Messenger Code API.
-     * (see https://developers.facebook.com/docs/messenger-platform/messenger-code)
+     * Generates a new Messenger Code with given parameters.
+     *
+     * @param {number} [size] - the size, in pixels, for the code (supported 100-2000, defaults to 1000)
+     * @param {string} [ref] - reference data to be send as POSTBACK when the user scans the code
+     * @returns {Promise<string>} - a URL of the generated code
      */
-    export class Api extends GraphApi<Request> {
+    public async generateCode(size?: number, ref?: string): Promise<string> {
 
-        constructor(protected accessToken: string) {
+        const req: Request = {
+            type: Type.STANDARD,
+            image_size: size || 1000
+        };
 
-            super(accessToken, GraphApi.Endpoint.MESSENGER_CODES);
-        }
+        ref && (req.data = { ref });
 
-        /**
-         * Generates a new Messenger Code with given parameters.
-         * 
-         * @param {number} [size] - the size, in pixels, for the code (supported 100-2000, defaults to 1000)
-         * @param {string} [ref] - reference data to be send as POSTBACK when the user scans the code
-         * @returns {Promise<string>} - a URL of the generated code
-         */
-        public async generateCode(size?: number, ref?: string): Promise<string> {
+        try {
 
-            let req: Request = {
-                type: Type.STANDARD,
-                image_size: size || 1000
-            };
+            return (await this.sendRequest(req)).uri || Promise.reject("no uri");
 
-            ref && (req.data = { ref: ref });
+        } catch (error) {
 
-            try {
-
-                let response: Response = await this.sendRequest(req);
-                return response.uri || Promise.reject("no uri");
-
-            } catch (error) {
-
-                return Promise.reject(error);
-            }
+            return Promise.reject(error);
         }
     }
+}
 
-    export enum Type {
-        STANDARD = "standard"
-    }
+export enum Type {
+    STANDARD = "standard"
+}
 
-    export interface Request extends GraphApi.Request {
-        type: Type;
-        image_size?: number;
-        data?: { ref: string };
-    }
+export interface Request extends ga.Request {
+    type: Type;
+    image_size?: number;
+    data?: { ref: string };
+}
 
-    export interface Response {
-        uri: string;
-    }
+export interface Response {
+    uri: string;
 }

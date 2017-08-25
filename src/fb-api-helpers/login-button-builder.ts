@@ -1,4 +1,4 @@
-import { Send } from "../fb-api/send";
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
 
 /**
@@ -11,8 +11,8 @@ export class LoginButtonBuilder extends Builder<Send.LoginButton> {
 
     /**
      * Creates an instance of LoginButtonBuilder.
-     * 
-     * @param {string} url 
+     *
+     * @param {string} url
      */
     constructor(url: string) {
 
@@ -20,14 +20,14 @@ export class LoginButtonBuilder extends Builder<Send.LoginButton> {
 
         this.button = {
             type: Send.ButtonType.LOGIN,
-            url: url
+            url
         };
     }
 
     /**
      * Returns built Login Button object.
-     * 
-     * @returns {Send.LoginButton} 
+     *
+     * @returns {Send.LoginButton}
      */
     public build(): Send.LoginButton {
         return this.button;

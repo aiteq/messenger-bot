@@ -1,4 +1,4 @@
-import { Send } from "../fb-api/send";
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
 
 /**
@@ -23,8 +23,8 @@ export class LogoutButtonBuilder extends Builder<Send.LogoutButton> {
 
     /**
      * Returns built Logout Button object.
-     * 
-     * @returns {Send.LogoutButton} 
+     *
+     * @returns {Send.LogoutButton}
      */
     public build(): Send.LogoutButton {
         return this.button;

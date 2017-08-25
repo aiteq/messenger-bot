@@ -1,5 +1,5 @@
+import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { Send } from "../fb-api/send";
 import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
@@ -11,20 +11,20 @@ export class OgElementBuilder extends Builder<Send.OpenGraphElement> {
 
     /**
      * Creates an instance of ElementBuilder.
-     * 
-     * @param {string} url 
+     *
+     * @param {string} url
      */
     constructor(url: string) {
 
         super();
 
-        this.element = { url }
+        this.element = { url };
     }
 
     /**
      * Adds a Button.
-     * 
-     * @param {Builder<T>} buttonBuilder 
+     *
+     * @param {Builder<T>} buttonBuilder
      * @returns {this} - for chaining
      */
     public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
@@ -42,8 +42,8 @@ export class OgElementBuilder extends Builder<Send.OpenGraphElement> {
 
     /**
      * Returns built Open Graph Element object.
-     * 
-     * @returns {Send.OpenGraphElement} 
+     *
+     * @returns {Send.OpenGraphElement}
      */
     public build(): Send.OpenGraphElement {
         return this.element;

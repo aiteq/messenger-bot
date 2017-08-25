@@ -92,7 +92,7 @@ The callback is executed with three parameters:
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | hooks | `RegExp` ⎮ `string` ⎮ `Array`<`RegExp` ⎮ `string`> | a string, a regexp or a mixed array of both strings and regexps |
-| callback | `Function`   |  a callback to be executed if a message matches one of the hooks |
+| callback | `chat: Chat, text: string, matches: string[]`   |  a callback to be executed if a message matches one of the hooks |
 
 **Returns:** `this` - for chaining
 ___

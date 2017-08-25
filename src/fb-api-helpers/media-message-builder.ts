@@ -1,5 +1,5 @@
+import * as Send from "../fb-api/send";
 import { MessageBuilder } from "./message-builder";
-import { Send } from "../fb-api/send";
 
 /**
  * Helps to create a message with media attachment.
@@ -7,42 +7,42 @@ import { Send } from "../fb-api/send";
  */
 export class MediaMessageBuilder extends MessageBuilder<Send.AttachmentMessage> {
 
-	/**
+    /**
      * Creates an instance of MediaMessageBuilder.
-     * 
-     * @param {Send.MediaAttachmentType} type 
+     *
+     * @param {Send.MediaAttachmentType} type
      */
     constructor(type: Send.AttachmentType) {
 
         super();
-        
-		this.message = {
-			attachment: <Send.MediaAttachment>{
-				type: type,
-				payload: {}
-			}
-		}
-	}
 
-	/**
+        this.message = {
+            attachment: {
+                type,
+                payload: {}
+            } as Send.MediaAttachment
+        };
+    }
+
+    /**
      * Sets a URL of the media file.
-     * 
-     * @param {string} url 
+     *
+     * @param {string} url
      * @returns {this} - for chaining
      */
     public setUrl(url: string): this {
-		(<Send.MediaPayload>this.message.attachment.payload).url = url;
-		return this;
-	}
+        (this.message.attachment.payload as Send.MediaPayload).url = url;
+        return this;
+    }
 
-	/**
+    /**
      * Controls attachment's reusability.
-     * 
-     * @param {boolean} reusable 
+     *
+     * @param {boolean} reusable
      * @returns {this} - for chaining
      */
     public setReusable(reusable: boolean): this {
-		(<Send.MediaPayload>this.message.attachment.payload).is_reusable = reusable;
-		return this;
-	}
+        (this.message.attachment.payload as Send.MediaPayload).is_reusable = reusable;
+        return this;
+    }
 }

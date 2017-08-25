@@ -12,17 +12,17 @@ export class DomainsGroup extends Group {
     }
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
-        
+
         switch (command) {
 
             case "get":
-                let result: any = await botUtils.getDomainWhitelist();
+                const result: any = await botUtils.getDomainWhitelist();
                 return result && result.length > 0 ?
                     `Whitelisted domains:\n\n  ${result.join("\n  ")}` :
                     "No domains whitelisted";
 
             case "add":
-                let domains: Array<string> = options._.slice(2);
+                const domains: string[] = options._.slice(2);
                 domains.length > 0 || this.exitWithUsage();
                 await botUtils.whitelistDomains(domains);
                 return "Domain Whitelist has been successfully updated";
@@ -50,6 +50,6 @@ Usage:
 
     mbutil ${this.getName()} delete [options]
         - remove all domains from the whitelist
-`
+`;
     }
 }

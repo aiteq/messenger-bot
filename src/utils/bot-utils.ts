@@ -1,10 +1,11 @@
 import * as fs from "async-file";
-import { AxiosPromise, AxiosResponse } from "axios";
 import Axios from "axios";
+import { AxiosResponse } from "axios";
+
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
-import { MessengerCodes } from "../fb-api/messenger-codes";
-import { MessengerProfile } from "../fb-api/messenger-profile";
-import { Send } from "../fb-api/send";
+import * as MessengerCodes from "../fb-api/messenger-codes";
+import * as MessengerProfile from "../fb-api/messenger-profile";
+import * as Send from "../fb-api/send";
 import { logger } from "../logger";
 import { BotConfig } from "./bot-config";
 

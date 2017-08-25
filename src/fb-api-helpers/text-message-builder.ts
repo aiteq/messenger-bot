@@ -1,6 +1,5 @@
+import * as Send from "../fb-api/send";
 import { MessageBuilder } from "./message-builder";
-import { Send } from "../fb-api/send";
-
 
 /**
  * Helps to build a Text Message.
@@ -8,15 +7,15 @@ import { Send } from "../fb-api/send";
  */
 export class TextMessageBuilder extends MessageBuilder<Send.TextMessage> {
 
-	/**
+    /**
      * Creates an instance of TextMessageBuilder.
-     * 
+     *
      * @param {string} text - a text of the message
      */
     constructor(text: string) {
 
         super();
-        
-		this.message = { text };
-	}
+
+        this.message = { text };
+    }
 }
