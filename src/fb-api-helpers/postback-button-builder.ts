@@ -1,6 +1,5 @@
 import * as Send from "../fb-api/send";
 import * as Webhook from "../fb-api/webhook";
-import * as Webview from "../fb-api/webview";
 import { Builder } from "./builder";
 
 /**

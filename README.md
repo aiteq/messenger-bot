@@ -1,8 +1,10 @@
-# <div style="float:left">@aiteq/messenger-bot</div><div style="float:right">[![npm version](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot.svg)](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot) [![Build Status](https://travis-ci.org/aiteq/messenger-bot.svg?branch=master)](https://travis-ci.org/aiteq/messenger-bot) [![Coverage Status](https://coveralls.io/repos/github/aiteq/messenger-bot/badge.svg?branch=master)](https://coveralls.io/github/aiteq/messenger-bot?branch=master)</div><div style="clear:both"></div>
+# @aiteq/messenger-bot
+
+[![npm version](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot.svg)](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot) [![Dependency Status](https://david-dm.org/aiteq/messenger-bot.svg)](https://david-dm.org/aiteq/messenger-bot) [![Build Status](https://travis-ci.org/aiteq/messenger-bot.svg?branch=master)](https://travis-ci.org/aiteq/messenger-bot) [![Coverage Status](https://coveralls.io/repos/github/aiteq/messenger-bot/badge.svg?branch=master)](https://coveralls.io/github/aiteq/messenger-bot?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/292b507c8c744281ba35a2cb821a7104)](https://www.codacy.com/app/tomasklima/messenger-bot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aiteq/messenger-bot&amp;utm_campaign=Badge_Grade)
 
 #### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
-*Please note that the package is still not fully tested BETA. Ideas, tips and bug/typo reports are welcomed.*
+*Please note that the package is still not fully tested BETA. Join our [Slack channel](https://aiteq.slack.com/messages/C6TNM9T5Z/) and discuss ideas, suggest improvements and listen for news.*
 
 <table><tr>
 <td><b><a href="#major-features">Features</a></b></td>

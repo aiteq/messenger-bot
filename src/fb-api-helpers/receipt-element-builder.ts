@@ -1,6 +1,5 @@
 import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
  * Helps to create a Receipt Element.

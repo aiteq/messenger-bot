@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
 import Axios from "axios";
 import { logger } from "../logger";
 

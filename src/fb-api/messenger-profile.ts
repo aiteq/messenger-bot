@@ -32,7 +32,7 @@ export class Api extends ga.GraphApi<Request> {
             src: Webhook.PostbackSource.GET_STARTED_BUTTON
         };
 
-        data && (payload.data = data);
+        payload.data = data;
 
         return this.setField(Field.GET_STARTED_BUTTON, {
             payload: JSON.stringify(payload)

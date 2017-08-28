@@ -1,6 +1,5 @@
 import * as Send from "../fb-api/send";
 import { Builder } from "./builder";
-import { DefaultActionBuilder } from "./default-action-builder";
 
 /**
  * Helps to create an Open Graph Element.
@@ -29,7 +28,7 @@ export class OgElementBuilder extends Builder<Send.OpenGraphElement> {
      */
     public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
 
-        this.element.buttons || (this.element.buttons = new Array<T>());
+        this.element.buttons = this.element.buttons || new Array<T>();
 
         if (this.element.buttons.length === 3) {
             throw new Error("couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");

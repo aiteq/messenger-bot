@@ -1,5 +1,4 @@
 import * as Send from "../fb-api/send";
-import { Builder } from "./builder";
 import { OgElementBuilder } from "./og-element-builder";
 import { TemplateMessageBuilder } from "./template-message-builder";
 

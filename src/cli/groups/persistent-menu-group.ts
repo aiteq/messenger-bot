@@ -79,11 +79,28 @@ Options:
         const menu: Menu = PersistentMenuBuilder.createMenu();
 
         items.forEach((item: any) => {
+
             if (item.url) {
-                menu.addWebUrlMenuItem(item.title, item.url, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
+
+                menu.addWebUrlMenuItem(item.title, item.url, {
+                    webviewHeightRatio: item.webviewHeightRatio,
+                    messengerExtensions: item.messengerExtensions,
+                    shareButton: item.shareButton,
+                    fallbackUrl: item.fallbackUrl
+                });
+
             } else if (item.id) {
-                menu.addPostbackMenuItem(item.title, item.id, item.data, item.webviewHeightRatio, item.messengerExtensions, item.shareButton, item.fallbackUrl);
+
+                menu.addPostbackMenuItem(item.title, item.id, {
+                    data: item.data,
+                    webviewHeightRatio: item.webviewHeightRatio,
+                    messengerExtensions: item.messengerExtensions,
+                    shareButton: item.shareButton,
+                    fallbackUrl: item.fallbackUrl
+                });
+
             } else if (item.items) {
+
                 menu.addSubmenu(item.title, this.createMenu(item.items));
             }
         });

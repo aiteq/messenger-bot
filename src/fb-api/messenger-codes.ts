@@ -1,6 +1,4 @@
-import { logger } from "../logger";
 import * as ga from "./graph-api";
-import * as Webview from "./webview";
 
 /**
  * API and types for Messenger Codes API.

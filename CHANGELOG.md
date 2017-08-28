@@ -7,16 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - storing reusable media ids (store module refactored)
+- number of fixies according to tslint & Codacy findings
 
 ### Changed
 - TypeScript 2.5, Node 8.4
-- using `npm shrinkwrap` due to vulnerabilities found by snyk (check npm-shrinkwrap.json.0)
 
 ### Added
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)
 - test coverage: store
+- tslint
+- coveralls
 - [Chat.wait](doc/classes/chat.md#wait)
 
+<a id="latest"></a>
 ## [1.1.0-beta.4] - 2017-08-19
 ### Fixed
 - using built-in 'crypto' module instead of deprecated external package (no more warnings)

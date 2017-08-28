@@ -61,7 +61,7 @@ export class ElementBuilder extends Builder<Send.Element> {
      */
     public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
 
-        this.element.buttons || (this.element.buttons = new Array<T>());
+        this.element.buttons = this.element.buttons || new Array<T>();
 
         this.element.buttons.push(buttonBuilder.build());
     }

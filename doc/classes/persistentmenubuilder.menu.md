@@ -6,16 +6,16 @@
 
 ### Methods
 
-* [addPostbackMenuItem(title, id, data, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])](persistentmenubuilder.menu.md#addpostbackmenuitem)
+* [addPostbackMenuItem(title, id, data, [options])](persistentmenubuilder.menu.md#addpostbackmenuitem)
 * [addSubmenu(title, submenu)](persistentmenubuilder.menu.md#addsubmenu)
-* [addWebUrlMenuItem(title, url, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])](persistentmenubuilder.menu.md#addweburlmenuitem)
+* [addWebUrlMenuItem(title, url, [options])](persistentmenubuilder.menu.md#addweburlmenuitem)
 
 ---
 
 ## Methods
 
 <a id="addpostbackmenuitem"></a>
-###  `addPostbackMenuItem(title, id, data, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])`
+###  `addPostbackMenuItem(title, id, data, [options])`
 
 **Parameters:**
 
@@ -23,6 +23,12 @@
 | ------ | ------ | ------ |
 | title | `string`   | title of the item |
 | id | `string`   | ID of the item |
+| options | `object` |  |
+
+`options` object can contain:
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
 | data | `any`   | payload data to be send when the item is selected |
 | webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md)   | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 | messengerExtensions | `boolean` | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
@@ -46,7 +52,7 @@ ___
 ___
 
 <a id="addweburlmenuitem"></a>
-###  `addWebUrlMenuItem(title, url, [webviewHeightRatio, [messengerExtensions, [shareButton, [fallbackUrl]]]])`
+###  `addWebUrlMenuItem(title, url, [options])`
 
 **Parameters:**
 
@@ -54,6 +60,12 @@ ___
 | ------ | ------ | ------ |
 | title | `string`   | title of the item |
 | url | `string`   | ID of the item |
+| options | `object` |  |
+
+`options` object can contain:
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
 | webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 | messengerExtensions | `boolean`   | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 | shareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
