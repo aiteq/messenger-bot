@@ -23,6 +23,10 @@ export abstract class GraphApi<T extends Request> {
      */
     constructor(protected accessToken: string, private endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
 
+        if (!accessToken) {
+            throw new Error("accessToken must by provided");
+        }
+
         // create instance of Axios with default configuration
         this.client = Axios.create({
             baseURL: `https://graph.facebook.com/v${version || GraphApi.DEFAULT_VERSION}/${endpoint}`,

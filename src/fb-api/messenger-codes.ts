@@ -29,7 +29,7 @@ export class Api extends ga.GraphApi<Request> {
 
         try {
 
-            return (await this.sendRequest(req)).uri || Promise.reject("no uri");
+            return (await this.sendRequest(req)).uri;
 
         } catch (error) {
 

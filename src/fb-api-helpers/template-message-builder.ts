@@ -1,7 +1,6 @@
 import * as Send from "../fb-api/send";
 import * as Webhook from "../fb-api/webhook";
 import * as Webview from "../fb-api/webview";
-import { logger } from "../logger";
 import { CallButtonBuilder } from "./call-button-builder";
 import { DefaultActionBuilder } from "./default-action-builder";
 import { ElementBuilder } from "./element-builder";

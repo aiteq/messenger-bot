@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fb-api/graph-api.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> graph-api.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.7% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>39/43</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">74.07% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>20/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>36/40</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
+import Axios from "axios";
+import { logger } from "../logger";
+&nbsp;
+/**
+ * An abstract class providing access to Facebook Graph API. Implementations must specify concrete endpoint.
+ *
+ * Calling of the Graph API uses the Axios package providing fully &lt;i&gt;promisified&lt;/code&gt; interface.
+ */
+export abstract class GraphApi&lt;T extends Request&gt; {
+&nbsp;
+    private static readonly DEFAULT_VERSION = "2.9";
+&nbsp;
+    private client: AxiosInstance;
+&nbsp;
+    /**
+     * The constructor to be called by subclasses.
+     *
+     * @param {string} accessToken - a Page Access Token
+     * @param {(GraphApi.Endpoint | string)} [endpoint=""] - a concrete endpoint
+     * @param {GraphApi.Method} [method] - default HTTP method
+     * @param {string} [version] - specific version of the Graph API
+     */
+    constructor(protected accessToken: string, private <span class="branch-0 cbranch-no" title="branch not covered" >endpoint: Endpoint | string = </span>"", private method?: Method, protected version?: string) {
+&nbsp;
+        if (!accessToken) {
+            throw new Error("accessToken must by provided");
+        }
+&nbsp;
+        // create instance of Axios with default configuration
+        this.client = Axios.create({
+            baseURL: `https://graph.facebook.com/v${version || GraphApi.DEFAULT_VERSION}/${endpoint}`,
+            headers: { "Content-Type": "application/json" },
+            responseType: "json"
+        });
+    }
+&nbsp;
+    /**
+     * Sends request asynchronously.
+     *
+     * @param {T} data - a data to be send
+     * @param {AxiosRequestConfig} [config={}] - request options
+     * @returns {Promise&lt;any&gt;}
+     */
+    protected async sendRequest(data: T, config: AxiosRequestConfig = {}): Promise&lt;any&gt; {
+&nbsp;
+        config.method = config.method || this.method || Method.POST;
+&nbsp;
+        data.access_token = this.accessToken;
+&nbsp;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (config.method === Method.GET) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            config.params = d</span>ata;
+&nbsp;
+        } else <span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>if (</span>config.method === Method.POST || config.method === Method.DELETE) {
+&nbsp;
+            config.data = data;
+&nbsp;
+        } else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            Promise.reject("GraphApi.senRequest: method not supporetd: " + config.m</span>ethod);
+        }
+&nbsp;
+        try {
+&nbsp;
+            logger.debug("GraphApi: sending:", config.method, this.client.defaults.baseURL);
+            logger.debug("GraphApi:", JSON.stringify(data));
+&nbsp;
+            // perform the call
+            const response: AxiosResponse = await this.client.request(config);
+&nbsp;
+            logger.debug("GraphApi:", response.status, response.statusText);
+            logger.debug("GraphApi: response data:", response.data);
+&nbsp;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (<span class="branch-1 cbranch-no" title="branch not covered" >response.</span>data.result &amp;&amp; response.data.result !== "success") {
+<span class="cstat-no" title="statement not covered" >                logger.error("GraphApi: result:", response.data.result);</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(response.data.r</span>esult);
+            }
+&nbsp;
+            return response.data;
+&nbsp;
+        } catch (error) {
+&nbsp;
+            logger.error("GraphApi:", error.message);
+            logger.debug(error.response.data);
+&nbsp;
+            let message: string = "uknown error";
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (error.response.data.error &amp;&amp; error.response.data.error.message) {
+                logger.error(error.response.data.error.message);
+                message = error.response.data.error.message;
+            }
+&nbsp;
+            return Promise.reject(message);
+        }
+    }
+}
+&nbsp;
+export enum Method {
+    GET = "get",
+    POST = "post",
+    DELETE = "delete"
+}
+&nbsp;
+export enum Endpoint {
+    MESSAGES = "me/messages",
+    MESSENGER_PROFILE = "me/messenger_profile",
+    MESSENGER_CODES = "me/messenger_codes",
+    USER_PROFILE = "USER-PROFILE"
+}
+&nbsp;
+export interface Request {
+    access_token?: string;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Aug 28 2017 20:53:48 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
