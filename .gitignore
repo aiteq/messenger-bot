@@ -3,10 +3,11 @@
 *.js
 *.d.ts
 
+/src/.baseDir.ts
 /node_modules
 /bin
-/test
 /work
 /doc-pre
+
 bot-db.json
 .coveralls.yml

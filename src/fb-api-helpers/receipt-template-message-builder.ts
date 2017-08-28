@@ -1,5 +1,4 @@
 import * as Send from "../fb-api/send";
-import { Builder } from "./builder";
 import { ReceiptElementBuilder } from "./receipt-element-builder";
 import { TemplateMessageBuilder } from "./template-message-builder";
 
@@ -84,7 +83,7 @@ export class ReceiptTemplateMessageBuilder extends TemplateMessageBuilder<Send.R
      */
     public addElement(elementBuilder: ReceiptElementBuilder): this {
 
-        this.template.elements || (this.template.elements = new Array<Send.ReceiptElement>());
+        this.template.elements = this.template.elements || new Array<Send.ReceiptElement>();
 
         if (this.template.elements.length === 100) {
             throw new Error("couldn't add next Receipt Element to Receipt Tepmplate message (only 100 elements is allowed)");

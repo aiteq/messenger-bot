@@ -1,6 +1,5 @@
 import * as  MessengerProfile from "../fb-api/messenger-profile";
 import * as Webhook from "../fb-api/webhook";
-import * as Webview from "../fb-api/webview";
 import { Builder } from "./builder";
 import { Menu } from "./persistent-menu-builder-menu";
 
