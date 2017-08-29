@@ -1,6 +1,6 @@
 # @aiteq/messenger-bot
 
-[![npm version](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot.svg)](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot) [![Dependency Status](https://david-dm.org/aiteq/messenger-bot.svg)](https://david-dm.org/aiteq/messenger-bot) [![Build Status](https://travis-ci.org/aiteq/messenger-bot.svg?branch=master)](https://travis-ci.org/aiteq/messenger-bot) [![Coverage Status](https://coveralls.io/repos/github/aiteq/messenger-bot/badge.svg?branch=master)](https://coveralls.io/github/aiteq/messenger-bot?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/292b507c8c744281ba35a2cb821a7104)](https://www.codacy.com/app/tomasklima/messenger-bot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aiteq/messenger-bot&amp;utm_campaign=Badge_Grade)
+[![npm version](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot.svg)](https://badge.fury.io/js/%40aiteq%2Fmessenger-bot)&nbsp;&nbsp;[![Dependency Status](https://david-dm.org/aiteq/messenger-bot.svg)](https://david-dm.org/aiteq/messenger-bot)&nbsp;&nbsp;[![Build Status](https://travis-ci.org/aiteq/messenger-bot.svg?branch=master)](https://travis-ci.org/aiteq/messenger-bot)&nbsp;&nbsp;[![Coverage Status](https://coveralls.io/repos/github/aiteq/messenger-bot/badge.svg?branch=master)](https://coveralls.io/github/aiteq/messenger-bot?branch=master)&nbsp;&nbsp;[![Codacy Badge](https://api.codacy.com/project/badge/Grade/292b507c8c744281ba35a2cb821a7104)](https://www.codacy.com/app/tomasklima/messenger-bot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aiteq/messenger-bot&amp;utm_campaign=Badge_Grade)
 
 #### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
@@ -257,11 +257,9 @@ Sometimes, we also want to send a *push message* - a message sent to the user pr
 
 The above cases are not quite bot-aware functions. Thus, in order to keep [BotServer](doc/classes/botserver.md)'s interface clean, these services are made available through the [BotUtils](doc/classes/botutils.md) class.
 
-An instance of the [BotUtils](doc/classes/botutils.md) is also initialized passing the [config object](doc/interfaces/botconfig.md), but only the ```accessToken``` property is required within.
+An instance of the [BotUtils](doc/classes/botutils.md) is initialized passing the the ```accessToken```.
 ```typescript
-let utils: BotUtils = new BotUtils({
-    accessToken: "open, sesame"
-});
+let utils: BotUtils = new BotUtils("open, sesame");
 ```
 
 #### Example: send push message
