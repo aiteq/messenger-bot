@@ -54,4 +54,11 @@ export interface BotConfig {
      * @type {string}
      */
     name?: string;
+
+    /**
+     * Logging level (according to log4js spec) for the package. Optional.
+     *
+     * @type {string}
+     */
+    logLevel?: string;
 }

@@ -11,10 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - TypeScript 2.5, Node 8.4
+- **API CHANGE** BotUtils.constructor() needs only accessToken (instead of all BotConfig object)
 
 ### Added
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)
-- test coverage: store
+- test coverage: store, messenger-codes
 - tslint
 - coveralls
 - [Chat.wait](doc/classes/chat.md#wait)
@@ -27,7 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - conversation redesigned (see [doc](./README.md#conversation))
-- **!!! API CHANGE !!!** [Chat](./doc/classes/chat.md) - methods [ask()](./doc/classes/chat.md#ask) and [askWithMessage()](./doc/classes/chat.md#askwithmessage) moved from Conversation
+- **API CHANGE** [Chat](./doc/classes/chat.md) - methods [ask()](./doc/classes/chat.md#ask) and [askWithMessage()](./doc/classes/chat.md#askwithmessage) moved from Conversation
 - TypeScript upgraded to 2.4 -> string enums used instead *namespace+type* workaround
 - changed type of Send.ShareButton.share_contents to proper type
 - CLI: `--inTest` and `--shareButton` switches doesn't need following `true`/`false`
@@ -37,7 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - CLI: added alias `code generate` to `code create`
 
 ### Deleted
-- **!!! API CHANGE !!!** class Conversation
+- **API CHANGE** class Conversation
 
 ## [1.1.0-beta.3] - 2017-08-15
 ### Fixed
