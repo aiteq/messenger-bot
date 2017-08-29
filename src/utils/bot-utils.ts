@@ -7,7 +7,6 @@ import * as MessengerCodes from "../fb-api/messenger-codes";
 import * as MessengerProfile from "../fb-api/messenger-profile";
 import * as Send from "../fb-api/send";
 import { logger } from "../logger";
-import { BotConfig } from "./bot-config";
 
 /**
  * Provides an interface to non-interactive services of Messenger Platform API through a set of
@@ -22,9 +21,9 @@ export class BotUtils {
     /**
      * Creates an instance of BotUtils.
      *
-     * @param {BotConfig} config - bot configuration object
+     * @param {string} accessToken - page access token
      */
-    constructor(private config: BotConfig) {}
+    constructor(private accessToken: string) {}
 
     /**
      * Sends a plain text message.

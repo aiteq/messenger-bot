@@ -7,7 +7,7 @@ Provides an interface to non-interactive services of Messenger Platform API thro
 
 ### Constructors
 
-* [constructor(config)](botutils.md#constructor)
+* [constructor(accessToken)](botutils.md#constructor)
 
 ### Methods
 
@@ -53,7 +53,7 @@ Creates an instance of [BotUtils](botutils.md).
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| config | [BotConfig](../interfaces/botconfig.md) | bot configuration object (only the `accessToken` property is required) |
+| accessToken | `string` | bot configuration object (only the `accessToken` property is required) |
 
 **Returns:** [BotUtils](botutils.md)
 
