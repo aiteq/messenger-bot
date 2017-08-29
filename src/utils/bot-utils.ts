@@ -34,9 +34,9 @@ export class BotUtils {
      *
      * @param {string} recipientId - ID of the recipient
      * @param {string} text - a text to be send
-     * @returns {Promise<void>}
+     * @returns {Promise<Send.Response>}
      */
-    public sendText(recipientId: string, text: string): Promise<void> {
+    public sendText(recipientId: string, text: string): Promise<Send.Response> {
         return this.getSendApi().sendText(recipientId, text);
     }
 
@@ -45,10 +45,11 @@ export class BotUtils {
      *
      * @param {string} recipientId - ID of the recipient
      * @param {string} url - URL of the image
-     * @returns {Promise<string>}
+     * @param {boolean} [reusable] - controls whether the attachment is to be reused
+     * @returns {Promise<Send.Response>}
      */
-    public sendImage(recipientId: string, url: string): Promise<string> {
-        return this.getSendApi().sendImage(recipientId, url, false);
+    public sendImage(recipientId: string, url: string, reusable?: boolean): Promise<Send.Response> {
+        return this.getSendApi().sendImage(recipientId, url, reusable);
     }
 
     /**
@@ -56,10 +57,11 @@ export class BotUtils {
      *
      * @param {string} recipientId - ID of the recipient
      * @param {string} url - URL of the audio file
-     * @returns {Promise<string>}
+     * @param {boolean} [reusable] - controls whether the attachment is to be reused
+     * @returns {Promise<Send.Response>}
      */
-    public sendAudio(recipientId: string, url: string): Promise<string> {
-        return this.getSendApi().sendAudio(recipientId, url, false);
+    public sendAudio(recipientId: string, url: string, reusable?: boolean): Promise<Send.Response> {
+        return this.getSendApi().sendAudio(recipientId, url, reusable);
     }
 
     /**
@@ -67,10 +69,11 @@ export class BotUtils {
      *
      * @param {string} recipientId - ID of the recipient
      * @param {string} url - URL of the video file
-     * @returns {Promise<string>}
+     * @param {boolean} [reusable] - controls whether the attachment is to be reused
+     * @returns {Promise<Send.Response>}
      */
-    public sendVideo(recipientId: string, url: string): Promise<string> {
-        return this.getSendApi().sendVideo(recipientId, url, false);
+    public sendVideo(recipientId: string, url: string, reusable?: boolean): Promise<Send.Response> {
+        return this.getSendApi().sendVideo(recipientId, url, reusable);
     }
 
     /**
@@ -78,10 +81,11 @@ export class BotUtils {
      *
      * @param {string} recipientId - ID of the recipient
      * @param {string} url - URL of the file
-     * @returns {Promise<string>}
+     * @param {boolean} [reusable] - controls whether the attachment is to be reused
+     * @returns {Promise<Send.Response>}
      */
-    public sendFile(recipientId: string, url: string): Promise<string> {
-        return this.getSendApi().sendFile(recipientId, url, false);
+    public sendFile(recipientId: string, url: string, reusable?: boolean): Promise<Send.Response> {
+        return this.getSendApi().sendFile(recipientId, url, reusable);
     }
 
     /**

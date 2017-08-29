@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - TypeScript 2.5, Node 8.4
 - **API CHANGE** BotUtils.constructor() needs only accessToken (instead of all BotConfig object)
+- **API CHANGE** BotUtils.sendAudio|sendFile|sendImage|sendVideo have new optional parameter reusable
 
 ### Added
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)

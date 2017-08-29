@@ -30,11 +30,11 @@ Provides an interface to non-interactive services of Messenger Platform API thro
 * [getPersistentMenu()](botutils.md#getpersistentmenu)
 * [getTargetAudience()](botutils.md#gettargetaudience)
 * [openTargetAudience()](botutils.md#opentargetaudience)
-* [sendAudio(recipientId, url)](botutils.md#sendaudio)
-* [sendFile(recipientId, url)](botutils.md#sendfile)
-* [sendImage(recipientId, url)](botutils.md#sendimage)
+* [sendAudio(recipientId, url, reusable)](botutils.md#sendaudio)
+* [sendFile(recipientId, url, reusable)](botutils.md#sendfile)
+* [sendImage(recipientId, url, reusable)](botutils.md#sendimage)
 * [sendText(recipientId, text)](botutils.md#sendtext)
-* [sendVideo(recipientId, url)](botutils.md#sendvideo)
+* [sendVideo(recipientId, url, reusable)](botutils.md#sendvideo)
 * [setAccountLinkingUrl(url)](botutils.md#setaccountlinkingurl)
 * [setChatExtensionHomeUrl(url, [inTest, [shareButton]])](botutils.md#setchatextensionhomeurl)
 * [setGetStartedButton([data])](botutils.md#setgetstartedbutton)
@@ -237,7 +237,7 @@ Open Target Audience to all.
 ___
 
 <a id="sendaudio"></a>
-###  `sendAudio(recipientId, url)`
+###  `sendAudio(recipientId, url, reusable)`
 
 Sends a message with audio attachment.
 
@@ -247,14 +247,15 @@ Sends a message with audio attachment.
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
 | url | `string`   |  URL of the audio file |
+| reusable | `boolean` | controls whether the attachment is to be reused |
 
-**Returns:** `Promise`<`string`> - an attachment ID for reusing
+**Returns:** `Promise`<`Send.Response`>
 
 **Note**: The attachment reusing is managed automatically by the package. So, when you don't intend to reuse the attachment outside the package, you can forget the returned value.
 ___
 
 <a id="sendfile"></a>
-###  `sendFile(recipientId, url)`
+###  `sendFile(recipientId, url, reusable)`
 
 Sends a message with file attachment.
 
@@ -264,14 +265,15 @@ Sends a message with file attachment.
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
 | url | `string`   |  URL of the file |
+| reusable | `boolean` | controls whether the attachment is to be reused |
 
-**Returns:** `Promise`<`string`> - an attachment ID for reusing
+**Returns:** `Promise`<`Send.Response`>
 
 **Note**: The attachment reusing is managed automatically by the package. So, when you don't intend to reuse the attachment outside the package, you can forget the returned value.
 ___
 
 <a id="sendimage"></a>
-###  `sendImage(recipientId, url)`
+###  `sendImage(recipientId, url, reusable)`
 
 Sends a message with image attachment.
 
@@ -281,8 +283,9 @@ Sends a message with image attachment.
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
 | url | `string`   |  URL of the image |
+| reusable | `boolean` | controls whether the attachment is to be reused |
 
-**Returns:** `Promise`<`string`> - an attachment ID for reusing
+**Returns:** `Promise`<`Send.Response`>
 
 **Note**: The attachment reusing is managed automatically by the package. So, when you don't intend to reuse the attachment outside the package, you can forget the returned value.
 ___
@@ -299,11 +302,11 @@ Sends a plain text message.
 | recipientId | `string`   |  ID of the recipient |
 | text | `string`   |  a text to be send |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`Send.Response`>
 ___
 
 <a id="sendvideo"></a>
-###  `sendVideo(recipientId, url)`
+###  `sendVideo(recipientId, url, reusable)`
 
 Sends a message with video attachment.
 
@@ -313,8 +316,9 @@ Sends a message with video attachment.
 | ------ | ------ | ------ |
 | recipientId | `string`   |  ID of the recipient |
 | url | `string`   |  URL of the video file |
+| reusable | `boolean` | controls whether the attachment is to be reused |
 
-**Returns:** `Promise`<`string`> - an attachment ID for reusing
+**Returns:** `Promise`<`Send.Response`>
 
 **Note**: The attachment reusing is managed automatically by the package. So, when you don't intend to reuse the attachment outside the package, you can forget the returned value.
 ___
