@@ -52,6 +52,8 @@ export class BotServer {
         config.extensionsPath = config.extensionsPath || "/ext";
         config.name = config.name || "noname";
 
+        logger.level = config.logLevel || logger.level;
+
         this.profileApi = new MessengerProfile.Api(this.config.accessToken);
 
         // create express.js application
