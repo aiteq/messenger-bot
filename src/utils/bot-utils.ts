@@ -23,7 +23,11 @@ export class BotUtils {
      *
      * @param {string} accessToken - page access token
      */
-    constructor(private accessToken: string) {}
+    constructor(private accessToken: string) {
+        if (!accessToken) {
+            throw new Error("accessToken must by provided");
+        }
+    }
 
     /**
      * Sends a plain text message.
@@ -367,16 +371,16 @@ export class BotUtils {
 
     private getMessengerCodesApi(): MessengerCodes.Api {
         return this.messengerCodesApi ||
-            (this.messengerCodesApi = new MessengerCodes.Api(this.config.accessToken));
+            (this.messengerCodesApi = new MessengerCodes.Api(this.accessToken));
     }
 
     private getMessengerProfileApi(): MessengerProfile.Api {
         return this.messengerProfileApi ||
-            (this.messengerProfileApi = new MessengerProfile.Api(this.config.accessToken));
+            (this.messengerProfileApi = new MessengerProfile.Api(this.accessToken));
     }
 
     private getSendApi(): Send.Api {
         return this.sendApi ||
-            (this.sendApi = new Send.Api(this.config.accessToken));
+            (this.sendApi = new Send.Api(this.accessToken));
     }
 }
