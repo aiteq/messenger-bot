@@ -1,18 +1,18 @@
 import { logger } from "../logger";
-import * as ga from "./graph-api";
+import * as Graph from "./graph-api";
 
 /**
  * API and types for User Profile API.
  * (see https://developers.facebook.com/docs/messenger-platform/user-profile)
  */
-export class Api extends ga.GraphApi<Request> {
+export class Api extends Graph.Api<Request> {
 
     /**
      * Creates an instance of UserProfile.Api.
      * @param {string} accessToken - a Page Access Token
      */
     constructor(protected accessToken: string) {
-        super(accessToken, "", ga.Method.GET);
+        super(accessToken, "", Graph.Method.GET);
     }
 
     /**
@@ -39,7 +39,7 @@ export class Api extends ga.GraphApi<Request> {
     }
 }
 
-export interface Request extends ga.Request {
+export interface Request extends Graph.Request {
     fields: string;
 }
 

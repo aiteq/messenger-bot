@@ -1,14 +1,14 @@
-import * as ga from "./graph-api";
+import * as Graph from "./graph-api";
 
 /**
  * API and types for Messenger Codes API.
  * (see https://developers.facebook.com/docs/messenger-platform/messenger-code)
  */
-export class Api extends ga.GraphApi<Request> {
+export class Api extends Graph.Api<Request> {
 
     constructor(protected accessToken: string) {
 
-        super(accessToken, ga.Endpoint.MESSENGER_CODES);
+        super(accessToken, Graph.Endpoint.MESSENGER_CODES);
     }
 
     /**
@@ -42,7 +42,7 @@ export enum Type {
     STANDARD = "standard"
 }
 
-export interface Request extends ga.Request {
+export interface Request extends Graph.Request {
     type: Type;
     image_size?: number;
     data?: { ref: string };
