@@ -13,7 +13,6 @@ export abstract class Group {
      * @param {string} name - a name of the group
      */
     constructor(protected name: string) {
-        MBUtil.registerGroup(this);
     }
 
     /**

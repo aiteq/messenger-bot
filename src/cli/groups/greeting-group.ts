@@ -24,7 +24,7 @@ export class GreetingGroup extends Group {
             case "add":
                 const text: string = options._[2];
                 text || this.exitWithUsage();
-                await botUtils.addGreeting(text, options.locale);
+                await botUtils.setGreeting(text, options.locale);
                 return "Greeting has been successfully added";
 
             case "delete":
