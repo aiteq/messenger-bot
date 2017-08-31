@@ -107,7 +107,7 @@ The primary way to send a plain TEXT message to the user.
 | ------ | ------ | ------ |
 | text | `string`   |  a text to be send |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="sendaudio"></a>
@@ -122,7 +122,7 @@ Sends an audio file.
 | url | `string`  |  | a URL of the audio file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `Promise`<`string`>
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="sendfile"></a>
@@ -137,7 +137,7 @@ Sends a file.
 | url | `string`  |  |   a URL of the file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `Promise`<`string`>
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="sendimage"></a>
@@ -152,7 +152,7 @@ Sends an image.
 | url | `string`  | - |   a URL of the image file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `Promise`<`string`>
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="sendmessage"></a>
@@ -166,7 +166,7 @@ Sends a message prepared manually or using message builder.
 | ------ | ------ | ------ |
 | messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) | a structured message or message builder |
 
-**Returns:** `this` - for chaining
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="sendvideo"></a>
@@ -181,7 +181,7 @@ Sends a video file.
 | url | `string`  | |   a URL of the video file |
 | reusable | `boolean`  | false | controls whether the attachment can be reused later |
 
-**Returns:** `Promise`<`string`>
+**Returns:** `Promise`<[Send.Response](../interfaces/send.response.md)>
 ___
 
 <a id="typingoff"></a>

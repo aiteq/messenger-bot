@@ -60,50 +60,6 @@ Options:
 
     private async readFromFile(fileName: string): Promise<PersistentMenuBuilder> {
 
-        const menuDef: any = JSON.parse(await fs.readTextFile(fileName, "utf8"));
-
-        const builder: PersistentMenuBuilder = new PersistentMenuBuilder();
-
-        Object.keys(menuDef).forEach((locale: string) => {
-
-            const lmenu: any = menuDef[locale];
-            builder.addMenu(locale, !!lmenu.composerInputDisabled, this.createMenu(lmenu.items));
-        });
-
-        return builder;
-    }
-
-    private createMenu(items: any[]): Menu {
-
-        const menu: Menu = PersistentMenuBuilder.createMenu();
-
-        items.forEach((item: any) => {
-
-            if (item.url) {
-
-                menu.addWebUrlMenuItem(item.title, item.url, {
-                    webviewHeightRatio: item.webviewHeightRatio,
-                    messengerExtensions: item.messengerExtensions,
-                    shareButton: item.shareButton,
-                    fallbackUrl: item.fallbackUrl
-                });
-
-            } else if (item.id) {
-
-                menu.addPostbackMenuItem(item.title, item.id, {
-                    data: item.data,
-                    webviewHeightRatio: item.webviewHeightRatio,
-                    messengerExtensions: item.messengerExtensions,
-                    shareButton: item.shareButton,
-                    fallbackUrl: item.fallbackUrl
-                });
-
-            } else if (item.items) {
-
-                menu.addSubmenu(item.title, this.createMenu(item.items));
-            }
-        });
-
-        return menu;
+        return new PersistentMenuBuilder(JSON.parse(await fs.readTextFile(fileName, "utf8")));
     }
 }

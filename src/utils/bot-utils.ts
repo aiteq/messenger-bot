@@ -3,6 +3,7 @@ import Axios from "axios";
 import { AxiosResponse } from "axios";
 
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
+import { PersistentMenuDef } from "../fb-api-helpers/persistent-menu-def";
 import * as MessengerCodes from "../fb-api/messenger-codes";
 import * as MessengerProfile from "../fb-api/messenger-profile";
 import * as Send from "../fb-api/send";
@@ -93,18 +94,18 @@ export class BotUtils {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
      *
      * @param {*} [data] - an optional data to be received when the user clicks on the Get Started butoon
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public setGetStartedButton(data?: any): Promise<void> {
+    public setGetStartedButton(data?: any): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().setGetStartedButton(data);
     }
 
     /**
      * Reads the current Get Started button setting.
      *
-     * @returns {Promise<any>} - an object with Get Started button setting
+     * @returns {Promise<MessengerProfile.GetStartedButton>} - an object with Get Started button setting
      */
-    public getGetStartedButton(): Promise<any> {
+    public getGetStartedButton(): Promise<MessengerProfile.GetStartedButton> {
         return this.getMessengerProfileApi().getGetStartedButton();
     }
 
@@ -113,56 +114,60 @@ export class BotUtils {
      * <b>Note:</b> Get Started button can't be removed when a Persistent Menu is set while
      * Persistent Menu can't be used without Get Started button.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteGetStartedButton(): Promise<void> {
+    public deleteGetStartedButton(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteGetStartedButton();
     }
 
     /**
-     * Adds the Greeting for the Page.
+     * Sets the Greeting for the Page. If it is already set for the locale, it will be changed.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
      *
      * @param {string} text - a text of the greeting
      * @param {string} [locale="default"] - greeting's locale
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public async addGreeting(text: string, locale: string = "default"): Promise<void> {
+    public async setGreeting(text: string, locale: string = "default"): Promise<MessengerProfile.Response> {
 
         const greeting: MessengerProfile.Greeting = { locale, text };
 
-        // first get current greetings
-        const current: MessengerProfile.Greeting[] = await this.getMessengerProfileApi().getGreeting();
-
-        return this.getMessengerProfileApi().setGreeting(current ? current.concat(greeting) : [greeting]);
+        return this.getMessengerProfileApi().setGreeting(
+            (await this.getMessengerProfileApi().getGreeting() || [])
+            .filter((grt) => grt.locale !== locale)
+            .concat(greeting)
+        );
     }
 
     /**
      * Reads the current Greeting.
      *
-     * @returns {Promise<any>} - an object with greeting
+     * @returns {Promise<MessengerProfile.Greeting[]>} - an object with greeting
      */
-    public getGreeting(): Promise<any> {
+    public getGreeting(): Promise<MessengerProfile.Greeting[]> {
         return this.getMessengerProfileApi().getGreeting();
     }
 
     /**
      * Removes the current Greeting.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteGreeting(): Promise<void> {
+    public deleteGreeting(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteGreeting();
     }
 
     /**
      * Sets Persistent Menu for the Page.
      *
-     * @param {(MessengerProfile.PersistentMenu | MessengerProfile.PersistentMenu[] | PersistentMenuBuilder)} menuDef
-     * @returns {Promise<void>}
+     * @param {(PersistentMenuDef | PersistentMenuDef[] | PersistentMenuBuilder)} menuDef
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public setPersistentMenu(menuDef: MessengerProfile.PersistentMenu | MessengerProfile.PersistentMenu[] | PersistentMenuBuilder): Promise<void> {
-        return this.getMessengerProfileApi().setPersistentMenu(menuDef);
+    public setPersistentMenu(menuDef: PersistentMenuDef | PersistentMenuDef[] | PersistentMenuBuilder): Promise<MessengerProfile.Response> {
+
+        menuDef instanceof PersistentMenuBuilder || (menuDef = new PersistentMenuBuilder(menuDef));
+
+        return this.getMessengerProfileApi().setPersistentMenu(menuDef.build());
     }
 
     /**
@@ -177,9 +182,9 @@ export class BotUtils {
     /**
      * Removes the current Persistent Menu.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deletePersistentMenu(): Promise<void> {
+    public deletePersistentMenu(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deletePersistentMenu();
     }
 
@@ -196,18 +201,18 @@ export class BotUtils {
      * Adds domains to the whitelist.
      *
      * @param {Array<string>} domains - an array of domains
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public whitelistDomains(domains: string[]): Promise<void> {
+    public whitelistDomains(domains: string[]): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().whitelistDomains(domains);
     }
 
     /**
      * Removes all domains from whitelist.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteDomainWhitelist(): Promise<void> {
+    public deleteDomainWhitelist(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteDomainWhitelist();
     }
 
@@ -224,18 +229,18 @@ export class BotUtils {
      * Sets a new Account Linking URL.
      *
      * @param {string} url - a URL
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public setAccountLinkingUrl(url: string): Promise<void> {
+    public setAccountLinkingUrl(url: string): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().setAccountLinkingUrl(url);
     }
 
     /**
      * Removes current setting of Account Linking URL.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteAccountLinkingUrl(): Promise<void> {
+    public deleteAccountLinkingUrl(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteAccountLinkingUrl();
     }
 
@@ -251,18 +256,18 @@ export class BotUtils {
     /**
      * Open Target Audience to all.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public openTargetAudience(): Promise<void> {
+    public openTargetAudience(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().openAudienceToAll();
     }
 
     /**
      * Close Target Audience to all.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public closeTargetAudience(): Promise<void> {
+    public closeTargetAudience(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().closeAudienceToAll();
     }
 
@@ -270,9 +275,9 @@ export class BotUtils {
      * Adds countries to Target Audience whitelist.
      *
      * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public whitelistAudienceCountries(countries: string[]): Promise<void> {
+    public whitelistAudienceCountries(countries: string[]): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().whitelistAudienceCountries(countries);
     }
 
@@ -280,18 +285,18 @@ export class BotUtils {
      * Adds countries to Target Audience blacklist.
      *
      * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public blacklistAudienceCountries(countries: string[]): Promise<void> {
+    public blacklistAudienceCountries(countries: string[]): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().blacklistAudienceCountries(countries);
     }
 
     /**
      * Removes all countris from both whitelist and blacklist.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteTargetAudience(): Promise<void> {
+    public deleteTargetAudience(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteAudience();
     }
 
@@ -311,10 +316,10 @@ export class BotUtils {
      * @param {boolean} [inTest=false] - controls whether the Chat Extension is in test mode
      * @param {boolean} [shareButton=true] - controls whether the share button in the webview is enabled
      * @param {*} [cliLogger] - logger for CLI
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
     public async setChatExtensionHomeUrl(
-        url: string, inTest: boolean = false, shareButton: boolean = true, cliLogger?: any): Promise<void> {
+        url: string, inTest: boolean = false, shareButton: boolean = true, cliLogger?: any): Promise<MessengerProfile.Response> {
 
         if (url.indexOf("https://") !== 0) {
             return Promise.reject("only 'https' protocol is supported for Chat Extension home URL");
@@ -336,9 +341,9 @@ export class BotUtils {
     /**
      * Removes current setting of Chat Extension home URL.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<MessengerProfile.Response>}
      */
-    public deleteChatExtensionHomeUrl(): Promise<void> {
+    public deleteChatExtensionHomeUrl(): Promise<MessengerProfile.Response> {
         return this.getMessengerProfileApi().deleteChatExtensionHomeUrl();
     }
 
