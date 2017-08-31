@@ -1,4 +1,4 @@
-[@aiteq/messenger-bot](../README.md) > [MessengerProfile](../modules/messengerprofile.md) > [Greeting](../modules/messengerprofile.greeting.md)
+[@aiteq/messenger-bot](../README.md) > MessengerProfile > [Greeting](../modules/messengerprofile.greeting.md)
 
 # Module: Greeting
 

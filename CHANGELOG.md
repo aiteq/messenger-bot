@@ -13,8 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - TypeScript 2.5, Node 8.4
 - **API CHANGE** BotUtils.constructor() needs only accessToken (instead of all BotConfig object)
 - **API CHANGE** BotUtils.sendAudio|sendFile|sendImage|sendVideo have new optional parameter reusable
+- **API CHANGE** BotUtils.addGreeting() changed to setGreeting (according to its logic)
+- **API CHANGE** BotUtils.setPersistentMenu() accepts [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) instead of Messenger API type (MessengerProfile.PersistentMenu)
+- all BotUtils methods now return Promises with response (prior this version they were returning Promise<void>)
+- **API CHANGE** MessengerProfile.setPersistentMenu() no longer accepts [PersistentMenuBuilder](./doc/classes/persistentmenubuilder.md)
+- [PersistentMenuBuilder](./doc/classes/persistentmenubuilder.md) now accepts [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) in [constructor](./doc/classes/persistentmenubuilder.md#constructor)
 
 ### Added
+- [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) interface for better separation from Messenger API types and simplified menu definition in declarative way
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)
 - test coverage: store, messenger-codes
 - tslint

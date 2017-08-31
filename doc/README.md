@@ -4,7 +4,6 @@
 
 ## Modules
 
-* [MessengerProfile](./modules/messengerprofile.md)
 * [MessengerProfile.Greeting](./modules/messengerprofile.greeting.md)
 * [Send](./modules/send.md)
 * [Webhook](./modules/webhook.md)
@@ -43,9 +42,8 @@
 
 * [BotConfig](./interfaces/botconfig.md)
 * [ChatExtension](./interfaces/chatextension.md)
-* [MessengerProfile.Menu](./interfaces/messengerprofile.menu.md)
-* [MessengerProfile.MenuItem](./interfaces/messengerprofile.menuitem.md)
-* [MessengerProfile.PersistentMenu](./interfaces/messengerprofile.persistentmenu.md)
+* [PersistentMenuDef](./interfaces/persistentmenudef.md)
+* [PersistentMenuItemDef](./interfaces/persistentmenuitemdef.md)
 * [Send.AbstractMessage](./interfaces/send.abstractmessage.md)
 * [Send.Address](./interfaces/send.address.md)
 * [Send.AttachmentMessage](./interfaces/send.attachmentmessage.md)
@@ -77,12 +75,9 @@
 
 ## Enums
 
-* [MessengerProfile.MenuItemType](./enums/messengerprofile.menuitemtype.md)
 * [Send.ImageAspectRatio](./enums/send.imageaspectratio.md)
 * [Send.ListTopElementStyle](./enums/send.listtopelementstyle.md)
 * [Send.NotificationType](./enums/send.notificationtype.md)
 * [Webhook.Event](./enums/webhook.event.md)
 * [Webview.HeightRatio](./enums/webview.heightratio.md)
 * [Webview.ShareButton](./enums/webview.sharebutton.md)
-
-

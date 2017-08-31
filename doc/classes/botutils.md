@@ -11,7 +11,6 @@ Provides an interface to non-interactive services of Messenger Platform API thro
 
 ### Methods
 
-* [addGreeting(text, [locale])](botutils.md#addgreeting)
 * [blacklistAudienceCountries(countries)](botutils.md#blacklistaudiencecountries)
 * [closeTargetAudience()](botutils.md#closetargetaudience)
 * [deleteAccountLinkingUrl()](botutils.md#deleteaccountlinkingurl)
@@ -38,6 +37,7 @@ Provides an interface to non-interactive services of Messenger Platform API thro
 * [setAccountLinkingUrl(url)](botutils.md#setaccountlinkingurl)
 * [setChatExtensionHomeUrl(url, [inTest, [shareButton]])](botutils.md#setchatextensionhomeurl)
 * [setGetStartedButton([data])](botutils.md#setgetstartedbutton)
+* [setGreeting(text, [locale])](botutils.md#setgreeting)
 * [setPersistentMenu(menuDef)](botutils.md#setpersistentmenu)
 * [whitelistAudienceCountries(countries)](botutils.md#whitelistaudiencecountries)
 * [whitelistDomains(domains)](botutils.md#whitelistdomains)
@@ -61,10 +61,10 @@ Creates an instance of [BotUtils](botutils.md).
 
 ## Methods
 
-<a id="addgreeting"></a>
-###  `addGreeting(text, [locale])`
+<a id="setgreeting"></a>
+###  `setGreeting(text, [locale])`
 
-Adds the [Greeting](https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text) for the Page.
+Sets the [Greeting](https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text) for the Page. If it is already set for the locale, it will be changed.
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Adds the [Greeting](https://developers.facebook.com/docs/messenger-platform/mess
 | text | `string`  | |   a greeting text |
 | locale | `string`  | `"default"` | a locale of the greeting ([supported locales](https://developers.facebook.com/docs/messenger-platform/messenger-profile/supported-locales)) |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="blacklistaudiencecountries"></a>
@@ -87,7 +87,7 @@ Adds countries to Target Audience blacklist.
 | ------ | ------ | ------ |
 | countries | `Array`<`string`> | a list of [ISO 3166 Alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of countries to be blacklisted |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="closetargetaudience"></a>
@@ -95,7 +95,7 @@ ___
 
 Close Target Audience to all.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deleteaccountlinkingurl"></a>
@@ -103,7 +103,7 @@ ___
 
 Removes current setting of Account Linking URL.
 
-**Returns:** `Promise.<`void`>
+**Returns:** `Promise.<`MessengerProfile.Response`>
 ___
 
 <a id="deletechatextensionhomeurl"></a>
@@ -111,7 +111,7 @@ ___
 
 Removes current setting of Chat Extension home URL.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deletedomainwhitelist"></a>
@@ -119,7 +119,7 @@ ___
 
 Removes all domains from whitelist.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deletegetstartedbutton"></a>
@@ -129,7 +129,7 @@ Disables the Get Started button on the Page.
 
 **Note:** Get Started button can't be removed when a Persistent Menu is set while Persistent Menu can't be used without Get Started button.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deletegreeting"></a>
@@ -137,7 +137,7 @@ ___
 
 Removes the current Greeting.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deletepersistentmenu"></a>
@@ -145,7 +145,7 @@ ___
 
 Removes the current Persistent Menu.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="deletetargetaudience"></a>
@@ -153,7 +153,7 @@ ___
 
 Removes all countris from both whitelist and blacklist.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="generatemessengercode"></a>
@@ -169,7 +169,7 @@ Generates and saves a new Messenger Code as PNG image.
 | size | `number` | a size of the image (ragnge: `100` - `2000`, default: `1000`) |
 | ref | `string` | optional data to be sent when the user scans the code |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="getaccountlinkingurl"></a>
@@ -201,7 +201,7 @@ ___
 
 Reads the current Get Started button setting.
 
-**Returns:** `Promise`<`any`> - an object with Get Started button setting
+**Returns:** `Promise`<`MessengerProfile.GetStartedButton`> - an object with Get Started button setting
 ___
 
 <a id="getgreeting"></a>
@@ -209,7 +209,7 @@ ___
 
 Reads the current Greeting.
 
-**Returns:** `Promise`<`any`> - an object with greeting
+**Returns:** `Promise`<`MessengerProfile.Greeting[]`> - an array of greetings
 ___
 
 <a id="getpersistentmenu"></a>
@@ -334,7 +334,7 @@ Sets a new Account Linking URL.
 | ------ | ------ | ------ |
 | url | `string`   |  new Account Linking URL |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="setchatextensionhomeurl"></a>
@@ -350,7 +350,7 @@ Sets a new Chat Extension home URL. If the URL is not whitelisted it will be don
 | inTest | `boolean` | `false` | controls whether the Chat Extension is in test mode |
 | shareButton | `boolean` | `true` | controls whether the share button in the webview is enabled |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="setgetstartedbutton"></a>
@@ -364,7 +364,7 @@ Sets [Get Started button](https://developers.facebook.com/docs/messenger-platfor
 | ------ | ------ | ------ |
 | data | `any`   | optional data to be sent when the user clicks on the button |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="setpersistentmenu"></a>
@@ -376,9 +376,9 @@ Sets Persistent Menu for the Page.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| menuDef | [PersistentMenu](../interfaces/messengerprofile.persistentmenu.md) ⎮ `Array`<[PersistentMenu](../interfaces/messengerprofile.persistentmenu.md)> ⎮ [PersistentMenuBuilder](persistentmenubuilder.md)   | definition of Persistent Menu |
+| menuDef | [PersistentMenuDef](../interfaces/persistentmenudef.md) ⎮ `Array`<[PersistentMenuDef](../interfaces/persistentmenudef.md)> ⎮ [PersistentMenuBuilder](persistentmenubuilder.md)   | definition of Persistent Menu |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="whitelistaudiencecountries"></a>
@@ -392,7 +392,7 @@ Adds countries to Target Audience whitelist.
 | ------ | ------ | ------ |
 | countries | `Array`<`string`> | list of [ISO 3166 Alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of countries to be whitelisted |
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`MessengerProfile.Response`>
 ___
 
 <a id="whitelistdomains"></a>

@@ -10,6 +10,10 @@ Helps to create a [Persistent Menu](https://developers.facebook.com/docs/messeng
 
 * [Menu](persistentmenubuilder.menu.md)
 
+### Constructors
+
+* [constructor(menuDef)](persistentmenubuilder.md#constructor)
+
 ### Methods
 
 * [addMenu(locale, composerInputDisabled, menu)](persistentmenubuilder.md#addmenu)
@@ -17,6 +21,23 @@ Helps to create a [Persistent Menu](https://developers.facebook.com/docs/messeng
 ### Static methods
 
 * [PersistentMenuBuilder.createMenu()](persistentmenubuilder.md#createmenu)
+
+---
+
+## Constructors
+
+<a id="constructor"></a>
+### new PersistentMenuBuilder(menuDef)`
+
+Creates a new PersistentMenuBuilder and optionaly read persistent menu definition.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| menuDef | [PersistentMenuDef](../interfaces/persistentmenudef.md) | [PersistentMenuDef](../interfaces/persistentmenudef.md)[] | optional persistent menu definition object or array of objects |
+
+**Returns:** [PersistentMenuBuilder](persistentmenubuilder.md)
 
 ---
 ## Methods
