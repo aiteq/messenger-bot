@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **API CHANGE** BotUtils.sendAudio|sendFile|sendImage|sendVideo have new optional parameter reusable
 - **API CHANGE** BotUtils.addGreeting() changed to setGreeting (according to its logic)
 - **API CHANGE** BotUtils.setPersistentMenu() accepts [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) instead of Messenger API type (MessengerProfile.PersistentMenu)
-- all BotUtils methods now return Promises with response (prior this version they were returning Promise<void>)
+- all BotUtils & Chat methods now return Promises with response (prior this version they were returning Promise<void>)
 - **API CHANGE** MessengerProfile.setPersistentMenu() no longer accepts [PersistentMenuBuilder](./doc/classes/persistentmenubuilder.md)
 - [PersistentMenuBuilder](./doc/classes/persistentmenubuilder.md) now accepts [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) in [constructor](./doc/classes/persistentmenubuilder.md#constructor)
 

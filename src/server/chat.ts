@@ -34,9 +34,9 @@ export class Chat {
      * The primary way to send a plain TEXT message to the user.
      *
      * @param {string} text - a text to be send
-     * @returns {Promise<void>}
+     * @returns {Promise<Send.Response>}
      */
-    public async say(text: string): Promise<void> {
+    public async say(text: string): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -88,9 +88,9 @@ export class Chat {
      *
      * @param {string} url - a URL of the image file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Send.Response>}
      */
-    public async sendImage(url: string, reusable: boolean = false): Promise<string> {
+    public async sendImage(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -103,9 +103,9 @@ export class Chat {
      *
      * @param {string} url - a URL of the audio file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Send.Response>}
      */
-    public async sendAudio(url: string, reusable: boolean = false): Promise<string> {
+    public async sendAudio(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -118,9 +118,9 @@ export class Chat {
      *
      * @param {string} url - a URL of the video file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Send.Response>}
      */
-    public async sendVideo(url: string, reusable: boolean = false): Promise<string> {
+    public async sendVideo(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -133,9 +133,9 @@ export class Chat {
      *
      * @param {string} url - a URL of the file
      * @param {boolean} [reusable=false] - if <code>true</code> the attachment will be marked as reusable
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Send.Response>}
      */
-    public async sendFile(url: string, reusable: boolean = false): Promise<string> {
+    public async sendFile(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -147,9 +147,9 @@ export class Chat {
      * Sends a message prepared manually or using message builder.
      *
      * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - a structured message or message builder
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Send.Response>}
      */
-    public async sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<void> {
+    public async sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
