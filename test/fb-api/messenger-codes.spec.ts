@@ -1,10 +1,11 @@
 import { logger } from "../../src/logger";
 import * as MessengerCodes from "../../src/fb-api/messenger-codes";
 
-const ACCESS_CODE: string = "EAABtZB4WKRZAsBAAhdWqAnZCY4hd0OwMWP7viawsCgkbaAy7uKSzvOD1X70agVglIG1X74EJZCP0IYsZBqyRqRyrMDS6gzbJOh3BzsO6xLkMwzUb1oFDRaQiwaMA1ZAv5YXi8MIb1n11zsXbKEDda0Tdsn5Ff8wuM9OuODtDv04VYzVkt6Tvv7";
+const config = require("../../work/test-config.json");
+const ACCESS_TOKEN: string = config.accessToken;
 const RE_URL: RegExp = /^https:\/\/.*\.fbcdn\.net\/.*\.png/;
 
-describe.only("MessengerCodes.Api", () => {
+describe("MessengerCodes.Api", () => {
 
     logger.level = "OFF";
 
@@ -13,7 +14,7 @@ describe.only("MessengerCodes.Api", () => {
     describe("valid accessCode", () => {
 
         test("constructor(valid-access-code)", () => {
-            expect(api = new MessengerCodes.Api(ACCESS_CODE)).toBeInstanceOf(MessengerCodes.Api);
+            expect(api = new MessengerCodes.Api(ACCESS_TOKEN)).toBeInstanceOf(MessengerCodes.Api);
         });
 
         test("generateCode()", async () => {
