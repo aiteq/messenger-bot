@@ -1,6 +1,5 @@
-import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { logger } from "../logger";
-import * as ga from "./graph-api";
+import * as Graph from "./graph-api";
 import * as MessengerProfile from "./messenger-profile";
 import * as Webhook from "./webhook";
 import * as Webview from "./webview";
@@ -9,14 +8,14 @@ import * as Webview from "./webview";
  * API and types for Messenger Profile API.
  * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile)
  */
-export class Api extends ga.GraphApi<Request> {
+export class Api extends Graph.Api<Request> {
 
     /**
      * Creates an instance of MessengerProfile.Api.
      * @param {string} accessToken - a Page Access Token
      */
     constructor(protected accessToken: string) {
-        super(accessToken, ga.Endpoint.MESSENGER_PROFILE);
+        super(accessToken, Graph.Endpoint.MESSENGER_PROFILE);
     }
 
     /**
@@ -24,9 +23,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
      *
      * @param {*} [data] - a data to be received when the user clicks on the Get Started butoon
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public setGetStartedButton(data?: any): Promise<void> {
+    public setGetStartedButton(data?: any): Promise<Response> {
 
         const payload: any = {
             src: Webhook.PostbackSource.GET_STARTED_BUTTON
@@ -44,16 +43,22 @@ export class Api extends ga.GraphApi<Request> {
      *
      * @returns {Promise<GetStartedButton>} - Get Started Button setting
      */
-    public getGetStartedButton(): Promise<GetStartedButton> {
-        return this.getField(Field.GET_STARTED_BUTTON);
+    public async getGetStartedButton(): Promise<GetStartedButton> {
+        try {
+            let response: any = await this.getField(Field.GET_STARTED_BUTTON);
+            response && (response.payload = JSON.parse(response.payload));
+            return response;
+        } catch (error) {
+            return Promise.reject((error));
+        }
     }
 
     /**
      * Removes Get Started button.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public deleteGetStartedButton(): Promise<void> {
+    public deleteGetStartedButton(): Promise<Response> {
         return this.deleteField([Field.GET_STARTED_BUTTON]);
     }
 
@@ -62,9 +67,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
      *
      * @param {(string | Greeting | Array<Greeting>)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public async setGreeting(greeting: string | Greeting | Greeting[]): Promise<void> {
+    public async setGreeting(greeting: string | Greeting | Greeting[]): Promise<Response> {
 
         return this.setField(Field.GREETING, typeof greeting === "string" ?
             [{
@@ -77,18 +82,18 @@ export class Api extends ga.GraphApi<Request> {
     /**
      * Reads the current Greeting setting.
      *
-     * @returns {Promise<Array<MessengerProfile.Greeting>>} - current Greeting
+     * @returns {Promise<Array<Greeting>>} - current Greeting
      */
-    public getGreeting(): Promise<MessengerProfile.Greeting[]> {
+    public getGreeting(): Promise<Greeting[]> {
         return this.getField(Field.GREETING);
     }
 
     /**
      * Removes all greetings.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public deleteGreeting(): Promise<void> {
+    public deleteGreeting(): Promise<Response> {
         return this.deleteField([Field.GREETING]);
     }
 
@@ -97,28 +102,29 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
      * <b>Note:</b> You must set up a Get Started button if you also wish to use Persistent Menu.
      *
-     * @param {(PersistentMenu | Array<PersistentMenu> | PersistentMenuBuilder)} menuDef - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
-     * @returns {Promise<void>}
+     * @param {(PersistentMenu | Array<PersistentMenu>)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
+     * @returns {Promise<Response>}
      */
-    public setPersistentMenu(menuDef: PersistentMenu | PersistentMenu[] | PersistentMenuBuilder): Promise<void> {
+    public setPersistentMenu(menu: PersistentMenu | PersistentMenu[]): Promise<Response> {
 
-        menuDef instanceof PersistentMenuBuilder && (menuDef = menuDef.build());
-        return this.setField(Field.PERSISTENT_MENU, Array.isArray(menuDef) ? menuDef : [menuDef]);
+        return this.setField(Field.PERSISTENT_MENU, Array.isArray(menu) ? menu : [menu]);
     }
 
     /**
      * Reads the current Persistent Menu setting.
      *
-     * @returns {Promise<Array<MessengerProfile.PersistentMenu>>}
+     * @returns {Promise<Array<PersistentMenu>>}
      */
-    public getPersistentMenu(): Promise<MessengerProfile.PersistentMenu[]> {
+    public getPersistentMenu(): Promise<PersistentMenu[]> {
         return this.getField(Field.PERSISTENT_MENU);
     }
 
     /**
      * Removes currently installed Persistent Menu.
+     *
+     * @returns {Promise<Response>}
      */
-    public deletePersistentMenu(): Promise<void> {
+    public deletePersistentMenu(): Promise<Response> {
         return this.deleteField([Field.PERSISTENT_MENU]);
     }
 
@@ -127,9 +133,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting)
      *
      * @param {(string | Array<string>)} domains - a domain or array of domains to by whitelisted
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public whitelistDomains(domains: string | string[]): Promise<void> {
+    public whitelistDomains(domains: string | string[]): Promise<Response> {
         return this.setField(Field.DOMAIN_WHITELIST, Array.isArray(domains) ? domains : [domains]);
     }
 
@@ -145,9 +151,9 @@ export class Api extends ga.GraphApi<Request> {
     /**
      * Removes all whitelisted domains.
      *
-     * @returns {this} - for chaining
+     * @returns {Promise<Response>} - for chaining
      */
-    public deleteDomainWhitelist(): Promise<void> {
+    public deleteDomainWhitelist(): Promise<Response> {
         return this.deleteField([Field.DOMAIN_WHITELIST]);
     }
 
@@ -156,9 +162,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/account-linking-url)
      *
      * @param {string} url
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public setAccountLinkingUrl(url: string): Promise<void> {
+    public setAccountLinkingUrl(url: string): Promise<Response> {
         return this.setField(Field.ACCOUNT_LINKING_URL, url);
     }
 
@@ -174,9 +180,9 @@ export class Api extends ga.GraphApi<Request> {
     /**
      * Removes currently set account linking URL.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public deleteAccountLinkingUrl(): Promise<void> {
+    public deleteAccountLinkingUrl(): Promise<Response> {
         return this.deleteField([Field.ACCOUNT_LINKING_URL]);
     }
 
@@ -185,9 +191,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
      *
      * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted for audience
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public whitelistAudienceCountries(countries: string | string[]): Promise<void> {
+    public whitelistAudienceCountries(countries: string | string[]): Promise<Response> {
 
         return this.setField(Field.TARGET_AUDIENCE, {
             audience_type: AudienceType.CUSTOM,
@@ -202,9 +208,9 @@ export class Api extends ga.GraphApi<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
      *
      * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted for audience
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public blacklistAudienceCountries(countries: string | string[]): Promise<void> {
+    public blacklistAudienceCountries(countries: string | string[]): Promise<Response> {
 
         return this.setField(Field.TARGET_AUDIENCE, {
             audience_type: AudienceType.CUSTOM,
@@ -218,9 +224,9 @@ export class Api extends ga.GraphApi<Request> {
      * Opens audience for all.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public openAudienceToAll(): Promise<void> {
+    public openAudienceToAll(): Promise<Response> {
         return this.setField(Field.TARGET_AUDIENCE, {
             audience_type: AudienceType.ALL
         });
@@ -230,9 +236,9 @@ export class Api extends ga.GraphApi<Request> {
      * Closes audience for all.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public closeAudienceToAll(): Promise<void> {
+    public closeAudienceToAll(): Promise<Response> {
 
         return this.setField(Field.TARGET_AUDIENCE, {
             audience_type: AudienceType.NONE
@@ -251,9 +257,9 @@ export class Api extends ga.GraphApi<Request> {
     /**
      * Removes all audience settings.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public deleteAudience(): Promise<void> {
+    public deleteAudience(): Promise<Response> {
         return this.deleteField([Field.TARGET_AUDIENCE]);
     }
 
@@ -264,9 +270,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} url - Chat Extensions home URL
      * @param {boolean} [inTest=false] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
      * @param {boolean} [shareButton=true] - Controls whether the share button in the webview is enabled.
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = true): Promise<void> {
+    public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = true): Promise<Response> {
 
         return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
             url,
@@ -288,54 +294,53 @@ export class Api extends ga.GraphApi<Request> {
     /**
      * Removes Chat Extension home URL.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public deleteChatExtensionHomeUrl(): Promise<void> {
+    public deleteChatExtensionHomeUrl(): Promise<Response> {
         return this.deleteField([Field.CHAT_EXTENSION_WEB_URL]);
     }
 
-    private async setField(field: Field, data: any): Promise<void> {
+    private setField(field: Field, data: any): Promise<Response> {
 
         logger.debug(`setting the field '${field}' to`, JSON.stringify(data, null, 2));
 
         const payload: any = {};
         payload[field] = data;
 
-        try {
-
-            await this.sendRequest(payload);
-            logger.debug(`the field '${field}' has been succesfully set`);
-
-        } catch (error) {
-
-            logger.debug(`unable to set the field '${field}'`, error);
-            return Promise.reject(error);
-        }
+        return this.sendRequest(payload);
     }
 
     private async getField(field: Field): Promise<any> {
 
         logger.debug("reading the field", field);
 
-        const data: any[] = (await this.sendRequest({
-            fields: field
-        }, { method: ga.Method.GET })).data;
+        try {
+            const data: any[] = (await this.sendRequest({
+                fields: field
+            }, { method: Graph.Method.GET })).data;
 
-        return data.length > 0 ? data[0][field] : undefined;
+            return data.length > 0 ? data[0][field] : undefined;
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 
-    private async deleteField(fields: Field[]): Promise<void> {
+    private deleteField(fields: Field[]): Promise<Response> {
 
         logger.debug("deleting fields", fields);
 
-        return await this.sendRequest({
+        return this.sendRequest({
             fields
-        }, { method: ga.Method.DELETE });
+        }, { method: Graph.Method.DELETE });
     }
 }
 
 export interface GetStartedButton {
-    payload: string;
+    payload: {
+        src: Webhook.PostbackSource,
+        data?: any
+    }
 }
 
 export enum MenuItemType {
@@ -401,7 +406,7 @@ export interface ChatExtensionHomeUrl {
     in_test: boolean;
 }
 
-export interface Request extends ga.Request {
+export interface Request extends Graph.Request {
     persistent_menu?: PersistentMenu[];
     get_started?: GetStartedButton;
     greeting?: Greeting[];

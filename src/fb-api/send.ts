@@ -2,14 +2,14 @@ import { MessageBuilder } from "../fb-api-helpers/message-builder";
 import { logger } from "../logger";
 import { Reusable } from "../store/reusable";
 import { ReusableDao } from "../store/reusable-dao";
-import * as ga from "./graph-api";
+import * as Graph from "./graph-api";
 import * as Webview from "./webview";
 
 /**
  * Functions and types for Send API.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference)
  */
-export class Api extends ga.GraphApi<Request> {
+export class Api extends Graph.Api<Request> {
 
     private reusableDao: ReusableDao;
 
@@ -19,7 +19,7 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} accessToken - a Page Access Token
      */
     constructor(protected accessToken: string) {
-        super(accessToken, ga.Endpoint.MESSAGES);
+        super(accessToken, Graph.Endpoint.MESSAGES);
         this.reusableDao = new ReusableDao();
     }
 
@@ -28,9 +28,9 @@ export class Api extends ga.GraphApi<Request> {
      *
      * @param {string} recipientId - recipient's ID
      * @param {string} text - a text to be send
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public sendText(recipientId: string, text: string): Promise<void> {
+    public sendText(recipientId: string, text: string): Promise<Response> {
         return this.send(recipientId, { text });
     }
 
@@ -40,9 +40,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} recipientId - recipient's ID
      * @param {string} url - URL of the image file
      * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Response>}
      */
-    public sendImage(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
+    public sendImage(recipientId: string, url: string, reusable: boolean = false): Promise<Response> {
         return this.sendMediaAttachment(AttachmentType.IMAGE, recipientId, url, reusable);
     }
 
@@ -52,9 +52,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} recipientId - recipient's ID
      * @param {string} url - URL of the audio file
      * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Response>}
      */
-    public sendAudio(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
+    public sendAudio(recipientId: string, url: string, reusable: boolean = false): Promise<Response> {
         return this.sendMediaAttachment(AttachmentType.AUDIO, recipientId, url, reusable);
     }
 
@@ -64,9 +64,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} recipientId - recipient's ID
      * @param {string} url - URL of the video file
      * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Response>}
      */
-    public sendVideo(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
+    public sendVideo(recipientId: string, url: string, reusable: boolean = false): Promise<Response> {
         return this.sendMediaAttachment(AttachmentType.VIDEO, recipientId, url, reusable);
     }
 
@@ -76,9 +76,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} recipientId - recipient's ID
      * @param {string} url - URL of the file
      * @param {boolean} [reusable=false] - controls whether the attachment is to be reused
-     * @returns {Promise<string>} - an attachment ID
+     * @returns {Promise<Response>}
      */
-    public sendFile(recipientId: string, url: string, reusable: boolean = false): Promise<string> {
+    public sendFile(recipientId: string, url: string, reusable: boolean = false): Promise<Response> {
         return this.sendMediaAttachment(AttachmentType.FILE, recipientId, url, reusable);
     }
 
@@ -133,9 +133,9 @@ export class Api extends ga.GraphApi<Request> {
      * @param {string} recipientId - recipient's ID
      * @param {(Message | MessageBuilder<Message>)} messageOrBuilder - a message or message builder
      * @param {NotificationType} [notification=NotificationType.REGULAR]
-     * @returns {Promise<any>}
+     * @returns {Promise<Response>}
      */
-    public send(recipientId: string, messageOrBuilder: Message | MessageBuilder<Message>, notification: NotificationType = NotificationType.REGULAR): Promise<any> {
+    public send(recipientId: string, messageOrBuilder: Message | MessageBuilder<Message>, notification: NotificationType = NotificationType.REGULAR): Promise<Response> {
 
         return this.sendRequest({
             recipient: JSON.stringify({
@@ -146,7 +146,7 @@ export class Api extends ga.GraphApi<Request> {
         });
     }
 
-    private async sendMediaAttachment(type: AttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<string> {
+    private async sendMediaAttachment(type: AttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<Response> {
 
         if (reuse) {
 
@@ -156,7 +156,7 @@ export class Api extends ga.GraphApi<Request> {
 
                 logger.info(`re-using attachment '{url}' (attachmentId=${reusable.id})`);
 
-                this.send(recipientId, {
+                return this.send(recipientId, {
                     attachment: {
                         type,
                         payload: {
@@ -164,8 +164,6 @@ export class Api extends ga.GraphApi<Request> {
                         }
                     } as Attachment
                 }, notification);
-
-                return reusable.id;
             }
         }
 
@@ -179,13 +177,12 @@ export class Api extends ga.GraphApi<Request> {
             } as Attachment
         }, notification);
 
-        if (reuse && response) {
+        if (reuse) {
             // save attachmentId to re-use later
             this.reusableDao.save({ url, id: response.attachment_id });
-            return response.attachment_id;
         }
 
-        return undefined;
+        return response;
     }
 }
 
@@ -462,7 +459,7 @@ export enum Tag {
     ISSUE_RESOLUTION = "ISSUE_RESOLUTION"
 }
 
-export interface Request extends ga.Request {
+export interface Request extends Graph.Request {
     recipient: string;
     message?: string;
     sender_action?: SenderAction;

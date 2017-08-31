@@ -7,7 +7,7 @@ import { logger } from "../logger";
  *
  * Calling of the Graph API uses the Axios package providing fully <i>promisified</code> interface.
  */
-export abstract class GraphApi<T extends Request> {
+export abstract class Api<T extends Request> {
 
     private static readonly DEFAULT_VERSION = "2.9";
 
@@ -29,7 +29,7 @@ export abstract class GraphApi<T extends Request> {
 
         // create instance of Axios with default configuration
         this.client = Axios.create({
-            baseURL: `https://graph.facebook.com/v${version || GraphApi.DEFAULT_VERSION}/${endpoint}`,
+            baseURL: `https://graph.facebook.com/v${version || Api.DEFAULT_VERSION}/${endpoint}`,
             headers: { "Content-Type": "application/json" },
             responseType: "json"
         });
