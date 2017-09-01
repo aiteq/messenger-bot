@@ -21,27 +21,8 @@ export class MBUtil {
 `;
     }
 
-    private groups: Map<string, Group> = new Map<string, Group>();
-
-    private exitWithUsage(): void {
-        console.log("Usage: mbutil <group> [command] [options]");
-        console.log("Groups: ", Array.from(this.groups.keys()).join(", "));
-        console.log("\nType 'mbutil <group> --help' to display usage for the group\n");
-        process.exit(0);
-    }
-
     private botUtils: BotUtils;
-
-    private registerGroups() {
-
-        // read all groups from groups/index.js
-        let groups = require("./groups/");
-
-        Object.keys(groups).forEach((key) => {
-            let group: Group = new groups[key]();
-            this.groups.set(group.getName(), group);
-        });
-    }
+    private groups: Map<string, Group> = new Map<string, Group>();
 
     public async bootstrap(): Promise<void> {
 
@@ -72,5 +53,23 @@ export class MBUtil {
         this.botUtils = new BotUtils(config);
 
         cliout.info(await groupHandler.execute(command, this.botUtils, options) + "\n");
+    }
+
+    private exitWithUsage(): void {
+        console.log("Usage: mbutil <group> [command] [options]");
+        console.log("Groups: ", Array.from(this.groups.keys()).join(", "));
+        console.log("\nType 'mbutil <group> --help' to display usage for the group\n");
+        process.exit(0);
+    }
+
+    private registerGroups() {
+
+        // read all groups from groups/index.js
+        const groups = require("./groups/");
+
+        Object.keys(groups).forEach((key) => {
+            const group: Group = new groups[key]();
+            this.groups.set(group.getName(), group);
+        });
     }
 }

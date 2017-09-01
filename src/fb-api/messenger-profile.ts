@@ -45,7 +45,7 @@ export class Api extends Graph.Api<Request> {
      */
     public async getGetStartedButton(): Promise<GetStartedButton> {
         try {
-            let response: any = await this.getField(Field.GET_STARTED_BUTTON);
+            const response: any = await this.getField(Field.GET_STARTED_BUTTON);
             response && (response.payload = JSON.parse(response.payload));
             return response;
         } catch (error) {
@@ -197,7 +197,7 @@ export class Api extends Graph.Api<Request> {
      */
     public setTargetAudience(type: TargetAudienceType, whitelist: string[] = [], blacklist: string[] = []): Promise<Response> {
 
-        let audience: TargetAudience = {
+        const audience: TargetAudience = {
             audience_type: type
         };
 
@@ -300,7 +300,7 @@ export interface GetStartedButton {
     payload: {
         src: Webhook.PostbackSource,
         data?: any
-    }
+    };
 }
 
 export enum MenuItemType {

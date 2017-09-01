@@ -286,9 +286,9 @@ export class BotUtils {
      */
     public async whitelistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
 
-        let whitelist: string[] = Array.isArray(countries) ? countries : [countries];
+        const whitelist: string[] = Array.isArray(countries) ? countries : [countries];
 
-        let current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
+        const current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
 
         current && current.countries && current.countries.whitelist && whitelist.concat(current.countries.whitelist);
 
@@ -303,9 +303,9 @@ export class BotUtils {
      */
     public async blacklistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
 
-        let blacklist: string[] = Array.isArray(countries) ? countries : [countries];
+        const blacklist: string[] = Array.isArray(countries) ? countries : [countries];
 
-        let current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
+        const current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
 
         current && current.countries && current.countries.blacklist && blacklist.concat(current.countries.blacklist);
 
