@@ -13,7 +13,6 @@
     "types": "./bin/index.d.ts",
     "scripts": {
         "compile": "grunt",
-        "prepublishOnly": "npm run compile",
         "test": "jest",
         "lint": "tslint --project ."
     },

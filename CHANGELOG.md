@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+<a id="latest"></a>
+## [1.1.0-beta.5] - 2017-09-01
 ### Fixed
 - storing reusable media ids (store module refactored)
 - number of fixies according to tslint & Codacy findings
@@ -28,7 +31,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - coveralls
 - [Chat.wait](doc/classes/chat.md#wait)
 
-<a id="latest"></a>
 ## [1.1.0-beta.4] - 2017-08-19
 ### Fixed
 - using built-in 'crypto' module instead of deprecated external package (no more warnings)
@@ -56,4 +58,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [1.1.0-beta.5]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.4...v1.1.0-beta.5
 [1.1.0-beta.4]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.3...v1.1.0-beta.4
 [1.1.0-beta.3]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.2...v1.1.0-beta.3
-
