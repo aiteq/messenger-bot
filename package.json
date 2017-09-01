@@ -1,6 +1,6 @@
 {
     "name": "@aiteq/messenger-bot",
-    "version": "1.1.0-beta.4",
+    "version": "1.1.0-beta.5",
     "description": "A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.",
     "keywords": [
         "facebook-messenger-platform",
@@ -38,7 +38,7 @@
         "@types/jest": "^20.0.8",
         "@types/lowdb": "^0.15.0",
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.25",
+        "@types/node": "^8.0.26",
         "grunt": "^1.0.1",
         "grunt-coveralls": "^1.0.1",
         "grunt-exec": "^3.0.0",
@@ -46,9 +46,9 @@
         "grunt-ts": "^5.5.1",
         "grunt-tslint": "^5.0.1",
         "jest": "^20.0.4",
-        "ts-jest": "^20.0.10",
-        "tslint": "^5.6.0",
-        "typescript": "^2.4.2"
+        "ts-jest": "^20.0.14",
+        "tslint": "^5.7.0",
+        "typescript": "^2.5.2"
     },
     "dependencies": {
         "async-file": "^2.0.2",
