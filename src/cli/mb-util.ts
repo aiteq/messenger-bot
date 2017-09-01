@@ -12,13 +12,29 @@ import { Group } from "./group";
  */
 export class MBUtil {
 
-    public static getGlobalOptions(): string {
-        return `Global options:
-    --config <path> - config json file
-    --accessToken <token> - Page Access Token (overrides config file)
-    --help - display usage for the group
+    public static exitWithUsage(usage: string | Map<string, Group>): void {
 
-`;
+        if (typeof usage === "string") {
+
+            console.log(`${usage}
+Global options:
+--config <path> - config json file
+--accessToken <token> - Page Access Token (overrides config file)
+--help - display usage for the group
+
+`);
+
+        } else {
+
+            console.log(`Usage: mbutil <group> [command] [options]
+Groups: ${Array.from(usage.keys()).join(", ")}
+
+Type 'mbutil <group> --help' to display usage for the group
+
+`);
+        }
+
+        throw new Error("exit");
     }
 
     private botUtils: BotUtils;
@@ -36,7 +52,7 @@ export class MBUtil {
 
         const groupHandler: Group = this.groups.get(group);
 
-        groupHandler || this.exitWithUsage();
+        groupHandler || MBUtil.exitWithUsage(this.groups);
 
         options.help && groupHandler.exitWithUsage();
 
@@ -53,13 +69,6 @@ export class MBUtil {
         this.botUtils = new BotUtils(config);
 
         cliout.info(await groupHandler.execute(command, this.botUtils, options) + "\n");
-    }
-
-    private exitWithUsage(): void {
-        console.log("Usage: mbutil <group> [command] [options]");
-        console.log("Groups: ", Array.from(this.groups.keys()).join(", "));
-        console.log("\nType 'mbutil <group> --help' to display usage for the group\n");
-        process.exit(0);
     }
 
     private registerGroups() {

@@ -9,6 +9,9 @@ import { MBUtil } from "./mb-util";
         console.log("\nMessenger Bot Utility by Aiteq\n");
         await new MBUtil().bootstrap();
     } catch (error) {
+
+        if (error.message === "exit") { return; }
+
         cliout.error((error.message || error) + "\n");
         if (logger.level.levelStr === "ALL") {
             logger.error(error);

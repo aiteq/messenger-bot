@@ -1,8 +1,6 @@
 import { BotUtils } from "../utils/bot-utils";
 import { MBUtil } from "./mb-util";
 
-/* tslint:disable no-console */
-
 /**
  * A parent class of <i>group plugins</i> for mbutil CLI.
  */
@@ -27,9 +25,7 @@ export abstract class Group {
     public abstract execute(command: string, botUtils: BotUtils, options: any): void;
 
     public exitWithUsage(): void {
-        console.log(this.getUsage());
-        console.log(MBUtil.getGlobalOptions());
-        process.exit(0);
+        MBUtil.exitWithUsage(this.getUsage());
     }
 
     protected abstract getUsage(): string;
