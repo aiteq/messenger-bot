@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/fb-api/messenger-codes.ts</title>
+    <title>Code coverage report for src/fb-api-helpers/og-element-builder.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> messenger-codes.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> og-element-builder.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>4/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/6</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>4/10</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -93,16 +93,22 @@
 48
 49
 50
-51
-52
-53
-54</td><td class="line-coverage quiet"><span class="cline-any cline-yes">11x</span>
+51</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,27 +123,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,61 +140,58 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Graph from "./graph-api";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { Builder } from "./builder";
 &nbsp;
 /**
- * API and types for Messenger Codes API.
- * (see https://developers.facebook.com/docs/messenger-platform/messenger-code)
+ * Helps to create an Open Graph Element.
  */
-export class Api extends Graph.Api&lt;Request&gt; {
+export class OgElementBuilder extends Builder&lt;Send.OpenGraphElement&gt; {
 &nbsp;
-    constructor(protected accessToken: string) {
+    private element: Send.OpenGraphElement;
 &nbsp;
-        super(accessToken, Graph.Endpoint.MESSENGER_CODES);
+    /**
+     * Creates an instance of ElementBuilder.
+     *
+     * @param {string} url
+     */
+    constructor(url: string) {
+&nbsp;
+        super();
+&nbsp;
+        this.element = { url };
     }
 &nbsp;
     /**
-     * Generates a new Messenger Code with given parameters.
+     * Adds a Button.
      *
-     * @param {number} [size] - the size, in pixels, for the code (supported 100-2000, defaults to 1000)
-     * @param {string} [ref] - reference data to be send as POSTBACK when the user scans the code
-     * @returns {Promise&lt;string&gt;} - a URL of the generated code
+     * @param {Builder&lt;T&gt;} buttonBuilder
+     * @returns {this} - for chaining
      */
-    public async generateCode(size?: number, ref?: string): Promise&lt;string&gt; {
+    public <span class="fstat-no" title="function not covered" >addButton&lt;T extends Send.Button&gt;(</span>buttonBuilder: Builder&lt;T&gt;): this {
 &nbsp;
-        const req: Request = {
-            type: Type.STANDARD,
-            image_size: <span class="branch-1 cbranch-no" title="branch not covered" >size || </span>1000
-        };
+<span class="cstat-no" title="statement not covered" >        this.element.buttons = t</span>his.element.buttons || new Array&lt;T&gt;();
 &nbsp;
-        ref &amp;&amp; (req.data = { ref });
-&nbsp;
-        try {
-&nbsp;
-            return (await this.sendRequest(req)).uri;
-&nbsp;
-        } catch (error) {
-&nbsp;
-            return Promise.reject(error);
+<span class="cstat-no" title="statement not covered" >        if (this.element.buttons.length === 3) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("</span>couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");
         }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.element.buttons.push(buttonBuilder.b</span>uild());
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
     }
-}
 &nbsp;
-export enum Type {
-    STANDARD = "standard"
-}
-&nbsp;
-export interface Request extends Graph.Request {
-    type: Type;
-    image_size?: number;
-    data?: { ref: string };
-}
-&nbsp;
-export interface Response {
-    uri: string;
+    /**
+     * Returns built Open Graph Element object.
+     *
+     * @returns {Send.OpenGraphElement}
+     */
+    public <span class="fstat-no" title="function not covered" >build(): Send.OpenGraphElement {</span>
+<span class="cstat-no" title="statement not covered" >        return this.e</span>lement;
+    }
 }
 &nbsp;</pre></td></tr>
 </table></pre>

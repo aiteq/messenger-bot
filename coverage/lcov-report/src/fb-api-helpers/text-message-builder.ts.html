@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/store/reusable-dao.ts</title>
+    <title>Code coverage report for src/fb-api-helpers/text-message-builder.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/store</a> reusable-dao.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> text-message-builder.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>4/4</span>
       </div>
     </div>
   </div>
@@ -52,22 +52,58 @@
 7
 8
 9
-10</td><td class="line-coverage quiet"><span class="cline-any cline-yes">28x</span>
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Dao } from "./dao";
-import { Reusable } from "./reusable";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { MessageBuilder } from "./message-builder";
 &nbsp;
-export class ReusableDao extends Dao&lt;Reusable&gt; {
+/**
+ * Helps to build a Text Message.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/text-message)
+ */
+export class TextMessageBuilder extends MessageBuilder&lt;Send.TextMessage&gt; {
 &nbsp;
-    constructor() {
-        super("reusables", "url");
+    /**
+     * Creates an instance of TextMessageBuilder.
+     *
+     * @param {string} text - a text of the message
+     */
+    constructor(text: string) {
+&nbsp;
+        super();
+&nbsp;
+        this.message = { text };
     }
 }
 &nbsp;</pre></td></tr>

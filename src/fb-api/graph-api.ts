@@ -82,11 +82,11 @@ export abstract class Api<T extends Request> {
         } catch (error) {
 
             logger.error("GraphApi:", error.message);
-            logger.debug(error.response.data);
+            error.response && logger.debug(error.response.data);
 
-            let message: string = "uknown error";
+            let message: string = error.message;
 
-            if (error.response.data.error && error.response.data.error.message) {
+            if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
                 logger.error(error.response.data.error.message);
                 message = error.response.data.error.message;
             }

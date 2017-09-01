@@ -404,7 +404,7 @@ Adds domains to the whitelist.
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| domains | `Array`<`string`> | array of domains to be whitelisted |
+| domains | `string` | `Array`<`string`> | array of domains to be whitelisted |
 
 **Returns:** `Promise`<`void`>
 ___

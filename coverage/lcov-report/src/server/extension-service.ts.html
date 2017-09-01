@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/store/dao.ts</title>
+    <title>Code coverage report for src/server/extension-service.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/store</a> dao.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/server</a> extension-service.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>3/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/13</span>
+        <span class='fraction'>3/9</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -78,29 +78,16 @@
 33
 34
 35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-yes">29x</span>
+36</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,79 +97,56 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Lowdb = require("lowdb");
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { NextFunction, Request, Response } from "express";
+import { logger } from "../logger";
+import { ChatExtension } from "./chat-extension";
+import { RouterService } from "./router-service";
 &nbsp;
-export class Dao&lt;T&gt; {
+/**
+ * Handles all request routed to Chat Extensions path (default "/ext").
+ * Chat Extensions are rendered using Express Response.render method.
+ */
+export class ExtensionService extends RouterService {
 &nbsp;
-    private db: Lowdb;
-    private table: Lowdb;
+  /**
+   * Mounts a Chat Extension to path according its name. If the extensions path is set to "/ext" and
+   * the name of the given extension is "orders", the extension's path will be "/ext/orders".
+   * The name actually represents the name of a &lt;i&gt;view&lt;/i&gt; to be rendered by Express using specified
+   * view engine.
+   *
+   * @param {ChatExtension} extension
+   * @returns {this}
+   */
+  public <span class="fstat-no" title="function not covered" >addExtension(</span>extension: ChatExtension): this {
 &nbsp;
-    constructor(private path: string, private idProperty: string = "id") {
+    const <span class="cstat-no" title="statement not covered" >view: string = </span>extension.getView();
 &nbsp;
-        if (!path) {
-            throw new Error("path not specified");
-        }
+<span class="cstat-no" title="statement not covered" >    logger.info("adding extension", v</span>iew);
 &nbsp;
-        this.db = new Lowdb("./bot-db.json", {
-            storage: require("lowdb/lib/storages/file-async")
-        })
-        .defaults({
-            [path]: []
-        });
+<span class="cstat-no" title="statement not covered" >    this.get(`/${view}`, <span class="fstat-no" title="function not covered" >(r</span>eq: Request, res: Response, next: NextFunction) =&gt; {</span>
 &nbsp;
-        this.table = this.db.get(path);
-    }
+<span class="cstat-no" title="statement not covered" >      logger.debug(`received request for EXTENSION '${view}':`, req.q</span>uery);
+<span class="cstat-no" title="statement not covered" >      res.render(view, extension.g</span>etData());
+    });
 &nbsp;
-    public get(id: any): T {
-        return this.table.find({ [this.idProperty]: id }).value&lt;T&gt;();
-    }
-&nbsp;
-    public async save(entity: T): Promise&lt;T&gt; {
-&nbsp;
-        if (!entity || !entity[this.idProperty]) {
-            return Promise.reject(`couldn't save undefined or entity without ${this.idProperty} property`);
-        }
-&nbsp;
-        const existing: Lowdb = this.table.find({ [this.idProperty]: entity[this.idProperty] });
-&nbsp;
-        if (existing.value()) {
-&nbsp;
-            // update existing
-            return existing.assign(entity).write() as any;
-&nbsp;
-        } else {
-&nbsp;
-            // save new
-            return (await this.table.push(entity).write())[0];
-        }
-    }
+<span class="cstat-no" title="statement not covered" >    return t</span>his;
+  }
 }
 &nbsp;</pre></td></tr>
 </table></pre>

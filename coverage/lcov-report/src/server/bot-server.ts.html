@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/server/bot-server.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/server</a> bot-server.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">34.85% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>23/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.05% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>8/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">8.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">34.85% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>23/66</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as bodyParser from "body-parser";
+import * as crypto from "crypto";
+import * as express from "express";
+import * as http from "http";
+import * as MessengerProfile from "../fb-api/messenger-profile";
+import * as Webhook from "../fb-api/webhook";
+import { logger } from "../logger";
+import { BotConfig } from "../utils/bot-config";
+import { Chat } from "./chat";
+import { ChatExtension } from "./chat-extension";
+import { ExtensionService } from "./extension-service";
+import { ResponderService } from "./responder-service";
+import { VerificationService } from "./verification-service";
+&nbsp;
+/**
+ * Represents a bot server listening for webhook requests.
+ */
+export class BotServer {
+&nbsp;
+    private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
+&nbsp;
+    /**
+     * Normalize a port into a number, string, or false. In some environments the port can be named pipe.
+     */
+    private <span class="fstat-no" title="function not covered" >static </span>normalizePort(value: number | string): number | string | boolean {
+        const <span class="cstat-no" title="statement not covered" >port: number = (typeof v</span>alue === "string") ? parseInt(value, 10) : value;
+<span class="cstat-no" title="statement not covered" >        return isNaN(p</span>ort) ? value : (port &gt;= 0 ? port : false);
+    }
+&nbsp;
+    /**
+     * Escapes regexp special characters.
+     */
+    private <span class="fstat-no" title="function not covered" >static </span>regExpEscape(text: string): string {
+<span class="cstat-no" title="statement not covered" >        return text.replace(BotServer.RE_ESCAPE, "</span>\\$&amp;");
+    }
+&nbsp;
+    private app: express.Application;
+    private server: http.Server;
+&nbsp;
+    private responder: ResponderService;
+    private extensions: ExtensionService;
+    private profileApi: MessengerProfile.Api;
+&nbsp;
+    /**
+     * Creates an instance of BotServer.
+     *
+     * @param {BotConfig} config - bot configuration object
+     */
+    constructor(private config: BotConfig) {
+&nbsp;
+        config.webhookPath = config.webhookPath || "/webhook";
+        config.extensionsPath = config.extensionsPath || "/ext";
+        config.name = config.name || "noname";
+&nbsp;
+        logger.level = config.logLevel || logger.level;
+&nbsp;
+        this.profileApi = new MessengerProfile.Api(this.config.accessToken);
+&nbsp;
+        // create express.js application
+        this.app = express();
+&nbsp;
+        // prepare ejs template engine for use by Message Extensions
+        this.app.set("view engine", "ejs");
+&nbsp;
+        // use the 'public' folder for static assets
+        this.app.use("/static", express.static("public"));
+&nbsp;
+        // parse incoming POST request bodies and make them available under the req.body property
+        // every incoming POST request will be verified according to https://developers.facebook.com/docs/messenger-platform/webhook-reference#security
+        this.app.use(bodyParser.json({ verify: this.verifyRequest }));
+&nbsp;
+        // parse incoming GET request (used during webhook verification)
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+&nbsp;
+        // install service for handling verification request
+        this.app.use(this.config.webhookPath, new VerificationService(this.config.verifyToken).getRouter());
+        logger.info("VerificationServices has been attached to", this.config.webhookPath);
+&nbsp;
+        // install service for handling webhook requests
+        this.responder = new ResponderService(this.config.accessToken);
+        this.app.use(this.config.webhookPath, this.responder.getRouter());
+        logger.info("ResponderService has been attached to", this.config.webhookPath);
+&nbsp;
+        // install service for handling Message Extensions requests
+        this.extensions = new ExtensionService();
+        this.app.use(this.config.extensionsPath, this.extensions.getRouter());
+        logger.info("ExtensionService has been attached to", this.config.extensionsPath);
+    }
+&nbsp;
+    /**
+     * Starts the bot server.
+     */
+    public <span class="fstat-no" title="function not covered" >start(): void {</span>
+&nbsp;
+        const <span class="cstat-no" title="statement not covered" >port = BotServer.n</span>ormalizePort(this.config.port || process.env.PORT || 8080);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.app.set("port", p</span>ort);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.server = http.createServer(this.app)</span>
+&nbsp;
+        .on("error", <span class="fstat-no" title="function not covered" >(error: NodeJS.ErrnoException) =&gt; {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (error.syscall !== "listen") {</span>
+<span class="cstat-no" title="statement not covered" >                throw e</span>rror;
+            }
+&nbsp;
+            const <span class="cstat-no" title="statement not covered" >bind = (typeof p</span>ort === "string") ? "Pipe " + port : "Port " + port;
+&nbsp;
+            switch (error.code) {
+                case "EACCES":
+<span class="cstat-no" title="statement not covered" >                    logger.error(`BotServer[${this.config.name}] not started. ${bind} requires elevated privileges.`)</span>;
+<span class="cstat-no" title="statement not covered" >                    process.exit(1</span>);
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                case "EADDRINUSE":
+<span class="cstat-no" title="statement not covered" >                    logger.error(`BotServer[${this.config.name}] not started. ${bind} is already in use.`)</span>;
+<span class="cstat-no" title="statement not covered" >                    process.exit(1</span>);
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+&nbsp;
+                default:
+<span class="cstat-no" title="statement not covered" >                    throw e</span>rror;
+            }
+        })
+&nbsp;
+        .on("listening", <span class="fstat-no" title="function not covered" >() =&gt; {</span>
+            // only for showing the "listening" message
+            const <span class="cstat-no" title="statement not covered" >addr = </span>this.server.address();
+            const <span class="cstat-no" title="statement not covered" >bind = (typeof a</span>ddr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
+<span class="cstat-no" title="statement not covered" >            logger.info(`BotServer[${this.config.name}] is listening on ${bind}`)</span>;
+        })
+&nbsp;
+        .listen(port) as http.Server;
+    }
+&nbsp;
+    /**
+     * Stops the bot server.
+     */
+    public <span class="fstat-no" title="function not covered" >stop(): void {</span>
+<span class="cstat-no" title="statement not covered" >        this.server.c</span>lose();
+    }
+&nbsp;
+    /**
+     * A convenient method to subscribe to specific &lt;i&gt;hooks&lt;/i&gt; that can be found within a received
+     * &lt;i&gt;text message&lt;/i&gt;. The hooks can be specified as a command or using a &lt;i&gt;regular expression&lt;/i&gt;.
+     * When the server receives a text message, it test the content for specified hooks. If a match is
+     * found the server executes the subscribed callback. Commands are considered as case-insensitive.
+     * The callbacks installed using the &lt;code&gt;BotServer.hear&lt;/code&gt; method are executed BEFORE
+     * callbacks installed using the &lt;code&gt;on()&lt;/code&gt; method.
+     * The callback is executed with the parameters: chat: Chat, text: string, matches: string[].
+     * &lt;b&gt;Note&lt;/b&gt;: the &lt;code&gt;hear()&lt;/code&gt; method listens only for text messages.
+     * &lt;b&gt;Note&lt;/b&gt;: the callback is not executed when a received text message matches the hook but
+     * the message is part of an active conversation.
+     *
+     * @param {(RegExp | string | Array&lt;RegExp | string&gt;)} hooks - a string, a regexp or an array of both strings and regexps
+     * @param {(chat: Chat, text: string, matches: string[]) =&gt; void} callback - a callback to be executed if a message matches one of the hooks
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >hear(</span>hooks: RegExp | string | Array&lt;RegExp | string&gt;, callback: (chat: Chat, text: string, matches: string[]) =&gt; void): this {
+&nbsp;
+        let regexps: RegExp[];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof hooks === "string") {</span>
+&nbsp;
+            // create new case-insensitive regexp based on the given keyword
+<span class="cstat-no" title="statement not covered" >            regexps = [new RegExp(`^${BotServer.regExpEscape(hooks)}$`, "</span>i")];
+&nbsp;
+        } else <span class="cstat-no" title="statement not covered" >if (Array.isArray(hooks)) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            regexps = hooks.</span>map((hook: RegExp | string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                return typeof hook === "</span>string" ? new RegExp(`^${BotServer.regExpEscape(hook)}$`, "i") : hook;
+            });
+&nbsp;
+        } else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            regexps = [</span>hooks];
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.responder.hear(regexps, c</span>allback);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Subscribe to an &lt;i&gt;event&lt;/i&gt; emitted when a webhook request is received.
+     * The callback is executed with the parameters: chat: Chat, data: any.
+     *
+     * @param {Webhook.Event} event - an event for which the callback will be executed
+     * @param {(...args: any[]) =&gt; void} callback - a callback function
+     * @returns {this} - for chaining
+     */
+    public on(event: Webhook.Event, callback: (...args: any[]) =&gt; void): this;
+&nbsp;
+    /**
+     * Subscribe to an &lt;i&gt;identified event&lt;/i&gt;. An identified event is specified, in addition to its
+     * type, with an ID. This feature is available for events capable of carrying data such as
+     * POSTBACK or PERSISTENT_MENU_ITEM.
+     * The callback is executed with the parameters: chat: Chat, data: any.
+     *
+     * @param {Webhook.Event} event - an event for which the callback will be executed
+     * @param {string} id - an identification of the event
+     * @param {(...args: any[]) =&gt; void} callback - a callback function
+     * @returns {this}
+     */
+    public on(event: Webhook.Event, id: string, callback: (...args: any[]) =&gt; void): this;
+&nbsp;
+    /* implementation of the overloaded method on() - see 2 overloads above */
+    public <span class="fstat-no" title="function not covered" >on(</span>event: Webhook.Event, idOrCallback: string | ((...args: any[]) =&gt; void), callback?: (...args: any[]) =&gt; void): this {
+&nbsp;
+        let <span class="cstat-no" title="statement not covered" >extEvent: string = </span>event;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof idOrCallback === "string") {</span>
+<span class="cstat-no" title="statement not covered" >            extEvent += ":" + i</span>dOrCallback;
+        } else {
+<span class="cstat-no" title="statement not covered" >            callback = i</span>dOrCallback;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        logger.info("subscribing to event", e</span>xtEvent);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.responder.on(extEvent, c</span>allback);
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Install a Chat Extension.
+     * (https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)
+     *
+     * @param {ChatExtension} extension
+     * @returns {this}
+     */
+    public <span class="fstat-no" title="function not covered" >addChatExtension(</span>extension: ChatExtension): this {
+<span class="cstat-no" title="statement not covered" >        this.extensions.addExtension(e</span>xtension);
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Verify incoming webhook request.
+     * (https://developers.facebook.com/docs/messenger-platform/webhook-reference#security)
+     *
+     * Must be an arrow function because it is called as calback and needs to acceess this.config
+     */
+    private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) =&gt; void = <span class="fstat-no" title="function not covered" >(r</span>eq: express.Request, res: express.Response, buf: Buffer, encoding: string) =&gt; {
+&nbsp;
+        const [algorithm, <span class="cstat-no" title="statement not covered" >signature] = </span>((req.headers["x-hub-signature"] as string) || "").split("=");
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!signature) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("</span>couldn't validate the request signature, the 'x-hub-signature' header not found");
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (signature !== crypto.createHmac(algorithm, this.config.appSecret).update(buf).digest("hex")) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("</span>request's signature is not valid");
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        logger.debug("</span>request signature verified");
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

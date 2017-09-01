@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/logger.ts</title>
+    <title>Code coverage report for src/fb-api-helpers/call-button-builder.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">src</a> logger.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> call-button-builder.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>4/5</span>
       </div>
     </div>
   </div>
@@ -70,7 +70,35 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">28x</span>
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -84,46 +112,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as log4js from "log4js";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { Builder } from "./builder";
 &nbsp;
-log4js.configure({
-    appenders: {
-        console: {
-            type: "console",
-            layout: {
-                type: "pattern",
-                pattern: "[%[%5.5p%]] [%c] %m"
-            }
-        },
-        cli: {
-            type: "console",
-            layout: {
-                type: "pattern",
-                pattern: "[%[%p%]] %m"
-            }
-        }
-    },
-    categories: {
-        "@aiteq/messenger-bot": { "appenders": ["console"], "level": "ALL" },
-        cli: { "appenders": ["cli"], "level": "INFO" },
-        default: { "appenders": ["console"], "level": "ALL" }
+/**
+ * Helps to create a Call Button.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button)
+ */
+export class CallButtonBuilder extends Builder&lt;Send.CallButton&gt; {
+&nbsp;
+    private button: Send.CallButton;
+&nbsp;
+    /**
+     * Creates an instance of CallButtonBuilder.
+     *
+     * @param {string} title - a title of the Button, max length is 20 characters
+     * @param {string} payload - a phone number, format must have "+" prefix followed by the country code, area code and local number (e.g. +16505551234)
+     */
+    constructor(title: string, payload: string) {
+&nbsp;
+        super();
+        this.button = {
+            type: Send.ButtonType.CALL,
+            title,
+            payload
+        };
     }
-});
 &nbsp;
-export const logger = log4js.getLogger("@aiteq/messenger-bot");
+    /**
+     * Returns built Call Button object.
+     *
+     * @returns {Send.CallButton}
+     */
+    public <span class="fstat-no" title="function not covered" >build(): Send.CallButton {</span>
+<span class="cstat-no" title="statement not covered" >        return this.b</span>utton;
+    }
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
@@ -133,7 +160,7 @@ export const logger = log4js.getLogger("@aiteq/messenger-bot");
   generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
 </div>
 </div>
-<script src="../prettify.js"></script>
+<script src="../../prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -141,6 +168,6 @@ window.onload = function () {
         }
 };
 </script>
-<script src="../sorter.js"></script>
+<script src="../../sorter.js"></script>
 </body>
 </html>

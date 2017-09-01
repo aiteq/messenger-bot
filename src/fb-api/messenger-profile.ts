@@ -187,62 +187,23 @@ export class Api extends Graph.Api<Request> {
     }
 
     /**
-     * Whilists audience countries.
+     * Set target audience countries.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
      *
-     * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted for audience
+     * @param {TargetAudienceType} type
+     * @param {string[]} [whitelist] - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted for audience
+     * @param {string[]} [blacklist] - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted for audience
      * @returns {Promise<Response>}
      */
-    public whitelistAudienceCountries(countries: string | string[]): Promise<Response> {
+    public setTargetAudience(type: TargetAudienceType, whitelist: string[] = [], blacklist: string[] = []): Promise<Response> {
 
-        return this.setField(Field.TARGET_AUDIENCE, {
-            audience_type: AudienceType.CUSTOM,
-            countries: {
-                whitelist: Array.isArray(countries) ? countries : [countries]
-            }
-        });
-    }
+        let audience: TargetAudience = {
+            audience_type: type
+        };
 
-    /**
-     * Blacklist audience countries.
-     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
-     *
-     * @param {(string | Array<string>)} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted for audience
-     * @returns {Promise<Response>}
-     */
-    public blacklistAudienceCountries(countries: string | string[]): Promise<Response> {
+        type === TargetAudienceType.CUSTOM && (audience.countries = { whitelist, blacklist });
 
-        return this.setField(Field.TARGET_AUDIENCE, {
-            audience_type: AudienceType.CUSTOM,
-            countries: {
-                blacklist: Array.isArray(countries) ? countries : [countries]
-            }
-        });
-    }
-
-    /**
-     * Opens audience for all.
-     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
-     *
-     * @returns {Promise<Response>}
-     */
-    public openAudienceToAll(): Promise<Response> {
-        return this.setField(Field.TARGET_AUDIENCE, {
-            audience_type: AudienceType.ALL
-        });
-    }
-
-    /**
-     * Closes audience for all.
-     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
-     *
-     * @returns {Promise<Response>}
-     */
-    public closeAudienceToAll(): Promise<Response> {
-
-        return this.setField(Field.TARGET_AUDIENCE, {
-            audience_type: AudienceType.NONE
-        });
+        return this.setField(Field.TARGET_AUDIENCE, audience);
     }
 
     /**
@@ -259,7 +220,7 @@ export class Api extends Graph.Api<Request> {
      *
      * @returns {Promise<Response>}
      */
-    public deleteAudience(): Promise<Response> {
+    public deleteTargetAudience(): Promise<Response> {
         return this.deleteField([Field.TARGET_AUDIENCE]);
     }
 
@@ -268,17 +229,16 @@ export class Api extends Graph.Api<Request> {
      * <b>Note:</b> The domain of the URL should be whitelisted for it to work correctly.
      *
      * @param {string} url - Chat Extensions home URL
-     * @param {boolean} [inTest=false] - Controls whether public users (not assigned to the bot or its Facebook page) can see the Chat Extension. This should be set to true until the Chat Extension is ready to be used by others.
-     * @param {boolean} [shareButton=true] - Controls whether the share button in the webview is enabled.
+     * @param {{ inTest: boolean, shareButton: boolean }} [options]
      * @returns {Promise<Response>}
      */
-    public setChatExtensionHomeUrl(url: string, inTest: boolean = false, shareButton: boolean = true): Promise<Response> {
+    public setChatExtensionHomeUrl(url: string, options?: { inTest: boolean, shareButton: boolean }, inTest: boolean = false, shareButton: boolean = true): Promise<Response> {
 
         return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
             url,
             webview_height_ratio: Webview.HeightRatio.TALL,
-            webview_share_button: shareButton ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE,
-            in_test: inTest
+            webview_share_button: !options || options.shareButton ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE,
+            in_test: options && options.inTest
         });
     }
 
@@ -380,22 +340,17 @@ export const Greeting = {
     FULL_NAME: "user_full_name",
 };
 
-export enum AudienceType {
+export enum TargetAudienceType {
     ALL = "all",
     CUSTOM = "custom",
     NONE = "none"
 }
 
-export interface Country {
-    blacklist?: string[];    // ISO 3166 Alpha-2 codes
-    whitelist?: string[];    // ISO 3166 Alpha-2 codes
-}
-
 export interface TargetAudience {
-    audience_type: AudienceType;
+    audience_type: TargetAudienceType;
     countries?: {
-        whitelist?: Country[],
-        blacklist?: Country[]
+        whitelist?: string[],
+        blacklist?: string[]
     };
 }
 

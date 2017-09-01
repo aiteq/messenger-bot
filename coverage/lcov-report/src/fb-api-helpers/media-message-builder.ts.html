@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/fb-api/messenger-codes.ts</title>
+    <title>Code coverage report for src/fb-api-helpers/media-message-builder.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> messenger-codes.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> media-message-builder.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>3/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/6</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>3/7</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -91,20 +91,12 @@
 46
 47
 48
-49
-50
-51
-52
-53
-54</td><td class="line-coverage quiet"><span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+49</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,29 +107,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,58 +123,69 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Graph from "./graph-api";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { MessageBuilder } from "./message-builder";
 &nbsp;
 /**
- * API and types for Messenger Codes API.
- * (see https://developers.facebook.com/docs/messenger-platform/messenger-code)
+ * Helps to create a message with media attachment.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/contenttypes)
  */
-export class Api extends Graph.Api&lt;Request&gt; {
+export class MediaMessageBuilder extends MessageBuilder&lt;Send.AttachmentMessage&gt; {
 &nbsp;
-    constructor(protected accessToken: string) {
+    /**
+     * Creates an instance of MediaMessageBuilder.
+     *
+     * @param {Send.MediaAttachmentType} type
+     */
+    constructor(type: Send.AttachmentType) {
 &nbsp;
-        super(accessToken, Graph.Endpoint.MESSENGER_CODES);
+        super();
+&nbsp;
+        this.message = {
+            attachment: {
+                type,
+                payload: {}
+            } as Send.MediaAttachment
+        };
     }
 &nbsp;
     /**
-     * Generates a new Messenger Code with given parameters.
+     * Sets a URL of the media file.
      *
-     * @param {number} [size] - the size, in pixels, for the code (supported 100-2000, defaults to 1000)
-     * @param {string} [ref] - reference data to be send as POSTBACK when the user scans the code
-     * @returns {Promise&lt;string&gt;} - a URL of the generated code
+     * @param {string} url
+     * @returns {this} - for chaining
      */
-    public async generateCode(size?: number, ref?: string): Promise&lt;string&gt; {
-&nbsp;
-        const req: Request = {
-            type: Type.STANDARD,
-            image_size: <span class="branch-1 cbranch-no" title="branch not covered" >size || </span>1000
-        };
-&nbsp;
-        ref &amp;&amp; (req.data = { ref });
-&nbsp;
-        try {
-&nbsp;
-            return (await this.sendRequest(req)).uri;
-&nbsp;
-        } catch (error) {
-&nbsp;
-            return Promise.reject(error);
-        }
+    public <span class="fstat-no" title="function not covered" >setUrl(</span>url: string): this {
+        (<span class="cstat-no" title="statement not covered" >this.message.attachment.payload as Send.MediaPayload).url = u</span>rl;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
     }
-}
 &nbsp;
-export enum Type {
-    STANDARD = "standard"
-}
-&nbsp;
-export interface Request extends Graph.Request {
-    type: Type;
-    image_size?: number;
-    data?: { ref: string };
-}
-&nbsp;
-export interface Response {
-    uri: string;
+    /**
+     * Controls attachment's reusability.
+     *
+     * @param {boolean} reusable
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setReusable(</span>reusable: boolean): this {
+        (<span class="cstat-no" title="statement not covered" >this.message.attachment.payload as Send.MediaPayload).is_reusable = r</span>eusable;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
 }
 &nbsp;</pre></td></tr>
 </table></pre>

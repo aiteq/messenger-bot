@@ -15,6 +15,7 @@ const URL_AUDIO: string = "https://ssl.gstatic.com/dictionary/static/sounds/de/0
 const URL_VIDEO: string = "https://static.videezy.com/system/resources/previews/000/005/499/original/Earth_Spin_In_Hands.mp4";
 const URL_FILE: string = "https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf";
 const FILE: string = "./bot-db.json";
+const CODE_FILE: string = "./code.png";
 const RESPONSE_SUCCESS = { result: "success" };
 const PERSISTENT_MENU: PersistentMenuDef[] = [{
     locale: "default",
@@ -102,7 +103,7 @@ const PERSISTENT_MENU_CHECK = [{
 
 describe("BotUtils", () => {
 
-    logger.level = "OFF";
+    logger.level = "ERROR";
 
     let utils: BotUtils;
 
@@ -114,7 +115,7 @@ describe("BotUtils", () => {
         expect(utils = new BotUtils(ACCESS_TOKEN)).toBeInstanceOf(BotUtils);
     });
 
-    describe.skip("Send.Api", () => {
+    describe("Send.Api", () => {
 
         function clean() {
             try { fs.unlinkSync(FILE); } catch (error) { }
@@ -174,19 +175,19 @@ describe("BotUtils", () => {
             exp.toHaveProperty("recipient_id", RECIPIENT_ID);
             exp.toHaveProperty("message_id");
             exp.not.toHaveProperty("attachment_id");
-        });
+        }, 20000);
 
         test("sendFile(recipient, url)", async () => {
             let exp: jest.Matchers<void> = expect(await utils.sendFile(RECIPIENT_ID, URL_FILE));
             exp.toHaveProperty("recipient_id", RECIPIENT_ID);
             exp.toHaveProperty("message_id");
             exp.not.toHaveProperty("attachment_id");
-        });
+        }, 10000);
     });
 
     describe("MessengerProfile.Api", () => {
 
-        describe.skip("GetStartedButton", () => {
+        describe("GetStartedButton", () => {
 
             test("setGetStartedButton()", async () => {
                 expect(await utils.setGetStartedButton()).toMatchObject(RESPONSE_SUCCESS);
@@ -220,7 +221,7 @@ describe("BotUtils", () => {
             });
         });
 
-        describe.skip("Greeting", () => {
+        describe("Greeting", () => {
 
             test("setGreeting(text)", async () => {
                 expect(await utils.setGreeting("Greeting default 1")).toMatchObject(RESPONSE_SUCCESS);
@@ -260,14 +261,10 @@ describe("BotUtils", () => {
 
         describe("PersistentMenu", async () => {
 
-            afterAll(async () => {
-                await utils.deleteGetStartedButton();
-            });
-
             test("setPersistentMenu(menu)", async () => {
-                await utils.setGetStartedButton();
+                expect(await utils.setGetStartedButton()).toMatchObject(RESPONSE_SUCCESS);
                 expect(await utils.setPersistentMenu(PERSISTENT_MENU[0])).toMatchObject(RESPONSE_SUCCESS);
-            });
+            }, 10000);
 
             test("getPersistentMenu() (one locale)", async () => {
                 expect(await utils.getPersistentMenu()).toMatchObject([PERSISTENT_MENU_CHECK[0]]);
@@ -284,11 +281,176 @@ describe("BotUtils", () => {
 
             test("deletePersistentMenu()", async () => {
                 expect(await utils.deletePersistentMenu()).toMatchObject(RESPONSE_SUCCESS);
+                expect(await utils.deleteGetStartedButton()).toMatchObject(RESPONSE_SUCCESS);
             }, 10000);
 
             test("getPersistentMenu() (after delete)", async () => {
                 expect(await utils.getPersistentMenu()).toBeUndefined();
             });
         });
+
+        describe("DomainWhitelist", async () => {
+
+            test("whitelistDomains(domain)", async () => {
+                expect(await utils.whitelistDomains("https://www.aiteq.com/")).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getDomainWhitelist() (one domain)", async () => {
+                expect(await utils.getDomainWhitelist()).toContain("https://www.aiteq.com/");
+            });
+
+            test("whitelistDomains([domains])", async () => {
+                expect(await utils.whitelistDomains(["https://www.aiteq.international/", "https://blog.aiteq.com/"])).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getDomainWhitelist() (multiple domains)", async () => {
+                let exp: jest.Matchers<void> = expect(await utils.getDomainWhitelist());
+                exp.toContain("https://www.aiteq.com/");
+                exp.toContain("https://www.aiteq.international/");
+                exp.toContain("https://blog.aiteq.com/");
+            });
+
+            test("deletePersistentMenu()", async () => {
+                expect(await utils.deleteDomainWhitelist()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getDomainWhitelist() (after delete)", async () => {
+                expect(await utils.getDomainWhitelist()).toBeUndefined();
+            });
+        });
+
+        describe("AccountLinkingUrl", async () => {
+
+            test("setAccountLinkingUrl(url)", async () => {
+                expect(await utils.setAccountLinkingUrl("https://www.aiteq.com/")).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getAccountLinkingUrl()", async () => {
+                expect(await utils.getAccountLinkingUrl()).toBe("https://www.aiteq.com/");
+            });
+
+            test("deleteAccountLinkingUrl()", async () => {
+                expect(await utils.deleteAccountLinkingUrl()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getAccountLinkingUrl() (after delete)", async () => {
+                expect(await utils.getAccountLinkingUrl()).toBeUndefined();
+            });
+        });
+
+        describe("TargetAudience", async () => {
+
+            test("openTargetAudience()", async () => {
+                expect(await utils.openTargetAudience()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getTargetAudience()", async () => {
+                //console.log(JSON.stringify(await utils.getTargetAudience(), null, 2));
+                expect(await utils.getTargetAudience()).toHaveProperty("audience_type", "all");
+            });
+
+            test("closeTargetAudience()", async () => {
+                expect(await utils.closeTargetAudience()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getTargetAudience()", async () => {
+                expect(await utils.getTargetAudience()).toHaveProperty("audience_type", "none");
+            });
+
+            test("whitelistAudienceCountries([country])", async () => {
+                expect(await utils.whitelistAudienceCountries(["fr"])).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getTargetAudience()", async () => {
+                expect(await utils.getTargetAudience()).toMatchObject({
+                    audience_type: "custom",
+                    countries: {
+                        whitelist: ["FR"]
+                    }
+                });
+            });
+
+            test("blacklistAudienceCountries([country])", async () => {
+                expect(await utils.blacklistAudienceCountries(["cz"])).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getTargetAudience()", async () => {
+                expect(await utils.getTargetAudience()).toMatchObject({
+                    audience_type: "custom",
+                    countries: {
+                        blacklist: ["CZ"]
+                    }
+                });
+            });
+
+            test("deleteTargetAudience()", async () => {
+                expect(await utils.deleteTargetAudience()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getTargetAudience() (after delete)", async () => {
+                expect(await utils.getTargetAudience()).toBeUndefined();
+            });
+        });
+
+        describe("ChatExtensionHomeUrl", async () => {
+
+            test("setChatExtensionHomeUrl(url)", async () => {
+                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com/", true, true)).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getChatExtensionHomeUrl()", async () => {
+                expect(await utils.getChatExtensionHomeUrl()).toMatchObject({
+                    url: "https://www.aiteq.com/",
+                    webview_height_ratio: "tall",
+                    webview_share_button: "show",
+                    in_test: true
+                })
+            });
+
+            test("setChatExtensionHomeUrl(url)", async () => {
+                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com/", false, false)).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getChatExtensionHomeUrl()", async () => {
+                expect(await utils.getChatExtensionHomeUrl()).toMatchObject({
+                    url: "https://www.aiteq.com/",
+                    webview_height_ratio: "tall",
+                    webview_share_button: "hide",
+                    in_test: false
+                })
+            });
+
+            test("deleteChatExtensionHomeUrl()", async () => {
+                expect(await utils.deleteChatExtensionHomeUrl()).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getChatExtensionHomeUrl() (after delete)", async () => {
+                expect(await utils.getChatExtensionHomeUrl()).toBeUndefined();
+            });
+        });
+    });
+
+    describe("MessengerCodes.Api", () => {
+
+        function clean() {
+            try { fs.unlinkSync(CODE_FILE); } catch (error) { }
+        }
+
+        beforeAll(() => {
+            clean();
+        });
+
+        afterAll(() => {
+            clean();
+        });
+
+        test("generateMessengerCode(file, size, ref)", async () => {
+            await expect(utils.generateMessengerCode(CODE_FILE, 500, "test")).resolves.toBeUndefined();
+            expect(() => fs.unlinkSync(CODE_FILE)).not.toThrow();
+        }, 10000);
+
+        test("generateMessengerCode(file, invalid-size)", async () => {
+            await expect(utils.generateMessengerCode(CODE_FILE, 2500)).rejects.toMatch("image_size");
+        }, 10000);
     });
 });

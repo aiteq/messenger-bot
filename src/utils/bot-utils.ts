@@ -134,8 +134,8 @@ export class BotUtils {
 
         return this.getMessengerProfileApi().setGreeting(
             (await this.getMessengerProfileApi().getGreeting() || [])
-            .filter((grt) => grt.locale !== locale)
-            .concat(greeting)
+                .filter((grt) => grt.locale !== locale)
+                .concat(greeting)
         );
     }
 
@@ -200,11 +200,18 @@ export class BotUtils {
     /**
      * Adds domains to the whitelist.
      *
-     * @param {Array<string>} domains - an array of domains
+     * @param {string | Array<string>} domains - single domain or array of domains
      * @returns {Promise<MessengerProfile.Response>}
      */
-    public whitelistDomains(domains: string[]): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().whitelistDomains(domains);
+    public async whitelistDomains(domains: string | string[]): Promise<MessengerProfile.Response> {
+
+        domains = Array.isArray(domains) ? domains : [domains];
+
+        return this.getMessengerProfileApi().whitelistDomains(
+            (await this.getMessengerProfileApi().getWhitelistedDomains() || [])
+                .filter((domain) => domains.indexOf(domain) < 0)
+                .concat(domains)
+        );
     }
 
     /**
@@ -259,7 +266,7 @@ export class BotUtils {
      * @returns {Promise<MessengerProfile.Response>}
      */
     public openTargetAudience(): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().openAudienceToAll();
+        return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.ALL);
     }
 
     /**
@@ -268,36 +275,50 @@ export class BotUtils {
      * @returns {Promise<MessengerProfile.Response>}
      */
     public closeTargetAudience(): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().closeAudienceToAll();
+        return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.NONE);
     }
 
     /**
      * Adds countries to Target Audience whitelist.
      *
-     * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted
+     * @param {string | Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted
      * @returns {Promise<MessengerProfile.Response>}
      */
-    public whitelistAudienceCountries(countries: string[]): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().whitelistAudienceCountries(countries);
+    public async whitelistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
+
+        let whitelist: string[] = Array.isArray(countries) ? countries : [countries];
+
+        let current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
+
+        current && current.countries && current.countries.whitelist && whitelist.concat(current.countries.whitelist);
+
+        return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.CUSTOM, whitelist);
     }
 
     /**
      * Adds countries to Target Audience blacklist.
      *
-     * @param {Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted
+     * @param {string | Array<string>} countries - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted
      * @returns {Promise<MessengerProfile.Response>}
      */
-    public blacklistAudienceCountries(countries: string[]): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().blacklistAudienceCountries(countries);
+    public async blacklistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
+
+        let blacklist: string[] = Array.isArray(countries) ? countries : [countries];
+
+        let current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
+
+        current && current.countries && current.countries.blacklist && blacklist.concat(current.countries.blacklist);
+
+        return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.CUSTOM, undefined, blacklist);
     }
 
     /**
-     * Removes all countris from both whitelist and blacklist.
+     * Removes all countries from both whitelist and blacklist.
      *
      * @returns {Promise<MessengerProfile.Response>}
      */
     public deleteTargetAudience(): Promise<MessengerProfile.Response> {
-        return this.getMessengerProfileApi().deleteAudience();
+        return this.getMessengerProfileApi().deleteTargetAudience();
     }
 
     /**
@@ -321,10 +342,6 @@ export class BotUtils {
     public async setChatExtensionHomeUrl(
         url: string, inTest: boolean = false, shareButton: boolean = true, cliLogger?: any): Promise<MessengerProfile.Response> {
 
-        if (url.indexOf("https://") !== 0) {
-            return Promise.reject("only 'https' protocol is supported for Chat Extension home URL");
-        }
-
         url.charAt(url.length - 1) === "/" || (url = url.concat("/"));
 
         const whitelist: string[] = await this.getMessengerProfileApi().getWhitelistedDomains();
@@ -335,7 +352,7 @@ export class BotUtils {
             cliLogger && cliLogger.info(`Domain '${url}' has been successfully whitelisted`);
         }
 
-        return this.getMessengerProfileApi().setChatExtensionHomeUrl(url, inTest, shareButton);
+        return this.getMessengerProfileApi().setChatExtensionHomeUrl(url, { inTest, shareButton });
     }
 
     /**
@@ -361,20 +378,19 @@ export class BotUtils {
 
             // generate
             const uri: string = await this.getMessengerCodesApi().generateCode(size, ref);
-
             logger.info("Messenger Code successfully generated:", uri);
 
-            // donwload
+            // download
             const response: AxiosResponse = await Axios.get(uri, { responseType: "stream" });
+            logger.info("Messenger Code successfully downloaded:", uri);
 
             // save
             response.data.pipe(await fs.createWriteStream(fileName));
-
             logger.info("Messenger Code successfully saved:", fileName);
 
         } catch (error) {
 
-            logger.error("Messenger Code not saved: ", error);
+            return Promise.reject(error);
         }
     }
 

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fb-api-helpers/message-builder.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> message-builder.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.08% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.08% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/13</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</td><td class="line-coverage quiet"><span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { Builder } from "./builder";
+&nbsp;
+/**
+ * An abstract parent class for &lt;i&gt;message builders&lt;/i&gt;. The message builders help to construct
+ * complex messages to be send (e.g. &lt;i&gt;template messages&lt;/i&gt;).
+ */
+export abstract class MessageBuilder&lt;T extends Send.Message&gt; extends Builder&lt;T&gt; {
+&nbsp;
+    protected message: T;
+&nbsp;
+    /**
+     * Adds a Quick Reply button to the message.
+     *
+     * @param {string} title - a title of the Quick Reply
+     * @param {string} id - an ID of the button (required for proper generation of webhook events)
+     * @param {(string | any)} [data] - optional data payload
+     * @param {string} [imageUrl] - optional URL of an image for the Quick Reply
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >addQuickReply(</span>title: string, id: string, data?: string | any, imageUrl?: string): this {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.message.quick_replies = t</span>his.message.quick_replies || new Array&lt;Send.QuickReply&gt;();
+&nbsp;
+        const <span class="cstat-no" title="statement not covered" >payload: any = </span>{ id };
+<span class="cstat-no" title="statement not covered" >        data &amp;&amp; (</span>payload.data = typeof data === "string" ? data : JSON.stringify(data));
+&nbsp;
+        const qr: Send.TextQuickReply = {
+            content_type: Send.ContentType.TEXT,
+            title,
+            payload: JSON.stringify(payload)
+        };
+<span class="cstat-no" title="statement not covered" >        imageUrl &amp;&amp; (</span>qr.image_url = imageUrl);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.message.quick_replies.push(q</span>r);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Adds a Quick Reply button to quickly send user's location.
+     *
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >addLocationQuickReply(): this {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.message.quick_replies = t</span>his.message.quick_replies || new Array&lt;Send.QuickReply&gt;();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.message.quick_replies.push({ content_type: Send.ContentType.L</span>OCATION });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Creates and returns a message object.
+     *
+     * @returns {T} - a message object
+     */
+    public <span class="fstat-no" title="function not covered" >build(): T {</span>
+<span class="cstat-no" title="statement not covered" >        return this.m</span>essage;
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

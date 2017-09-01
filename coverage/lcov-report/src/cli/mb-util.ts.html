@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/cli/mb-util.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/cli</a> mb-util.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.14% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>7/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.14% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>7/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as fs from "fs";
+import * as minimist from "minimist";
+import { logger } from "../logger";
+import { BotUtils } from "../utils/bot-utils";
+import { cliout } from "./cli-logger";
+import { Group } from "./group";
+&nbsp;
+/* tslint:disable no-console */
+&nbsp;
+/**
+ * The entrypoint of the mbutil CLI.
+ */
+export class MBUtil {
+&nbsp;
+    public <span class="fstat-no" title="function not covered" >static </span>getGlobalOptions(): string {
+        return `Global options:
+    --config &lt;path&gt; - config json file
+    --accessToken &lt;token&gt; - Page Access Token (overrides config file)
+    --help - display usage for the group
+&nbsp;
+`;
+    }
+&nbsp;
+    private groups: Map&lt;string, Group&gt; = new Map&lt;string, Group&gt;();
+&nbsp;
+    private <span class="fstat-no" title="function not covered" >exitWithUsage(): void {</span>
+<span class="cstat-no" title="statement not covered" >        console.log("</span>Usage: mbutil &lt;group&gt; [command] [options]");
+<span class="cstat-no" title="statement not covered" >        console.log("Groups: ", Array.from(this.groups.keys()).join("</span>, "));
+<span class="cstat-no" title="statement not covered" >        console.log("</span>\nType 'mbutil &lt;group&gt; --help' to display usage for the group\n");
+<span class="cstat-no" title="statement not covered" >        process.exit(0</span>);
+    }
+&nbsp;
+    private botUtils: BotUtils;
+&nbsp;
+    private <span class="fstat-no" title="function not covered" >registerGroups() {</span>
+&nbsp;
+        // read all groups from groups/index.js
+        let <span class="cstat-no" title="statement not covered" >groups = </span>require("./groups/");
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        Object.keys(groups).forEach(</span>(<span class="fstat-no" title="function not covered" >key) =&gt; {</span>
+            let <span class="cstat-no" title="statement not covered" >group: Group = </span>new groups[key]();
+<span class="cstat-no" title="statement not covered" >            this.groups.set(group.getName(), g</span>roup);
+        });
+    }
+&nbsp;
+    public async <span class="fstat-no" title="function not covered" >bootstrap(): Promise&lt;void&gt; {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.r</span>egisterGroups();
+&nbsp;
+        const <span class="cstat-no" title="statement not covered" >options: any = </span>minimist(process.argv.slice(2));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        logger.level = options.d</span>ebug ? "ALL" : "OFF";
+&nbsp;
+        const [group, <span class="cstat-no" title="statement not covered" >command] = </span>options._;
+&nbsp;
+        const <span class="cstat-no" title="statement not covered" >groupHandler: Group = </span>this.groups.get(group);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        groupHandler || </span>this.exitWithUsage();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        options.</span>help &amp;&amp; groupHandler.exitWithUsage();
+&nbsp;
+        let <span class="cstat-no" title="statement not covered" >config: any = </span>{};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        options.c</span>onfig &amp;&amp; (config = JSON.parse(fs.readFileSync(options.config, "utf8")));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        options.a</span>ccessToken &amp;&amp; (config.accessToken = options.accessToken);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!config.accessToken) {</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject("</span>no accessToken");
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.botUtils = new BotUtils(c</span>onfig);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        cliout.info(await groupHandler.execute(command, this.botUtils, options) + "</span>\n");
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fb-api-helpers/receipt-template-message-builder.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> receipt-template-message-builder.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.81% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.81% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/27</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { ReceiptElementBuilder } from "./receipt-element-builder";
+import { TemplateMessageBuilder } from "./template-message-builder";
+&nbsp;
+/**
+ * Helps to create a Open Graph Template message.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/receipt-template)
+ */
+export class ReceiptTemplateMessageBuilder extends TemplateMessageBuilder&lt;Send.ReceiptTemplate&gt; {
+&nbsp;
+    /**
+     * Creates an instance of ReceiptTemplateMessageBuilder.
+     *
+     * @param {string} recipientName
+     * @param {string} orderNumber
+     * @param {string} currency
+     * @param {string} paymentMethod
+     * @param {number} totalCost
+     */
+    constructor(recipientName: string, orderNumber: string, currency: string, paymentMethod: string, totalCost: number) {
+&nbsp;
+        super();
+&nbsp;
+        this.template = {
+            template_type: Send.TemplateType.RECEIPT,
+            recipient_name: recipientName,
+            order_number: orderNumber,
+            currency,
+            payment_method: paymentMethod,
+            summary: { total_cost: totalCost }
+        };
+    }
+&nbsp;
+    /**
+     * Controls native share button.
+     *
+     * @param {boolean} sherable - set to false to disable the native share button in Messenger
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setSherable(</span>sherable: boolean): this {
+<span class="cstat-no" title="statement not covered" >        this.template.sherable = s</span>herable;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets a name of the the merchant.
+     *
+     * @param {string} merchantName
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setMerchantName(</span>merchantName: string): this {
+<span class="cstat-no" title="statement not covered" >        this.template.merchant_name = m</span>erchantName;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets the timestamp.
+     *
+     * @param {string} timestamp
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setTimestamp(</span>timestamp: string): this {
+<span class="cstat-no" title="statement not covered" >        this.template.timestamp = t</span>imestamp;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets a URL of the order.
+     *
+     * @param {string} orderUrl
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setOrderUrl(</span>orderUrl: string): this {
+<span class="cstat-no" title="statement not covered" >        this.template.order_url = o</span>rderUrl;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Adds a Receipt Element representing items of the order. Max number of elements is limited to 100.
+     *
+     * @param {ReceiptElementBuilder} elementBuilder
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >addElement(</span>elementBuilder: ReceiptElementBuilder): this {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.template.elements = t</span>his.template.elements || new Array&lt;Send.ReceiptElement&gt;();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.template.elements.length === 100) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("</span>couldn't add next Receipt Element to Receipt Tepmplate message (only 100 elements is allowed)");
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.template.elements.push(elementBuilder.b</span>uild());
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets an address.
+     *
+     * @param {Send.Address} address
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setAddress(</span>address: Send.Address): this {
+<span class="cstat-no" title="statement not covered" >        this.template.address = a</span>ddress;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets receipt's subtotal.
+     *
+     * @param {number} subtotal
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setSubtotal(</span>subtotal: number): this {
+<span class="cstat-no" title="statement not covered" >        this.template.summary.subtotal = s</span>ubtotal;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets order's shipping cost.
+     *
+     * @param {number} shippingCost
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setShippingCost(</span>shippingCost: number): this {
+<span class="cstat-no" title="statement not covered" >        this.template.summary.shipping_cost = s</span>hippingCost;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets receipt's total tax.
+     *
+     * @param {number} totalTax
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setTotalTax(</span>totalTax: number): this {
+<span class="cstat-no" title="statement not covered" >        this.template.summary.total_tax = t</span>otalTax;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+&nbsp;
+    /**
+     * Sets payment adjustements.
+     *
+     * @param {Send.PaymentAdjustments} adjustments
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setPaymentAdjustments(</span>adjustments: Send.PaymentAdjustments): this {
+<span class="cstat-no" title="statement not covered" >        this.template.adjustments = a</span>djustments;
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/fb-api/messenger-profile.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> messenger-profile.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.61% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>57/59</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88.89% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>24/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>28/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>57/59</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</td><td class="line-coverage quiet"><span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { logger } from "../logger";
+import * as Graph from "./graph-api";
+import * as MessengerProfile from "./messenger-profile";
+import * as Webhook from "./webhook";
+import * as Webview from "./webview";
+&nbsp;
+/**
+ * API and types for Messenger Profile API.
+ * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile)
+ */
+export class Api extends Graph.Api&lt;Request&gt; {
+&nbsp;
+    /**
+     * Creates an instance of MessengerProfile.Api.
+     * @param {string} accessToken - a Page Access Token
+     */
+    constructor(protected accessToken: string) {
+        super(accessToken, Graph.Endpoint.MESSENGER_PROFILE);
+    }
+&nbsp;
+    /**
+     * Sets the Get Started button for the Page.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button)
+     *
+     * @param {*} [data] - a data to be received when the user clicks on the Get Started butoon
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public setGetStartedButton(data?: any): Promise&lt;Response&gt; {
+&nbsp;
+        const payload: any = {
+            src: Webhook.PostbackSource.GET_STARTED_BUTTON
+        };
+&nbsp;
+        payload.data = data;
+&nbsp;
+        return this.setField(Field.GET_STARTED_BUTTON, {
+            payload: JSON.stringify(payload)
+        });
+    }
+&nbsp;
+    /**
+     * Reads the current Get Started button setting.
+     *
+     * @returns {Promise&lt;GetStartedButton&gt;} - Get Started Button setting
+     */
+    public async getGetStartedButton(): Promise&lt;GetStartedButton&gt; {
+        try {
+            let response: any = await this.getField(Field.GET_STARTED_BUTTON);
+            response &amp;&amp; (response.payload = JSON.parse(response.payload));
+            return response;
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            return Promise.reject((e</span>rror));
+        }
+    }
+&nbsp;
+    /**
+     * Removes Get Started button.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deleteGetStartedButton(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.GET_STARTED_BUTTON]);
+    }
+&nbsp;
+    /**
+     * Sets locale-aware Greeting for users coming into your bot for the first time.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
+     *
+     * @param {(string | Greeting | Array&lt;Greeting&gt;)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public async setGreeting(greeting: string | Greeting | Greeting[]): Promise&lt;Response&gt; {
+&nbsp;
+        return this.setField(Field.GREETING, typeof greeting === "string" ?
+            [{
+                locale: "default",
+                text: greeting
+            }] :
+            (Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >greeting) ? </span>greeting : [greeting]));
+    }
+&nbsp;
+    /**
+     * Reads the current Greeting setting.
+     *
+     * @returns {Promise&lt;Array&lt;Greeting&gt;&gt;} - current Greeting
+     */
+    public getGreeting(): Promise&lt;Greeting[]&gt; {
+        return this.getField(Field.GREETING);
+    }
+&nbsp;
+    /**
+     * Removes all greetings.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deleteGreeting(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.GREETING]);
+    }
+&nbsp;
+    /**
+     * Sets locale-aware Persistent Menu to be available within Messenger UI.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
+     * &lt;b&gt;Note:&lt;/b&gt; You must set up a Get Started button if you also wish to use Persistent Menu.
+     *
+     * @param {(PersistentMenu | Array&lt;PersistentMenu&gt;)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public setPersistentMenu(menu: PersistentMenu | PersistentMenu[]): Promise&lt;Response&gt; {
+&nbsp;
+        return this.setField(Field.PERSISTENT_MENU, Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >menu) ? </span>menu : [menu]);
+    }
+&nbsp;
+    /**
+     * Reads the current Persistent Menu setting.
+     *
+     * @returns {Promise&lt;Array&lt;PersistentMenu&gt;&gt;}
+     */
+    public getPersistentMenu(): Promise&lt;PersistentMenu[]&gt; {
+        return this.getField(Field.PERSISTENT_MENU);
+    }
+&nbsp;
+    /**
+     * Removes currently installed Persistent Menu.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deletePersistentMenu(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.PERSISTENT_MENU]);
+    }
+&nbsp;
+    /**
+     * Adds a domain or domains to the whitelist for using with Chat Extensions.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting)
+     *
+     * @param {(string | Array&lt;string&gt;)} domains - a domain or array of domains to by whitelisted
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public whitelistDomains(domains: string | string[]): Promise&lt;Response&gt; {
+        return this.setField(Field.DOMAIN_WHITELIST, Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >domains) ? </span>domains : [domains]);
+    }
+&nbsp;
+    /**
+     * Reads the current whitelisted domains.
+     *
+     * @returns {Array&lt;string&gt;} - an array of domains
+     */
+    public getWhitelistedDomains(): Promise&lt;string[]&gt; {
+        return this.getField(Field.DOMAIN_WHITELIST);
+    }
+&nbsp;
+    /**
+     * Removes all whitelisted domains.
+     *
+     * @returns {Promise&lt;Response&gt;} - for chaining
+     */
+    public deleteDomainWhitelist(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.DOMAIN_WHITELIST]);
+    }
+&nbsp;
+    /**
+     * Sets an account linking URL.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/account-linking-url)
+     *
+     * @param {string} url
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public setAccountLinkingUrl(url: string): Promise&lt;Response&gt; {
+        return this.setField(Field.ACCOUNT_LINKING_URL, url);
+    }
+&nbsp;
+    /**
+     * Reads the current account linking URL.
+     *
+     * @returns {string} - the current account linking URL
+     */
+    public getAccountLinkingUrl(): Promise&lt;string&gt; {
+        return this.getField(Field.ACCOUNT_LINKING_URL);
+    }
+&nbsp;
+    /**
+     * Removes currently set account linking URL.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deleteAccountLinkingUrl(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.ACCOUNT_LINKING_URL]);
+    }
+&nbsp;
+    /**
+     * Set target audience countries.
+     * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience)
+     *
+     * @param {TargetAudienceType} type
+     * @param {string[]} [whitelist] - a list of ISO 3166 Alpha-2 codes of countries to be whitelisted for audience
+     * @param {string[]} [blacklist] - a list of ISO 3166 Alpha-2 codes of countries to be blacklisted for audience
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public setTargetAudience(type: TargetAudienceType, whitelist: string[] = [], blacklist: string[] = []): Promise&lt;Response&gt; {
+&nbsp;
+        let audience: TargetAudience = {
+            audience_type: type
+        };
+&nbsp;
+        type === TargetAudienceType.CUSTOM &amp;&amp; (audience.countries = { whitelist, blacklist });
+&nbsp;
+        return this.setField(Field.TARGET_AUDIENCE, audience);
+    }
+&nbsp;
+    /**
+     * Reads the current audience setting.
+     *
+     * @returns {string} - the current account linking URL
+     */
+    public getTargetAudience(): Promise&lt;TargetAudience&gt; {
+        return this.getField(Field.TARGET_AUDIENCE);
+    }
+&nbsp;
+    /**
+     * Removes all audience settings.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deleteTargetAudience(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.TARGET_AUDIENCE]);
+    }
+&nbsp;
+    /**
+     * Sets a home URL for Chat Extensions.
+     * &lt;b&gt;Note:&lt;/b&gt; The domain of the URL should be whitelisted for it to work correctly.
+     *
+     * @param {string} url - Chat Extensions home URL
+     * @param {{ inTest: boolean, shareButton: boolean }} [options]
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public setChatExtensionHomeUrl(url: string, options?: { inTest: boolean, shareButton: boolean }, inTest: boolean = false, shareButton: boolean = true): Promise&lt;Response&gt; {
+&nbsp;
+        return this.setField(Field.CHAT_EXTENSION_WEB_URL, {
+            url,
+            webview_height_ratio: Webview.HeightRatio.TALL,
+            webview_share_button: !options || options.shareButton ? Webview.ShareButton.SHOW : Webview.ShareButton.HIDE,
+            in_test: options &amp;&amp; options.inTest
+        });
+    }
+&nbsp;
+    /**
+     * Reads the current Chat Extension home URL.
+     *
+     * @returns {string} - the current Chat Extension home URL
+     */
+    public getChatExtensionHomeUrl(): Promise&lt;string&gt; {
+        return this.getField(Field.CHAT_EXTENSION_WEB_URL);
+    }
+&nbsp;
+    /**
+     * Removes Chat Extension home URL.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public deleteChatExtensionHomeUrl(): Promise&lt;Response&gt; {
+        return this.deleteField([Field.CHAT_EXTENSION_WEB_URL]);
+    }
+&nbsp;
+    private setField(field: Field, data: any): Promise&lt;Response&gt; {
+&nbsp;
+        logger.debug(`setting the field '${field}' to`, JSON.stringify(data, null, 2));
+&nbsp;
+        const payload: any = {};
+        payload[field] = data;
+&nbsp;
+        return this.sendRequest(payload);
+    }
+&nbsp;
+    private async getField(field: Field): Promise&lt;any&gt; {
+&nbsp;
+        logger.debug("reading the field", field);
+&nbsp;
+        try {
+            const data: any[] = (await this.sendRequest({
+                fields: field
+            }, { method: Graph.Method.GET })).data;
+&nbsp;
+            return data.length &gt; 0 ? data[0][field] : undefined;
+&nbsp;
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(e</span>rror);
+        }
+    }
+&nbsp;
+    private deleteField(fields: Field[]): Promise&lt;Response&gt; {
+&nbsp;
+        logger.debug("deleting fields", fields);
+&nbsp;
+        return this.sendRequest({
+            fields
+        }, { method: Graph.Method.DELETE });
+    }
+}
+&nbsp;
+export interface GetStartedButton {
+    payload: {
+        src: Webhook.PostbackSource,
+        data?: any
+    }
+}
+&nbsp;
+export enum MenuItemType {
+    WEB_URL = "web_url",
+    POSTBACK = "postback",
+    NESTED = "nested"
+}
+&nbsp;
+export interface Menu {
+    call_to_actions?: MenuItem[];
+}
+&nbsp;
+export interface MenuItem extends Menu {
+    type: MenuItemType;
+    title: string;
+    url?: string;
+    payload?: string;
+    webview_height_ratio?: Webview.HeightRatio;
+    messenger_extensions?: boolean;
+    fallback_url?: string;
+    webview_share_button?: Webview.ShareButton;
+}
+&nbsp;
+export interface PersistentMenu extends Menu {
+    locale: string;
+    composer_input_disabled: boolean;
+}
+&nbsp;
+export interface Greeting {
+    locale: string;
+    text: string;
+}
+&nbsp;
+export const Greeting = {
+    FIRST_NAME: "user_first_name",
+    LAST_NAME: "user_last_name",
+    FULL_NAME: "user_full_name",
+};
+&nbsp;
+export enum TargetAudienceType {
+    ALL = "all",
+    CUSTOM = "custom",
+    NONE = "none"
+}
+&nbsp;
+export interface TargetAudience {
+    audience_type: TargetAudienceType;
+    countries?: {
+        whitelist?: string[],
+        blacklist?: string[]
+    };
+}
+&nbsp;
+export interface ChatExtensionHomeUrl {
+    url: string;
+    webview_height_ratio: Webview.HeightRatio;
+    webview_share_button: Webview.ShareButton;
+    in_test: boolean;
+}
+&nbsp;
+export interface Request extends Graph.Request {
+    persistent_menu?: PersistentMenu[];
+    get_started?: GetStartedButton;
+    greeting?: Greeting[];
+    whitelisted_domains?: string[];
+    account_linking_url?: string;
+    target_audience?: TargetAudience;
+    home_url?: ChatExtensionHomeUrl;
+    fields?: Field | Field[];
+}
+&nbsp;
+export enum Field {
+    PERSISTENT_MENU = "persistent_menu",
+    GET_STARTED_BUTTON = "get_started",
+    GREETING = "greeting",
+    DOMAIN_WHITELIST = "whitelisted_domains",
+    ACCOUNT_LINKING_URL = "account_linking_url",
+    TARGET_AUDIENCE = "target_audience",
+    CHAT_EXTENSION_WEB_URL = "home_url"
+}
+&nbsp;
+export interface Response {
+    result: string;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

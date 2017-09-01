@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/server/chat.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/server</a> chat.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10.64% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.67% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/45</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { MessageBuilder } from "../fb-api-helpers/message-builder";
+import * as Send from "../fb-api/send";
+import * as UserProfile from "../fb-api/user-profile";
+import * as Webhook from "../fb-api/webhook";
+import { logger } from "../logger";
+import { ResponderService } from "./responder-service";
+&nbsp;
+/**
+ * Provides methods for two-way bot-to-user communication. An instance of [[Chat]] is always passed to
+ * hear and event handlers to be used for interaction with the user.
+ * &lt;b&gt;Note:&lt;/b&gt; all methods are non-blocking and call underlaying API asynchronously.
+ */
+export class Chat {
+&nbsp;
+    private callbacks: {
+        resolve: (data: string | Webhook.QuickReplyPayload) =&gt; void,
+        validator?: (text: string) =&gt; void,
+        challenge?: string
+    };
+&nbsp;
+    private timeout: Promise&lt;any&gt;;
+&nbsp;
+    /**
+     * Creates an instance of [[Chat]]. Instances are managed by the [[ResponderService]] so
+     * don't create one directly.
+     *
+     * @param {string} partnerId
+     * @param {Send.Api} sendApi
+     * @param {UserProfile.Api} userProfileApi
+     */
+    constructor(protected partnerId: string, protected sendApi: Send.Api, protected userProfileApi: UserProfile.Api) { }
+&nbsp;
+    /**
+     * The primary way to send a plain TEXT message to the user.
+     *
+     * @param {string} text - a text to be send
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >say(</span>text: string): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.sendText(this.partnerId, t</span>ext);
+    }
+&nbsp;
+    /**
+     * Turns typing indicator ON for 20 seconds or next message.
+     *
+     * @returns {Promise&lt;void&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >typingOn(): Promise&lt;void&gt; {</span>
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.typingOn(this.p</span>artnerId);
+    }
+&nbsp;
+    /**
+     * Turns typing indicator OFF.
+     *
+     * @returns {Promise&lt;void&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >typingOff(): Promise&lt;void&gt; {</span>
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.typingOff(this.p</span>artnerId);
+    }
+&nbsp;
+    /**
+     * Marks the last sent message as read.
+     *
+     * @returns {Promise&lt;void&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >markSeen(): Promise&lt;void&gt; {</span>
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.markSeen(this.p</span>artnerId);
+    }
+&nbsp;
+    /**
+     * Sends an image.
+     *
+     * @param {string} url - a URL of the image file
+     * @param {boolean} [reusable=false] - if &lt;code&gt;true&lt;/code&gt; the attachment will be marked as reusable
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >sendImage(</span>url: string, <span class="branch-0 cbranch-no" title="branch not covered" >reusable: boolean = </span>false): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.sendImage(this.partnerId, url, r</span>eusable);
+    }
+&nbsp;
+    /**
+     * Sends an audio.
+     *
+     * @param {string} url - a URL of the audio file
+     * @param {boolean} [reusable=false] - if &lt;code&gt;true&lt;/code&gt; the attachment will be marked as reusable
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >sendAudio(</span>url: string, <span class="branch-0 cbranch-no" title="branch not covered" >reusable: boolean = </span>false): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.sendAudio(this.partnerId, url, r</span>eusable);
+    }
+&nbsp;
+    /**
+     * Sends a video.
+     *
+     * @param {string} url - a URL of the video file
+     * @param {boolean} [reusable=false] - if &lt;code&gt;true&lt;/code&gt; the attachment will be marked as reusable
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >sendVideo(</span>url: string, <span class="branch-0 cbranch-no" title="branch not covered" >reusable: boolean = </span>false): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.sendVideo(this.partnerId, url, r</span>eusable);
+    }
+&nbsp;
+    /**
+     * Sends a file.
+     *
+     * @param {string} url - a URL of the file
+     * @param {boolean} [reusable=false] - if &lt;code&gt;true&lt;/code&gt; the attachment will be marked as reusable
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >sendFile(</span>url: string, <span class="branch-0 cbranch-no" title="branch not covered" >reusable: boolean = </span>false): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.sendFile(this.partnerId, url, r</span>eusable);
+    }
+&nbsp;
+    /**
+     * Sends a message prepared manually or using message builder.
+     *
+     * @param {(Send.Message | MessageBuilder&lt;Send.Message&gt;)} messageOrBuilder - a structured message or message builder
+     * @returns {Promise&lt;Send.Response&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >sendMessage(</span>messageOrBuilder: Send.Message | MessageBuilder&lt;Send.Message&gt;): Promise&lt;Send.Response&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return await this.sendApi.send(this.partnerId, m</span>essageOrBuilder);
+    }
+&nbsp;
+    /**
+     * Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
+     * If a validator is specified, the bot will automatically repeat the challenge until valid response.
+     *
+     * @param {string} challenge - a question
+     * @param {(text: string) =&gt; boolean} [validator] - optional validator function - returns `true` if the input is valid
+     * @returns {Promise&lt;string&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >ask(</span>challenge: string, validator?: (text: string) =&gt; boolean): Promise&lt;string&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+        // await for the message to be send, so you can be sure the user is responding to your question
+        await this.say(challenge);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return n</span>ew Promise(</span>(<span class="fstat-no" title="function not covered" >resolve: (data: string) =&gt; void) =&gt; {
+&nbsp;
+            // This is maybe the most interested part of conversation's implementation.
+            // Because the response will arrive in one of the subsequent requests, we must remember
+            // this Promise's resolve callback. Its later execution will be made by the resume() method.
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.callbacks = { resolve, validator, c</span>hallenge };
+        });
+    }
+&nbsp;
+    /**
+     * Asks the user with a message prepared manually or using message builder. It's necessary when
+     * we want to force the user to response using QUICK REPLY buttons.
+     *
+     * @param {(Send.Message | MessageBuilder&lt;Send.Message&gt;)} messageOrBuilder - structured message or message builder
+     * @returns {Promise&lt;T&gt;}
+     */
+    public async <span class="fstat-no" title="function not covered" >askWithMessage&lt;T extends string | Webhook.QuickReplyPayload&gt;(</span>messageOrBuilder: Send.Message | MessageBuilder&lt;Send.Message&gt;): Promise&lt;T&gt; {
+&nbsp;
+        // wait if requested
+<span class="cstat-no" title="statement not covered" >        this.</span>timeout &amp;&amp; await this.timeout;
+&nbsp;
+        // await for the message to be send, so you can be sure the user is responding to your question
+        await this.sendMessage(messageOrBuilder);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return n</span>ew Promise(</span>(<span class="fstat-no" title="function not covered" >resolve: (data: T) =&gt; void) =&gt; {
+<span class="cstat-no" title="statement not covered" >            this.callbacks = { r</span>esolve };
+        });
+    }
+&nbsp;
+    /**
+     * For internal use only.
+     * Resumes the conversation executing the saved resolve callback or repeating the original
+     * challenge if the response is not valid
+     *
+     * @param {(string | Webhook.QuickReplyPayload)} data - user's response
+     * @param {ResponderService} responder - the method can be called only from ResponderService
+     * @returns {boolean} - true if the incoming message is an answer to previously asked question
+     */
+    public <span class="fstat-no" title="function not covered" >answer(</span>data: string | Webhook.QuickReplyPayload, responder: ResponderService): boolean {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!responder) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("</span>unauthorized calling of the Chat.answer");
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.callbacks) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (typeof data === "string" &amp;&amp; this.callbacks.validator &amp;&amp; !this.callbacks.validator(data)) {</span>
+&nbsp;
+                // validation of the input failed, repeat the challenge
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                logger.debug("input validation failed, repeating the challenge");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.say(this.callbacks.c</span>hallenge);
+&nbsp;
+            } else {
+&nbsp;
+                // the question answered, clear the callbacks
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                logger.debug("</span>the question asked has been answered");
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.callbacks.resolve(d</span>ata);
+<span class="cstat-no" title="statement not covered" >                this.callbacks = u</span>ndefined;
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return t</span>rue;
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return f</span>alse;
+    }
+&nbsp;
+    /**
+    * Returns user's profile containing public information.
+    *
+    * @returns {Promise&lt;UserProfile.Response&gt;} - user's public profile information
+    */
+    public <span class="fstat-no" title="function not covered" >getUserProfile(): Promise&lt;UserProfile.Response&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return this.userProfileApi.getUserProfile(this.p</span>artnerId);
+    }
+&nbsp;
+    /**
+     * Returns an ID of the chat partner.
+     *
+     * @returns {string}
+     */
+    public <span class="fstat-no" title="function not covered" >getPartnerId(): string {</span>
+<span class="cstat-no" title="statement not covered" >        return this.p</span>artnerId;
+    }
+&nbsp;
+    /**
+     * Wait before next action.
+     *
+     * @param {number} seconds - lenght of timeout
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >wait(</span>seconds: number): this {
+<span class="cstat-no" title="statement not covered" >        this.timeout = n</span>ew Promise(</span>(<span class="fstat-no" title="function not covered" >resolve) =&gt; {
+<span class="cstat-no" title="statement not covered" >            setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                this.timeout = u</span>ndefined;
+<span class="cstat-no" title="statement not covered" >                resolve();</span>
+            }, seconds * 1000);
+        });
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

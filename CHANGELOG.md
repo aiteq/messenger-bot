@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - storing reusable media ids (store module refactored)
 - number of fixies according to tslint & Codacy findings
+- messenger code generating error handling
 
 ### Changed
 - TypeScript 2.5, Node 8.4
@@ -22,7 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - [PersistentMenuDef](./doc/interfaces/persistentmenudef.md) interface for better separation from Messenger API types and simplified menu definition in declarative way
 - testing infrastructure using [Jest](https://facebook.github.io/jest/)
-- test coverage: store, messenger-codes
+- test coverage: store, BotUtils
 - tslint
 - coveralls
 - [Chat.wait](doc/classes/chat.md#wait)

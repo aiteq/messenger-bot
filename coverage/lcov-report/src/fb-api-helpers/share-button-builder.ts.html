@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for dao.ts</title>
+    <title>Code coverage report for src/fb-api-helpers/share-button-builder.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="index.html">All files</a> dao.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api-helpers</a> share-button-builder.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">57.14% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>4/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">57.14% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/13</span>
+        <span class='fraction'>4/7</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -88,18 +88,14 @@
 43
 44
 45
-46
-47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+46</td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,79 +105,77 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Lowdb = require("lowdb");
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as Send from "../fb-api/send";
+import { Builder } from "./builder";
+import { GenericTemplateMessageBuilder } from "./generic-template-message-builder";
 &nbsp;
-export class Dao&lt;T&gt; {
+/**
+ * Helps to create a Share Button.
+ * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button)
+ */
+export class ShareButtonBuilder extends Builder&lt;Send.ShareButton&gt; {
 &nbsp;
-    private db: Lowdb;
-    private table: Lowdb;
+    private button: Send.ShareButton;
 &nbsp;
-    constructor(private path: string, private idProperty: string = "id") {
+    /**
+     * Creates an instance of ShareButtonBuilder.
+     */
+    constructor() {
 &nbsp;
-        if (!path) {
-            throw new Error("path not specified");
-        }
+        super();
 &nbsp;
-        this.db = new Lowdb("./bot-db.json", {
-            storage: require("lowdb/lib/storages/file-async")
-        })
-        .defaults({
-            [path]: []
-        });
-&nbsp;
-        this.table = this.db.get(path);
+        this.button = {
+            type: Send.ButtonType.SHARE
+        };
     }
 &nbsp;
-    public get(id: any): T {
-        return this.table.find({ [this.idProperty]: id }).value&lt;T&gt;();
+    /**
+     * Sets optional share contents, actually a complete Generic Template Message.
+     * (See https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button#implementation)
+     *
+     * @param {GenericTemplateMessageBuilder} builder
+     * @returns {this} - for chaining
+     */
+    public <span class="fstat-no" title="function not covered" >setGenericTemplate(</span>builder: GenericTemplateMessageBuilder): this {
+<span class="cstat-no" title="statement not covered" >        this.button.share_contents = builder.b</span>uild() as { attachment: Send.GenericTemplateAttachment };
+<span class="cstat-no" title="statement not covered" >        return t</span>his;
     }
 &nbsp;
-    public async save(entity: T): Promise&lt;T&gt; {
-&nbsp;
-        if (!entity || !entity[this.idProperty]) {
-            return Promise.reject(`couldn't save undefined or entity without ${this.idProperty} property`);
-        }
-&nbsp;
-        const existing: Lowdb = this.table.find({ [this.idProperty]: entity[this.idProperty] });
-&nbsp;
-        if (existing.value()) {
-&nbsp;
-            // update existing
-            return existing.assign(entity).write() as any;
-&nbsp;
-        } else {
-&nbsp;
-            // save new
-            return (await this.table.push(entity).write())[0];
-        }
+    /**
+     * Returns built Share Button object.
+     *
+     * @returns {Send.ShareButton}
+     */
+    public <span class="fstat-no" title="function not covered" >build(): Send.ShareButton {</span>
+<span class="cstat-no" title="statement not covered" >        return this.b</span>utton;
     }
 }
 &nbsp;</pre></td></tr>
@@ -190,10 +184,10 @@ export class Dao&lt;T&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Aug 25 2017 16:04:22 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
 </div>
 </div>
-<script src="prettify.js"></script>
+<script src="../../prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -201,6 +195,6 @@ window.onload = function () {
         }
 };
 </script>
-<script src="sorter.js"></script>
+<script src="../../sorter.js"></script>
 </body>
 </html>
