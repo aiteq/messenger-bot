@@ -25,7 +25,10 @@ export class PersistentMenuGroup extends Group {
                     "Persistent Menu is not set";
 
             case "set":
-                options.file || this.exitWithUsage();
+                if (!options.file) {
+                    return this.usage();
+                }
+
                 await botUtils.setPersistentMenu(await this.readFromFile(options.file));
                 return "Persistent Menu has been successfully set";
 
@@ -34,7 +37,7 @@ export class PersistentMenuGroup extends Group {
                 return "Persistent Menu has been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

@@ -11,7 +11,7 @@ export class AccountLinkingGroup extends Group {
         super("accountlinking");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         switch (command) {
 
@@ -22,7 +22,9 @@ export class AccountLinkingGroup extends Group {
                     "Account Linking URL is not set";
 
             case "set":
-                options._[2] || this.exitWithUsage();
+                if (!options._[2]) {
+                    return this.usage();
+                }
                 await botUtils.setAccountLinkingUrl(options._[2]);
                 return "Account Linking URL has been successfully set";
 
@@ -31,7 +33,7 @@ export class AccountLinkingGroup extends Group {
                 return "Account Linking URL has been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

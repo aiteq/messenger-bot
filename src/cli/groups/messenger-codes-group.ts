@@ -12,7 +12,10 @@ export class MessengerCodeGroup extends Group {
 
     public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
-        command === "create" || command === "generate" || this.exitWithUsage();
+        if (command !== "create" && command !== "generate") {
+            return this.usage();
+        }
+
         await botUtils.generateMessengerCode(options.out || "code.png", options.size, options.ref);
         return "Messenger Code has been succesfully saved";
     }

@@ -14,7 +14,8 @@
     "scripts": {
         "compile": "grunt",
         "test": "jest",
-        "lint": "tslint --project ."
+        "lint": "tslint --project .",
+        "mbutil": "node ./bin/cli/index.js"
     },
     "bin": {
         "mbutil": "./bin/cli/index.js"

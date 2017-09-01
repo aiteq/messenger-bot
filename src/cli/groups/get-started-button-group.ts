@@ -30,7 +30,7 @@ export class GetStartedButtonGroup extends Group {
                 return "Get Started button has been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

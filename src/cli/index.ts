@@ -5,18 +5,21 @@ import { MBUtil } from "./mb-util";
 /* tslint:disable no-console */
 
 (async () => {
+
     try {
+
         console.log("\nMessenger Bot Utility by Aiteq\n");
-        await new MBUtil().bootstrap();
+        const usage: string = await new MBUtil().bootstrap(process.argv.slice(2));
+        usage && console.log(usage);
+
     } catch (error) {
 
-        if (error.message === "exit") { return; }
-
-        cliout.error((error.message || error) + "\n");
+        cliout.error(error.message || error);
         if (logger.level.levelStr === "ALL") {
             logger.error(error);
             logger.error(error.stack);
         }
     }
+
     console.log(" ");
 })();

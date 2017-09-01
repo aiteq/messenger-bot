@@ -22,10 +22,10 @@ export abstract class Group {
         return this.name;
     }
 
-    public abstract execute(command: string, botUtils: BotUtils, options: any): void;
+    public abstract execute(command: string, botUtils: BotUtils, options: any): Promise<string>;
 
-    public exitWithUsage(): void {
-        MBUtil.exitWithUsage(this.getUsage());
+    public usage(): Promise<string> {
+        return Promise.reject(this.getUsage());
     }
 
     protected abstract getUsage(): string;

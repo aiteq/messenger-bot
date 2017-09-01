@@ -12,39 +12,20 @@ import { Group } from "./group";
  */
 export class MBUtil {
 
-    public static exitWithUsage(usage: string | Map<string, Group>): void {
-
-        if (typeof usage === "string") {
-
-            console.log(`${usage}
+    private static readonly USAGE_GLOBAL_OPTIONS: string = `
 Global options:
---config <path> - config json file
---accessToken <token> - Page Access Token (overrides config file)
---help - display usage for the group
-
-`);
-
-        } else {
-
-            console.log(`Usage: mbutil <group> [command] [options]
-Groups: ${Array.from(usage.keys()).join(", ")}
-
-Type 'mbutil <group> --help' to display usage for the group
-
-`);
-        }
-
-        throw new Error("exit");
-    }
+    --config <path> - config json file
+    --accessToken <token> - Page Access Token (overrides config file)
+    --help - display usage for the group`;
 
     private botUtils: BotUtils;
     private groups: Map<string, Group> = new Map<string, Group>();
 
-    public async bootstrap(): Promise<void> {
+    public async bootstrap(args: string[]): Promise<string> {
 
         this.registerGroups();
 
-        const options: any = minimist(process.argv.slice(2));
+        const options: any = minimist(args);
 
         logger.level = options.debug ? "ALL" : "OFF";
 
@@ -52,23 +33,35 @@ Type 'mbutil <group> --help' to display usage for the group
 
         const groupHandler: Group = this.groups.get(group);
 
-        groupHandler || MBUtil.exitWithUsage(this.groups);
+        if (!groupHandler) {
+            return Promise.resolve(`Usage: mbutil <group> [command] [options]
+Groups: ${Array.from(this.groups.keys()).join(", ")}
 
-        options.help && groupHandler.exitWithUsage();
+Type 'mbutil <group> --help' to display usage for the group`);
+        }
 
-        let config: any = {};
+        if (options.help) {
+            try { await groupHandler.usage(); }
+            catch (error) { return Promise.resolve(error + MBUtil.USAGE_GLOBAL_OPTIONS) };
+        }
 
-        options.config && (config = JSON.parse(fs.readFileSync(options.config, "utf8")));
+        let accessToken: string;
 
-        options.accessToken && (config.accessToken = options.accessToken);
+        options.config && (accessToken = JSON.parse(fs.readFileSync(options.config, "utf8")).accessToken);
 
-        if (!config.accessToken) {
+        accessToken = options.accessToken || accessToken;
+
+        if (!accessToken) {
             return Promise.reject("no accessToken");
         }
 
-        this.botUtils = new BotUtils(config);
+        this.botUtils = new BotUtils(accessToken);
 
-        cliout.info(await groupHandler.execute(command, this.botUtils, options) + "\n");
+        try {
+            cliout.info(await groupHandler.execute(command, this.botUtils, options));
+        } catch (error) {
+            return error;
+        }
     }
 
     private registerGroups() {

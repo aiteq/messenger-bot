@@ -11,7 +11,7 @@ export class DomainsGroup extends Group {
         super("domains");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         switch (command) {
 
@@ -23,7 +23,10 @@ export class DomainsGroup extends Group {
 
             case "add":
                 const domains: string[] = options._.slice(2);
-                domains.length > 0 || this.exitWithUsage();
+                if (!domains.length) {
+                    return this.usage();
+                }
+
                 await botUtils.whitelistDomains(domains);
                 return "Domain Whitelist has been successfully updated";
 
@@ -32,7 +35,7 @@ export class DomainsGroup extends Group {
                 return "All domains have been successfully removed from whitelist";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

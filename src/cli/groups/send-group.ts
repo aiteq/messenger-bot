@@ -10,34 +10,48 @@ export class SendGroup extends Group {
         super("send");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         switch (command) {
 
             case "image":
-                (options.recipient && options.url) || this.exitWithUsage();
+                if (!options.recipient || !options.url) {
+                    return this.usage();
+                }
+
                 await botUtils.sendImage(options.recipient, options.url);
                 break;
 
             case "audio":
-                (options.recipient && options.url) || this.exitWithUsage();
+                if (!options.recipient || !options.url) {
+                    return this.usage();
+                }
+
                 await botUtils.sendAudio(options.recipient, options.url);
                 break;
 
             case "video":
-                (options.recipient && options.url) || this.exitWithUsage();
+                if (!options.recipient || !options.url) {
+                    return this.usage();
+                }
+
                 await botUtils.sendVideo(options.recipient, options.url);
                 break;
 
             case "file":
-                (options.recipient && options.url) || this.exitWithUsage();
+                if (!options.recipient || !options.url) {
+                    return this.usage();
+                }
+
                 await botUtils.sendFile(options.recipient, options.url);
                 break;
 
             default:
-                const text: string = options._[1];
-                (text && options.recipient) || this.exitWithUsage();
-                await botUtils.sendText(options.recipient, text);
+                if (!options.recipient || !options._[1]) {
+                    return this.usage();
+                }
+
+                await botUtils.sendText(options.recipient, options._[1]);
                 break;
         }
 

@@ -11,7 +11,7 @@ export class GreetingGroup extends Group {
         super("greeting");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         switch (command) {
 
@@ -22,9 +22,11 @@ export class GreetingGroup extends Group {
                     "Greeting is not set";
 
             case "add":
-                const text: string = options._[2];
-                text || this.exitWithUsage();
-                await botUtils.setGreeting(text, options.locale);
+                if (!options._[2]) {
+                    return this.usage();
+                }
+
+                await botUtils.setGreeting(options._[2], options.locale);
                 return "Greeting has been successfully added";
 
             case "delete":
@@ -32,7 +34,7 @@ export class GreetingGroup extends Group {
                 return "Greeting has been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

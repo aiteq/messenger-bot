@@ -11,7 +11,7 @@ export class TargetAudienceGroup extends Group {
         super("audience");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         let countries: string[];
 
@@ -33,13 +33,19 @@ export class TargetAudienceGroup extends Group {
 
             case "whitelist":
                 countries = options._.slice(2);
-                countries.length > 0 || this.exitWithUsage();
+                if (!countries.length) {
+                    return this.usage();
+                }
+
                 await botUtils.whitelistAudienceCountries(countries);
                 return "Target Audience whitelist has been successfully updated";
 
             case "blacklist":
                 countries = options._.slice(2);
-                countries.length > 0 || this.exitWithUsage();
+                if (!countries.length) {
+                    return this.usage();
+                }
+
                 await botUtils.blacklistAudienceCountries(countries);
                 return "Target Audience blacklist has been successfully updated";
 
@@ -48,7 +54,7 @@ export class TargetAudienceGroup extends Group {
                 return "All Target Audience settings have been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 

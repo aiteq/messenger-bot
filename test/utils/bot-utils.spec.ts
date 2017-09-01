@@ -103,7 +103,7 @@ const PERSISTENT_MENU_CHECK = [{
 
 describe("BotUtils", () => {
 
-    logger.level = "ERROR";
+    logger.level = "OFF";
 
     let utils: BotUtils;
 

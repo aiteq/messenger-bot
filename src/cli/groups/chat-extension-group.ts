@@ -12,7 +12,7 @@ export class ChatExtensionGroup extends Group {
         super("chatext");
     }
 
-    public async execute(command: string, botUtils: BotUtils, options: any): Promise<any> {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise<string> {
 
         switch (command) {
 
@@ -23,8 +23,11 @@ export class ChatExtensionGroup extends Group {
                     "Chat Extension home URL is not set";
 
             case "set":
-                options._[2] || this.exitWithUsage();
-                await botUtils.setChatExtensionHomeUrl(options._[2], !!options.inTest, !!options.shareButton, cliout);
+                if (!options._[2]) {
+                    return this.usage();
+                }
+
+                await botUtils.setChatExtensionHomeUrl(options._[2], !!options.inTest, !options.hideShareButton, cliout);
                 return "Chat Extension home URL has been successfully set";
 
             case "delete":
@@ -32,12 +35,12 @@ export class ChatExtensionGroup extends Group {
                 return "Chat Extension home URL has been successfully removed";
 
             default:
-                this.exitWithUsage();
+                return this.usage();
         }
     }
 
     protected getUsage(): string {
-        return `Manage Account Linking URL.
+        return `Manage Chat Extension home URL.
 See more at https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url.
 
 Usage:
@@ -46,14 +49,14 @@ Usage:
         - show current Chat Extension home URL
 
     mbutil ${this.getName()} set <url> [options]
-        - set a new Chat Extension home URL (options: --inTest, --shareButton)
+        - set a new Chat Extension home URL (options: --inTest, --hideShareButton)
 
     mbutil ${this.getName()} delete [options]
         - remove the current Chat Extension home URL
 
 Options:
     --inTest - controls whether public users can see the Chat Extension
-    --shareButton - controls whether the share button in the webview is enabled
+    --hideShareButton - controls whether the share button in the webview is enabled
 `;
     }
 }
