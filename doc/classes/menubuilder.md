@@ -1,14 +1,14 @@
-[@aiteq/messenger-bot](../README.md) > [PersistentMenuBuilder](../classes/persistentmenubuilder.md) > [Menu](../classes/persistentmenubuilder.menu.md)
+[@aiteq/messenger-bot](../README.md) > [MenuBuilder](../classes/menubuilder.md)
 
-# Class: Menu
+# Class: MenuBuilder
 
 ## Index
 
 ### Methods
 
-* [addPostbackMenuItem(title, id, data, [options])](persistentmenubuilder.menu.md#addpostbackmenuitem)
-* [addSubmenu(title, submenu)](persistentmenubuilder.menu.md#addsubmenu)
-* [addWebUrlMenuItem(title, url, [options])](persistentmenubuilder.menu.md#addweburlmenuitem)
+* [addPostbackMenuItem(title, id, data, [options])](menubuilder.md#addpostbackmenuitem)
+* [addSubmenu(title, submenu)](menubuilder.md#addsubmenu)
+* [addWebUrlMenuItem(title, url, [options])](menubuilder.md#addweburlmenuitem)
 
 ---
 
@@ -46,7 +46,7 @@ ___
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | title | `string`   | title of the submenu |
-| submenu | [Menu](persistentmenubuilder.menu.md)   |  |
+| submenu | [MenuBuilder](menubuilder.md)   |  |
 
 **Returns:** `this` - for chaining
 ___

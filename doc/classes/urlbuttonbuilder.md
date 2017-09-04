@@ -19,7 +19,7 @@ Helps to create a [URL Button](https://developers.facebook.com/docs/messenger-pl
 ### Methods
 
 * [setFallbackUrl(fallbackUrl)](urlbuttonbuilder.md#setfallbackurl)
-* [setMessengerEtensions(messengerExtensions)](urlbuttonbuilder.md#setmessengeretensions)
+* [setMessengerExtensions(messengerExtensions)](urlbuttonbuilder.md#setmessengerextensions)
 * [setShowWebviewShareButton(webviewShareButton)](urlbuttonbuilder.md#setshowwebviewsharebutton)
 * [setWebviewHeightRatio(webviewHeightRatio)](urlbuttonbuilder.md#setwebviewheightratio)
 
@@ -59,8 +59,8 @@ Sets the URL to use on clients that don't support Messenger Extensions. If this 
 **Returns:** `this` - for chaining
 ___
 
-<a id="setmessengeretensions"></a>
-###  `setMessengerEtensions(messengerExtensions)`
+<a id="setmessengerextensions"></a>
+###  `setMessengerExtensions(messengerExtensions)`
 
 Controls usage of Messenger Extensions.
 

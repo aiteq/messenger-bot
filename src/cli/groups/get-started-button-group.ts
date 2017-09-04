@@ -18,7 +18,7 @@ export class GetStartedButtonGroup extends Group {
             case "get":
                 const result: any = await botUtils.getGetStartedButton();
                 return result ?
-                    `Get Started button is set (data: ${JSON.parse(result.payload).data || "not set"})` :
+                    `Get Started button is set (data: ${result.payload.data || "not set"})` :
                     "Get Started button is not set";
 
             case "set":

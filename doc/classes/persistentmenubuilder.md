@@ -17,6 +17,7 @@ Helps to create a [Persistent Menu](https://developers.facebook.com/docs/messeng
 ### Methods
 
 * [addMenu(locale, composerInputDisabled, menu)](persistentmenubuilder.md#addmenu)
+* [build()](persistentmenubuilder.md#build)
 
 ### Static methods
 
@@ -55,6 +56,15 @@ Adds a new Menu for the given locale.
 | menu | [Menu](persistentmenubuilder.menu.md)   | menu to be added |
 
 **Returns:** `this` - for chaining
+___
+
+<a id="build"></a>
+
+###  `build()`
+
+Creates an instance of Messenger API specific object.
+
+**Returns:** `MessengerProfile.PersistentMenu`
 ___
 
 <a id="createmenu"></a>

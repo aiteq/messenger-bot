@@ -1,3 +1,5 @@
+import * as Webview from "../fb-api/webview";
+
 export interface PersistentMenuDef {
     locale: string;
     composerInputDisabled: boolean;
@@ -10,4 +12,8 @@ export interface PersistentMenuItemDef {
     data?: any;
     id?: string;
     items?: PersistentMenuItemDef[];
+    webviewHeightRatio?: Webview.HeightRatio;
+    messengerExtensions?: boolean;
+    shareButton?: boolean;
+    fallbackUrl?: string;
 }

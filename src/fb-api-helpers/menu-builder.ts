@@ -1,12 +1,13 @@
 import * as  MessengerProfile from "../fb-api/messenger-profile";
 import * as Webhook from "../fb-api/webhook";
 import * as Webview from "../fb-api/webview";
+import { Builder } from "./builder";
 
-export class Menu {
+export class MenuBuilder extends Builder<MessengerProfile.MenuItem[]> {
 
     private actions: MessengerProfile.MenuItem[] = new Array<MessengerProfile.MenuItem>();
 
-    public getActions(): MessengerProfile.MenuItem[] {
+    public build(): MessengerProfile.MenuItem[] {
         return this.actions;
     }
 
@@ -47,7 +48,7 @@ export class Menu {
         return this;
     }
 
-    public addSubmenu(title: string, submenu: Menu): this {
+    public addSubmenu(title: string, submenu: MenuBuilder): this {
 
         this.addMenuItem({ type: MessengerProfile.MenuItemType.NESTED, title, call_to_actions: submenu.actions });
 
@@ -63,9 +64,9 @@ export class Menu {
 
         options = options || {};
 
-        item.webview_height_ratio = options.webviewHeightRatio;
-        item.messenger_extensions = options.messengerExtensions;
-        item.fallback_url = options.fallbackUrl;
+        options.webviewHeightRatio && (item.webview_height_ratio = options.webviewHeightRatio);
+        options.messengerExtensions && (item.messenger_extensions = options.messengerExtensions);
+        options.fallbackUrl && (item.fallback_url = options.fallbackUrl);
         item.webview_share_button = options.shareButton === false ? Webview.ShareButton.HIDE : Webview.ShareButton.SHOW;
 
         this.actions.push(item);

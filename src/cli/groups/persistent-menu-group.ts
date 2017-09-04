@@ -1,6 +1,5 @@
 import * as fs from "async-file";
 import { PersistentMenuBuilder } from "../../fb-api-helpers/persistent-menu-builder";
-import { Menu } from "../../fb-api-helpers/persistent-menu-builder-menu";
 import { BotUtils } from "../../utils/bot-utils";
 import { Group } from "../group";
 

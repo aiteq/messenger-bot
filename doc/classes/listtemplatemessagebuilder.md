@@ -22,7 +22,6 @@ Helps to create a [List Template](https://developers.facebook.com/docs/messenger
 * [addLocationQuickReply()](listtemplatemessagebuilder.md#addlocationquickreply)
 * [addQuickReply(title, id, [data, [imageUrl]])](listtemplatemessagebuilder.md#addquickreply)
 * [setButton(buttonBuilder)](listtemplatemessagebuilder.md#setbutton)
-* [setSherable(sherable)](listtemplatemessagebuilder.md#setsherable)
 * [setTopElementStyle(topElementStyle)](listtemplatemessagebuilder.md#settopelementstyle)
 
 ### Static methods
@@ -106,20 +105,6 @@ Sets a Button for the List Template message.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | buttonBuilder | [Builder](builder.md)   | |
-
-**Returns:** `void`
-___
-
-<a id="setsherable"></a>
-###  `setSherable(sherable)`
-
-Controls native share button.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| sherable | `boolean`   |  set to `false` to disable the native share button in Messenger |
 
 **Returns:** `this` - for chaining
 ___

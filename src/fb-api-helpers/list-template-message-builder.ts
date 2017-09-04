@@ -50,8 +50,10 @@ export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.List
      * Sets a Button for the List Template message.
      *
      * @param {Builder<T>} buttonBuilder
+     * @returns {this} - for chaining
      */
-    public setButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
+    public setButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
         this.template.buttons = [buttonBuilder.build()];
+        return this;
     }
 }

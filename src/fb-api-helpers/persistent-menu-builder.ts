@@ -1,8 +1,8 @@
 import * as  MessengerProfile from "../fb-api/messenger-profile";
 import * as Webhook from "../fb-api/webhook";
 import { Builder } from "./builder";
-import { Menu } from "./persistent-menu-builder-menu";
-import { PersistentMenuDef } from "./persistent-menu-def";
+import { MenuBuilder } from "./menu-builder";
+import { PersistentMenuDef, PersistentMenuItemDef } from "./persistent-menu-def";
 
 /**
  * Helps to create a Persistent Menu.
@@ -13,16 +13,16 @@ export class PersistentMenuBuilder extends Builder<MessengerProfile.PersistentMe
     /**
      * Creates a new Menu.
      *
-     * @returns {Menu}
+     * @returns {MenuBuilder}
      */
-    public static createMenu(): Menu {
-        return new Menu();
+    public static createMenu(): MenuBuilder {
+        return new MenuBuilder();
     }
 
     private static checkMenu(menu: MessengerProfile.PersistentMenu): MessengerProfile.PersistentMenu {
 
         if (menu.composer_input_disabled && (!menu.call_to_actions || menu.call_to_actions.length === 0)) {
-            throw new Error("PersistentMenuBuilder: at least one menu item must be added when composer input is disabled (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu#post)");
+            throw new Error("at least one menu item must be added when composer input is disabled (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu#post)");
         }
 
         return menu;
@@ -44,7 +44,7 @@ export class PersistentMenuBuilder extends Builder<MessengerProfile.PersistentMe
             menuDef = Array.isArray(menuDef) ? menuDef : [menuDef];
 
             menuDef.forEach((localMenuDef: PersistentMenuDef) => {
-                this.addMenu(localMenuDef.locale, !!localMenuDef.composerInputDisabled, this.createMenu(localMenuDef.items));
+                this.addMenu(localMenuDef.locale, !!localMenuDef.composerInputDisabled, this.buildMenu(localMenuDef.items));
             });
         }
     }
@@ -66,22 +66,22 @@ export class PersistentMenuBuilder extends Builder<MessengerProfile.PersistentMe
      * @param {PersistentMenuBuilder.Menu} menu
      * @returns {this} - for chaining
      */
-    public addMenu(locale: string, composerInputDisabled: boolean, menu: Menu): this {
+    public addMenu(locale: string, composerInputDisabled: boolean, menu: MenuBuilder): this {
 
         this.menus.push(PersistentMenuBuilder.checkMenu({
             locale,
             composer_input_disabled: composerInputDisabled,
-            call_to_actions: menu.getActions()
+            call_to_actions: menu.build()
         }));
 
         return this;
     }
 
-    private createMenu(items: any[]): Menu {
+    private buildMenu(items: PersistentMenuItemDef[]): MenuBuilder {
 
-        const menu: Menu = PersistentMenuBuilder.createMenu();
+        const menu: MenuBuilder = PersistentMenuBuilder.createMenu();
 
-        items.forEach((item: any) => {
+        items.forEach((item: PersistentMenuItemDef) => {
 
             if (item.url) {
 
@@ -104,7 +104,7 @@ export class PersistentMenuBuilder extends Builder<MessengerProfile.PersistentMe
 
             } else if (item.items) {
 
-                menu.addSubmenu(item.title, this.createMenu(item.items));
+                menu.addSubmenu(item.title, this.buildMenu(item.items));
             }
         });
 

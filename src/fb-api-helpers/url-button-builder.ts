@@ -44,7 +44,7 @@ export class UrlButtonBuilder extends Builder<Send.UrlButton> {
      * @param {boolean} messengerExtensions - must be true if using Messenger Extensions
      * @returns {this} - for chaining
      */
-    public setMessengerEtensions(messengerExtensions: boolean): this {
+    public setMessengerExtensions(messengerExtensions: boolean): this {
         this.button.messenger_extensions = messengerExtensions;
         return this;
     }

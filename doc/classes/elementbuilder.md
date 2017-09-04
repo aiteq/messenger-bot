@@ -58,7 +58,7 @@ Adds a Button.
 | ------ | ------ | ------ |
 | buttonBuilder | [Builder](builder.md) | button builder |
 
-**Returns:** `void`
+**Returns:** `this` - for chaining
 ___
 
 <a id="setdefaultaction"></a>

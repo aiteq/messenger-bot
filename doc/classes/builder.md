@@ -6,7 +6,7 @@ An abstract parent class for builders.
 
 ## Type parameters
 
-#### T 
+#### T
 
 ## Hierarchy
 
@@ -44,7 +44,7 @@ An abstract parent class for builders.
 
 ###  `build()`
 
-Creates an isntance of desired class.
+Creates an instance of desired class.
 
 **Returns:** `T`
 ___

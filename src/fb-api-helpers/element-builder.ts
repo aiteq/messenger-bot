@@ -58,12 +58,13 @@ export class ElementBuilder extends Builder<Send.Element> {
      * Adds a Button.
      *
      * @param {Builder<T>} buttonBuilder
+     * @returns {this} - for chaining
      */
-    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): void {
+    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
 
         this.element.buttons = this.element.buttons || new Array<T>();
-
         this.element.buttons.push(buttonBuilder.build());
+        return this;
     }
 
     /**
