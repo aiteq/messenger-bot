@@ -1,10 +1,8 @@
 import * as fs from "fs";
 import { logger } from "../../src/logger";
 import { BotUtils } from "../../src/utils/bot-utils";
-import * as MessengerProfile from "../../src/fb-api/messenger-profile";
+import { MessengerProfile, Send, Webhook } from "../../src/fb-api";
 import { PersistentMenuDef } from "../../src/fb-api-helpers/persistent-menu-def";
-import * as Send from "../../src/fb-api/send";
-import * as Webhook from "../../src/fb-api/webhook";
 
 const config = require("../../work/test-config.json");
 const ACCESS_TOKEN: string = config.accessToken;

@@ -1,6 +1,6 @@
 import { ElementBuilder } from "../../src/fb-api-helpers/element-builder";
 import { ListTemplateMessageBuilder } from "../../src/fb-api-helpers/list-template-message-builder";
-import * as Send from "../../src/fb-api/send";
+import { Send } from "../../src/fb-api";
 
 const URL_IMAGE: string = "https://static.wixstatic.com/media/a3e73d_d0a6eaa7c6194519937b46d95dcbd97c.png";
 

@@ -1,5 +1,5 @@
 import { UrlButtonBuilder } from "../../src/fb-api-helpers/url-button-builder";
-import * as Webview from "../../src/fb-api/webview";
+import { Webview } from "../../src/fb-api";
 
 describe("UrlButtonBuilder", () => {
 

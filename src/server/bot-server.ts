@@ -2,14 +2,13 @@ import * as bodyParser from "body-parser";
 import * as crypto from "crypto";
 import * as express from "express";
 import * as http from "http";
-import * as MessengerProfile from "../fb-api/messenger-profile";
-import * as Webhook from "../fb-api/webhook";
+import { MessengerProfile, Webhook } from "../fb-api";
 import { logger } from "../logger";
 import { BotConfig } from "../utils/bot-config";
 import { Chat } from "./chat";
 import { ChatExtension } from "./chat-extension";
 import { ExtensionService } from "./extension-service";
-import { ResponderService } from "./responder-service";
+import { ChatService } from "./chat-service";
 import { VerificationService } from "./verification-service";
 
 /**
@@ -37,7 +36,7 @@ export class BotServer {
     private app: express.Application;
     private server: http.Server;
 
-    private responder: ResponderService;
+    private chatService: ChatService;
     private extensions: ExtensionService;
     private profileApi: MessengerProfile.Api;
 
@@ -77,8 +76,8 @@ export class BotServer {
         logger.info("VerificationServices has been attached to", this.config.webhookPath);
 
         // install service for handling webhook requests
-        this.responder = new ResponderService(this.config.accessToken);
-        this.app.use(this.config.webhookPath, this.responder.getRouter());
+        this.chatService = new ChatService(this.config.accessToken);
+        this.app.use(this.config.webhookPath, this.chatService.getRouter());
         logger.info("ResponderService has been attached to", this.config.webhookPath);
 
         // install service for handling Message Extensions requests
@@ -100,22 +99,14 @@ export class BotServer {
 
         .on("error", (error: NodeJS.ErrnoException) => {
 
-            if (error.syscall !== "listen") {
-                throw error;
-            }
-
-            const bind = (typeof port === "string") ? "Pipe " + port : "Port " + port;
+            const bind = (typeof port === "string") ? "pipe " + port : "port " + port;
 
             switch (error.code) {
                 case "EACCES":
-                    logger.error(`BotServer[${this.config.name}] not started. ${bind} requires elevated privileges.`);
-                    process.exit(1);
-                    break;
+                    throw new Error(`BotServer[${this.config.name}] not started. ${bind} requires elevated privileges.`);
 
                 case "EADDRINUSE":
-                    logger.error(`BotServer[${this.config.name}] not started. ${bind} is already in use.`);
-                    process.exit(1);
-                    break;
+                    throw new Error(`BotServer[${this.config.name}] not started. ${bind} is already in use.`);
 
                 default:
                     throw error;
@@ -175,7 +166,7 @@ export class BotServer {
             regexps = [hooks];
         }
 
-        this.responder.hear(regexps, callback);
+        this.chatService.hear(regexps, callback);
 
         return this;
     }
@@ -216,7 +207,7 @@ export class BotServer {
 
         logger.info("subscribing to event", extEvent);
 
-        this.responder.on(extEvent, callback);
+        this.chatService.on(extEvent, callback);
         return this;
     }
 

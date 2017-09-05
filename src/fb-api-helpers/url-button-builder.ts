@@ -1,5 +1,4 @@
-import * as Send from "../fb-api/send";
-import * as Webview from "../fb-api/webview";
+import { Send, Webview } from "../fb-api";
 import { Builder } from "./builder";
 
 /**

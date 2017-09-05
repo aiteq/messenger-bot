@@ -1,4 +1,4 @@
-import * as Send from "../fb-api/send";
+import { Send } from "../fb-api";
 import { MessageBuilder } from "./message-builder";
 
 /**

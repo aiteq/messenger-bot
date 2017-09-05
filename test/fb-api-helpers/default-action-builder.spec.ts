@@ -1,5 +1,5 @@
 import { DefaultActionBuilder } from "../../src/fb-api-helpers/default-action-builder";
-import * as Webview from "../../src/fb-api/webview";
+import { Webview } from "../../src/fb-api";
 
 describe("DefaultActionBuilder", () => {
 

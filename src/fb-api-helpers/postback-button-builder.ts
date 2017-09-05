@@ -1,5 +1,4 @@
-import * as Send from "../fb-api/send";
-import * as Webhook from "../fb-api/webhook";
+import { Send, Webhook } from "../fb-api";
 import { Builder } from "./builder";
 
 /**

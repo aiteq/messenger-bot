@@ -1,9 +1,7 @@
+import { Send, UserProfile, Webhook } from "../fb-api";
 import { MessageBuilder } from "../fb-api-helpers/message-builder";
-import * as Send from "../fb-api/send";
-import * as UserProfile from "../fb-api/user-profile";
-import * as Webhook from "../fb-api/webhook";
 import { logger } from "../logger";
-import { ResponderService } from "./responder-service";
+import { ChatService } from "./chat-service";
 
 /**
  * Provides methods for two-way bot-to-user communication. An instance of [[Chat]] is always passed to
@@ -12,10 +10,11 @@ import { ResponderService } from "./responder-service";
  */
 export class Chat {
 
-    private callbacks: {
+    private responder: {
         resolve: (data: string | Webhook.QuickReplyPayload) => void,
+        reject: (reason?: any) => void,
         validator?: (text: string) => void,
-        challenge?: string
+        challenge?: string | Send.Message
     };
 
     private timeout: Promise<any>;
@@ -154,7 +153,10 @@ export class Chat {
         // wait if requested
         this.timeout && await this.timeout;
 
-        return await this.sendApi.send(this.partnerId, messageOrBuilder);
+        return await this.sendApi.send(
+            this.partnerId, messageOrBuilder instanceof MessageBuilder ?
+                messageOrBuilder.build() :
+                messageOrBuilder);
     }
 
     /**
@@ -170,36 +172,50 @@ export class Chat {
         // wait if requested
         this.timeout && await this.timeout;
 
+        if (this.responder) {
+            logger.warn("previous asking not answered");
+            this.responder.reject("not answered");
+        }
+
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.say(challenge);
 
-        return new Promise((resolve: (data: string) => void) => {
+        return new Promise((resolve: (data: string) => void, reject: (reason?: any) => void) => {
 
             // This is maybe the most interested part of conversation's implementation.
             // Because the response will arrive in one of the subsequent requests, we must remember
             // this Promise's resolve callback. Its later execution will be made by the resume() method.
 
-            this.callbacks = { resolve, validator, challenge };
+            this.responder = { resolve, reject, validator, challenge };
         });
     }
 
     /**
      * Asks the user with a message prepared manually or using message builder. It's necessary when
      * we want to force the user to response using QUICK REPLY buttons.
+     * If a validator is specified, the bot will automatically repeat the challenge until valid response.
      *
      * @param {(Send.Message | MessageBuilder<Send.Message>)} messageOrBuilder - structured message or message builder
+     * @param {(text: string) => boolean} [validator] - optional validator function - returns `true` if the input is valid
      * @returns {Promise<T>}
      */
-    public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<T> {
+    public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>, validator?: (text: string) => boolean): Promise<T> {
 
         // wait if requested
         this.timeout && await this.timeout;
 
-        // await for the message to be send, so you can be sure the user is responding to your question
-        await this.sendMessage(messageOrBuilder);
+        const challenge: Send.Message = messageOrBuilder = messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder
 
-        return new Promise((resolve: (data: T) => void) => {
-            this.callbacks = { resolve };
+        if (this.responder) {
+            logger.warn("previous asking not answered");
+            this.responder.reject("not answered");
+        }
+
+        // await for the message to be send, so you can be sure the user is responding to your question
+        await this.sendMessage(challenge);
+
+        return new Promise((resolve: (data: T) => void, reject: (reason?: any) => void) => {
+            this.responder = { resolve, reject, validator, challenge };
         });
     }
 
@@ -212,21 +228,25 @@ export class Chat {
      * @param {ResponderService} responder - the method can be called only from ResponderService
      * @returns {boolean} - true if the incoming message is an answer to previously asked question
      */
-    public answer(data: string | Webhook.QuickReplyPayload, responder: ResponderService): boolean {
+    public answer(data: string | Webhook.QuickReplyPayload, chatService: ChatService): boolean {
 
-        if (!responder) {
+        if (!chatService) {
             throw new Error("unauthorized calling of the Chat.answer");
         }
 
-        if (this.callbacks) {
+        if (this.responder) {
 
-            if (typeof data === "string" && this.callbacks.validator && !this.callbacks.validator(data)) {
+            if (typeof data === "string" && this.responder.validator && !this.responder.validator(data)) {
 
                 // validation of the input failed, repeat the challenge
 
                 logger.debug("input validation failed, repeating the challenge");
 
-                this.say(this.callbacks.challenge);
+                if (typeof this.responder.challenge === "string") {
+                    this.say(this.responder.challenge);
+                } else {
+                    this.sendMessage(this.responder.challenge);
+                }
 
             } else {
 
@@ -234,8 +254,8 @@ export class Chat {
 
                 logger.debug("the question asked has been answered");
 
-                this.callbacks.resolve(data);
-                this.callbacks = undefined;
+                this.responder.resolve(data);
+                this.responder = undefined;
             }
 
             return true;

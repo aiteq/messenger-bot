@@ -4,9 +4,7 @@ import { AxiosResponse } from "axios";
 
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { PersistentMenuDef } from "../fb-api-helpers/persistent-menu-def";
-import * as MessengerCodes from "../fb-api/messenger-codes";
-import * as MessengerProfile from "../fb-api/messenger-profile";
-import * as Send from "../fb-api/send";
+import { MessengerCodes, MessengerProfile, Send } from "../fb-api";
 import { logger } from "../logger";
 
 /**

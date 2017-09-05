@@ -1,4 +1,4 @@
-import * as Webview from "../fb-api/webview";
+import { Webview } from "../fb-api";
 
 export interface PersistentMenuDef {
     locale: string;

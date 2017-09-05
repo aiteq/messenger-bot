@@ -1,6 +1,4 @@
-import * as  MessengerProfile from "../fb-api/messenger-profile";
-import * as Webhook from "../fb-api/webhook";
-import * as Webview from "../fb-api/webview";
+import { MessengerProfile, Webhook, Webview } from "../fb-api";
 import { Builder } from "./builder";
 
 export class MenuBuilder extends Builder<MessengerProfile.MenuItem[]> {

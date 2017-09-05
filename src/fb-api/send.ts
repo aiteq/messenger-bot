@@ -1,9 +1,8 @@
-import { MessageBuilder } from "../fb-api-helpers/message-builder";
 import { logger } from "../logger";
 import { Reusable } from "../store/reusable";
 import { ReusableDao } from "../store/reusable-dao";
+import { Webview } from ".";
 import * as Graph from "./graph-api";
-import * as Webview from "./webview";
 
 /**
  * Functions and types for Send API.
@@ -131,17 +130,17 @@ export class Api extends Graph.Api<Request> {
      * Sends a message.
      *
      * @param {string} recipientId - recipient's ID
-     * @param {(Message | MessageBuilder<Message>)} messageOrBuilder - a message or message builder
+     * @param {Message} message - a message
      * @param {NotificationType} [notification=NotificationType.REGULAR]
      * @returns {Promise<Response>}
      */
-    public send(recipientId: string, messageOrBuilder: Message | MessageBuilder<Message>, notification: NotificationType = NotificationType.REGULAR): Promise<Response> {
+    public send(recipientId: string, message: Message, notification: NotificationType = NotificationType.REGULAR): Promise<Response> {
 
         return this.sendRequest({
             recipient: JSON.stringify({
                 id: recipientId
             }),
-            message: JSON.stringify(messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder),
+            message: JSON.stringify(message),
             notification_type: notification
         });
     }

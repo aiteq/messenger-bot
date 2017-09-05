@@ -1,8 +1,6 @@
 import { logger } from "../logger";
+import { MessengerProfile, Webhook, Webview } from ".";
 import * as Graph from "./graph-api";
-import * as MessengerProfile from "./messenger-profile";
-import * as Webhook from "./webhook";
-import * as Webview from "./webview";
 
 /**
  * API and types for Messenger Profile API.

@@ -1,7 +1,7 @@
 import { PersistentMenuDef } from "../../src/fb-api-helpers/persistent-menu-def";
 import { PersistentMenuBuilder } from "../../src/fb-api-helpers/persistent-menu-builder";
 import { MenuBuilder } from "../../src/fb-api-helpers/menu-builder";
-import * as Webview from "../../src/fb-api/webview";
+import { Webview } from "../../src/fb-api";
 
 const PERSISTENT_MENU: PersistentMenuDef[] = [{
     locale: "default",

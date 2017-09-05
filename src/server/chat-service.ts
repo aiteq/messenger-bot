@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import * as Send from "../fb-api/send";
-import * as UserProfile from "../fb-api/user-profile";
-import * as Webhook from "../fb-api/webhook";
+import { Send, UserProfile, Webhook } from "../fb-api";
 import { logger } from "../logger";
 import { Chat } from "./chat";
 import { RouterService } from "./router-service";
@@ -9,7 +7,7 @@ import { RouterService } from "./router-service";
 /**
  * A main middleware handling all webhook requests.
  */
-export class ResponderService extends RouterService {
+export class ChatService extends RouterService {
 
     // handlers installed using BotServer.hear
     private hearHandlers: Array<{ hook: RegExp, func: (chat: Chat, text: string, matches: string[]) => void }>;

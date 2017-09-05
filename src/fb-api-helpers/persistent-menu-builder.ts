@@ -1,5 +1,4 @@
-import * as  MessengerProfile from "../fb-api/messenger-profile";
-import * as Webhook from "../fb-api/webhook";
+import { MessengerProfile } from "../fb-api";
 import { Builder } from "./builder";
 import { MenuBuilder } from "./menu-builder";
 import { PersistentMenuDef, PersistentMenuItemDef } from "./persistent-menu-def";

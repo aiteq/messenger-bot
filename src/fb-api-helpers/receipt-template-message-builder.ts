@@ -1,4 +1,4 @@
-import * as Send from "../fb-api/send";
+import { Send } from "../fb-api";
 import { ReceiptElementBuilder } from "./receipt-element-builder";
 import { TemplateMessageBuilder } from "./template-message-builder";
 

@@ -6,8 +6,8 @@ Provides methods for two-way bot-to-user communication. An instance of [Chat](ch
 ## Index
 
 ### Methods
-* [ask](conversation.md#ask)
-* [askWithMessage](conversation.md#askwithmessage)
+* [ask(text, validator)](conversation.md#ask)
+* [askWithMessage(messageOrBuilder, validator)](conversation.md#askwithmessage)
 * [getPartnerId](chat.md#getpartnerid)
 * [getUserProfile](chat.md#getuserprofile)
 * [markSeen](chat.md#markseen)
@@ -25,7 +25,7 @@ Provides methods for two-way bot-to-user communication. An instance of [Chat](ch
 
 ## Methods
 <a id="ask"></a>
-###  `ask(text)`
+###  `ask(text, validator)`
 Asks the user with a plain TEXT message and returns user's response (TEXT or QUICK REPLY).
 If a validator is specified, the bot will automatically repeat the challenge until valid response.
 
@@ -54,8 +54,10 @@ The bot will automatically repeat the question until the user enters a valid ema
 ___
 
 <a id="askwithmessage"></a>
-###  `askWithMessage(messageOrBuilder)`
+###  `askWithMessage(messageOrBuilder, validator)`
 Asks the user with a message prepared manually or using message builder. It's necessary when we want to force the user to response using QUICK REPLY buttons.
+
+If a validator is specified, the bot will automatically repeat the challenge until valid response.
 
 **Note:** No events are emitted and no hear handlers called when the bot receives an answer to the question asked.
 
@@ -68,6 +70,7 @@ T: `string` ⎮ [QuickReplyPayload](../interfaces/webhook.quickreplypayload.md)
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | messageOrBuilder | [Message](../modules/send.md#message) ⎮ [MessageBuilder](messagebuilder.md) |structured message or message builder |
+| validator | `(text: string) => boolean` | optional validator function - returns `true` if the input is valid |
 
 **Returns:** `Promise`<`T`>
 ___

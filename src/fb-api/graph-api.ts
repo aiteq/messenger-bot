@@ -58,22 +58,22 @@ export abstract class Api<T extends Request> {
 
         } else {
 
-            Promise.reject("GraphApi.senRequest: method not supporetd: " + config.method);
+            Promise.reject("method not supporetd: " + config.method);
         }
 
         try {
 
-            logger.debug("GraphApi: sending:", config.method, this.client.defaults.baseURL);
-            logger.debug("GraphApi:", JSON.stringify(data));
+            logger.debug("sending:", config.method, this.client.defaults.baseURL);
+            logger.debug("data:", JSON.stringify(data));
 
             // perform the call
             const response: AxiosResponse = await this.client.request(config);
 
-            logger.debug("GraphApi:", response.status, response.statusText);
-            logger.debug("GraphApi: response data:", response.data);
+            logger.debug("response:", response.status, response.statusText);
+            logger.debug("data:", response.data);
 
             if (response.data.result && response.data.result !== "success") {
-                logger.error("GraphApi: result:", response.data.result);
+                logger.error("result:", response.data.result);
                 return Promise.reject(response.data.result);
             }
 
@@ -81,7 +81,7 @@ export abstract class Api<T extends Request> {
 
         } catch (error) {
 
-            logger.error("GraphApi:", error.message);
+            logger.error(error.message);
             error.response && logger.debug(error.response.data);
 
             let message: string = error.message;
