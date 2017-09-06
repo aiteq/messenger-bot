@@ -41,6 +41,13 @@ export interface BotConfig {
     extensionsPath?: string;
 
     /**
+     * A custom endpoint name for the ping service. Optional, default: "/ping".
+     *
+     * @type {string}
+     */
+    pingPath?: string;
+
+            /**
      * A port number for bot server. Optional. If it is not specified the bot will try to use
      * the <code>process.env.PORT</code> property or set the port to 8080.
      *

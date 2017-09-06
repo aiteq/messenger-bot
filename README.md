@@ -281,6 +281,10 @@ utils.generateMessengerCode("my-m-code.png");
 ```
 See [BotUtils.generateMessengerCode()](doc/classes/botutils.md#generatemessengercode)
 
+### Server monitoring
+
+TO-DO
+
 ## Chat extensions
 
 TO-DO

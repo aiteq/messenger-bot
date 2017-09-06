@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - CLI refactored to not using `process.exit()`
+- [Chat.askWithMessage()](./doc/classes/chat.md) supports validator
 
 ### Added
 - test coverage: CLI
+- ping service
 
 <a id="latest"></a>
 ## [1.1.0-beta.5] - 2017-09-01

@@ -9,6 +9,7 @@ import { Chat } from "./chat";
 import { ChatExtension } from "./chat-extension";
 import { ExtensionService } from "./extension-service";
 import { ChatService } from "./chat-service";
+import { PingService } from "./ping-service";
 import { VerificationService } from "./verification-service";
 
 /**
@@ -84,6 +85,10 @@ export class BotServer {
         this.extensions = new ExtensionService();
         this.app.use(this.config.extensionsPath, this.extensions.getRouter());
         logger.info("ExtensionService has been attached to", this.config.extensionsPath);
+
+        // install service for handling ping requests
+        this.app.use(this.config.pingPath, new PingService().getRouter());
+        logger.info("PingService has been attached to", this.config.pingPath);
     }
 
     /**

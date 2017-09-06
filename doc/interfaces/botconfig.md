@@ -38,6 +38,14 @@ A name of the bot. Optional. It's used only for logging in this time.
 **type**: `string`
 ___
 
+<a id="pingpath"></a>
+### «optional» `pingPath`
+
+A custom endpoint name for the ping service. Default value: `"/ping"`.
+
+**type**: `string`
+___
+
 <a id="port"></a>
 ### «optional» `port`
 
