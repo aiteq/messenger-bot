@@ -96,7 +96,7 @@ ___
 
 Marks the last sent message as read.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`Send.Response`>
 ___
 
 <a id="say"></a>
@@ -192,7 +192,7 @@ ___
 
 Turns typing indicator OFF.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`Send.Response`>
 ___
 
 <a id="typingon"></a>
@@ -200,7 +200,7 @@ ___
 
 Turns typing indicator ON for 20 seconds or next message.
 
-**Returns:** `Promise`<`void`>
+**Returns:** `Promise`<`Send.Response`>
 ___
 
 <a id="wait"></a>

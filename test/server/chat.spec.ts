@@ -28,6 +28,10 @@ describe("Chat", () => {
         expect(chat = new Chat(RECIPIENT_ID, new Send.Api(ACCESS_TOKEN), new UserProfile.Api(ACCESS_TOKEN))).toBeInstanceOf(Chat);
     });
 
+    test("wait(seconds)", () => {
+        expect(chat.wait(1)).toBe(chat);
+    });
+
     test("say(text)", async () => {
         let exp: jest.Matchers<void> = expect(await chat.say("text"));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
@@ -35,78 +39,103 @@ describe("Chat", () => {
     });
 
     test("typingOn()", async () => {
-        expect(await chat.typingOn()).toBeUndefined();
+        chat.wait(0);
+        expect(await chat.typingOn()).toHaveProperty("recipient_id", RECIPIENT_ID);
     });
 
     test("typingOff()", async () => {
-        expect(await chat.typingOff()).toBeUndefined();
+        chat.wait(0);
+        expect(await chat.typingOff()).toHaveProperty("recipient_id", RECIPIENT_ID);
     });
 
     test("markSeen()", async () => {
-        expect(await chat.markSeen()).toBeUndefined();
+        chat.wait(0);
+        expect(await chat.markSeen()).toHaveProperty("recipient_id", RECIPIENT_ID);
     });
 
     test("sendImage(recipient, url)", async () => {
-        let exp: jest.Matchers<void> = expect(await chat.sendImage(URL_IMAGE, false));
+        chat.wait(0);
+        let exp: jest.Matchers<void> = expect(await chat.sendImage(URL_IMAGE, true));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
-        exp.not.toHaveProperty("attachment_id");
+        await expect(chat.sendImage(undefined)).rejects.toBe("no URL");
+        await expect(chat.sendImage(undefined, false)).rejects.toBe("no URL");
     });
 
     test("sendAudio(recipient, url)", async () => {
-        let exp: jest.Matchers<void> = expect(await chat.sendAudio(URL_AUDIO, false));
+        chat.wait(0);
+        let exp: jest.Matchers<void> = expect(await chat.sendAudio(URL_AUDIO, true));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
-        exp.not.toHaveProperty("attachment_id");
+        await expect(chat.sendAudio(undefined)).rejects.toBe("no URL");
+        await expect(chat.sendAudio(undefined, false)).rejects.toBe("no URL");
     });
 
     test("sendVideo(recipient, url)", async () => {
-        let exp: jest.Matchers<void> = expect(await chat.sendVideo(URL_VIDEO, false));
+        chat.wait(0);
+        let exp: jest.Matchers<void> = expect(await chat.sendVideo(URL_VIDEO, true));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
-        exp.not.toHaveProperty("attachment_id");
+        await expect(chat.sendVideo(undefined)).rejects.toBe("no URL");
+        await expect(chat.sendVideo(undefined, false)).rejects.toBe("no URL");
     });
 
-    test("sendFile(recipient, url)", async () => {
-        let exp: jest.Matchers<void> = expect(await chat.sendFile(URL_FILE, false));
+    test("sendFile(url, reusable)", async () => {
+        chat.wait(0);
+        let exp: jest.Matchers<void> = expect(await chat.sendFile(URL_FILE, true));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
-        exp.not.toHaveProperty("attachment_id");
+        await expect(chat.sendFile(undefined)).rejects.toBe("no URL");
+        await expect(chat.sendFile(undefined, false)).rejects.toBe("no URL");
     });
 
     test("sendMessage(message)", async () => {
+        chat.wait(0);
         let exp: jest.Matchers<void> = expect(await chat.sendMessage(MESSAGE));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
     });
 
     test("sendMessage(builder)", async () => {
+        chat.wait(0);
         let exp: jest.Matchers<void> = expect(await chat.sendMessage(new TextMessageBuilder("textaaa")));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
     });
 
     test("ask(question, validator)", async () => {
-        await expect(chat.ask("challenge", (text) => true)).rejects.toBe("not answered");
+        chat.wait(0);
+        setTimeout(() => {
+            expect(chat.ask("challenge", (text) => true)).rejects.toBe("previous asking not answered yet");
+            expect(chat.answer("invalid answer", responder)).toBeTruthy();
+            expect(chat.answer("answer", responder)).toBeTruthy();
+        }, 1000);
+        expect(await chat.ask("challenge", (text) => text === "answer")).toBe("answer");
     });
 
-    test("askWithMessage(question, validator)", async() => {
-        await expect(chat.askWithMessage(new TextMessageBuilder("textaaa"), (text) => true)).resolves.toBe("answer");
+    test("askWithMessage(question, validator)", async () => {
+        chat.wait(0);
+        setTimeout(() => {
+            expect(chat.askWithMessage(new TextMessageBuilder("textaaa").build(), (text) => true)).rejects.toBe("previous asking not answered yet");
+            expect(chat.answer("invalid answer", responder)).toBeTruthy();
+            expect(chat.answer("answer", responder)).toBeTruthy();
+        }, 2000);
+        expect(await chat.askWithMessage(new TextMessageBuilder("textaaa"), (text) => text === "answer")).toBe("answer");
     });
 
     test("answer(string, undefined)", () => {
-        expect(chat.answer("answer", undefined)).toThrow("unauthorized calling of the Chat.answer");
+        expect(() => chat.answer("answer", undefined)).toThrow("unauthorized calling of the Chat.answer");
     });
 
-    test("answer(string, responder)", () => {
-        expect(chat.answer("answer", responder)).toBeTruthy();
-    });
-
-    test("answer(string, responder) 2", () => {
+    test("answer(string, responder) (w/o asking)", () => {
         expect(chat.answer("answer", responder)).toBeFalsy();
     });
 
-    test("answer(string, responder) 2", () => {
-        expect(chat.answer("answer", responder)).toBeFalsy();
+    test("getUserProfile()", async () => {
+        expect(await chat.getUserProfile()).toHaveProperty("id", RECIPIENT_ID);
+    });
+
+    test("getPartnerId()", () => {
+        expect(chat.getPartnerId()).toBe(RECIPIENT_ID);
     });
 });

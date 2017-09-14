@@ -85,9 +85,9 @@ export class Api extends Graph.Api<Request> {
      * Turns typing indicator on, to let the user know you are processing his request.
      *
      * @param {string} recipientId - recipient's ID
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public typingOn(recipientId: string): Promise<void> {
+    public typingOn(recipientId: string): Promise<Response> {
         return this.sendRequest({
             recipient: JSON.stringify({
                 id: recipientId
@@ -100,9 +100,9 @@ export class Api extends Graph.Api<Request> {
      * Turns typing indicator off.
      *
      * @param {string} recipientId - recipient's ID
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public typingOff(recipientId: string): Promise<void> {
+    public typingOff(recipientId: string): Promise<Response> {
         return this.sendRequest({
             recipient: JSON.stringify({
                 id: recipientId
@@ -115,9 +115,9 @@ export class Api extends Graph.Api<Request> {
      * Mark the last sent message as read.
      *
      * @param {string} recipientId - recipient's ID
-     * @returns {Promise<void>}
+     * @returns {Promise<Response>}
      */
-    public markSeen(recipientId: string): Promise<void> {
+    public markSeen(recipientId: string): Promise<Response> {
         return this.sendRequest({
             recipient: JSON.stringify({
                 id: recipientId
@@ -146,6 +146,10 @@ export class Api extends Graph.Api<Request> {
     }
 
     private async sendMediaAttachment(type: AttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<Response> {
+
+        if (!url) {
+            return Promise.reject("no URL");
+        }
 
         if (reuse) {
 

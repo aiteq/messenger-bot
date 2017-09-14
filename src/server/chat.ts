@@ -46,9 +46,9 @@ export class Chat {
     /**
      * Turns typing indicator ON for 20 seconds or next message.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Send.Response>}
      */
-    public async typingOn(): Promise<void> {
+    public async typingOn(): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -59,9 +59,9 @@ export class Chat {
     /**
      * Turns typing indicator OFF.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Send.Response>}
      */
-    public async typingOff(): Promise<void> {
+    public async typingOff(): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -72,9 +72,9 @@ export class Chat {
     /**
      * Marks the last sent message as read.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<Send.Response>}
      */
-    public async markSeen(): Promise<void> {
+    public async markSeen(): Promise<Send.Response> {
 
         // wait if requested
         this.timeout && await this.timeout;
@@ -173,8 +173,8 @@ export class Chat {
         this.timeout && await this.timeout;
 
         if (this.responder) {
-            logger.warn("previous asking not answered");
-            this.responder.reject("not answered");
+            logger.warn("couldn't ask again over previous asking that is not yet answered");
+            return Promise.reject("previous asking not answered yet");
         }
 
         // await for the message to be send, so you can be sure the user is responding to your question
@@ -184,8 +184,7 @@ export class Chat {
 
             // This is maybe the most interested part of conversation's implementation.
             // Because the response will arrive in one of the subsequent requests, we must remember
-            // this Promise's resolve callback. Its later execution will be made by the resume() method.
-
+            // this Promise's resolve callback. Its later execution will be made by the answer() method.
             this.responder = { resolve, reject, validator, challenge };
         });
     }
@@ -207,8 +206,8 @@ export class Chat {
         const challenge: Send.Message = messageOrBuilder = messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder
 
         if (this.responder) {
-            logger.warn("previous asking not answered");
-            this.responder.reject("not answered");
+            logger.warn("couldn't ask again over previous asking that is not yet answered");
+            return Promise.reject("previous asking not answered yet");
         }
 
         // await for the message to be send, so you can be sure the user is responding to your question
@@ -243,8 +242,10 @@ export class Chat {
                 logger.debug("input validation failed, repeating the challenge");
 
                 if (typeof this.responder.challenge === "string") {
+                    // repeat plain text message
                     this.say(this.responder.challenge);
                 } else {
+                    // repeat structured message
                     this.sendMessage(this.responder.challenge);
                 }
 
