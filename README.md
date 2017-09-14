@@ -249,6 +249,21 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-form", async (chat: Chat) => {
 ```
 The bot will automatically repeat the question until the user enters a valid email address.
 
+#### Unanswered questions
+The questions asked using the [ask()](doc/classes/chat.md#ask) or [askWithMessage()](doc/classes/chat.md#askwithmessage) method may remain unanswered by the user. In order to avoid pending Promises these questions are set to automatically expire. The expiration period is set to 5 minutes by default but you can override it using [BotConfig.askTimeout](doc/interfaces/botconfig.md#asktimeout) parameter. The unanswered question is rejected after its expiration. If you want to react to this situation you may catch the rejection:
+
+```typescript
+bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-name", async (chat: Chat) => {
+    try {
+        let name = await chat.ask("What's your name?");
+        chat.say(`Hello, ${name}. My name is Emil.`);
+    } catch (error) {
+        chat.say("I'm so sorry you have no name.");
+    }
+});
+```
+If you won't catch the expiration the bot will swallow it without consequences. Don't worry about it.
+
 
 ### BotUtils
 

@@ -63,6 +63,13 @@ export interface BotConfig {
     name?: string;
 
     /**
+     * Number of milliseconds to expire unanswered asking during conversation. Optional.
+     *
+     * @type {number}
+     */
+    askTimeout?: number;
+
+    /**
      * Logging level (according to log4js spec) for the package. Optional.
      *
      * @type {string}

@@ -48,10 +48,12 @@ export class BotServer {
      */
     constructor(private config: BotConfig) {
 
+        // set defaults
         config.webhookPath = config.webhookPath || "/webhook";
         config.extensionsPath = config.extensionsPath || "/ext";
         config.pingPath = config.pingPath || "/ping";
         config.name = config.name || "noname";
+        config.askTimeout = config.askTimeout || (1000 * 60 * 5); // 5 minutes
 
         logger.level = config.logLevel || logger.level;
 
@@ -78,7 +80,7 @@ export class BotServer {
         logger.info("VerificationServices has been attached to", this.config.webhookPath);
 
         // install service for handling webhook requests
-        this.chatService = new ChatService(this.config.accessToken);
+        this.chatService = new ChatService(this.config.accessToken, this.config.askTimeout);
         this.app.use(this.config.webhookPath, this.chatService.getRouter());
         logger.info("ResponderService has been attached to", this.config.webhookPath);
 
@@ -90,6 +92,18 @@ export class BotServer {
         // install service for handling ping requests
         this.app.use(this.config.pingPath, new PingService().getRouter());
         logger.info("PingService has been attached to", this.config.pingPath);
+
+        // install "unhandledRejection" handler
+        process.on("unhandledRejection", (error) => {
+
+            // catch and swallow unanswered questions from conversation
+            if (error.message === "ask expired") {
+                // do nothing
+                logger.debug("unanswered question:", error.data);
+            } else {
+                logger.error("unhandledRejection:", error.message);
+            }
+        });
     }
 
     /**
@@ -103,30 +117,30 @@ export class BotServer {
 
         this.server = http.createServer(this.app)
 
-        .on("error", /* istanbul ignore next */ (error: NodeJS.ErrnoException) => {
+            .on("error", /* istanbul ignore next */(error: NodeJS.ErrnoException) => {
 
-            const bind = (typeof port === "string") ? "pipe " + port : "port " + port;
+                const bind = (typeof port === "string") ? "pipe " + port : "port " + port;
 
-            switch (error.code) {
-                case "EACCES":
-                    throw new Error(`BotServer[${this.config.name}] not started. ${bind} requires elevated privileges.`);
+                switch (error.code) {
+                    case "EACCES":
+                        throw new Error(`BotServer[${this.config.name}] not started. ${bind} requires elevated privileges.`);
 
-                case "EADDRINUSE":
-                    throw new Error(`BotServer[${this.config.name}] not started. ${bind} is already in use.`);
+                    case "EADDRINUSE":
+                        throw new Error(`BotServer[${this.config.name}] not started. ${bind} is already in use.`);
 
-                default:
-                    throw error;
-            }
-        })
+                    default:
+                        throw error;
+                }
+            })
 
-        .on("listening", /* istanbul ignore next */ () => {
-            // only for showing the "listening" message
-            const addr = this.server.address();
-            const bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
-            logger.info(`BotServer[${this.config.name}] is listening on ${bind}`);
-        })
+            .on("listening", /* istanbul ignore next */() => {
+                // only for showing the "listening" message
+                const addr = this.server.address();
+                const bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
+                logger.info(`BotServer[${this.config.name}] is listening on ${bind}`);
+            })
 
-        .listen(port) as http.Server;
+            .listen(port) as http.Server;
     }
 
     /**

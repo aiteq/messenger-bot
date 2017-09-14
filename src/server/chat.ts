@@ -17,7 +17,7 @@ export class Chat {
         challenge?: string | Send.Message
     };
 
-    private timeout: Promise<any>;
+    private delay: Promise<any>;
 
     /**
      * Creates an instance of [[Chat]]. Instances are managed by the [[ResponderService]] so
@@ -27,7 +27,12 @@ export class Chat {
      * @param {Send.Api} sendApi
      * @param {UserProfile.Api} userProfileApi
      */
-    constructor(protected partnerId: string, protected sendApi: Send.Api, protected userProfileApi: UserProfile.Api) { }
+    constructor(
+        private partnerId: string,
+        private sendApi: Send.Api,
+        private userProfileApi: UserProfile.Api,
+        private askTimeout: number
+    ) { }
 
     /**
      * The primary way to send a plain TEXT message to the user.
@@ -38,7 +43,7 @@ export class Chat {
     public async say(text: string): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.sendText(this.partnerId, text);
     }
@@ -51,7 +56,7 @@ export class Chat {
     public async typingOn(): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.typingOn(this.partnerId);
     }
@@ -64,7 +69,7 @@ export class Chat {
     public async typingOff(): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.typingOff(this.partnerId);
     }
@@ -77,7 +82,7 @@ export class Chat {
     public async markSeen(): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.markSeen(this.partnerId);
     }
@@ -92,7 +97,7 @@ export class Chat {
     public async sendImage(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.sendImage(this.partnerId, url, reusable);
     }
@@ -107,7 +112,7 @@ export class Chat {
     public async sendAudio(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.sendAudio(this.partnerId, url, reusable);
     }
@@ -122,7 +127,7 @@ export class Chat {
     public async sendVideo(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.sendVideo(this.partnerId, url, reusable);
     }
@@ -137,7 +142,7 @@ export class Chat {
     public async sendFile(url: string, reusable: boolean = false): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.sendFile(this.partnerId, url, reusable);
     }
@@ -151,7 +156,7 @@ export class Chat {
     public async sendMessage(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>): Promise<Send.Response> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         return await this.sendApi.send(
             this.partnerId, messageOrBuilder instanceof MessageBuilder ?
@@ -170,7 +175,7 @@ export class Chat {
     public async ask(challenge: string, validator?: (text: string) => boolean): Promise<string> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         if (this.responder) {
             logger.warn("couldn't ask again over previous asking that is not yet answered");
@@ -180,13 +185,26 @@ export class Chat {
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.say(challenge);
 
-        return new Promise((resolve: (data: string) => void, reject: (reason?: any) => void) => {
+        return Promise.race([
 
-            // This is maybe the most interested part of conversation's implementation.
-            // Because the response will arrive in one of the subsequent requests, we must remember
-            // this Promise's resolve callback. Its later execution will be made by the answer() method.
-            this.responder = { resolve, reject, validator, challenge };
-        });
+            new Promise((resolve: (data: string) => void, reject: (reason?: any) => void) => {
+
+                // This is maybe the most interested part of conversation's implementation.
+                // Because the response will arrive in one of the subsequent requests, we must remember
+                // this Promise's resolve callback. Its later execution will be made by the answer() method.
+                this.responder = { resolve, reject, validator, challenge };
+            }),
+
+            new Promise((resolve: (data: string) => void, reject: (reason?: any) => void) => {
+
+                // set timeout for unanswered questions
+                const id = setTimeout(() => {
+                    clearTimeout(id);
+                    this.responder = undefined;
+                    reject({ message: "ask expired", data: challenge });
+                }, this.askTimeout);
+            })
+        ]);
     }
 
     /**
@@ -201,7 +219,7 @@ export class Chat {
     public async askWithMessage<T extends string | Webhook.QuickReplyPayload>(messageOrBuilder: Send.Message | MessageBuilder<Send.Message>, validator?: (text: string) => boolean): Promise<T> {
 
         // wait if requested
-        this.timeout && await this.timeout;
+        this.delay && await this.delay;
 
         const challenge: Send.Message = messageOrBuilder = messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder;
 
@@ -213,9 +231,23 @@ export class Chat {
         // await for the message to be send, so you can be sure the user is responding to your question
         await this.sendMessage(challenge);
 
-        return new Promise((resolve: (data: T) => void, reject: (reason?: any) => void) => {
-            this.responder = { resolve, reject, validator, challenge };
-        });
+        return Promise.race([
+
+            new Promise((resolve: (data: T) => void, reject: (reason?: any) => void) => {
+
+                this.responder = { resolve, reject, validator, challenge };
+            }),
+
+            new Promise((resolve: (data: T) => void, reject: (reason?: any) => void) => {
+
+                // set timeout for unanswered questions
+                const id = setTimeout(() => {
+                    clearTimeout(id);
+                    this.responder = undefined;
+                    reject({ message: "ask expired", data: "<structured message>" });
+                }, this.askTimeout);
+            })
+        ]);
     }
 
     /**
@@ -290,9 +322,9 @@ export class Chat {
      * @returns {this} - for chaining
      */
     public wait(seconds: number): this {
-        this.timeout = new Promise((resolve) => {
+        this.delay = new Promise((resolve) => {
             setTimeout(() => {
-                this.timeout = undefined;
+                this.delay = undefined;
                 resolve();
             }, seconds * 1000);
         });

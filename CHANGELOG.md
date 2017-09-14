@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - tests coveraging almost all code
 - ping service
+- expiration of unanswered questions ([BotConfig.askTimeout](doc/interfaces/botconfig.md#asktimeout))
 
 <a id="latest"></a>
 ## [1.1.0-beta.5] - 2017-09-01

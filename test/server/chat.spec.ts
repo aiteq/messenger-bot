@@ -21,12 +21,12 @@ const MESSAGE: Send.Message = {
 describe("Chat", () => {
 
     let chat: Chat;
-    const responder: ChatService = new ChatService(ACCESS_TOKEN);
+    const responder: ChatService = new ChatService(ACCESS_TOKEN, 3000);
 
     logger.level = "OFF";
 
     test("constructor(partnerId, sendApi, userProfileApi)", () => {
-        expect(chat = new Chat(RECIPIENT_ID, new Send.Api(ACCESS_TOKEN), new UserProfile.Api(ACCESS_TOKEN))).toBeInstanceOf(Chat);
+        expect(chat = new Chat(RECIPIENT_ID, new Send.Api(ACCESS_TOKEN), new UserProfile.Api(ACCESS_TOKEN), 3000)).toBeInstanceOf(Chat);
     });
 
     test("wait(seconds)", () => {
@@ -102,6 +102,10 @@ describe("Chat", () => {
         let exp: jest.Matchers<void> = expect(await chat.sendMessage(new TextMessageBuilder("textaaa")));
         exp.toHaveProperty("recipient_id", RECIPIENT_ID);
         exp.toHaveProperty("message_id");
+    });
+
+    test("ask(question) (expired)", async () => {
+        await expect(chat.ask("challenge")).rejects.toBe("ask expired");
     });
 
     test("ask(question, validator)", async () => {

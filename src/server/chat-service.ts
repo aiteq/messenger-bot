@@ -22,7 +22,7 @@ export class ChatService extends RouterService {
      * Creates an instance of ResponderService.
      * @param {string} accessToken
      */
-    constructor(private accessToken: string) {
+    constructor(private accessToken: string, private askTimeout: number) {
 
         super();
 
@@ -56,7 +56,7 @@ export class ChatService extends RouterService {
 
                     // get cached or create new Chat
                     const chat: Chat = this.chats.get(item.sender.id) || (() => {
-                        const newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi);
+                        const newChat: Chat = new Chat(item.sender.id, this.sendApi, this.userProfileApi, this.askTimeout);
                         this.chats.set(item.sender.id, newChat);
                         return newChat;
                     })();

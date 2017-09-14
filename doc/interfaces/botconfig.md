@@ -22,6 +22,14 @@ An [App Secret](https://stackoverflow.com/questions/3203649/where-can-i-find-my-
 **type**: `string`
 ___
 
+<a id="asktimeout"></a>
+###  «optional» `askTimeout`
+
+Number of milliseconds to expire unanswered asking during conversation.
+
+**type**: `number`
+___
+
 <a id="extensionspath"></a>
 ### «optional» `extensionsPath`
 
