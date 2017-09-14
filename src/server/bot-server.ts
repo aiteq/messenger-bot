@@ -96,11 +96,14 @@ export class BotServer {
         // install "unhandledRejection" handler
         process.on("unhandledRejection", (error) => {
 
-            // catch and swallow unanswered questions from conversation
             if (error.message === "ask expired") {
-                // do nothing
+
+                // catch and swallow unanswered questions from conversation
                 logger.debug("unanswered question:", error.data);
+
             } else {
+
+                // log any other unhandled rejections
                 logger.error("unhandledRejection:", error.message);
             }
         });

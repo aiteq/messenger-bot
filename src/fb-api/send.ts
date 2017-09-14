@@ -131,18 +131,23 @@ export class Api extends Graph.Api<Request> {
      *
      * @param {string} recipientId - recipient's ID
      * @param {Message} message - a message
-     * @param {NotificationType} [notification=NotificationType.REGULAR]
+     * @param {NotificationType} [notification] - optional notification type
+     * @param {Tag} [tag] - optional tag
      * @returns {Promise<Response>}
      */
-    public send(recipientId: string, message: Message, notification: NotificationType = NotificationType.REGULAR): Promise<Response> {
+    public send(recipientId: string, message: Message, notification?: NotificationType, tag?: Tag): Promise<Response> {
 
-        return this.sendRequest({
+        const request: Request = {
             recipient: JSON.stringify({
                 id: recipientId
             }),
-            message: JSON.stringify(message),
-            notification_type: notification
-        });
+            message: JSON.stringify(message)
+        };
+
+        notification && (request.notification_type = notification);
+        tag && (request.tag = tag);
+
+        return this.sendRequest(request);
     }
 
     private async sendMediaAttachment(type: AttachmentType, recipientId: string, url: string, reuse: boolean, notification?: NotificationType): Promise<Response> {
@@ -457,9 +462,17 @@ export enum NotificationType {
 }
 
 export enum Tag {
+    ACCOUNT_UPDATE = "ACCOUNT_UPDATE",
+    PAYMENT_UPDATE = "PAYMENT_UPDATE",
+    PERSONAL_FINANCE_UPDATE = "PERSONAL_FINANCE_UPDATE",
     SHIPPING_UPDATE = "SHIPPING_UPDATE",
     RESERVATION_UPDATE = "RESERVATION_UPDATE",
-    ISSUE_RESOLUTION = "ISSUE_RESOLUTION"
+    ISSUE_RESOLUTION = "ISSUE_RESOLUTION",
+    APPOINTMENT_UPDATE = "APPOINTMENT_UPDATE",
+    GAME_EVENT = "GAME_EVENT",
+    TRANSPORTATION_UPDATE = "TRANSPORTATION_UPDATE",
+    FEATURE_FUNCTIONALITY_UPDATE = "FEATURE_FUNCTIONALITY_UPDATE",
+    TICKET_UPDATE = "TICKET_UPDATE"
 }
 
 export interface Request extends Graph.Request {

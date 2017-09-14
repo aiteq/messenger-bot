@@ -17,6 +17,24 @@
 <td><b><a href="https://aiteq.slack.com/messages/#messenger-bot/"><img src="https://a.slack-edge.com/436da/marketing/img/meta/slack_hash_128.png" width="20"></a></b></td>
 </tr></table>
 
+```typescript
+new BotServer({
+    verifyToken: "hasta-la-vista-baby",
+    accessToken: "open-sesame",
+    appSecret: "too-secret-to-say"
+})
+.hear("order", async (chat: Chat) => {
+    await chat.say("Well, let's order some Botcoins. I'll just ask you a few details.");
+    botcoinMachine.placeOrder({
+        amount: await chat.ask("How many Botcoins you want to buy?"),
+        wallet: await chat.ask("What's the address of your Botcoin wallet?"),
+        email: await chat.ask("And finally, tell me your email where I should send instructions.")
+    });
+    chat.say("Thank you for your order!");
+})
+.start();
+```
+
 ## Major features
 
 * Express.js based, **event-driven bot server** handling both **[Webhook](https://developers.facebook.com/docs/messenger-platform/webhook-reference)** and **[Chat Extension](https://developers.facebook.com/docs/messenger-platform/guides/chat-extensions)** requests.
@@ -195,6 +213,7 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-about", (chat: Chat) => {
 });
 ```
 <a id="conversation"></a>
+
 ### Conversation
 Conversation is synchronous message exchange between users and the bot by setting a flow of questions and answers. It's a useful way to get conventional UI tasks, like form filling, closer to interpersonal communication.
 
@@ -264,6 +283,9 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-name", async (chat: Chat) => {
 ```
 If you won't catch the expiration the bot will swallow it without consequences. Don't worry about it.
 
+### Media reusing
+
+When you're about to send a message with a media attached you can indicate wheather the media should be reused. The bot stores all reusable attachment ID's. When you try to send the same attachment (with the same URL and `reusable` set to `true`) twice or more times the bot replace media's URL with stored attachment ID.
 
 ### BotUtils
 
@@ -296,9 +318,11 @@ utils.generateMessengerCode("my-m-code.png");
 ```
 See [BotUtils.generateMessengerCode()](doc/classes/botutils.md#generatemessengercode)
 
-### Server monitoring
+## Server monitoring
 
-TO-DO
+The bot server supports responding for *ping* requests. By default, the ping service is attached to `/ping` path and may be overrided by [BotConfig.pingPath](doc/interfaces/botconfig.md#pingpath) configuration parameter. The ping request must use the GET method. If all goes well the `"OK"` string is returned with 200 HTTP code.
+
+The ping feature is useful with conjunction with up-time monitoring services like [Uptime Robot](https://uptimerobot.com/).
 
 ## Chat extensions
 

@@ -5,16 +5,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+<a id="latest"></a>
+
+## [1.1.0-RC.1] - 2017-09-15
+### Fixed
+- several minor fixies according to unit testing
+
 ### Changed
 - CLI refactored to not using `process.exit()`
 - [Chat.askWithMessage()](./doc/classes/chat.md) supports validator
 
 ### Added
-- tests coveraging almost all code
+- **tests coveraging almost all code**
 - ping service
 - expiration of unanswered questions ([BotConfig.askTimeout](doc/interfaces/botconfig.md#asktimeout))
+- documentation (monitoring, expiration, intro example)
 
-<a id="latest"></a>
 ## [1.1.0-beta.5] - 2017-09-01
 ### Fixed
 - storing reusable media ids (store module refactored)
@@ -62,7 +69,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - emitting postback identified events
 
-[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.5...HEAD
+[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-RC.1...HEAD
+[1.1.0-RC.1]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.5...v1.1.0-RC.1
 [1.1.0-beta.5]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.4...v1.1.0-beta.5
 [1.1.0-beta.4]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.3...v1.1.0-beta.4
 [1.1.0-beta.3]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.2...v1.1.0-beta.3
