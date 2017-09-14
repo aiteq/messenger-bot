@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">30% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/10</span>
+        <span class='fraction'>10/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/3</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">30% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/10</span>
+        <span class='fraction'>10/10</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -109,29 +109,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">81x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,30 +168,30 @@ export class GetStartedButtonGroup extends Group {
         super("getstarted");
     }
 &nbsp;
-    public async <span class="fstat-no" title="function not covered" >execute(</span>command: string, botUtils: BotUtils, options: any): Promise&lt;string&gt; {
+    public async execute(command: string, botUtils: BotUtils, options: any): Promise&lt;string&gt; {
 &nbsp;
         switch (command) {
 &nbsp;
             case "get":
-                const <span class="cstat-no" title="statement not covered" >result: any = </span>await botUtils.getGetStartedButton();
-<span class="cstat-no" title="statement not covered" >                return result ?</span>
-                    `Get Started button is set (data: ${JSON.parse(result.payload).data || "not set"})` :
-<span class="branch-0 cbranch-no" title="branch not covered" >                    "Get Started button is not set";</span>
+                const result: any = await botUtils.getGetStartedButton();
+                return result ?
+                    `Get Started button is set (data: ${result.payload.data || "not set"})` :
+                    "Get Started button is not set";
 &nbsp;
             case "set":
-<span class="cstat-no" title="statement not covered" >                await botUtils.setGetStartedButton(options.d</span>ata);
-<span class="cstat-no" title="statement not covered" >                return "</span>Get Started button has been successfully set";
+                await botUtils.setGetStartedButton(options.data);
+                return "Get Started button has been successfully set";
 &nbsp;
             case "delete":
-<span class="cstat-no" title="statement not covered" >                await botUtils.d</span>eleteGetStartedButton();
-<span class="cstat-no" title="statement not covered" >                return "</span>Get Started button has been successfully removed";
+                await botUtils.deleteGetStartedButton();
+                return "Get Started button has been successfully removed";
 &nbsp;
             default:
-<span class="cstat-no" title="statement not covered" >                this.e</span>xitWithUsage();
+                return this.usage();
         }
     }
 &nbsp;
-    public <span class="fstat-no" title="function not covered" >getUsage(): string {</span>
+    public getUsage(): string {
         return `Manage Get Started button for the Page.
 See more about Get Started button at https://developers.facebook.com/docs/messenger-platform/messenger-profile/get-started-button.
 &nbsp;
@@ -217,7 +217,7 @@ Options:
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 01 2017 11:09:35 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 14 2017 15:39:44 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

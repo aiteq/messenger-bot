@@ -1,5 +1,5 @@
-import { logger } from "../logger";
 import { MessengerProfile, Webhook, Webview } from ".";
+import { logger } from "../logger";
 import * as Graph from "./graph-api";
 
 /**
@@ -42,11 +42,16 @@ export class Api extends Graph.Api<Request> {
      * @returns {Promise<GetStartedButton>} - Get Started Button setting
      */
     public async getGetStartedButton(): Promise<GetStartedButton> {
+
         try {
+
             const response: any = await this.getField(Field.GET_STARTED_BUTTON);
             response && (response.payload = JSON.parse(response.payload));
             return response;
+
         } catch (error) {
+
+            /* istanbul ignore next */
             return Promise.reject((error));
         }
     }
@@ -280,6 +285,8 @@ export class Api extends Graph.Api<Request> {
             return data.length > 0 ? data[0][field] : undefined;
 
         } catch (error) {
+
+            /* istanbul ignore next */
             return Promise.reject(error);
         }
     }

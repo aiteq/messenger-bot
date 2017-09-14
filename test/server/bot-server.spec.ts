@@ -5,7 +5,7 @@ import { ChatExtension } from "../../src/server/chat-extension";
 import { BotConfig } from "../../src/utils/bot-config";
 import { Webhook } from "../../src/fb-api";
 
-const config = require("../../work/test-config.json");
+const config: BotConfig = require("../../work/test-config.json");
 
 describe("BotServer", () => {
 
@@ -58,5 +58,11 @@ describe("BotServer", () => {
 
     test("stop()", () => {
         expect(bot.stop()).toBeUndefined();
+    });
+
+    test("normalizePort(port)", () => {
+        expect(BotServer.normalizePort("8080")).toBe(8080);
+        expect(BotServer.normalizePort(8080)).toBe(8080);
+        expect(BotServer.normalizePort("abc")).toBe("abc");
     });
 });

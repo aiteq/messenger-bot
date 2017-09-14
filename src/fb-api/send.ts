@@ -1,7 +1,7 @@
+import { Webview } from ".";
 import { logger } from "../logger";
 import { Reusable } from "../store/reusable";
 import { ReusableDao } from "../store/reusable-dao";
-import { Webview } from ".";
 import * as Graph from "./graph-api";
 
 /**

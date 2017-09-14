@@ -100,7 +100,7 @@ describe("PersistentMenuBuilder", () => {
     });
 
     test("addMenu(locale, composerInputDisabled, menu)", () => {
-        const mb: MenuBuilder = PersistentMenuBuilder.createMenu();
+        let mb: MenuBuilder = PersistentMenuBuilder.createMenu();
         expect(mb.addPostbackMenuItem("title", "id", {
             shareButton: false,
             data: "data",
@@ -111,6 +111,8 @@ describe("PersistentMenuBuilder", () => {
         expect(mb.addWebUrlMenuItem("title", "https://www.aiteq.com")).toBe(mb);
         expect(mb.addSubmenu("title", PersistentMenuBuilder.createMenu())).toBe(mb);
         expect(builder.addMenu("default", false, mb)).toBe(builder);
+        mb = PersistentMenuBuilder.createMenu();
+        expect(mb.addPostbackMenuItem("title", "id")).toBe(mb);
     });
 
     test("build()", () => {

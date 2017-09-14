@@ -7,8 +7,8 @@ import { logger } from "../logger";
 import { BotConfig } from "../utils/bot-config";
 import { Chat } from "./chat";
 import { ChatExtension } from "./chat-extension";
-import { ExtensionService } from "./extension-service";
 import { ChatService } from "./chat-service";
+import { ExtensionService } from "./extension-service";
 import { PingService } from "./ping-service";
 import { VerificationService } from "./verification-service";
 
@@ -17,15 +17,15 @@ import { VerificationService } from "./verification-service";
  */
 export class BotServer {
 
-    private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
-
     /**
      * Normalize a port into a number, string, or false. In some environments the port can be named pipe.
      */
-    private static normalizePort(value: number | string): number | string | boolean {
+    public static normalizePort(value: number | string): number | string | boolean {
         const port: number = (typeof value === "string") ? parseInt(value, 10) : value;
         return isNaN(port) ? value : (port >= 0 ? port : false);
     }
+
+    private static readonly RE_ESCAPE = RegExp("[" + "-[]/{}()*+?.\\^$|".split("").join("\\") + "]", "g");
 
     /**
      * Escapes regexp special characters.
@@ -50,6 +50,7 @@ export class BotServer {
 
         config.webhookPath = config.webhookPath || "/webhook";
         config.extensionsPath = config.extensionsPath || "/ext";
+        config.pingPath = config.pingPath || "/ping";
         config.name = config.name || "noname";
 
         logger.level = config.logLevel || logger.level;
@@ -102,7 +103,7 @@ export class BotServer {
 
         this.server = http.createServer(this.app)
 
-        .on("error", (error: NodeJS.ErrnoException) => {
+        .on("error", /* istanbul ignore next */ (error: NodeJS.ErrnoException) => {
 
             const bind = (typeof port === "string") ? "pipe " + port : "port " + port;
 
@@ -118,7 +119,7 @@ export class BotServer {
             }
         })
 
-        .on("listening", () => {
+        .on("listening", /* istanbul ignore next */ () => {
             // only for showing the "listening" message
             const addr = this.server.address();
             const bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
@@ -234,6 +235,7 @@ export class BotServer {
      *
      * Must be an arrow function because it is called as calback and needs to acceess this.config
      */
+    /* istanbul ignore next */
     private verifyRequest: (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => void = (req: express.Request, res: express.Response, buf: Buffer, encoding: string) => {
 
         const [algorithm, signature] = ((req.headers["x-hub-signature"] as string) || "").split("=");

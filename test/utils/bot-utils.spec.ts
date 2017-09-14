@@ -9,7 +9,8 @@ const ACCESS_TOKEN: string = config.accessToken;
 const RECIPIENT_ID: string = config.recipientId;
 
 const URL_IMAGE: string = "https://static.wixstatic.com/media/a3e73d_d0a6eaa7c6194519937b46d95dcbd97c.png";
-const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvSzg2OVg0VlRFMUk";
+const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvcDFmQ0ZnamUyQU0";
+//const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvSzg2OVg0VlRFMUk";
 const URL_VIDEO: string = "https://static.videezy.com/system/resources/previews/000/005/499/original/Earth_Spin_In_Hands.mp4";
 const URL_FILE: string = "https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf";
 const FILE: string = "./bot-db.json";
@@ -283,6 +284,7 @@ describe("BotUtils", () => {
         describe("DomainWhitelist", async () => {
 
             test("whitelistDomains(domain)", async () => {
+                await utils.deleteDomainWhitelist();
                 expect(await utils.whitelistDomains("https://www.aiteq.com/")).toMatchObject(RESPONSE_SUCCESS);
             });
 
@@ -301,7 +303,7 @@ describe("BotUtils", () => {
                 exp.toContain("https://blog.aiteq.com/");
             });
 
-            test("deletePersistentMenu()", async () => {
+            test("deleteDomainWhitelist()", async () => {
                 expect(await utils.deleteDomainWhitelist()).toMatchObject(RESPONSE_SUCCESS);
             });
 
@@ -349,6 +351,10 @@ describe("BotUtils", () => {
             });
 
             test("whitelistAudienceCountries([country])", async () => {
+                expect(await utils.whitelistAudienceCountries("cz")).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("whitelistAudienceCountries([country])", async () => {
                 expect(await utils.whitelistAudienceCountries(["fr"])).toMatchObject(RESPONSE_SUCCESS);
             });
 
@@ -356,20 +362,24 @@ describe("BotUtils", () => {
                 expect(await utils.getTargetAudience()).toMatchObject({
                     audience_type: "custom",
                     countries: {
-                        whitelist: ["FR"]
+                        whitelist: ["FR", "CZ"]
                     }
                 });
             });
 
             test("blacklistAudienceCountries([country])", async () => {
-                expect(await utils.blacklistAudienceCountries(["cz"])).toMatchObject(RESPONSE_SUCCESS);
+                expect(await utils.blacklistAudienceCountries("cz")).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("blacklistAudienceCountries([country])", async () => {
+                expect(await utils.blacklistAudienceCountries(["fr"])).toMatchObject(RESPONSE_SUCCESS);
             });
 
             test("getTargetAudience()", async () => {
                 expect(await utils.getTargetAudience()).toMatchObject({
                     audience_type: "custom",
                     countries: {
-                        blacklist: ["CZ"]
+                        blacklist: ["FR", "CZ"]
                     }
                 });
             });
@@ -386,7 +396,7 @@ describe("BotUtils", () => {
         describe("ChatExtensionHomeUrl", async () => {
 
             test("setChatExtensionHomeUrl(url)", async () => {
-                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com/", true, true)).toMatchObject(RESPONSE_SUCCESS);
+                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com/")).toMatchObject(RESPONSE_SUCCESS);
             });
 
             test("getChatExtensionHomeUrl()", async () => {
@@ -394,15 +404,20 @@ describe("BotUtils", () => {
                     url: "https://www.aiteq.com/",
                     webview_height_ratio: "tall",
                     webview_share_button: "show",
-                    in_test: true
+                    in_test: false
                 })
             });
 
-            test("setChatExtensionHomeUrl(url)", async () => {
-                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com/", false, false)).toMatchObject(RESPONSE_SUCCESS);
+            test("setChatExtensionHomeUrl(url, inTest, shareButton)", async () => {
+                await utils.deleteDomainWhitelist();
+                expect(await utils.setChatExtensionHomeUrl("https://blog.aiteq.com", false, false)).toMatchObject(RESPONSE_SUCCESS);
             });
 
-            test("getChatExtensionHomeUrl()", async () => {
+            test("setChatExtensionHomeUrl(url, inTest, shareButton, logger)", async () => {
+                expect(await utils.setChatExtensionHomeUrl("https://www.aiteq.com", false, false, logger)).toMatchObject(RESPONSE_SUCCESS);
+            });
+
+            test("getChatExtensionHomeUrl() 2", async () => {
                 expect(await utils.getChatExtensionHomeUrl()).toMatchObject({
                     url: "https://www.aiteq.com/",
                     webview_height_ratio: "tall",

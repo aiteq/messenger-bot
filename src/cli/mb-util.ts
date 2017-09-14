@@ -41,8 +41,11 @@ Type 'mbutil <group> --help' to display usage for the group`);
         }
 
         if (options.help) {
-            try { await groupHandler.usage(); }
-            catch (error) { return Promise.resolve(error + MBUtil.USAGE_GLOBAL_OPTIONS) };
+            try {
+                await groupHandler.usage();
+            } catch (error) {
+                return Promise.resolve(error + MBUtil.USAGE_GLOBAL_OPTIONS);
+            }
         }
 
         let accessToken: string;

@@ -7,7 +7,8 @@ const config = require("../../work/test-config.json");
 const ACCESS_TOKEN: string = config.accessToken;
 
 const URL_IMAGE: string = "https://static.wixstatic.com/media/a3e73d_d0a6eaa7c6194519937b46d95dcbd97c.png";
-const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvSzg2OVg0VlRFMUk";
+const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvcDFmQ0ZnamUyQU0";
+//const URL_AUDIO: string = "https://drive.google.com/uc?export=download&id=0B5o6eFQ3zIuvSzg2OVg0VlRFMUk";
 const URL_VIDEO: string = "https://static.videezy.com/system/resources/previews/000/005/499/original/Earth_Spin_In_Hands.mp4";
 const URL_FILE: string = "https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf";
 
@@ -300,7 +301,7 @@ describe("MBUtil", () => {
 
         test("image", async () => {
             expect(await mbu.bootstrap(["send", "image", "--accessToken", config.accessToken])).toMatch("Send messages directly to users");
-        });
+        }, 10000);
 
         test("image --recipient rcpnt --url", async () => {
             expect(await mbu.bootstrap(["send", "image", "--recipient", config.recipientId, "--url", URL_IMAGE, "--accessToken", config.accessToken])).toBeUndefined();
@@ -308,7 +309,7 @@ describe("MBUtil", () => {
 
         test("audio", async () => {
             expect(await mbu.bootstrap(["send", "audio", "--accessToken", config.accessToken])).toMatch("Send messages directly to users");
-        });
+        }, 10000);
 
         test("audio --recipient rcpnt --url", async () => {
             expect(await mbu.bootstrap(["send", "audio", "--recipient", config.recipientId, "--url", URL_AUDIO, "--accessToken", config.accessToken])).toBeUndefined();
@@ -316,7 +317,7 @@ describe("MBUtil", () => {
 
         test("video", async () => {
             expect(await mbu.bootstrap(["send", "video", "--accessToken", config.accessToken])).toMatch("Send messages directly to users");
-        });
+        }, 10000);
 
         test("video --recipient rcpnt --url", async () => {
             expect(await mbu.bootstrap(["send", "video", "--recipient", config.recipientId, "--url", URL_VIDEO, "--accessToken", config.accessToken])).toBeUndefined();
@@ -324,7 +325,7 @@ describe("MBUtil", () => {
 
         test("file", async () => {
             expect(await mbu.bootstrap(["send", "file", "--accessToken", config.accessToken])).toMatch("Send messages directly to users");
-        });
+        }, 10000);
 
         test("file --recipient rcpnt --url", async () => {
             expect(await mbu.bootstrap(["send", "file", "--recipient", config.recipientId, "--url", URL_FILE, "--accessToken", config.accessToken])).toBeUndefined();
@@ -332,7 +333,7 @@ describe("MBUtil", () => {
 
         test("text", async () => {
             expect(await mbu.bootstrap(["send", "text", "--accessToken", config.accessToken])).toMatch("Send messages directly to users");
-        });
+        }, 10000);
 
         test("text --recipient rcpnt --url", async () => {
             expect(await mbu.bootstrap(["send", "text", "--recipient", config.recipientId, "--accessToken", config.accessToken])).toBeUndefined();

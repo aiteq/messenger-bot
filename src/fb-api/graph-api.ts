@@ -23,10 +23,6 @@ export abstract class Api<T extends Request> {
      */
     constructor(protected accessToken: string, private endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
 
-        if (!accessToken) {
-            throw new Error("accessToken must by provided");
-        }
-
         // create instance of Axios with default configuration
         this.client = Axios.create({
             baseURL: `https://graph.facebook.com/v${version || Api.DEFAULT_VERSION}/${endpoint}`,
@@ -58,6 +54,7 @@ export abstract class Api<T extends Request> {
 
         } else {
 
+            /* istanbul ignore next */
             Promise.reject("method not supporetd: " + config.method);
         }
 
@@ -72,6 +69,7 @@ export abstract class Api<T extends Request> {
             logger.debug("response:", response.status, response.statusText);
             logger.debug("data:", response.data);
 
+            /* istanbul ignore next */
             if (response.data.result && response.data.result !== "success") {
                 logger.error("result:", response.data.result);
                 return Promise.reject(response.data.result);
@@ -86,10 +84,12 @@ export abstract class Api<T extends Request> {
 
             let message: string = error.message;
 
-            if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
-                logger.error(error.response.data.error.message);
-                message = error.response.data.error.message;
-            }
+            try {
+                if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
+                    logger.error(error.response.data.error.message);
+                    message = error.response.data.error.message;
+                }
+            } catch (error) {}
 
             return Promise.reject(message);
         }

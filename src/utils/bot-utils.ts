@@ -2,9 +2,9 @@ import * as fs from "async-file";
 import Axios from "axios";
 import { AxiosResponse } from "axios";
 
+import { MessengerCodes, MessengerProfile, Send } from "../fb-api";
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { PersistentMenuDef } from "../fb-api-helpers/persistent-menu-def";
-import { MessengerCodes, MessengerProfile, Send } from "../fb-api";
 import { logger } from "../logger";
 
 /**
@@ -284,11 +284,11 @@ export class BotUtils {
      */
     public async whitelistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
 
-        const whitelist: string[] = Array.isArray(countries) ? countries : [countries];
+        let whitelist: string[] = Array.isArray(countries) ? countries : [countries];
 
         const current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
 
-        current && current.countries && current.countries.whitelist && whitelist.concat(current.countries.whitelist);
+        current && current.countries && current.countries.whitelist && (whitelist = whitelist.concat(current.countries.whitelist));
 
         return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.CUSTOM, whitelist);
     }
@@ -301,11 +301,11 @@ export class BotUtils {
      */
     public async blacklistAudienceCountries(countries: string | string[]): Promise<MessengerProfile.Response> {
 
-        const blacklist: string[] = Array.isArray(countries) ? countries : [countries];
+        let blacklist: string[] = Array.isArray(countries) ? countries : [countries];
 
         const current: MessengerProfile.TargetAudience = await this.getMessengerProfileApi().getTargetAudience();
 
-        current && current.countries && current.countries.blacklist && blacklist.concat(current.countries.blacklist);
+        current && current.countries && current.countries.blacklist && (blacklist = blacklist.concat(current.countries.blacklist));
 
         return this.getMessengerProfileApi().setTargetAudience(MessengerProfile.TargetAudienceType.CUSTOM, undefined, blacklist);
     }
@@ -342,9 +342,9 @@ export class BotUtils {
 
         url.charAt(url.length - 1) === "/" || (url = url.concat("/"));
 
-        const whitelist: string[] = await this.getMessengerProfileApi().getWhitelistedDomains();
+        const whitelist: string[] = await this.getMessengerProfileApi().getWhitelistedDomains() || [];
 
-        if (!whitelist || whitelist.indexOf(url) < 0) {
+        if (whitelist.indexOf(url) < 0) {
             // domain has to be whitelisted first
             await this.getMessengerProfileApi().whitelistDomains([url]);
             cliLogger && cliLogger.info(`Domain '${url}' has been successfully whitelisted`);

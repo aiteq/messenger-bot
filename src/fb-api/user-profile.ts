@@ -22,20 +22,7 @@ export class Api extends Graph.Api<Request> {
      * @returns {Promise<Response>} - users's public profile
      */
     public getUserProfile(userId: string): Promise<Response> {
-        return this.getFields(userId, [Field.FIRST_NAME, Field.LAST_NAME, Field.PROFILE_PIC, Field.LOCALE, Field.TIMEZONE, Field.GENDER, Field.IS_PAYMENT_ENABLED, Field.LAST_AD_REFERRAL]);
-    }
-
-    /**
-     * Returns selected fields of user's public profile.
-     *
-     * @param {string} userId - user's ID
-     * @param {(Field | Array<Field>)} fields - a field or array of fields
-     * @returns {Promise<Response>} - users's public profile
-     */
-    public getFields(userId: string, fields: Field | Field[]): Promise<Response> {
-
-        Array.isArray(fields) || (fields = [fields]);
-        return this.sendRequest({ fields: fields.join(",") }, { url: userId });
+        return this.sendRequest({ fields: [Field.FIRST_NAME, Field.LAST_NAME, Field.PROFILE_PIC, Field.LOCALE, Field.TIMEZONE, Field.GENDER, Field.IS_PAYMENT_ENABLED, Field.LAST_AD_REFERRAL].join(",") }, { url: userId });
     }
 }
 

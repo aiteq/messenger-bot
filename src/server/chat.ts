@@ -203,7 +203,7 @@ export class Chat {
         // wait if requested
         this.timeout && await this.timeout;
 
-        const challenge: Send.Message = messageOrBuilder = messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder
+        const challenge: Send.Message = messageOrBuilder = messageOrBuilder instanceof MessageBuilder ? messageOrBuilder.build() : messageOrBuilder;
 
         if (this.responder) {
             logger.warn("couldn't ask again over previous asking that is not yet answered");
