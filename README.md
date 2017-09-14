@@ -4,8 +4,6 @@
 
 #### A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.
 
-*Please note that the package is still not fully tested BETA. Join our [Slack channel](https://aiteq.slack.com/messages/C6TNM9T5Z/) and discuss ideas, suggest improvements and listen for updates.*
-
 <table><tr>
 <td><b><a href="#major-features">Features</a></b></td>
 <td><b><a href="#technologies-used">Technologies</a></b></td>
