@@ -85,11 +85,11 @@ export abstract class Api<T extends Request> {
             let message: string = error.message;
 
             try {
-                if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
-                    logger.error(error.response.data.error.message);
-                    message = error.response.data.error.message;
-                }
-            } catch (error) {}
+                logger.error(error.response.data.error.message);
+                message = error.response.data.error.message;
+            } catch (error) {
+                // do nothing
+            }
 
             return Promise.reject(message);
         }

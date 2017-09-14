@@ -10,7 +10,7 @@ import { RouterService } from "./router-service";
 export class ChatService extends RouterService {
 
     // handlers installed using BotServer.hear
-    private hearHandlers: Array<{ hook: RegExp, func: (chat: Chat, text: string, matches: string[]) => void }>;
+    private hearHandlers: Array<{ hook: RegExp, handler: HearHandler }>;
 
     // cached chats - necessary for holding conversation contexts
     private chats: Map<string, Chat>;
@@ -26,7 +26,7 @@ export class ChatService extends RouterService {
 
         super();
 
-        this.hearHandlers = new Array<{ hook: RegExp, func: () => void }>();
+        this.hearHandlers = new Array<{ hook: RegExp, handler: HearHandler }>();
         this.chats = new Map<string, Chat>();
 
         this.sendApi = new Send.Api(accessToken);
@@ -128,11 +128,11 @@ export class ChatService extends RouterService {
      * @param {(chat: Chat, text: string, matches: string[]) => void} handler - a callback function
      * @returns {this}
      */
-    public hear(hooks: RegExp[], handler: (chat: Chat, text: string, matches: string[]) => void): this {
+    public hear(hooks: RegExp[], handler: HearHandler): this {
 
         hooks.forEach((hook) => {
             logger.info("subscribing to text", hook);
-            this.hearHandlers.push({ hook, func: handler });
+            this.hearHandlers.push({ hook, handler });
         });
 
         return this;
@@ -155,14 +155,14 @@ export class ChatService extends RouterService {
 
             // call all hear handlers according matching hooks
 
-            this.hearHandlers.forEach((handler: { hook: RegExp, func: (chat: Chat, text: string, captured: string[]) => void }) => {
+            this.hearHandlers.forEach((hh: { hook: RegExp, handler: HearHandler }) => {
 
-                const matches: RegExpExecArray = handler.hook.exec(message.text);
+                const matches: RegExpExecArray = hh.hook.exec(message.text);
 
                 if (matches) {
 
-                    logger.debug("calling hearing handler", handler.hook);
-                    handler.func(chat, message.text, matches.slice(1));
+                    logger.debug("calling hearing handler", hh.hook);
+                    hh.handler(chat, message.text, matches.slice(1));
                 }
             });
 
@@ -298,3 +298,6 @@ export class ChatService extends RouterService {
         this.emit(Webhook.Event.MESSAGE_READ, chat, read);
     }
 }
+
+export type HearHandler = (chat: Chat, text: string, matches: string[]) => void;
+export type EventHandler = (...args: any[]) => void;

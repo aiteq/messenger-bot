@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Chat.askWithMessage()](./doc/classes/chat.md) supports validator
 
 ### Added
-- test coverage: CLI
+- tests coveraging almost all code
 - ping service
 
 <a id="latest"></a>

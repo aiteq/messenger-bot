@@ -7,7 +7,7 @@ import { logger } from "../logger";
 import { BotConfig } from "../utils/bot-config";
 import { Chat } from "./chat";
 import { ChatExtension } from "./chat-extension";
-import { ChatService } from "./chat-service";
+import { ChatService, EventHandler, HearHandler } from "./chat-service";
 import { ExtensionService } from "./extension-service";
 import { PingService } from "./ping-service";
 import { VerificationService } from "./verification-service";
@@ -149,10 +149,10 @@ export class BotServer {
      * the message is part of an active conversation.
      *
      * @param {(RegExp | string | Array<RegExp | string>)} hooks - a string, a regexp or an array of both strings and regexps
-     * @param {(chat: Chat, text: string, matches: string[]) => void} callback - a callback to be executed if a message matches one of the hooks
+     * @param {HearHandler} callback - a callback to be executed if a message matches one of the hooks
      * @returns {this} - for chaining
      */
-    public hear(hooks: RegExp | string | Array<RegExp | string>, callback: (chat: Chat, text: string, matches: string[]) => void): this {
+    public hear(hooks: RegExp | string | Array<RegExp | string>, callback: HearHandler): this {
 
         let regexps: RegExp[];
 
@@ -182,10 +182,10 @@ export class BotServer {
      * The callback is executed with the parameters: chat: Chat, data: any.
      *
      * @param {Webhook.Event} event - an event for which the callback will be executed
-     * @param {(...args: any[]) => void} callback - a callback function
+     * @param {EventHandler} callback - a callback function
      * @returns {this} - for chaining
      */
-    public on(event: Webhook.Event, callback: (...args: any[]) => void): this;
+    public on(event: Webhook.Event, callback: EventHandler): this;
 
     /**
      * Subscribe to an <i>identified event</i>. An identified event is specified, in addition to its
@@ -195,13 +195,13 @@ export class BotServer {
      *
      * @param {Webhook.Event} event - an event for which the callback will be executed
      * @param {string} id - an identification of the event
-     * @param {(...args: any[]) => void} callback - a callback function
+     * @param {EventHandler} callback - a callback function
      * @returns {this}
      */
-    public on(event: Webhook.Event, id: string, callback: (...args: any[]) => void): this;
+    public on(event: Webhook.Event, id: string, callback: EventHandler): this;
 
     /* implementation of the overloaded method on() - see 2 overloads above */
-    public on(event: Webhook.Event, idOrCallback: string | ((...args: any[]) => void), callback?: (...args: any[]) => void): this {
+    public on(event: Webhook.Event, idOrCallback: string | EventHandler, callback?: EventHandler): this {
 
         let extEvent: string = event;
 
