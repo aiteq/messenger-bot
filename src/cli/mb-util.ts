@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as minimist from "minimist";
-import { logger } from "../logger";
+import logger from "../logger";
 import { BotUtils } from "../utils/bot-utils";
 import { cliout } from "./cli-logger";
 import { Group } from "./group";

@@ -24,4 +24,4 @@ log4js.configure({
     }
 });
 
-export const logger = log4js.getLogger("@aiteq/messenger-bot");
+export default log4js.getLogger("@aiteq/messenger-bot");

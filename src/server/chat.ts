@@ -1,6 +1,6 @@
 import { Send, UserProfile, Webhook } from "../fb-api";
 import { MessageBuilder } from "../fb-api-helpers/message-builder";
-import { logger } from "../logger";
+import logger from "../logger";
 import { ChatService } from "./chat-service";
 
 /**

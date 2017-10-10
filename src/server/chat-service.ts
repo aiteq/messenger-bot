@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Send, UserProfile, Webhook } from "../fb-api";
-import { logger } from "../logger";
+import logger from "../logger";
 import { Chat } from "./chat";
 import { RouterService } from "./router-service";
 

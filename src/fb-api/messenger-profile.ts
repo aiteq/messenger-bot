@@ -1,5 +1,5 @@
 import { MessengerProfile, Webhook, Webview } from ".";
-import { logger } from "../logger";
+import logger from "../logger";
 import * as Graph from "./graph-api";
 
 /**

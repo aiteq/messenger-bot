@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 import { MessengerCodes, MessengerProfile, Send } from "../fb-api";
 import { PersistentMenuBuilder } from "../fb-api-helpers/persistent-menu-builder";
 import { PersistentMenuDef } from "../fb-api-helpers/persistent-menu-def";
-import { logger } from "../logger";
+import logger from "../logger";
 
 /**
  * Provides an interface to non-interactive services of Messenger Platform API through a set of

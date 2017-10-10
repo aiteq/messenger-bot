@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { logger } from "../logger";
+import logger from "../logger";
 import { RouterService } from "./router-service";
 
 /**

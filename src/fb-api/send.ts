@@ -1,5 +1,5 @@
 import { Webview } from ".";
-import { logger } from "../logger";
+import logger from "../logger";
 import { Reusable } from "../store/reusable";
 import { ReusableDao } from "../store/reusable-dao";
 import * as Graph from "./graph-api";
@@ -13,7 +13,7 @@ export class Api extends Graph.Api<Request> {
     private reusableDao: ReusableDao;
 
     /**
-     * Creates an instance of MessengerProfile.Api.
+     * Creates an instance of Send.Api.
      *
      * @param {string} accessToken - a Page Access Token
      */
