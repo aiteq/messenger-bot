@@ -1,43 +1,50 @@
-[@aiteq/messenger-bot](../README.md) > [ListTemplateMessageBuilder](../classes/listtemplatemessagebuilder.md)
+[@aiteq/messenger-bot](../README.md) > [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md)
 
-# Class: ListTemplateMessageBuilder
+# Class: ButtonHoldingTemplateMessageBuilder
 
-Helps to create a [List Template](https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template) message.
+An abstract parent class for builders producing button-holding messages.
+
+## Type parameters
+
+#### T
 
 ## Hierarchy
 
-[ButtonHoldingTemplateMessageBuilder](buttonholdingtemplatemessagebuilder.md)
+[ButtonHolder](../interfaces/buttonholder.md)
+[MessageBuilder](messagebuilder.md)
 
-**↳ ListTemplateMessageBuilder**
+**↳ ButtonHoldingTemplateMessageBuilder**
+
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ButtonTemplateMessageBuilder](buttontemplatemessagebuilder.md)
+
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ListTemplateMessageBuilder](listtemplatemessagebuilder.md)
 
 ## Index
 
 ### Constructors
 
-* [constructor()](listtemplatemessagebuilder.md#constructor)
+* [constructor()](templatemessagebuilder.md#constructor)
 
 ### Methods
 
-* [addCallButton(title, phoneNumber)](listtemplatemessagebuilder.md#addcallbutton)
-* [addElement(elementBuilder)](listtemplatemessagebuilder.md#addelement)
-* [addExtensionButton(title, extension, [options])](listtemplatemessagebuilder.md#addextensionbutton)
-* [addLocationQuickReply()](listtemplatemessagebuilder.md#addlocationquickreply)
-* [addLoginButton(url)](listtemplatemessagebuilder.md#addloginbutton)
-* [addLogoutButton()](listtemplatemessagebuilder.md#addlogoutbutton)
-* [addPostbackButton(title, id, [data])](listtemplatemessagebuilder.md#addpostbackbutton)
-* [addQuickReply(title, id, [data, [imageUrl]])](listtemplatemessagebuilder.md#addquickreply)
-* [addShareButton(builder)](listtemplatemessagebuilder.md#addsharebutton)
-* [addUrlButton(title, url, [options])](listtemplatemessagebuilder.md#addurlbutton)
-* [setTopElementStyle(topElementStyle)](listtemplatemessagebuilder.md#settopelementstyle)
+* [addCallButton(title, phoneNumber)](buttonholdingtemplatemessagebuilder.md#addcallbutton)
+* [addExtensionButton(title, extension, [options])](buttonholdingtemplatemessagebuilder.md#addextensionbutton)
+* [addLocationQuickReply()](buttonholdingtemplatemessagebuilder.md#addlocationquickreply)
+* [addLoginButton(url)](buttonholdingtemplatemessagebuilder.md#addloginbutton)
+* [addLogoutButton()](buttonholdingtemplatemessagebuilder.md#addlogoutbutton)
+* [addPostbackButton(title, id, [data])](buttonholdingtemplatemessagebuilder.md#addpostbackbutton)
+* [addQuickReply(title, id, [data, [imageUrl]])](buttonholdingtemplatemessagebuilder.md#addquickreply)
+* [addShareButton(builder)](buttonholdingtemplatemessagebuilder.md#addsharebutton)
+* [addUrlButton(title, url, [options])](buttonholdingtemplatemessagebuilder.md#addurlbutton)
 
 ---
 
 ## Constructors
 
 <a id="constructor"></a>
-### `new ListTemplateMessageBuilder()`
+### `new ButtonHoldingTemplateMessageBuilder()`
 
-**Returns:** [ListTemplateMessageBuilder](listtemplatemessagebuilder.md)
+**Returns:** [ButtonHoldingTemplateMessageBuilder](buttonholdingtemplatemessagebuilder.md)
 
 ---
 
@@ -48,7 +55,7 @@ Helps to create a [List Template](https://developers.facebook.com/docs/messenger
 
 Creates and adds a [Call Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addCallButton](../interfaces/buttonholder.md#addcallbutton).*
 
 **Parameters:**
 
@@ -60,26 +67,12 @@ Creates and adds a [Call Button](https://developers.facebook.com/docs/messenger-
 **Returns:** `this` - for chaining
 ___
 
-<a id="addelement"></a>
-###  `addElement(elementBuilder)`
-
-Adds an Element. Number of Elements must be 2-4.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| elementBuilder | [ElementBuilder](elementbuilder.md)   | |
-
-**Returns:** `this` - for chaining
-___
-
 <a id="addextensionbutton"></a>
 ###  `addExtensionButton(title, extension, [options])`
 
 Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button) linking a Chat Extension.
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addExtensionButton](../interfaces/buttonholder.md#addextensionbutton).*
 
 **Parameters:**
 
@@ -115,7 +108,7 @@ ___
 
 Creates and adds a [Login Button](https://developers.facebook.com/docs/messenger-platform/account-linking/link-account).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addLoginButton](../interfaces/buttonholder.md#addloginbutton).*
 
 **Parameters:**
 
@@ -131,7 +124,7 @@ ___
 
 Creates and adds a [Logout Button](https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addLogoutButton](../interfaces/buttonholder.md#addlogoutbutton).*
 
 **Returns:** `this` - for chaining
 ___
@@ -141,7 +134,7 @@ ___
 
 Creates and adds a [Postback Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addPostbackButton](../interfaces/buttonholder.md#addpostbackbutton).*
 
 **Parameters:**
 
@@ -178,7 +171,7 @@ ___
 
 Creates and adds a [Share Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addShareButton](../interfaces/buttonholder.md#addsharebutton).*
 
 **Parameters:**
 
@@ -194,7 +187,7 @@ ___
 
 Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button).
 
-*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+*Implementation of [ButtonHolder.addUrlButton](../interfaces/buttonholder.md#addurlbutton).*
 
 **Parameters:**
 
@@ -215,16 +208,3 @@ Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-p
 
 **Returns:** `this` - for chaining
 ___
-
-<a id="settopelementstyle"></a>
-###  `setTopElementStyle(topElementStyle)`
-
-Sets a style for the first list item.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| topElementStyle | [ListTopElementStyle](../modules/send.listtopelementstyle.md) | |
-
-**Returns:** `this` - for chaining

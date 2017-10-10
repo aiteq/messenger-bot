@@ -1,53 +1,32 @@
-[@aiteq/messenger-bot](../README.md) > [ElementBuilder](../classes/elementbuilder.md)
+[@aiteq/messenger-bot](../README.md) > [ButtonHoldingBuilder](../classes/buttonholdingbuilder.md)
 
-# Class: ElementBuilder
+# Class: ButtonHoldingBuilder
 
-Helps to create an Element.
+Abstract class for message builders producing components with buttons.
 
 ## Hierarchy
 
-[ButtonHoldingBuilder](buttonholdingbuilder.md)
+[ButtonHolder](../interfaces/buttonholder.md)
 
-**↳ ElementBuilder**
+**↳ ButtonHoldingBuilder**
+
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [ElementBuilder](elementbuilder.md)
+
+&nbsp;&nbsp;&nbsp;&nbsp;↳ [OgElementBuilder](ogelementbuilder.md)
 
 ## Index
 
-### Constructors
-
-* [constructor(title)](elementbuilder.md#constructor)
-
 ### Methods
 
-* [addCallButton(title, phoneNumber)](elementbuilder.md#addcallbutton)
-* [addExtensionButton(title, extension, [options])](elementbuilder.md#addextensionbutton)
-* [addLoginButton(url)](elementbuilder.md#addloginbutton)
-* [addLogoutButton()](elementbuilder.md#addlogoutbutton)
-* [addPostbackButton(title, id, [data])](elementbuilder.md#addpostbackbutton)
-* [addShareButton(builder)](elementbuilder.md#addsharebutton)
-* [addUrlButton(title, url, [options])](elementbuilder.md#addurlbutton)
-* [setDefaultAction(url, [options])](elementbuilder.md#setdefaultaction)
-* [setExtensionDefaultAction(extension, [options])](elementbuilder.md#setextensiondefaultaction)
-* [setImageUrl(imageUrl)](elementbuilder.md#setimageurl)
-* [setSubtitle(subtitle)](elementbuilder.md#setsubtitle)
+* [addCallButton(title, phoneNumber)](buttonholdingbuilder.md#addcallbutton)
+* [addExtensionButton(title, extension, [options])](buttonholdingbuilder.md#addextensionbutton)
+* [addLoginButton(url)](buttonholdingbuilder.md#addloginbutton)
+* [addLogoutButton()](buttonholdingbuilder.md#addlogoutbutton)
+* [addPostbackButton(title, id, [data])](buttonholdingbuilder.md#addpostbackbutton)
+* [addShareButton(builder)](buttonholdingbuilder.md#addsharebutton)
+* [addUrlButton(title, url, [options])](buttonholdingbuilder.md#addurlbutton)
 
 ---
-## Constructors
-
-<a id="constructor"></a>
-### `new ElementBuilder(title)`
-
-Creates an instance of ElementBuilder.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| title | `string`   | title of the Element |
-
-**Returns:** [ElementBuilder](elementbuilder.md)
-
----
-
 ## Methods
 
 <a id="addcallbutton"></a>
@@ -55,7 +34,7 @@ Creates an instance of ElementBuilder.
 
 Creates and adds a [Call Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addCallButton](../interfaces/buttonholder.md#addcallbutton).*
 
 **Parameters:**
 
@@ -72,7 +51,7 @@ ___
 
 Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button) linking a Chat Extension.
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addExtensionButton](../interfaces/buttonholder.md#addextensionbutton).*
 
 **Parameters:**
 
@@ -98,7 +77,7 @@ ___
 
 Creates and adds a [Login Button](https://developers.facebook.com/docs/messenger-platform/account-linking/link-account).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addLoginButton](../interfaces/buttonholder.md#addloginbutton).*
 
 **Parameters:**
 
@@ -114,7 +93,7 @@ ___
 
 Creates and adds a [Logout Button](https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addLogoutButton](../interfaces/buttonholder.md#addlogoutbutton).*
 
 **Returns:** `this` - for chaining
 ___
@@ -124,7 +103,7 @@ ___
 
 Creates and adds a [Postback Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addPostbackButton](../interfaces/buttonholder.md#addpostbackbutton).*
 
 **Parameters:**
 
@@ -142,7 +121,7 @@ ___
 
 Creates and adds a [Share Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addShareButton](../interfaces/buttonholder.md#addsharebutton).*
 
 **Parameters:**
 
@@ -158,7 +137,7 @@ ___
 
 Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button).
 
-*Inherited from [ButtonHoldingBuilder](buttonholdingbuilder.md).*
+*Implementation of [ButtonHolder.addUrlButton](../interfaces/buttonholder.md#addurlbutton).*
 
 **Parameters:**
 
@@ -180,78 +159,4 @@ Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-p
 **Returns:** `this` - for chaining
 ___
 
-<a id="setdefaultaction"></a>
-###  `setDefaultAction(url, [options])`
 
-Set a Default Action for the Element.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| url | `string` | a URL to be opened |
-| options | `object` |  |
-
-`options` object can contain:
-
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-| messengerExtensions | `boolean`   | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-| webviewShareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
-| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-
-**Returns:** `this` - for chaining
-___
-
-<a id="setextensiondefaultaction"></a>
-###  `setExtensionDefaultAction(extension, [options])`
-
-Set a Default Action for the Element linking a Chat Extension.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| extension | [ChatExtension](chatextension.md) | a Chat Extension to be opened |
-| options | `object` |  |
-
-`options` object can contain:
-
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-(https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-| webviewShareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
-| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
-
-**Returns:** `this` - for chaining
-___
-
-<a id="setimageurl"></a>
-###  `setImageUrl(imageUrl)`
-
-Sets Element's image.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| imageUrl | `string`   | URL of the image of the Element |
-
-**Returns:** `this` - for chaining
-___
-
-<a id="setsubtitle"></a>
-###  `setSubtitle(subtitle)`
-
-Sets a text for Element's subtitle.
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| subtitle | `string`   | subtitle of the Element |
-
-**Returns:** `this` - for chaining
-___

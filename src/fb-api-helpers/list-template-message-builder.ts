@@ -1,13 +1,13 @@
 import { Send } from "../fb-api";
 import { Builder } from "./builder";
+import { ButtonHoldingTemplateMessageBuilder } from "./button-holding-template-message-builder";
 import { ElementBuilder } from "./element-builder";
-import { TemplateMessageBuilder } from "./template-message-builder";
 
 /**
  * Helps to create a List Template message.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template)
  */
-export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.ListTemplate> {
+export class ListTemplateMessageBuilder extends ButtonHoldingTemplateMessageBuilder<Send.ListTemplate> {
 
     constructor() {
 
@@ -46,14 +46,7 @@ export class ListTemplateMessageBuilder extends TemplateMessageBuilder<Send.List
         return this;
     }
 
-    /**
-     * Sets a Button for the List Template message.
-     *
-     * @param {Builder<T>} buttonBuilder
-     * @returns {this} - for chaining
-     */
-    public setButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
-        this.template.buttons = [buttonBuilder.build()];
-        return this;
+    protected addButton(button: Send.Button): void {
+        this.template.buttons = [button];
     }
 }

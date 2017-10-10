@@ -241,18 +241,6 @@ bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-order", async (chat: Chat) => {
 });
 ```
 
-Also, if the order of questions in the flow does not matter, you can wait for responses until the moment they are needed for processing:
-
-```typescript
-bot.on(Webhook.Event.PERSISTENT_MENU, "menu-item-sum3", async (chat: Chat) => {
-    await chat.say("Tell me 3 numbers and I'll sum them.");
-    let a = chat.ask("Number?");
-    let b = chat.ask("Number?");
-    let c = chat.ask("Number?");
-    chat.say(`Total: ${await a + await b + await c}`);
-});
-```
-
 #### Input validation
 As with classic forms, even in the case of a conversation, we need to validate user inputs. Therefore, the interface offers the ability to call a validation function wich you can pass when calling the [ask()](./doc/classes/chat.md#ask) method. As a validator you can conveniently use functions from [validator.js](https://github.com/chriso/validator.js) package:
 ```typescript
@@ -324,7 +312,58 @@ The ping feature is useful with conjunction with up-time monitoring services lik
 
 ## Chat extensions
 
-TO-DO
+The package supports [Embedded JavaScript Templates (EJS)](http://ejs.co/) for rendering Chat Extension views. For creating a new extension follow these steps.
+
+#### 1. Implement [ChatExtension](doc/interfaces/chatextension.md) interface
+```typescript
+import { ChatExtension } from "@aiteq/messenger-bot";
+
+export class MyExtension implements ChatExtension {
+
+    public getView(): string {
+        return "my";
+    }
+
+    public getModel(): any {
+        return {
+            name: "Captain Nemo"
+        };
+    }
+}
+```
+The chat extension class must implement two methods:
+- `getView()` - returns name of extension's view
+- `getModel()` - provides data to be used in the view
+
+The `getModel` is called every time an extension is requested.
+
+#### 2. Create view
+
+In your project root create `views` folder (default for placing views in Express application) and `my.ejs` file within it.
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Extension</title>
+    </head>
+    <body>
+        <div>Greetings, <%= name %>!</div>
+    </body>
+</html>
+```
+#### 3. Add the extension
+
+At last you have to register the extension to the bot server using the [addChatExtension](doc/classes/botserver.md#addchatextension) method.
+
+```typescript
+bot.addChatExtension(new MyExtension());
+```
+
+Now the extension is ready to use and you can test it pointing to `<your-bot-url>/ext/my`.
+
+*Note that the default path for extensions is `/ext` and you can chanage it by setting the `extensionPath` property of [BotConfig](doc/interfaces/botconfig.md).*
+
 
 ## CLI
 

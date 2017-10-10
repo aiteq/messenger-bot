@@ -4,21 +4,9 @@
 
 Helps to create [Button Template](https://developers.facebook.com/docs/messenger-platform/send-api-reference/button-template) message.
 
-Example of use:
-```typescript
-new ButtonTemplateMessageBuilder("What do you want to do next?")
-
-.addButton(
-    ButtonTemplateMessageBuilder.createUrlButton("Show website", "http://www.aiteq.com")
-)
-.addButton(
-    ButtonTemplateMessageBuilder.createCallButton("Call us", "+88335739565")
-);
-```
-
 ## Hierarchy
 
-[TemplateMessageBuilder](templatemessagebuilder.md)
+[ButtonHoldingTemplateMessageBuilder](buttonholdingtemplatemessagebuilder.md)
 
 **↳ ButtonTemplateMessageBuilder**
 
@@ -30,20 +18,15 @@ new ButtonTemplateMessageBuilder("What do you want to do next?")
 
 ### Methods
 
-* [addButton(buttonBuilder)](buttontemplatemessagebuilder.md#addbutton)
+* [addCallButton(title, phoneNumber)](buttontemplatemessagebuilder.md#addcallbutton)
+* [addExtensionButton(title, extension, [options])](buttontemplatemessagebuilder.md#addextensionbutton)
 * [addLocationQuickReply()](buttontemplatemessagebuilder.md#addlocationquickreply)
+* [addLoginButton(url)](buttontemplatemessagebuilder.md#addloginbutton)
+* [addLogoutButton()](buttontemplatemessagebuilder.md#addlogoutbutton)
+* [addPostbackButton(title, id, data)](buttontemplatemessagebuilder.md#addpostbackbutton)
 * [addQuickReply(title, id, [data, [imageUrl]])](buttontemplatemessagebuilder.md#addquickreply)
-
-### Static methods
-
-* [createCallButton(title, phoneNumber)](buttontemplatemessagebuilder.md#createcallbutton)
-* [createLoginButton(url)](buttontemplatemessagebuilder.md#createloginbutton)
-* [createLogoutButton()](buttontemplatemessagebuilder.md#createlogoutbutton)
-* [createPostbackButton(title, id, data)](buttontemplatemessagebuilder.md#createpostbackbutton)
-* [createShareButton()](buttontemplatemessagebuilder.md#createsharebutton)
-* [createUrlButton(title, url)](buttontemplatemessagebuilder.md#createurlbutton)
-
-
+* [addShareButton()](buttontemplatemessagebuilder.md#addsharebutton)
+* [addUrlButton(title, url)](buttontemplatemessagebuilder.md#addurlbutton)
 
 ---
 ## Constructors
@@ -63,19 +46,45 @@ ___
 
 ## Methods
 
-<a id="addbutton"></a>
-###  addButton(buttonBuilder)`
+<a id="addcallbutton"></a>
+### `addCallButton(title, phoneNumber)`
 
-Adds a Button. Number of Buttons must be 1-3.
+Creates and adds a [Call Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button).
 
-**Type parameters:**
-
-#### T :  [Button](../modules/send.md#button)
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
 
 **Parameters:**
+
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| buttonBuilder | [Builder](builder.md) | button builder |
+| title | `string`   | title of the button, max length is 20 characters |
+| phoneNumber | `string`   | phone number, format must have `"+"` prefix followed by the country code, area code and local number (e.g. +16505551234) |
+
+**Returns:** `this` - for chaining
+___
+
+<a id="addextensionbutton"></a>
+###  `addExtensionButton(title, extension, [options])`
+
+Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button) linking a Chat Extension.
+
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| title | `string`   | a title of the button, max length is 20 characters |
+| extension | [ChatExtension](../classes/chatextension.md) | a Chat Extension to be opened when the button is tapped |
+| options | `object` |  |
+
+`options` object can contain:
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| webviewShareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
+| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 
 **Returns:** `this` - for chaining
 ___
@@ -86,6 +95,50 @@ ___
 *Inherited from [MessageBuilder](messagebuilder.md)*
 
 Adds a Quick Reply button to quickly send user's location.
+
+**Returns:** `this` - for chaining
+___
+
+<a id="addloginbutton"></a>
+###  `addLoginButton(url)`
+
+Creates and adds a [Login Button](https://developers.facebook.com/docs/messenger-platform/account-linking/link-account).
+
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| url | `string`   | authentication callback URL (must use HTTPS protocol) |
+
+**Returns:** `this` - for chaining
+___
+
+<a id="addlogoutbutton"></a>
+###  `addLogoutButton()`
+
+Creates and adds a [Logout Button](https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account).
+
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+
+**Returns:** `this` - for chaining
+___
+
+<a id="addpostbackbutton"></a>
+###  `addPostbackButton(title, id, [data])`
+
+Creates and adds a [Postback Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button).
+
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| title | `string`   | a title of the button, max length is 20 characters |
+| id | `string` | an identification of the postback |
+| data | `string` | optional data to be send with postback |
 
 **Returns:** `this` - for chaining
 ___
@@ -109,90 +162,46 @@ Adds a Quick Reply button to the message.
 **Returns:** `this` - for chaining
 ___
 
-<a id="createcallbutton"></a>
-### `ButtonTemplateMessageBuilder.createCallButton(title, phoneNumber)`
+<a id="addsharebutton"></a>
+###  `addShareButton(builder)`
 
-Creates a new Call Button builder.
+Creates and adds a [Share Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button).
 
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md).*
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| title | `string`   | title of the button |
-| phoneNumber | `string`   | phone number (must be prefixed with `"+"`) |
-
-**Returns:** [CallButtonBuilder](callbuttonbuilder.md)
-___
-
-<a id="createloginbutton"></a>
-### `ButtonTemplateMessageBuilder.createLoginButton(url)`
-
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md)*
-
-Creates a new Login Button builder.
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| url | `string` | [Authentication](https://developers.facebook.com/docs/messenger-platform/account-linking/authentication) callback URL (must use HTTPS protocol) |
+| builder | [GenericTemplateMessageBuilder](../classes/generictemplatemessagebuilder.md) | a generic template message builder |
 
-**Returns:** [LoginButtonBuilder](loginbuttonbuilder.md)
+**Returns:** `this` - for chaining
 ___
 
-<a id="createlogoutbutton"></a>
-### `ButtonTemplateMessageBuilder.createLogoutButton()`
+<a id="addurlbutton"></a>
+###  `addUrlButton(title, url, [options])`
 
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md)*
+Creates and adds a [URL Button](https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button).
 
-Creates a new Logout Button builder.
-
-**Returns:** [LogoutButtonBuilder](logoutbuttonbuilder.md)
-___
-
-<a id="createpostbackbutton"></a>
-### `ButtonTemplateMessageBuilder.createPostbackButton(title, id, data)`
-
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md)*
-
-Creates a new Postback Button builder.
+*Inherited from [ButtonHoldingTemplateMessageBuilder](../classes/buttonholdingtemplatemessagebuilder.md).*
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   | title of the button |
-| id | `string`   | id of the button |
-| data | `string`   | data to be send with postback request |
+| title | `string`   | a title of the button, max length is 20 characters |
+| url | `string` | a URL to be opened in a mobile browser when the button is tapped |
+| options | `object` |  |
 
-**Returns:** [PostbackButtonBuilder](postbackbuttonbuilder.md)
-___
+`options` object can contain:
 
-<a id="createsharebutton"></a>
-### `ButtonTemplateMessageBuilder.createShareButton()`
-
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md)*
-
-Creates a new Share Button builder.
-
-**Returns:** [ShareButtonBuilder](sharebuttonbuilder.md)
-___
-
-<a id="createurlbutton"></a>
-### `ButtonTemplateMessageBuilder.createUrlButton(title, url)`
-
-*Inherited from [TemplateMessageBuilder](templatemessagebuilder.md)*
-
-Creates a new URL Button builder.
-
-**Parameters:**
-
-| Param | Type | Description |
+| Property | Type | Description |
 | ------ | ------ | ------ |
-| title | `string`   | title of the button |
-| url | `string`   | target URL |
+| webviewHeightRatio | [HeightRatio](../modules/webview.heightratio.md) | optional height of the [Webview](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| messengerExtensions | `boolean`   | must be `true` if using [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
+| webviewShareButton | `boolean` | set to `false` to disable sharing in the Webview (e.g. for sensitive info) |
+| fallbackUrl | `string`   | URL to use on clients that don't support [Messenger Extensions](https://developers.facebook.com/docs/messenger-platform/send-api-reference/webview) |
 
-**Returns:** [UrlButtonBuilder](urlbuttonbuilder.md)
+**Returns:** `this` - for chaining
 ___
+

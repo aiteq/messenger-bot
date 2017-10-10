@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- simplified and more consistent creation of template messages using builders
+
+### Added
+- adding `X-Frame-Options` and `Content-Security-Policy` headers for extensions
+- adding support for convenient adding URL Buttons and Default Actions linking Chat Extensions
+- **API CHANGE** ButtonTemplateMessageBuilder, ListTemplateMessageBuilder, ElementBuilder and OgElementBuilder have new add...Button methods for adding buttons (they replace removed button builders)
+- **API CHANGE** ElementBuilder has new methods setDefaultAction and setExtensionDefaultAction for adding Deafault Actions (they replace removed DefaultActionBuilder)
+
+### Deleted
+- **API CHANGE** CallButtonBuilder, LoginButtonBuilder, LogoutButtonBuilder, PostbackButtonBuilder, ShareButtonBuilder, UrlButtonBuilder and DefaultActionBuilder in order to simplify creating template messages
+- **API CHANGE** TemplateMessageBuilder lost its static methods createElement, createOgElement, createReceiptElement, createDefaultAction, createUrlButton, createPostbackButton, createCallButton, createShareButton, createLoginButton and createLogoutButton in order to simplify and to have more consistent creating template messages using builders
 
 <a id="latest"></a>
 

@@ -1,18 +1,14 @@
-import { Send } from "../fb-api";
+import { Send, Webview } from "../fb-api";
+import { ChatExtension } from "../server/chat-extension";
 import { Builder } from "./builder";
-import { TemplateMessageBuilder } from "./template-message-builder";
+import { ButtonHoldingTemplateMessageBuilder } from "./button-holding-template-message-builder";
+import { GenericTemplateMessageBuilder } from "./generic-template-message-builder";
 
 /**
  * Helps to create a Button Template message.
  * (see https://developers.facebook.com/docs/messenger-platform/send-api-reference/button-template)
- *
- * Example of use:
- * <code>
- *    new ButtonTemplateMessageBuilder("What do you want to do next?")
- *        .addButton(ButtonTemplateMessageBuilder.createUrlButton("Show Website", http://www.aiteq.com"));
- * </code>
  */
-export class ButtonTemplateMessageBuilder extends TemplateMessageBuilder<Send.ButtonTemplate> {
+export class ButtonTemplateMessageBuilder extends ButtonHoldingTemplateMessageBuilder<Send.ButtonTemplate> {
 
     /**
      * Creates a new ButtonTemplateMessageBuilder instance.
@@ -33,17 +29,15 @@ export class ButtonTemplateMessageBuilder extends TemplateMessageBuilder<Send.Bu
     /**
      * Adds a Button. Number of Buttons must be 1-3.
      *
-     * @param {Builder<T>} buttonBuilder
+     * @param {Send.Button} button
      * @returns {this} - for chaining
      */
-    public addButton<T extends Send.Button>(buttonBuilder: Builder<T>): this {
+    protected addButton(button: Send.Button): void {
 
         if (this.template.buttons.length === 3) {
             throw new Error("couldn't add next Button to Button Tepmlate message (only 1-3 buttons is allowed)");
         }
 
-        this.template.buttons.push(buttonBuilder.build());
-
-        return this;
+        this.template.buttons.push(button);
     }
 }
