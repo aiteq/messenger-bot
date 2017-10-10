@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
 import Axios from "axios";
-import { logger } from "../logger";
+import logger from "../logger";
 
 /**
  * An abstract class providing access to Facebook Graph API. Implementations must specify concrete endpoint.
@@ -16,12 +16,12 @@ export abstract class Api<T extends Request> {
     /**
      * The constructor to be called by subclasses.
      *
-     * @param {string} accessToken - a Page Access Token
+     * @param {string} accessToken - a Page/App Access Token
      * @param {(GraphApi.Endpoint | string)} [endpoint=""] - a concrete endpoint
      * @param {GraphApi.Method} [method] - default HTTP method
      * @param {string} [version] - specific version of the Graph API
      */
-    constructor(protected accessToken: string, private endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
+    constructor(protected accessToken: string, protected endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
 
         // create instance of Axios with default configuration
         this.client = Axios.create({
@@ -29,6 +29,13 @@ export abstract class Api<T extends Request> {
             headers: { "Content-Type": "application/json" },
             responseType: "json"
         });
+
+        /*
+        this.client.interceptors.request.use((request) => {
+            logger.debug("request:", request);
+            return request;
+        });
+        */
     }
 
     /**
@@ -60,7 +67,8 @@ export abstract class Api<T extends Request> {
 
         try {
 
-            logger.debug("sending:", config.method, this.client.defaults.baseURL);
+            logger.debug("sending:", config.method, this.client.defaults.baseURL + (config.url || ""));
+            logger.debug("config:", JSON.stringify(config));
             logger.debug("data:", JSON.stringify(data));
 
             // perform the call
