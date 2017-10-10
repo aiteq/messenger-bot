@@ -2,13 +2,13 @@ import * as bodyParser from "body-parser";
 import * as crypto from "crypto";
 import * as express from "express";
 import * as http from "http";
-import { MessengerProfile, Webhook } from "../fb-api";
-import { logger } from "../logger";
+import { MessengerProfile, Subscriptions, Webhook } from "../fb-api";
+import logger from "../logger";
 import { BotConfig } from "../utils/bot-config";
 import { Chat } from "./chat";
 import { ChatExtension } from "./chat-extension";
 import { ChatService, EventHandler, HearHandler } from "./chat-service";
-import { ExtensionService } from "./extension-service";
+import { ExtensionsService } from "./extensions-service";
 import { PingService } from "./ping-service";
 import { VerificationService } from "./verification-service";
 
@@ -38,8 +38,11 @@ export class BotServer {
     private server: http.Server;
 
     private chatService: ChatService;
-    private extensions: ExtensionService;
+    private extensions: ExtensionsService;
     private profileApi: MessengerProfile.Api;
+
+    private subscriptionsApi: Subscriptions.Api;
+    private callbackUrl: Promise<string>;
 
     /**
      * Creates an instance of BotServer.
@@ -58,6 +61,8 @@ export class BotServer {
         logger.level = config.logLevel || logger.level;
 
         this.profileApi = new MessengerProfile.Api(this.config.accessToken);
+        this.subscriptionsApi = new Subscriptions.Api(this.config.accessToken, this.config.appSecret);
+        this.callbackUrl = this.subscriptionsApi.getCallbackUrl(Subscriptions.SubscriptionTopic.PAGE);
 
         // create express.js application
         this.app = express();
@@ -77,7 +82,7 @@ export class BotServer {
 
         // install service for handling verification request
         this.app.use(this.config.webhookPath, new VerificationService(this.config.verifyToken).getRouter());
-        logger.info("VerificationServices has been attached to", this.config.webhookPath);
+        logger.info("VerificationService has been attached to", this.config.webhookPath);
 
         // install service for handling webhook requests
         this.chatService = new ChatService(this.config.accessToken, this.config.askTimeout);
@@ -85,7 +90,7 @@ export class BotServer {
         logger.info("ResponderService has been attached to", this.config.webhookPath);
 
         // install service for handling Message Extensions requests
-        this.extensions = new ExtensionService();
+        this.extensions = new ExtensionsService();
         this.app.use(this.config.extensionsPath, this.extensions.getRouter());
         logger.info("ExtensionService has been attached to", this.config.extensionsPath);
 
@@ -242,6 +247,7 @@ export class BotServer {
      * @returns {this}
      */
     public addChatExtension(extension: ChatExtension): this {
+        (async () => extension.setBaseUrl(await this.callbackUrl))();
         this.extensions.addExtension(extension);
         return this;
     }

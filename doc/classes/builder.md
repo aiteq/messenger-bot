@@ -36,9 +36,6 @@ An abstract parent class for builders.
 
 ↳  [LogoutButtonBuilder](logoutbuttonbuilder.md)
 
-## Index
-
-
 ## Methods
 <a id="build"></a>
 

@@ -92,7 +92,7 @@ The callback is executed with three parameters:
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | hooks | `RegExp` ⎮ `string` ⎮ `Array`<`RegExp` ⎮ `string`> | a string, a regexp or a mixed array of both strings and regexps |
-| callback | `chat: Chat, text: string, matches: string[]`   |  a callback to be executed if a message matches one of the hooks |
+| callback | `(chat: Chat, text: string, matches: string[]) => void`   |  a callback to be executed if a message matches one of the hooks |
 
 **Returns:** `this` - for chaining
 ___
@@ -116,7 +116,7 @@ The callback is executed with two parameters:
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
-| callback | `(...args: any[]) => void` | a callback function |
+| callback | `(chat: Chat, ...args: any[]) => void` | a callback function |
 
 **Returns:** `this` - for chaining
 
@@ -138,7 +138,7 @@ The callback is executed with two parameters:
 | ------ | ------ | ------ |
 | event | [Event](../modules/webhook.event.md) | an event for which the callback will be executed |
 | id | `string` | an identification of the event |
-| callback | `(...args: any[]) => void` | a callback function |
+| callback | `(chat: Chat, ...args: any[]) => void` | a callback function |
 
 **Returns:** `this` - for chaining
 ___
