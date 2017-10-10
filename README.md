@@ -320,10 +320,12 @@ import { ChatExtension } from "@aiteq/messenger-bot";
 
 export class MyExtension implements ChatExtension {
 
-    public getView(): string {
-        return "my";
+    constructor() {
+        // name your extension - the name will be a part of extension's URL
+        super("my");
     }
 
+    // implement abstract method getModel()
     public getModel(): any {
         return {
             name: "Captain Nemo"
@@ -331,9 +333,7 @@ export class MyExtension implements ChatExtension {
     }
 }
 ```
-The chat extension class must implement two methods:
-- `getView()` - returns name of extension's view
-- `getModel()` - provides data to be used in the view
+The chat extension class must implement abstract method `getModel()` that provides data to be used in the view.
 
 The `getModel` is called every time an extension is requested.
 
