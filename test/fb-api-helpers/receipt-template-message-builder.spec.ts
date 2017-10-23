@@ -5,7 +5,7 @@ describe("ReceiptTemplateMessageBuilder", () => {
 
     let builder: ReceiptTemplateMessageBuilder;
 
-    const reb: ReceiptElementBuilder = ReceiptTemplateMessageBuilder.createReceiptElement("title", 20);
+    const reb: ReceiptElementBuilder = new ReceiptElementBuilder("title", 20);
 
     test("constructor(recipientName, orderNumber, currency, paymentMethod, totalCost)", () => {
         expect(builder = new ReceiptTemplateMessageBuilder("name", "order", "CZK", "method", 100)).toBeInstanceOf(ReceiptTemplateMessageBuilder);

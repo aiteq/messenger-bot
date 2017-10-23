@@ -10,14 +10,13 @@ describe("OgElementBuilder", () => {
     });
 
     test("addButton(button)", () => {
-        const btn = OgTemplateMessageBuilder.createUrlButton("title", "https://www.aiteq.com");
 
         for (let i = 0; i < 3; i++) {
-            expect(builder.addButton(btn)).toBe(builder);
+            expect(builder.addUrlButton("title", "https://www.aiteq.com")).toBe(builder);
         }
-        expect(() => builder.addButton(btn)).toThrow("couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");
+        expect(() => builder.addUrlButton("title", "https://www.aiteq.com")).toThrow("couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");
 
-        builder = new OgElementBuilder("http://www.aiteq.com").addButton(btn);
+        builder = new OgElementBuilder("http://www.aiteq.com").addUrlButton("title", "https://www.aiteq.com");
     });
 
     test("build()", () => {

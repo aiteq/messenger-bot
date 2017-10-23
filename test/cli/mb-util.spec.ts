@@ -1,4 +1,4 @@
-import { logger } from "../../src/logger";
+import logger from "../../src/logger";
 import { cliout } from "../../src/cli/cli-logger";
 import { MBUtil } from "../../src/cli/mb-util";
 import { BotUtils } from "../../src/utils/bot-utils";

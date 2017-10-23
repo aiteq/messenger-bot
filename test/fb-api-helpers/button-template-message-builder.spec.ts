@@ -1,4 +1,5 @@
 import { ButtonTemplateMessageBuilder } from "../../src/fb-api-helpers/button-template-message-builder";
+import { GenericTemplateMessageBuilder } from "../../src/fb-api-helpers/generic-template-message-builder";
 
 describe("ButtonTemplateMessageBuilder", () => {
 
@@ -8,40 +9,33 @@ describe("ButtonTemplateMessageBuilder", () => {
         expect(builder = new ButtonTemplateMessageBuilder("Text")).toBeInstanceOf(ButtonTemplateMessageBuilder);
     });
 
-    test("addButton(call-button)", () => {
-        button = ButtonTemplateMessageBuilder.createCallButton("title", "+420123456789");
-        expect(builder.addButton(button)).toBe(builder);
+    test("addCallButton()", () => {
+        expect(builder.addCallButton("title", "+420123456789")).toBe(builder);
     });
 
-    test("addButton(login-button)", () => {
-        button = ButtonTemplateMessageBuilder.createLoginButton("https://www.aiteq.com");
-        expect(builder.addButton(button)).toBe(builder);
+    test("addLoginButton()", () => {
+        expect(builder.addLoginButton("https://www.aiteq.com")).toBe(builder);
     });
 
-    test("addButton(logout-button)", () => {
-        button = ButtonTemplateMessageBuilder.createLogoutButton();
-        expect(builder.addButton(button)).toBe(builder);
+    test("addLogoutButton()", () => {
+        expect(builder.addLogoutButton()).toBe(builder);
     });
 
-    test("addButton(postback-button) (not allowed)", () => {
-        button = ButtonTemplateMessageBuilder.createPostbackButton("title", "id", "data");
-        expect(() => builder.addButton(button)).toThrow("couldn't add next Button to Button Tepmlate message (only 1-3 buttons is allowed)");
+    test("addPostbackButton() (not allowed)", () => {
+        expect(() => builder.addPostbackButton("title", "id", "data")).toThrow("couldn't add next Button to Button Tepmlate message (only 1-3 buttons is allowed)");
     });
 
-    test("addButton(postback-button)", () => {
+    test("addPostbackButton()", () => {
         expect(builder = new ButtonTemplateMessageBuilder("Text")).toBeInstanceOf(ButtonTemplateMessageBuilder);
-        button = ButtonTemplateMessageBuilder.createPostbackButton("title", "id", "data");
-        expect(builder.addButton(button)).toBe(builder);
+        expect(builder.addPostbackButton("title", "id", "data")).toBe(builder);
     });
 
-    test("addButton(share-button)", () => {
-        button = ButtonTemplateMessageBuilder.createShareButton();
-        expect(builder.addButton(button)).toBe(builder);
+    test("addShareButton()", () => {
+        expect(builder.addShareButton(new GenericTemplateMessageBuilder())).toBe(builder);
     });
 
-    test("addButton(url-button)", () => {
-        button = ButtonTemplateMessageBuilder.createUrlButton("title", "https://www.aiteq.com");
-        expect(builder.addButton(button)).toBe(builder);
+    test("addUrlButton()", () => {
+        expect(builder.addUrlButton("title", "https://www.aiteq.com")).toBe(builder);
     });
 
     test("build()", () => {

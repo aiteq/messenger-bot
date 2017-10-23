@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { logger } from "../../src/logger";
+import logger from "../../src/logger";
 import { BotUtils } from "../../src/utils/bot-utils";
 import { MessengerProfile, Send, Webhook } from "../../src/fb-api";
 import { PersistentMenuDef } from "../../src/fb-api-helpers/persistent-menu-def";
@@ -160,7 +160,7 @@ describe("BotUtils", () => {
             exp.toHaveProperty("recipient_id", RECIPIENT_ID);
             exp.toHaveProperty("message_id");
             exp.not.toHaveProperty("attachment_id");
-        });
+        }, 10000);
 
         test("sendVideo(recipient, url)", async () => {
             let exp: jest.Matchers<void> = expect(await utils.sendVideo(RECIPIENT_ID, URL_VIDEO));

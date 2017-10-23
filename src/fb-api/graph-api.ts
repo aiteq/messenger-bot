@@ -61,6 +61,7 @@ export abstract class Api<T extends Request> {
 
         } else {
 
+            /* istanbul ignore next */
             return Promise.reject("method not supporetd: " + config.method);
         }
 

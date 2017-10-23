@@ -103,6 +103,7 @@ export class BotServer {
 
             if (error.message === "ask expired") {
 
+                /* istanbul ignore next */
                 // catch and swallow unanswered questions from conversation
                 logger.debug("unanswered question:", error.data);
 

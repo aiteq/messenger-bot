@@ -1,4 +1,4 @@
-import { logger } from "../../src/logger";
+import logger from "../../src/logger";
 import { BotServer } from "../../src/server/bot-server";
 import { Chat } from "../../src/server/chat";
 import { ChatExtension } from "../../src/server/chat-extension";

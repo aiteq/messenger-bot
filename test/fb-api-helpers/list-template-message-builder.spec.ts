@@ -8,11 +8,11 @@ describe("ListTemplateMessageBuilder", () => {
 
     let builder: ListTemplateMessageBuilder;
 
-    const eb: ElementBuilder = ListTemplateMessageBuilder.createElement("title")
-        .addButton(ListTemplateMessageBuilder.createUrlButton("title", "https://www.aiteq.com"))
-        .setDefaultAction(ListTemplateMessageBuilder.createDefaultAction("https://www.aiteq.com"))
-        .setImageUrl(URL_IMAGE)
-        .setSubtitle("subtitle");
+    const eb: ElementBuilder = new ElementBuilder("title")
+    .addUrlButton("title", "https://www.aiteq.com")
+    .setDefaultAction("https://www.aiteq.com")
+    .setImageUrl(URL_IMAGE)
+    .setSubtitle("subtitle");
 
     test("constructor()", () => {
         expect(builder = new ListTemplateMessageBuilder()).toBeInstanceOf(ListTemplateMessageBuilder);
@@ -28,7 +28,7 @@ describe("ListTemplateMessageBuilder", () => {
     });
 
     test("setButton(button)", () => {
-        expect(builder.setButton(ListTemplateMessageBuilder.createPostbackButton("title", "id", "data"))).toBe(builder);
+        expect(builder.addPostbackButton("title", "id", "data")).toBe(builder);
     });
 
     test("setTopElementStyle(style)", () => {

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/fb-api/application-aware-api.ts</title>
+    <title>Code coverage report for src/server/chat-extension.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> application-aware-api.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/server</a> chat-extension.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>3/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/5</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>3/5</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -87,29 +87,12 @@
 42
 43
 44</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -122,54 +105,71 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AxiosRequestConfig } from "axios";
-import logger from "../logger";
-import * as Application from "./application";
-import * as Graph from "./graph-api";
-&nbsp;
-/**
- * A super class for APIs associated with a Facebook Application.
- * It automatically adds App ID to the endpoint URL.
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Represents a Chat Extension.
  */
-export class Api&lt;T extends Graph.Request&gt; extends Graph.Api&lt;T&gt; {
+export abstract class ChatExtension {
 &nbsp;
-    private appInfo: Promise&lt;Application.Response&gt;;
-    private appId: string;
+    private url: string;
+&nbsp;
+    constructor(private view: string) {}
 &nbsp;
     /**
-     * Creates an instance of Subscriptions.Api.
-     * @param {string} pageAccessToken - Page Access Token
-     * @param {string} appSecret - App Secret
+     * Returns a data to be rendered to extension's view.
+     *
+     * @returns {*} - a data to be rendered
      */
-    constructor(protected pageAccessToken: string, protected appSecret: string, protected endpoint: string) {
+    public abstract getModel(): any;
 &nbsp;
-        super(undefined, "", Graph.Method.GET);
-&nbsp;
-        this.appInfo = new Application.Api(pageAccessToken).getAppInfo()
-            .catch((reason) =&gt; logger.error("couldn't get fb app info:", reason));
+    /**
+     * Returns a name of extension's view.
+     *
+     * @returns {string} - a name of extension's view
+     */
+    public <span class="fstat-no" title="function not covered" >getView(): string {</span>
+<span class="cstat-no" title="statement not covered" >        return this.v</span>iew;
     }
 &nbsp;
     /**
-     * Sends request asynchronously. Re-implements the Graph.Api.sendRequest() with adding an endpoint.
+     * Sets base URL for this extension.
      *
-     * @param {T} data - a data to be send
-     * @param {AxiosRequestConfig} [config={}] - request options
-     * @returns {Promise&lt;any&gt;}
+     * @param {string} baseUrl
      */
-    protected async sendRequest(data: T, config: AxiosRequestConfig = {}): Promise&lt;any&gt; {
+    public <span class="fstat-no" title="function not covered" >setBaseUrl(</span>baseUrl: string): void {
+<span class="cstat-no" title="statement not covered" >        this.url = baseUrl + this.v</span>iew;
+    }
 &nbsp;
-        this.appId = this.appId || (await this.appInfo).id;
-        config.url = this.appId + "/" + this.endpoint;
-        this.accessToken = this.accessToken || this.appId + "|" + this.appSecret;
-&nbsp;
-        return super.sendRequest(data, config);
+    /**
+     * Returns URL of this extension.
+     *
+     * @returns {string} - URL of this extension
+     */
+    public getUrl(): string {
+        return this.url;
     }
 }
 &nbsp;</pre></td></tr>

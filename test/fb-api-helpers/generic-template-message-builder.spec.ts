@@ -8,9 +8,9 @@ describe("GenericTemplateMessageBuilder", () => {
 
     let builder: GenericTemplateMessageBuilder;
 
-    const eb: ElementBuilder = GenericTemplateMessageBuilder.createElement("title")
-        .addButton(GenericTemplateMessageBuilder.createUrlButton("title", "https://www.aiteq.com"))
-        .setDefaultAction(GenericTemplateMessageBuilder.createDefaultAction("https://www.aiteq.com"))
+    const eb: ElementBuilder = new ElementBuilder("title")
+        .addUrlButton("title", "https://www.aiteq.com")
+        .setDefaultAction("https://www.aiteq.com")
         .setImageUrl(URL_IMAGE)
         .setSubtitle("subtitle");
 

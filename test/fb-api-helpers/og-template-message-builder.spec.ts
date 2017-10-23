@@ -1,4 +1,5 @@
 import { OgTemplateMessageBuilder } from "../../src/fb-api-helpers/og-template-message-builder";
+import { OgElementBuilder } from "../../src/fb-api-helpers/og-element-builder";
 
 const URL_IMAGE: string = "https://static.wixstatic.com/media/a3e73d_d0a6eaa7c6194519937b46d95dcbd97c.png";
 
@@ -12,9 +13,9 @@ describe("OgTemplateMessageBuilder", () => {
 
     test("setElement(element)", () => {
         expect(builder.setElement(
-            OgTemplateMessageBuilder.createOgElement("https://www.aiteq.com")
-                .addButton(OgTemplateMessageBuilder.createUrlButton("title", "https://www.aiteq.com"))
-        )).toBe(builder);
+            new OgElementBuilder("https://www.aiteq.com")
+            .addUrlButton("title", "https://www.aiteq.com"))
+        ).toBe(builder);
     });
 
     test("build()", () => {

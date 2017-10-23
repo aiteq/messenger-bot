@@ -25,9 +25,9 @@
         <span class='fraction'>56/56</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">95.45% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>24/27</span>
+        <span class='fraction'>21/22</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -434,16 +434,15 @@
 389
 390
 391
-392
-393</td><td class="line-coverage quiet"><span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+392</td><td class="line-coverage quiet"><span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -512,7 +511,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -745,10 +743,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -782,10 +780,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -814,21 +812,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { MessengerProfile, Webhook, Webview } from ".";
-import { logger } from "../logger";
+import logger from "../logger";
 import * as Graph from "./graph-api";
 &nbsp;
 /**
@@ -898,17 +896,16 @@ export class Api extends Graph.Api&lt;Request&gt; {
      * Sets locale-aware Greeting for users coming into your bot for the first time.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
      *
-     * @param {(string | Greeting | Array&lt;Greeting&gt;)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
+     * @param {(string | Array&lt;Greeting&gt;)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
      * @returns {Promise&lt;Response&gt;}
      */
-    public async setGreeting(greeting: string | Greeting | Greeting[]): Promise&lt;Response&gt; {
+    public async setGreeting(greeting: string | Greeting[]): Promise&lt;Response&gt; {
 &nbsp;
         return this.setField(Field.GREETING, typeof greeting === "string" ?
-            [{
+            [<span class="branch-0 cbranch-no" title="branch not covered" >{</span>
                 locale: "default",
                 text: greeting
-            }] :
-            (Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >greeting) ? </span>greeting : [greeting]));
+            }] : greeting);
     }
 &nbsp;
     /**
@@ -934,12 +931,12 @@ export class Api extends Graph.Api&lt;Request&gt; {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
      * &lt;b&gt;Note:&lt;/b&gt; You must set up a Get Started button if you also wish to use Persistent Menu.
      *
-     * @param {(PersistentMenu | Array&lt;PersistentMenu&gt;)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
+     * @param {(Array&lt;PersistentMenu&gt;)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
      * @returns {Promise&lt;Response&gt;}
      */
-    public setPersistentMenu(menu: PersistentMenu | PersistentMenu[]): Promise&lt;Response&gt; {
+    public setPersistentMenu(menu: PersistentMenu[]): Promise&lt;Response&gt; {
 &nbsp;
-        return this.setField(Field.PERSISTENT_MENU, Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >menu) ? </span>menu : [menu]);
+        return this.setField(Field.PERSISTENT_MENU, menu);
     }
 &nbsp;
     /**
@@ -967,8 +964,8 @@ export class Api extends Graph.Api&lt;Request&gt; {
      * @param {(string | Array&lt;string&gt;)} domains - a domain or array of domains to by whitelisted
      * @returns {Promise&lt;Response&gt;}
      */
-    public whitelistDomains(domains: string | string[]): Promise&lt;Response&gt; {
-        return this.setField(Field.DOMAIN_WHITELIST, Array.isArray(<span class="branch-1 cbranch-no" title="branch not covered" >domains) ? </span>domains : [domains]);
+    public whitelistDomains(domains: string[]): Promise&lt;Response&gt; {
+        return this.setField(Field.DOMAIN_WHITELIST, domains);
     }
 &nbsp;
     /**
@@ -1168,7 +1165,7 @@ export interface Greeting {
     text: string;
 }
 &nbsp;
-export const Greeting = {
+export const GreetingName = {
     FIRST_NAME: "user_first_name",
     LAST_NAME: "user_last_name",
     FULL_NAME: "user_full_name",
@@ -1225,7 +1222,7 @@ export interface Response {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 14 2017 15:39:44 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 23 2017 16:49:56 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

@@ -1,4 +1,4 @@
-import { logger } from "../../src/logger";
+import logger from "../../src/logger";
 import { Send, UserProfile } from "../../src/fb-api";
 import { Chat } from "../../src/server/chat";
 import { ChatService } from "../../src/server/chat-service";
@@ -105,7 +105,7 @@ describe("Chat", () => {
     });
 
     test("ask(question) (expired)", async () => {
-        await expect(chat.ask("challenge")).rejects.toBe("ask expired");
+        await expect(chat.ask("challenge")).rejects.toHaveProperty("message", "ask expired");
     });
 
     test("ask(question, validator)", async () => {

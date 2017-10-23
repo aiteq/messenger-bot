@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>9/9</span>
       </div>
     </div>
   </div>
@@ -90,16 +90,13 @@
 45
 46
 47
-48
-49
-50
-51</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+48</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,6 +111,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,25 +136,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Send } from "../fb-api";
-import { Builder } from "./builder";
+import { ButtonHoldingBuilder } from "./button-holding-builder";
 &nbsp;
 /**
  * Helps to create an Open Graph Element.
  */
-export class OgElementBuilder extends Builder&lt;Send.OpenGraphElement&gt; {
+export class OgElementBuilder extends ButtonHoldingBuilder&lt;Send.OpenGraphElement&gt; {
 &nbsp;
     private element: Send.OpenGraphElement;
 &nbsp;
@@ -166,31 +160,28 @@ export class OgElementBuilder extends Builder&lt;Send.OpenGraphElement&gt; {
     }
 &nbsp;
     /**
-     * Adds a Button.
-     *
-     * @param {Builder&lt;T&gt;} buttonBuilder
-     * @returns {this} - for chaining
-     */
-    public addButton&lt;T extends Send.Button&gt;(buttonBuilder: Builder&lt;T&gt;): this {
-&nbsp;
-        this.element.buttons = this.element.buttons || new Array&lt;T&gt;();
-&nbsp;
-        if (this.element.buttons.length === 3) {
-            throw new Error("couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");
-        }
-&nbsp;
-        this.element.buttons.push(buttonBuilder.build());
-&nbsp;
-        return this;
-    }
-&nbsp;
-    /**
      * Returns built Open Graph Element object.
      *
      * @returns {Send.OpenGraphElement}
      */
     public build(): Send.OpenGraphElement {
         return this.element;
+    }
+&nbsp;
+    /**
+     * Adds a Button.
+     *
+     * @param {Send.Button} button
+     */
+    protected addButton(button: Send.Button): void {
+&nbsp;
+        this.element.buttons = this.element.buttons || new Array&lt;Send.Button&gt;();
+&nbsp;
+        if (this.element.buttons.length === 3) {
+            throw new Error("couldn't add next Button to Open Graph Element (only 3 buttons is allowed)");
+        }
+&nbsp;
+        this.element.buttons.push(button);
     }
 }
 &nbsp;</pre></td></tr>
@@ -199,7 +190,7 @@ export class OgElementBuilder extends Builder&lt;Send.OpenGraphElement&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 14 2017 15:39:44 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 23 2017 16:49:56 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

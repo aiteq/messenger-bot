@@ -69,17 +69,16 @@ export class Api extends Graph.Api<Request> {
      * Sets locale-aware Greeting for users coming into your bot for the first time.
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text)
      *
-     * @param {(string | Greeting | Array<Greeting>)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
+     * @param {(string | Array<Greeting>)} greeting - a default or locale-aware Greeting (must be UTF-8 and has a 160 character limit)
      * @returns {Promise<Response>}
      */
-    public async setGreeting(greeting: string | Greeting | Greeting[]): Promise<Response> {
+    public async setGreeting(greeting: string | Greeting[]): Promise<Response> {
 
         return this.setField(Field.GREETING, typeof greeting === "string" ?
             [{
                 locale: "default",
                 text: greeting
-            }] :
-            (Array.isArray(greeting) ? greeting : [greeting]));
+            }] : greeting);
     }
 
     /**
@@ -105,12 +104,12 @@ export class Api extends Graph.Api<Request> {
      * (see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu)
      * <b>Note:</b> You must set up a Get Started button if you also wish to use Persistent Menu.
      *
-     * @param {(PersistentMenu | Array<PersistentMenu>)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
+     * @param {(Array<PersistentMenu>)} menu - a Persistent Menu or an array of locale-aware Persistent Menus or menu builder
      * @returns {Promise<Response>}
      */
-    public setPersistentMenu(menu: PersistentMenu | PersistentMenu[]): Promise<Response> {
+    public setPersistentMenu(menu: PersistentMenu[]): Promise<Response> {
 
-        return this.setField(Field.PERSISTENT_MENU, Array.isArray(menu) ? menu : [menu]);
+        return this.setField(Field.PERSISTENT_MENU, menu);
     }
 
     /**
@@ -138,8 +137,8 @@ export class Api extends Graph.Api<Request> {
      * @param {(string | Array<string>)} domains - a domain or array of domains to by whitelisted
      * @returns {Promise<Response>}
      */
-    public whitelistDomains(domains: string | string[]): Promise<Response> {
-        return this.setField(Field.DOMAIN_WHITELIST, Array.isArray(domains) ? domains : [domains]);
+    public whitelistDomains(domains: string[]): Promise<Response> {
+        return this.setField(Field.DOMAIN_WHITELIST, domains);
     }
 
     /**
@@ -339,7 +338,7 @@ export interface Greeting {
     text: string;
 }
 
-export const Greeting = {
+export const GreetingName = {
     FIRST_NAME: "user_first_name",
     LAST_NAME: "user_last_name",
     FULL_NAME: "user_full_name",
