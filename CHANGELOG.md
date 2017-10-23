@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+<a id="latest"></a>
+
+## [1.1.0-RC.2] - 2017-10-23
 ### Changed
 - simplified and more consistent creation of template messages using builders
 
@@ -17,8 +21,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deleted
 - **API CHANGE** CallButtonBuilder, LoginButtonBuilder, LogoutButtonBuilder, PostbackButtonBuilder, ShareButtonBuilder, UrlButtonBuilder and DefaultActionBuilder in order to simplify creating template messages
 - **API CHANGE** TemplateMessageBuilder lost its static methods createElement, createOgElement, createReceiptElement, createDefaultAction, createUrlButton, createPostbackButton, createCallButton, createShareButton, createLoginButton and createLogoutButton in order to simplify and to have more consistent creating template messages using builders
-
-<a id="latest"></a>
 
 ## [1.1.0-RC.1] - 2017-09-15
 ### Fixed
@@ -81,7 +83,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - emitting postback identified events
 
-[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-RC.1...HEAD
+[Unreleased]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-RC.2...HEAD
+[1.1.0-RC.2]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-RC-1...v1.1.0-RC.2
 [1.1.0-RC.1]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.5...v1.1.0-RC.1
 [1.1.0-beta.5]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.4...v1.1.0-beta.5
 [1.1.0-beta.4]: https://github.com/aiteq/messenger-bot/compare/v1.1.0-beta.3...v1.1.0-beta.4
