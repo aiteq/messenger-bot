@@ -1,4 +1,4 @@
-import { logger } from "../../src/logger";
+import logger from "../../src/logger";
 import { BotConfig } from "../../src/utils/bot-config";
 import { Application } from "../../src/fb-api";
 

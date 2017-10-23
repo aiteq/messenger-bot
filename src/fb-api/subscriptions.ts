@@ -55,7 +55,7 @@ export class Api extends ApplicationAware.Api<Graph.Request> {
         try {
             return (await this.getSubscription(topic)).callback_url;
         } catch (error) {
-            return error;
+            return Promise.reject(error);
         }
     }
 }

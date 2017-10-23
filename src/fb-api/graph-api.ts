@@ -16,12 +16,12 @@ export abstract class Api<T extends Request> {
     /**
      * The constructor to be called by subclasses.
      *
-     * @param {string | Promise<string>} accessToken - a Page/App Access Token
+     * @param {string} accessToken - a Page/App Access Token
      * @param {(GraphApi.Endpoint | string)} [endpoint=""] - a concrete endpoint
      * @param {GraphApi.Method} [method] - default HTTP method
      * @param {string} [version] - specific version of the Graph API
      */
-    constructor(protected accessToken: string | Promise<string>, protected endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
+    constructor(protected accessToken: string, protected endpoint: Endpoint | string = "", private method?: Method, protected version?: string) {
 
         // create instance of Axios with default configuration
         this.client = Axios.create({
@@ -49,7 +49,7 @@ export abstract class Api<T extends Request> {
 
         config.method = config.method || this.method || Method.POST;
 
-        data.access_token = typeof this.accessToken === "string" ? this.accessToken : await this.accessToken;
+        data.access_token = this.accessToken;
 
         if (config.method === Method.GET) {
 
@@ -61,8 +61,7 @@ export abstract class Api<T extends Request> {
 
         } else {
 
-            /* istanbul ignore next */
-            Promise.reject("method not supporetd: " + config.method);
+            return Promise.reject("method not supporetd: " + config.method);
         }
 
         try {

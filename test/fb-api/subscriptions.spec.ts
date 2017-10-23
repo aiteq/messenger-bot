@@ -10,6 +10,10 @@ describe("Subscriptions", () => {
 
     let api: Subscriptions.Api;
 
+    test("constructor(invalidAccessToken)", () => {
+        expect(new Subscriptions.Api("invalid-token", config.appSecret)).toBeInstanceOf(Subscriptions.Api);
+    });
+
     test("constructor(accessToken)", () => {
         expect(api = new Subscriptions.Api(config.accessToken, config.appSecret)).toBeInstanceOf(Subscriptions.Api);
     });
@@ -28,5 +32,9 @@ describe("Subscriptions", () => {
 
     test("getCallbackUrl(PAGE)", async () => {
         expect(await api.getCallbackUrl(Subscriptions.SubscriptionTopic.PAGE)).toMatch(/^https\:\/\/.*/);
+    });
+
+    test("getCallbackUrl(USER)", async () => {
+        await expect(api.getCallbackUrl(Subscriptions.SubscriptionTopic.USER)).rejects.toMatch("no subscription for topic 'user'");
     });
 });

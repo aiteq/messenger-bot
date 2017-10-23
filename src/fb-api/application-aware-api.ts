@@ -9,7 +9,8 @@ import * as Graph from "./graph-api";
  */
 export class Api<T extends Graph.Request> extends Graph.Api<T> {
 
-    private appEndpoint: Promise<string>;
+    private appInfo: Promise<Application.Response>;
+    private appId: string;
 
     /**
      * Creates an instance of Subscriptions.Api.
@@ -20,33 +21,8 @@ export class Api<T extends Graph.Request> extends Graph.Api<T> {
 
         super(undefined, "", Graph.Method.GET);
 
-        this.accessToken = new Promise(async (resolve) => {
-
-            try {
-
-                // an alternative way to create app access token (https://developers.facebook.com/docs/facebook-login/access-tokens/#apptokens)
-                resolve((await new Application.Api(pageAccessToken).getAppInfo()).id + "|" + appSecret);
-
-            } catch (error) {
-
-                logger.error("couldn't get app info:", error);
-                throw new Error(error);
-            }
-        });
-
-        this.appEndpoint = new Promise(async (resolve) => {
-
-            try {
-
-                // get Facebook App Id and add it to the endpoint URL
-                resolve((await new Application.Api(pageAccessToken).getAppInfo()).id + "/" + endpoint);
-
-            } catch (error) {
-
-                logger.error("couldn't get app info:", error);
-                throw new Error(error);
-            }
-        });
+        this.appInfo = new Application.Api(pageAccessToken).getAppInfo()
+            .catch((reason) => logger.error("couldn't get fb app info:", reason));
     }
 
     /**
@@ -57,7 +33,11 @@ export class Api<T extends Graph.Request> extends Graph.Api<T> {
      * @returns {Promise<any>}
      */
     protected async sendRequest(data: T, config: AxiosRequestConfig = {}): Promise<any> {
-        config.url = await this.appEndpoint;
+
+        this.appId = this.appId || (await this.appInfo).id;
+        config.url = this.appId + "/" + this.endpoint;
+        this.accessToken = this.accessToken || this.appId + "|" + this.appSecret;
+
         return super.sendRequest(data, config);
     }
 }

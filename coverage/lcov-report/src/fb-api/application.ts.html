@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/logger.ts</title>
+    <title>Code coverage report for src/fb-api/application.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">src</a> logger.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/fb-api</a> application.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>5/5</span>
       </div>
     </div>
   </div>
@@ -70,60 +70,75 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+28
+29
+30
+31
+32
+33</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as log4js from "log4js";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import logger from "../logger";
+import * as Graph from "./graph-api";
 &nbsp;
-log4js.configure({
-    appenders: {
-        console: {
-            type: "console",
-            layout: {
-                type: "pattern",
-                pattern: "[%[%5.5p%]] [%c] %m"
-            }
-        },
-        cli: {
-            type: "console",
-            layout: {
-                type: "pattern",
-                pattern: "[%[%p%]] %m"
-            }
-        }
-    },
-    categories: {
-        "@aiteq/messenger-bot": { "appenders": ["console"], "level": "ALL" },
-        cli: { "appenders": ["cli"], "level": "INFO" },
-        default: { "appenders": ["console"], "level": "ALL" }
+/**
+ * API and types for Application API providing access to Facebook Application info.
+ */
+export class Api extends Graph.Api&lt;Graph.Request&gt; {
+&nbsp;
+    /**
+     * Creates an instance of Application.Api.
+     * @param {string} accessToken - Page Access Token
+     */
+    constructor(protected accessToken: string) {
+        super(accessToken, "app", Graph.Method.GET);
     }
-});
 &nbsp;
-export default log4js.getLogger("@aiteq/messenger-bot");
+    /**
+     * Returns application information.
+     *
+     * @returns {Promise&lt;Response&gt;}
+     */
+    public getAppInfo(): Promise&lt;Response&gt; {
+        return this.sendRequest({});
+    }
+}
+&nbsp;
+export interface Response {
+    link: string;
+    id: string;
+    name: string;
+    namespace: string;
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
@@ -133,7 +148,7 @@ export default log4js.getLogger("@aiteq/messenger-bot");
   generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 23 2017 15:21:13 GMT+0200 (CEST)
 </div>
 </div>
-<script src="../prettify.js"></script>
+<script src="../../prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -141,6 +156,6 @@ window.onload = function () {
         }
 };
 </script>
-<script src="../sorter.js"></script>
+<script src="../../sorter.js"></script>
 </body>
 </html>
