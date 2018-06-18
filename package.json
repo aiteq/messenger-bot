@@ -1,66 +1,70 @@
 {
-    "name": "@aiteq/messenger-bot",
-    "version": "1.1.0-RC.2",
-    "description": "A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.",
-    "keywords": [
-        "facebook-messenger-platform",
-        "facebook-messenger-bot",
-        "messenger-bot",
-        "chatbot",
-        "bot"
-    ],
-    "main": "./bin/index.js",
-    "types": "./bin/index.d.ts",
-    "scripts": {
-        "compile": "grunt",
-        "test": "jest",
-        "lint": "tslint --project .",
-        "mbutil": "node ./bin/cli/index.js"
-    },
-    "bin": {
-        "mbutil": "./bin/cli/index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/aiteq/messenger-bot.git"
-    },
-    "bugs": {
-        "url": "https://github.com/aiteq/messenger-bot/issues"
-    },
-    "homepage": "https://github.com/aiteq/messenger-bot#readme",
-    "author": "Aiteq Reloaded, s.r.o.",
-    "license": "MIT",
-    "devDependencies": {
-        "@aiteq/grunt-slack": "^1.0.0-beta.1",
-        "@types/body-parser": "^1.16.5",
-        "@types/ejs": "^2.3.33",
-        "@types/express": "^4.0.37",
-        "@types/jest": "^20.0.8",
-        "@types/lowdb": "^0.15.0",
-        "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.26",
-        "grunt": "^1.0.1",
-        "grunt-coveralls": "^1.0.1",
-        "grunt-exec": "^3.0.0",
-        "grunt-file-append": "0.0.7",
-        "grunt-ts": "^5.5.1",
-        "grunt-tslint": "^5.0.1",
-        "jest": "^20.0.4",
-        "ts-jest": "^20.0.14",
-        "tslint": "^5.7.0",
-        "typescript": "^2.5.2"
-    },
-    "dependencies": {
-        "async-file": "^2.0.2",
-        "axios": "^0.16.2",
-        "body-parser": "^1.17.2",
-        "ejs": "^2.5.7",
-        "express": "^4.15.4",
-        "log4js": "^2.3.3",
-        "lowdb": "^0.15.0",
-        "minimist": "^1.2.0"
-    },
-    "engines": {
-        "node": ">=8.4.0"
-    }
+  "name": "@aiteq/messenger-bot",
+  "version": "1.1.0-RC.2",
+  "description": "A TypeScript coded Node.js package for effective building and managing Facebook Messenger Bots.",
+  "keywords": [
+    "facebook-messenger-platform",
+    "facebook-messenger-bot",
+    "messenger-bot",
+    "chatbot",
+    "bot"
+  ],
+  "main": "./bin/index.js",
+  "types": "./bin/index.d.ts",
+  "scripts": {
+    "compile": "grunt",
+    "test": "jest",
+    "lint": "tslint --project .",
+    "mbutil": "node ./bin/cli/index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "bin": {
+    "mbutil": "./bin/cli/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aiteq/messenger-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aiteq/messenger-bot/issues"
+  },
+  "homepage": "https://github.com/aiteq/messenger-bot#readme",
+  "author": "Aiteq Reloaded, s.r.o.",
+  "license": "MIT",
+  "devDependencies": {
+    "@aiteq/grunt-slack": "^1.0.0-beta.1",
+    "@types/body-parser": "^1.16.5",
+    "@types/ejs": "^2.3.33",
+    "@types/express": "^4.0.37",
+    "@types/jest": "^20.0.8",
+    "@types/lowdb": "^0.15.0",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^8.0.26",
+    "grunt": "^1.0.1",
+    "grunt-coveralls": "^1.0.1",
+    "grunt-exec": "^3.0.0",
+    "grunt-file-append": "0.0.7",
+    "grunt-ts": "^5.5.1",
+    "grunt-tslint": "^5.0.1",
+    "jest": "^20.0.4",
+    "ts-jest": "^20.0.14",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "async-file": "^2.0.2",
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "log4js": "^2.3.3",
+    "lowdb": "^0.15.0",
+    "minimist": "^1.2.0",
+    "snyk": "^1.83.0"
+  },
+  "engines": {
+    "node": ">=8.4.0"
+  },
+  "snyk": true
 }
