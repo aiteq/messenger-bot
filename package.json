@@ -58,7 +58,7 @@
         "express": "^4.15.4",
         "log4js": "^2.3.3",
         "lowdb": "^0.15.0",
-        "minimist": "^1.2.0"
+        "minimist": "^1.2.6"
     },
     "engines": {
         "node": ">=8.4.0"
