@@ -45,8 +45,8 @@
         "grunt-file-append": "0.0.7",
         "grunt-ts": "^5.5.1",
         "grunt-tslint": "^5.0.1",
-        "jest": "^20.0.4",
-        "ts-jest": "^20.0.14",
+        "jest": "^29.3.1",
+        "ts-jest": "^29.0.3",
         "tslint": "^5.7.0",
         "typescript": "^2.5.2"
     },
