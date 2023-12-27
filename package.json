@@ -52,7 +52,7 @@
     },
     "dependencies": {
         "async-file": "^2.0.2",
-        "axios": "^0.16.2",
+        "axios": "^1.6.3",
         "body-parser": "^1.17.2",
         "ejs": "^2.5.7",
         "express": "^4.15.4",
